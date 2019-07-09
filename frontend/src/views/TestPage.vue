@@ -1,13 +1,12 @@
 <template>
     <div id="test">
         <p>{{ posts }}</p>
-        <button @click="searchTerm">눌러보쟈</button>
+        <button @click="google">눌러보쟈</button>
     </div>
 </template>
 
 
 <script>
-    // import Translate from "@google-cloud/translate"
 
     export default {
         name: "TestPage",
@@ -17,24 +16,22 @@
             }
         },
         methods: {
-            searchTerm() {
-                this.quickstart()
-
+            async google() {
+                try {
+                    const projectId = "ssafy-ss2";
+                    const Translate = require('@google-cloud/translate');
+                    const translate = new Translate.Translate({projectId: projectId});
+                    console.log(translate);
+                    const text = 'Hello, world!';
+                    const target = 'ko';
+                    const translation = await translate.translate(text, target);
+                    console.log(`Text: ${text}`);
+                    console.log(`Translation: ${translation[0]}`);
+                    this.posts.push(translation);
+                } catch (error) {
+                    console.error(error);
+                }
             },
-            async quickstart(projectId = "ssafy-ss2") {
-                const {Translate} = require('@google-cloud/translate');
-
-                const translate = new Translate({projectId});
-
-                const text = 'Hello, world!';
-
-                const target = 'ko';
-
-                const translation = await translate.translate(text, target);
-                console.log(`Text: ${text}`);
-                console.log(`Translation: ${translation}`);
-                this.posts.push(translation)
-            }
         },
         computed: {}
     }
