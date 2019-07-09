@@ -10,6 +10,7 @@ var mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 
 var users = require("./routes/users");
+var posts = require("./routes/posts");
 
 mongoose.Promise = global.Promise;
 
@@ -38,6 +39,8 @@ app.use("/", indexRouter);
 
 // users REST API
 app.use("/users", users);
+
+app.use("/posts", posts);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
