@@ -21,11 +21,14 @@
     import FirebaseService from '@/services/FirebaseService'
     export default {
         name: "PortfolioWrite",
+        components: {
+
+        },
         data() {
             return {
-
             }
         },
+        methods: {}
 
     }
 </script>
