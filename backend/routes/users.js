@@ -3,6 +3,9 @@ var router = express.Router();
 var mongoose = require("mongoose");
 var User = require("../model/User");
 
+mongoose.set("useNewUrlParser", true);
+mongoose.set("useFindAndModify", false);
+
 // Get All Users Info
 router.get("/", function(req, res, next) {
   User.find(function(err, users) {
@@ -19,10 +22,6 @@ router.get("/:id", function(req, res, next) {
   });
 });
 
-// Get All Posts
-
-// Get All Repositories
-
 // Add User
 router.post("/", function(req, res, next) {
   User.create(req.body, function(err, user) {
@@ -31,20 +30,21 @@ router.post("/", function(req, res, next) {
   });
 });
 
-// Add Post
-
-// Add Repository
-
 // Update User
-
-// Update Post
-
-// Update Repository
+router.put("/:id", function(req, res, next) {
+  User.findByIdAndUpdate(req.param.id, req.body, function(err, user) {
+    if (err) return next(err);
+    res.json(user);
+  });
+});
 
 // Delete User
+router.delete("/:id", function(req, res) {
+  User.remove({ _id: req.params.id }, function(err, user) {
+    if (err) return res.status(500).json({ errer: "database failure" });
 
-// Delete Post
-
-// Delete Repository
+    res.status(204).end();
+  });
+});
 
 module.exports = router;
