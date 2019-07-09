@@ -12,7 +12,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
-Vue.use(VueAxios, axios)
+Vue.use(VueAxios, axios);
 
 Vue.config.productionTip = false;
 
@@ -24,16 +24,16 @@ Vue.use(Vuetify, {
         accent: '#8c9eff',
         error: '#b71c1c'
     }
-})
+});
 
-Vue.use(VueSimplemde)
+Vue.use(VueSimplemde);
 
 import VueResizeText from 'vue-resize-text';
 
-Vue.use(VueResizeText)
+Vue.use(VueResizeText);
 
 new Vue({
     router,
     store,
     render: h => h(App)
-}).$mount('#app')
+}).$mount('#app');
