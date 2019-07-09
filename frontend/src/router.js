@@ -6,7 +6,6 @@ import PortfolioPage from './views/PortfolioPage.vue'
 import LoginPage from './views/LoginPage.vue'
 import PortfolioWrite from "./views/PortfolioWrite.vue"
 import DetailPortfolio from "./views/DetailPortfolio.vue"
-import TestPage from "./views/TestPage.vue"
 
 Vue.use(Router)
 
@@ -43,11 +42,6 @@ export default new Router({
             path: "/portfoliowrite",
             name: "portfoliowrite",
             component: PortfolioWrite
-        },
-        {
-            path: "/testpage",
-            name: "testpage",
-            component: TestPage
         }
     ]
 })

@@ -1,6 +1,4 @@
 import Vue from 'vue'
-import axios from "axios"
-import VueAxios from "vue-axios"
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 import VueSimplemde from 'vue-simplemde'
@@ -12,9 +10,7 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
-Vue.use(VueAxios, axios)
-
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 Vue.use(Vuetify, {
     iconfont: 'fa',
