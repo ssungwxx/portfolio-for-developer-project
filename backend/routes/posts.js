@@ -8,10 +8,19 @@ mongoose.set("useFindAndModify", false);
 
 // Get All Posts
 router.get("/", function(req, res, next) {
-  User.find({}).select('posts-_id').exec(function(err, posts) {
+  User.find({}).select({"posts": 1, "_id": 0}).exec(function(err, posts) {
     if (err) return next(err);
     res.json(posts);
   });
 });
+
+// Get One Post
+
+// Add New Post
+
+// Modify Post
+
+// Delete Post
+
 
 module.exports = router;
