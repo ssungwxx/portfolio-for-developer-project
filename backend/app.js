@@ -7,6 +7,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 var mongoose = require("mongoose");
+var bodyParser = require("body-parser");
 
 var users = require("./routes/users");
 
@@ -29,8 +30,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// body-parser middle-ware 등록
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
 app.use("/", indexRouter);
 
+// users REST API
 app.use("/users", users);
 
 // catch 404 and forward to error handler
