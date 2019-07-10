@@ -5,7 +5,6 @@
     </div>
 </template>
 
-
 <script>
 
     export default {
@@ -18,9 +17,9 @@
         methods: {
             async google() {
                 try {
-                    const projectId = "ssafy-ss2";
-                    const Translate = require('@google-cloud/translate');
-                    const translate = new Translate.Translate({projectId: projectId});
+                    const projectId = "ssafy-ss2"
+                    const {Translate} = require("@google-cloud/translate").v3beta1;
+                    const translate = new Translate({projectId});
                     console.log(translate);
                     const text = 'Hello, world!';
                     const target = 'ko';
