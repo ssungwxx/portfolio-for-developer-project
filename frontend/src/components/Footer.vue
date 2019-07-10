@@ -76,6 +76,7 @@ methods:{
       getWeather: function(){
           var reqURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + this.latitude + '&lon=' + this.longitude + '&APPID=' + this.apikey;
 
+          
           this.$http.get(reqURL, {headers: {'x-requested-with': 'XMLHttpRequest'}}).then(function (response) {
               this.dataObj = response.data;
               this.temperature = (this.dataObj.main.temp - 273.15).toFixed(0);
