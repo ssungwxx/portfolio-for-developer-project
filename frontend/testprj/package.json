@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "@google-cloud/translate": "^4.1.1",
+    "ejs": "^2.6.2",
     "express": "^4.17.1"
   }
 }
