@@ -12,9 +12,11 @@ import router from './router'
 import store from './store'
 import './registerServiceWorker'
 
-Vue.use(VueAxios, axios);
 
-Vue.config.productionTip = false;
+//날씨 관련 Vue-Resource
+// npm install vue-resource"
+import VueResource from 'vue-resource'
+Vue.use(VueResource);
 
 Vue.use(Vuetify, {
     iconfont: 'fa',
