@@ -40,7 +40,7 @@ router.get("/:id/:pname", function(req, res, next) {
 
 // Add New Post
 // Problem: Object_id가 같이 들어가는 문제 해결해야함
-router.put("/:id", function(req, res, next) {
+router.put("/add/:id", function(req, res, next) {
   User.updateOne({
     "user_id": req.param.id
   }, {
@@ -55,7 +55,21 @@ router.put("/:id", function(req, res, next) {
 
 // Modify Post
 
-// Delete Post
 
+// Delete Post
+router.put("/delete/:id/:pname", function(req, res, next) {
+  User.updateOne({
+    "user_id": req.params.id
+  }, {
+    $pull: {
+      "posts": {
+        "post_name": req.params.pname
+      }
+    }
+  }).exec(function(err, post) {
+    if (err) return next(err);
+    res.json(post);
+  });
+});
 
 module.exports = router;
