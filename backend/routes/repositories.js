@@ -16,6 +16,14 @@ router.get("/:id", (req, res) => {
     .where("user_id", req.params.id)
     .then(data => res.json(data));
 });
+
+// Insert Repository
+router.post("/", (req, res) => {
+  knex("repository")
+    .insert(req.body)
+    .then(data => res.json(data));
+});
+
 // Update Repository
 router.put("/:no", (req, res) => {
   knex("repository")
