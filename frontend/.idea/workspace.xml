@@ -14,10 +14,33 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="719" />
-    <option name="width" value="1226" />
-    <option name="height" value="1053" />
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/components/MarkdownEditor.vue" />
+        <option value="$PROJECT_DIR$/src/views/PortfolioWrite.vue" />
+        <option value="$PROJECT_DIR$/src/router.js" />
+        <option value="$PROJECT_DIR$/public/test.html" />
+        <option value="$PROJECT_DIR$/../../test.html" />
+        <option value="$PROJECT_DIR$/node_modules/vuetify-loader/dev/webpack.config.js" />
+        <option value="$PROJECT_DIR$/SSAFY-SS2-TRANSLATE.json" />
+        <option value="$PROJECT_DIR$/test.html" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/views/TestPage.vue" />
+        <option value="$PROJECT_DIR$/jquery-3.4.1.min.js" />
+        <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/TestTranslate.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/trans.js" />
+        <option value="$PROJECT_DIR$/public/TestTranslate.js" />
+        <option value="$PROJECT_DIR$/src/main.js" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="822" />
+    <option name="width" value="1099" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
