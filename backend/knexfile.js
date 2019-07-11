@@ -6,4 +6,3 @@ module.exports = {
     database: "ssafy"
   }
 };
-// commit test2222
