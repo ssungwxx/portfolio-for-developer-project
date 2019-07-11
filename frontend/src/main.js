@@ -11,7 +11,10 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import Bars from 'vuebars'
 
+
+Vue.use(Bars)
 
 //날씨 관련 Vue-Resource
 // npm install vue-resource"

@@ -58,7 +58,6 @@ methods:{
           navigator.geolocation.getCurrentPosition(this.success, this.error, options);
       },
       success: function (position) {
-          console.log(position);
           this.latitude = position.coords.latitude;
           this.longitude = position.coords.longitude;
           this.latitude = parseFloat(this.latitude).toFixed(2);
@@ -84,8 +83,6 @@ methods:{
               this.weatherMain = this.dataObj.weather[0].main;
               console.log(response);
           }, function (response) {
-              console.log('error');
-              console.log(response);
               this.errorMsg = "Unable to retrive weather information.";
           });
       }
