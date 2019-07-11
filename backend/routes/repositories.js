@@ -1,27 +1,35 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
-var User = require("../model/User");
-var Repository = require("../model/Repository");
-
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
+const knex = require("knex")(require("../knexfile"));
 
 // Get All Repositories Sort By Date
-
-router.get("/", function(req, res, next) {
-  User.find({})
-    .select("repositories")
-    .exec(function(err, users) {
-      if (err) return next(err);
-      res.json(users);
-    });
+router.get("/", (req, res) => {
+  knex("repository")
+    .select("*")
+    .then(data => res.json(data));
 });
 
 // Get One Repository
-
+router.get("/:id", (req, res) => {
+  knex("repository")
+    .select("*")
+    .where("user_id", req.params.id)
+    .then(data => res.json(data));
+});
 // Update Repository
+router.put("/:no", (req, res) => {
+  knex("repository")
+    .update(req.body)
+    .where("repository_no", req.params.no)
+    .then(data => res.json(data));
+});
 
 // Delete Repository
+router.delete("/:no", (req, res) => {
+  knex("repository")
+    .delete(req.body)
+    .where("repository_no", req.params.no)
+    .then(data => res.json(data));
+});
 
 module.exports = router;
