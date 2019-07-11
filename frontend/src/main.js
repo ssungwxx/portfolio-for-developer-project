@@ -7,6 +7,7 @@ import VueSimplemde from 'vue-simplemde'
 import 'simplemde/dist/simplemde.min.css'
 import 'font-awesome/css/font-awesome.min.css'
 
+
 import App from './App.vue'
 import router from './router'
 import store from './store'

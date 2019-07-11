@@ -13,7 +13,8 @@
         </div>
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             <img :src="imageUrl" height="150" v-if="imageUrl"/>
-            <v-text-field label="Select Image" @click='pickFile' v-model='imageName' prepend-icon='attach_file'></v-text-field>
+            <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
+                          prepend-icon='attach_file'></v-text-field>
             <input
                     type="file"
                     style="display: none"
@@ -23,14 +24,23 @@
             >
         </v-flex>
 
-        <v-btn>
+        <v-btn @click="randomPhoto">
             Submit
         </v-btn>
+
+
     </v-container>
 </template>
 
 <script>
     import FirebaseService from '@/services/FirebaseService'
+    import Unsplash from "unsplash-js";
+
+    const unsplash = new Unsplash({
+        applicationId: "",
+        secret: ""
+    })
+
 
     export default {
         name: "PortfolioWrite",
@@ -67,7 +77,11 @@
                     this.imageFile = '';
                     this.imageUrl = '';
                 }
-            }
+            },
+            randomPhoto() {
+                unsplash.photos.getRandomPhoto({width: 1000, height: 1000})
+                    .then(toJson => console.log(toJson.url))
+            },
         }
 
     }
