@@ -12,9 +12,23 @@ var posts = require("./routes/posts");
 
 var bodyParser = require("body-parser");
 
+var cors = require("cors");
+
 var app = express();
 
+var whitelist = ["http://localhost:8080", "70.12.246.138:8080"];
+
+var corsOptions = {
+  origin: function(origin, callback) {
+    var isWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(null, isWhitelisted);
+  },
+  credentials: true
+};
+
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -2,10 +2,11 @@ var express = require("express");
 var router = express.Router();
 const knex = require("knex")(require("../knexfile"));
 
-// Get All Repositories Sort By Date
+// Get All Repositories
 router.get("/", (req, res) => {
   knex("repository")
     .select("*")
+    .orderBy("repository_date", "desc")
     .then(data => res.json(data));
 });
 
