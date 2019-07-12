@@ -1,7 +1,6 @@
 var express = require("express");
 var router = express.Router();
 const knex = require("knex")(require("../knexfile"));
-const translate = require("google-translate-api");
 
 // Get all posts sorted by datetime
 router.get("/", (req, res) => {
@@ -9,6 +8,20 @@ router.get("/", (req, res) => {
     .select("*")
     .orderBy("post_date", "desc")
     .then(data => res.json(data));
+});
+
+// Get all posts sorted by datetime (EN)
+router.get("/en", (req, res) => {
+  knex("post")
+    .select("*")
+    .orderBy("post_date", "desc")
+    .then(data => {
+      for (let index = 0; index < data.length; index++) {
+        data[index].post_title = "안녕하세요";
+        data[index].post_content = "!!";
+      }
+      res.json(data);
+    });
 });
 
 // Get one detailed post
