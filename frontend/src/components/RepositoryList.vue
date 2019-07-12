@@ -77,7 +77,7 @@
         groups: [
           {name: '김성우', username: 'rlatjddn23@gmail.com', access_token: 'Qqs1R7PD9T8v98HXyzKh'},
           {name: '신승민', username: 'sammiffy77@naver.com', access_token: 'AkY21v72oZBaUposZ2cs'},
-          {name: '이원진', username: 'lzeroll@naver.com', access_token: 'e_CnCxsi3fLRjDisDMmx'},
+          {name: '이원진', username: 'lzeroll@naver.com', access_token: 'hbDYs64QQoNquzmhCkm9'},
           {name: '이지선', username: 'yjs1002', access_token: 'wTE9n9Ye1MZujw4BPd2j'},
           {name: '이형주', username: 'gudwn8439@naver.com', access_token: 'Bo9wikujLgGNyhZ97oSw'},
         ]
