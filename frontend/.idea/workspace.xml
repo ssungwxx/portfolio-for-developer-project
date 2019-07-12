@@ -62,7 +62,7 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+        <entry file="file://$PROJECT_DIR$/src/services/GitlabService.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="336">
               <caret line="16" selection-start-line="16" selection-end-line="16" selection-end-column="69" />
@@ -130,6 +130,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
@@ -169,7 +170,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -464,7 +464,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Repository.vue">
+    <entry file="file://$PROJECT_DIR$/src/views/PortfolioWrite.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="202">
           <caret line="120" column="19" selection-start-line="120" selection-start-column="11" selection-end-line="120" selection-end-column="19" />
