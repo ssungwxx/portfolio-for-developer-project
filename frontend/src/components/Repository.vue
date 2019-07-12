@@ -1,200 +1,147 @@
-<!--<template>-->
-<!--  <div class="py-3">-->
-<!--    <v-layout>-->
-
-<!--      <v-flex xs8>-->
-<!--        <h2 class="font-weight-regular reponame">{{repos.path_with_namespace}}</h2>-->
-<!--        <p class="subheading mb-1 grey&#45;&#45;text text&#45;&#45;darken-1 font-weight-light">{{repos.namespace.name}}</p>-->
-<!--      </v-flex>-->
-
-<!--    </v-layout>-->
-<!--  </div>-->
-<!--</template>-->
-
-<!--<script>-->
-<!--import GitlabService from '@/services/GitlabService'-->
-
-<!--export default {-->
-<!--	name: 'Repository',-->
-<!--	props: {-->
-<!--		repos: {type: null}-->
-<!--	},-->
-<!--	data() {-->
-<!--		return {-->
-<!--			stats: {}-->
-<!--		}-->
-<!--	},-->
-<!--  mounted() {-->
-<!--		this.drawStatGraph()-->
-<!--  },-->
-<!--	methods: {-->
-<!--		async drawStatGraph() {-->
-<!--			this.commits = await GitlabService.getCommits(this.repos.id)-->
-<!--		}-->
-<!--	}-->
-<!--}-->
-<!--</script>-->
-
-
 <template>
   <div class="py-3">
-    <v-layout>
-
-      <v-flex xs8>
-        <!-- <v-clamp autoresize :max-lines="1"> -->
-        <h2 class="font-weight-regular">
-
-          <v-btn flat :href="'https://lab.ssafy.com/' + repos.path" target="_blank">
-            <v-clamp autoresize :max-lines="1">
-              {{name}}
-            </v-clamp>
+    <v-layout row wrap>
+      <v-flex xl3 lg3 md3 sm3 xs3>
+        <v-flex text-xs-left>
+          <h2 class="font-weight-regular headline_truncate">{{member.name}}</h2>
+          <p class="subheading mb-1 grey--text text--darken-1
+             font-weight-light">Point : {{allCommits}}</p>
+        </v-flex>
+        <v-flex text-xs-left>
+          <v-btn :href="member.web_url" small flat icon outline>
+            <v-icon small>fa-arrow-right</v-icon>
           </v-btn>
-
-        </h2>
-        <!-- </v-clamp> -->
-        <p class="subheading mb-1 grey--text text--darken-1 font-weight-light namespace">{{'@' + repos.name}}</p>
-
+        </v-flex>
+        <p>{{pushMessage}}</p>
       </v-flex>
-      <v-flex hidden-xs-only style="margin-right: 35px;align-items:center;">
-        <bars
-                :data="data"
-                :gradient="['#e7d7b7', '#ffa046']"
-                :barWidth="8"
-                :width="300"
-                :height="100"
-                :growDuration="2"
-                style="border:1px solid rgba(255, 180, 0, 0.8); padding-right:5px;">
-        </bars>
+      <v-flex xl8 lg8 md8 sm8 hidden-xs-only>
+        <v-sheet
+                class="v-sheet--offset mx-auto"
+                color="grey lighten-5"
+                elevation="12"
+                max-width="calc(100% - 32px)"
+                height="60%"
+        >
+          <v-sparkline
+                  :labels="labels"
+                  :value="valueall"
+                  :smooth="radius || false"
+                  :stroke-linecap="lineCap"
+                  :gradient="gradient"
+                  color="grey"
+                  line-width="2"
+                  padding="16"
+                  auto-draw
+
+                  class="zoom"
+          ></v-sparkline>
+        </v-sheet>
       </v-flex>
 
     </v-layout>
   </div>
 </template>
-<!-- <script src="path/to/chartjs/dist/Chart.js"></script> -->
+
 <script>
   import GitlabService from '@/services/GitlabService'
-  import VClamp from 'vue-clamp'
+
+  const gradients = [
+    ['#1feaea','#ffd200', '#f72047']
+  ]
+
+
   export default {
     name: 'Repository',
     props: {
-      repos: {type: null},
-      token: {type: String},
-      name: {type: String},
-      cname: {type: String},
-      cname2: {type:String},
+      member: {
+        type: Object,
+        default: function(){
+          return {
+            name:"로딩중",
+            web_url:"lab.ssafy.com",
+            todayDate:0,
+          }}
+      },
     },
     data() {
       return {
+        numberPush: 0,
+        pushMessage:"아직 Push 하지 않았습니다.",
         stats: {},
-        data: [],
-        repo: [],
+        labels: [
+          '7/8',
+          '7/9',
+          '7/10',
+          '7/11',
+          '7/12',
+          '7/13',
+          '7/14',
+          '7/15',
+          '7/16',
+          '7/17',
+          '7/18',
+          '7/19',
+        ],
+        valueall: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        allCommits: 0,
+        radius: 5,
+        gradient: gradients[0],
+        lineCap: 'round'
       }
-    },
-    components:{
-      VClamp
     },
     mounted() {
-      this.drawStatGraph(),
-              this.getCommits()
-
+      const today = new Date();
+      this.todayDate = String(today.getDate()).padStart(2, '0');
+      this.setCommit();
     },
     methods: {
-      async drawStatGraph() {
-        let toD = new Date();
-        this.commits = await GitlabService.getCommits(this.repos.id, this.token, toD.toISOString());
-
+      commitToValue(oneData) {
+        // let authorId = oneData.author_id
+        const new_value = this.valueall.slice()
+        const gitrepoDay = parseInt(oneData.created_at.slice(8, 10));
+        if (gitrepoDay === parseInt(this.todayDate)){
+          this.numberPush +=1
+          this.pushMessage = `${this.numberPush}번 push했습니다.`
+        }
+        if (new_value[gitrepoDay-8]<10){
+          new_value[gitrepoDay-8] += 1;
+        }
+        this.valueall = new_value
+        // console.log(this.value)
       },
-      async getCommits() {
-        let toD = new Date();
-        const response = await GitlabService.getCommits(this.repos.id, this.token, toD.toISOString());
-
-        if(response.status !== 200) {
-          return
-        }
-        this.repo = response.data;
-
-        const responseRepo = await GitlabService.getAllRepos(this.repos.name, this.token);
-
-        if (responseRepo.status !== 200) {
-          return
-        }
-        // console.log(responseRepo.data)
-        this.getDateTable();
-        for (const data of responseRepo.data) {
-          const repoName = data.path;
-          const responseCommit = await GitlabService.getRepoCommit(this.repos.name, repoName, this.token);
-
-          this.commits = responseCommit.data;
-          // console.log(this.repos.name, this.commits);
-          // console.log('commit', this.commits);
-          this.getChartData();
-        }
-        this.finishData();
+      commitToVuex(severalData) {
+        severalData.data.forEach(this.commitToValue);
       },
-      async getDateTable() {
-        let Cdata = [];
-        let today = new Date();
-        // console.log(today.getMonth());
-        let lastDay = new Date();
-        lastDay.setMonth(today.getMonth() - 1)
-        while (today.getMonth() != lastDay.getMonth() || today.getDate() != lastDay.getDate()) {
-          let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + '';
-          let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + '';
-          let chartData = {value: 0, title: month + '-' + day};
-          lastDay.setDate(lastDay.getDate() + 1);
-          Cdata.push(chartData);
-        }
-        let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + '';
-        let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + '';
-        let chartData = {value: 0, title: month + '-' + day};
-        lastDay.setDate(lastDay.getDate() + 1);
-        Cdata.push(chartData);
-        this.data = Cdata;
-
-        return
-      },
-      async getChartData() {
-
-        let Cdata = this.data;
-
-        if (this.commits.length != 0) {
-          let key = Cdata.length - 1;
-
-          for (const d of this.commits) {
-            // if (d.committer_name === this.cname || d.committer_name === this.cname2) {
-            // console.log(d.committer_name, d.created_at);
-            if (d.committer_name == this.cname || d.committer_name == this.name || d.committer_name == this.cname2) {
-              console.log(this.name, this.cname, this.cname2, this.commits, d)
-              const date = (d.created_at + '').slice(5, 10);
-              console.log(d.created_at)
-              // console.log(date, ' = ', Cdata[key]);
-              // console.log(key)
-              while (date != Cdata[key].title) {
-                key--
-              }
-              Cdata[key].value += 1
-            }
-          }
-        }
-        this.data = Cdata;
-
-        return
-      },
-      async finishData() {
-        const Cdata = this.data;
-        for (const c of Cdata) {
-          c.title = c.value != 1 ? c.title + ' : ' + c.value + 'commits' : c.title + ' : ' + c.value + ' commit'
-        }
-        this.data = Cdata;
-        return
+      async setCommit() {
+        const result = await GitlabService.getCommits(this.member.id)
+        this.allCommits = result.data.length
+        this.commitToVuex(result)
       }
-
+    },
+    watch:{
+      valueall: function(new_val){
+        console.log("hihi")
+      },
     }
   }
-
 </script>
 <style>
-  .namespace {
-    margin-left: 30px;
+  .zoom {
+    /*zoom: 200%;*/
+    width: 100%;
+    height: 100%;
+  }
+
+  .headline_truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .content_truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>
