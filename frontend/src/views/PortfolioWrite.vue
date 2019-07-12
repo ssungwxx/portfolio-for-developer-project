@@ -16,11 +16,11 @@
             <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
                           prepend-icon='attach_file'></v-text-field>
             <input id="imgup"
-                    type="file"
-                    style="display: none"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
+                   type="file"
+                   style="display: none"
+                   ref="image"
+                   accept="image/*"
+                   @change="onFilePicked"
             >
         </v-flex>
 
@@ -39,9 +39,9 @@
     import FirebaseService from '@/services/FirebaseService'
     import Unsplash from "unsplash-js";
 
+    const ClientId = "f54eed5a9fa625008ff25b3ac52e0af07388084d294f4c2e495f60e6c3ad5e22";
     const unsplash = new Unsplash({
-        applicationId: "f54eed5a9fa625008ff25b3ac52e0af07388084d294f4c2e495f60e6c3ad5e22",
-        secret: "35aefe92c645ce07c9817bab7aee76cf088f25eab35540495151176f528c95df"
+        applicationId: ClientId,
     });
 
 
@@ -75,6 +75,13 @@
                         this.imageUrl = fr.result;
                         this.imageFile = files[0] // this is an image file that can be sent to server...
                     })
+                } else if (this.imageUrl !== "") {
+                    this.imageName = "Random_Image";
+                    const fr = new FileReader();
+                    fr.readAsDataURL(this.imageUrl);
+                    fr.addEventListener("load", () => {
+                        this.imageFile = this.imageUrl;
+                    });
                 } else {
                     this.imageName = '';
                     this.imageFile = '';
@@ -83,7 +90,13 @@
             },
             randomPhoto() {
                 unsplash.photos.getRandomPhoto({width: 1000, height: 1000})
-                    .then(toJson => console.log(toJson))
+                    .then(function (toJson) {
+                        return toJson.url + "&client_id=" + ClientId;
+                    })
+                    .then(imgurl => axios.get(imgurl)
+                        .then(res => res.data.urls.custom)
+                        .then(image => this.imageUrl = image)
+                    )
             },
 
             uploadImageByImgur(file, callback) {
@@ -107,7 +120,8 @@
                     contentType: false,
                     processData: false
                 }).always(callback);
-            },
+            }
+            ,
 
             /* 파일 변경 이벤트가 감지되면 자동으로 이미지 업로드 */
             imgupload() { // 사용자가 파일을 변경했을때 발생됨
@@ -128,7 +142,8 @@
                         }
                     });
                 }
-            },
+            }
+            ,
         }
 
     }
