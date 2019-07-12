@@ -1,7 +1,5 @@
 <template>
-
     <div>
-
         <ImgBanner imgSrc="https://lorempixel.com/1600/900">
             <div style="line-height:1.2em;" slot="text">I can do this all day</div>
         </ImgBanner>
@@ -94,7 +92,7 @@
         margin-top: auto;
         margin-bottom: auto;
     }
-    
+
     @media screen and (max-width: 600px) {
         .profile-img {
             display: none;
