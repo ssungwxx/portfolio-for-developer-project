@@ -1,25 +1,35 @@
 <template>
-  <v-footer id="core-footer" absolute height="82">
+  <v-footer
+    id="core-footer"
+    absolute
+    height="82"
+  >
     <div class="footer-items">
-      <span v-for="link in links" :key="link.name">
-        <a :href="link.Link" class="tertiary--text footer-links">{{ link.name }}</a>
+      <span
+        v-for="link in links"
+        :key="link.name"
+      >
+        <a
+          :href="link.Link"
+          class="ftitem">{{ link.name }}</a>
       </span>
     </div>
-    <v-spacer />
-    <span class="font-weight-light copyright">
+    <v-spacer/>
+    <span class="ftweather">
       &copy;
       {{ (new Date()).getFullYear() }}
       <a
         href="https://edu.ssafy.com/"
-        target="_blank"
-      >SSAFY In {{ city }}</a>
-      <br />
-      {{ temperature }}℃ , {{ weatherMain }}
+        target="_blank">SSAFY In {{ city }}</a>
+        <br>
+        {{ temperature }}℃  {{ weatherMain }}
     </span>
   </v-footer>
 </template>
 
 <script>
+
+
 export default {
   data() {
     return {
@@ -94,7 +104,16 @@ export default {
 </script>
 
 <style>
-#core-footer {
-  z-index: 1;
+.ftitem{
+padding: 25px;
+color: black;
+font-size: 18px;
+}
+
+.ftweather{
+margin-right: 50px;
+text-align: right;
+font-family: sans-serif;
+font-size: 15px;
 }
 </style>
