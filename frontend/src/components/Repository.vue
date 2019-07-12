@@ -164,9 +164,9 @@
             // if (d.committer_name === this.cname || d.committer_name === this.cname2) {
             // console.log(d.committer_name, d.created_at);
             if (d.committer_name == this.cname || d.committer_name == this.name || d.committer_name == this.cname2) {
-              console.log(this.name, this.cname, this.cname2, this.commits, d)
+              // console.log(this.name, this.cname, this.cname2, this.commits, d)
               const date = (d.created_at + '').slice(5, 10);
-              console.log(d.created_at)
+              // console.log(d.created_at)
               // console.log(date, ' = ', Cdata[key]);
               // console.log(key)
               while (date != Cdata[key].title) {
