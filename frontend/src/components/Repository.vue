@@ -79,7 +79,9 @@
     props: {
       repos: {type: null},
       token: {type: String},
-      name: {type: String}
+      name: {type: String},
+      cname: {type: String},
+      cname2: {type:String},
     },
     data() {
       return {
@@ -98,65 +100,92 @@
     },
     methods: {
       async drawStatGraph() {
-        let toD = new Date()
+        let toD = new Date();
         this.commits = await GitlabService.getCommits(this.repos.id, this.token, toD.toISOString());
 
       },
       async getCommits() {
-        let toD = new Date()
+        let toD = new Date();
         const response = await GitlabService.getCommits(this.repos.id, this.token, toD.toISOString());
 
         if(response.status !== 200) {
           return
         }
-        this.repo = response.data
+        this.repo = response.data;
 
-        this.getChartData();
+        const responseRepo = await GitlabService.getAllRepos(this.repos.name, this.token);
+
+        if (responseRepo.status !== 200) {
+          return
+        }
+        // console.log(responseRepo.data)
+        this.getDateTable();
+        for (const data of responseRepo.data) {
+          const repoName = data.path;
+          const responseCommit = await GitlabService.getRepoCommit(this.repos.name, repoName, this.token);
+
+          this.commits = responseCommit.data;
+          // console.log(this.repos.name, this.commits);
+          // console.log('commit', this.commits);
+          this.getChartData();
+        }
+        this.finishData();
       },
-      async getChartData() {
-        const Cdata = [];
+      async getDateTable() {
+        let Cdata = [];
         let today = new Date();
+        // console.log(today.getMonth());
         let lastDay = new Date();
         lastDay.setMonth(today.getMonth() - 1)
         while (today.getMonth() != lastDay.getMonth() || today.getDate() != lastDay.getDate()) {
-          let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + ''
-          let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + ''
+          let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + '';
+          let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + '';
           let chartData = {value: 0, title: month + '-' + day};
           lastDay.setDate(lastDay.getDate() + 1);
           Cdata.push(chartData);
         }
-        let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + ''
-        let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + ''
+        let month = ((lastDay.getMonth() + 1) + '').length == 1 ? '0' + (lastDay.getMonth() + 1) : (lastDay.getMonth() + 1) + '';
+        let day = (lastDay.getDate() + '').length == 1 ? '0' + lastDay.getDate() : lastDay.getDate() + '';
         let chartData = {value: 0, title: month + '-' + day};
         lastDay.setDate(lastDay.getDate() + 1);
         Cdata.push(chartData);
+        this.data = Cdata;
 
-        while (this.repo.length != 0) {
+        return
+      },
+      async getChartData() {
+
+        let Cdata = this.data;
+
+        if (this.commits.length != 0) {
           let key = Cdata.length - 1;
-          let toD = this.repo[this.repo.length - 1].created_at
 
-          for (const d of this.repo) {
-            const date = (d.created_at + '').slice(5, 10);
-            while (date != Cdata[key].title) {
-              key--
+          for (const d of this.commits) {
+            // if (d.committer_name === this.cname || d.committer_name === this.cname2) {
+            // console.log(d.committer_name, d.created_at);
+            if (d.committer_name == this.cname || d.committer_name == this.name || d.committer_name == this.cname2) {
+              console.log(this.name, this.cname, this.cname2, this.commits, d)
+              const date = (d.created_at + '').slice(5, 10);
+              console.log(d.created_at)
+              // console.log(date, ' = ', Cdata[key]);
+              // console.log(key)
+              while (date != Cdata[key].title) {
+                key--
+              }
+              Cdata[key].value += 1
             }
-            Cdata[key].value += 1
           }
-
-          let R = await GitlabService.getCommits(this.repos.id, this.token, toD);
-
-          if(R.status !== 200) {
-            return
-          }
-          this.repo = R.data
-
         }
+        this.data = Cdata;
 
+        return
+      },
+      async finishData() {
+        const Cdata = this.data;
         for (const c of Cdata) {
           c.title = c.value != 1 ? c.title + ' : ' + c.value + 'commits' : c.title + ' : ' + c.value + ' commit'
         }
         this.data = Cdata;
-
         return
       }
 

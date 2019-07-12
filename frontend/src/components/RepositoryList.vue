@@ -56,7 +56,7 @@
   <v-layout column px-4>
     <v-flex v-for="i in repositories.length">
       <v-divider v-if="i === 1"></v-divider>
-      <Repository :repos="repositories[i - 1]" :token="groups[i - 1].access_token" :name="groups[i - 1].name"></Repository>
+      <Repository class="graph" :repos="repositories[i - 1]" :token="groups[i - 1].access_token" :name="groups[i - 1].name" :cname="groups[i-1].cname" :cname2="groups[i-1].cname2"></Repository>
       <v-divider></v-divider>
     </v-flex>
   </v-layout>
@@ -75,11 +75,11 @@
       return {
         repositories: [],
         groups: [
-          {name: '김성우', username: 'rlatjddn23@gmail.com', access_token: 'Qqs1R7PD9T8v98HXyzKh'},
-          {name: '신승민', username: 'sammiffy77@naver.com', access_token: 'AkY21v72oZBaUposZ2cs'},
-          {name: '이원진', username: 'lzeroll@naver.com', access_token: 'hbDYs64QQoNquzmhCkm9'},
-          {name: '이지선', username: 'yjs1002', access_token: 'wTE9n9Ye1MZujw4BPd2j'},
-          {name: '이형주', username: 'gudwn8439@naver.com', access_token: 'Bo9wikujLgGNyhZ97oSw'},
+          {name: '김성우', username: 'rlatjddn23@gmail.com', access_token: 'Qqs1R7PD9T8v98HXyzKh', cname:'ykk2006', cname2: "김성우"},
+          {name: '신승민', username: 'sammiffy77@naver.com', access_token: 'AkY21v72oZBaUposZ2cs', cname:'신승민', cname2: ""},
+          {name: '이원진', username: 'lzeroll@naver.com', access_token: 'hbDYs64QQoNquzmhCkm9', cname:'Terpe66', cname2: "이원진"},
+          {name: '이지선', username: 'yjs1002', access_token: 'wTE9n9Ye1MZujw4BPd2j', cname:'jisun1002', cname2: "이지선"},
+          {name: '이형주', username: 'gudwn8439@naver.com', access_token: 'Bo9wikujLgGNyhZ97oSw', cname:'이형주', cname2: ""}
         ]
       }
     },
