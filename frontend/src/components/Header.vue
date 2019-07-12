@@ -6,6 +6,9 @@
                 <v-icon>home</v-icon>
             </v-btn>
 
+            <v-btn>
+              <v-facebook-login app-id="2340768596039099"></v-facebook-login>
+            </v-btn>
             <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
 
             <v-spacer></v-spacer>
@@ -24,17 +27,19 @@
                 </router-link>
 
                 <router-link :to="login" style="text-decoration: none;">
-                    <v-btn icon href="./Login">
-                        <v-icon color="yellow">perm_identity</v-icon>
-                    </v-btn>
+                  <v-btn icon href="./Login">
+                  <v-icon color="yellow">perm_identity</v-icon>
+                  </v-btn>
                 </router-link>
-            </div>
 
+            </div>
         </v-toolbar>
     </div>
 </template>
 
 <script>
+import { VFBLogin as VFacebookLogin } from 'vue-facebook-login-component'
+
     export default {
         name: "Header",
         data: () => ({
@@ -58,8 +63,8 @@
             ]
         }),
         components: {
-        }
-        ,
+          VFacebookLogin
+        },
         methods: {
         }
     }
@@ -82,7 +87,7 @@
         z-index: 1;
         position: relative;
     }
-    
+
     @media screen and (min-width: 600px) {
         .menu {
             display: none;
