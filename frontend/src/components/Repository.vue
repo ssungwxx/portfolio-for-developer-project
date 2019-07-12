@@ -55,7 +55,7 @@
         <p class="subheading mb-1 grey--text text--darken-1 font-weight-light namespace">{{'@' + repos.name}}</p>
 
       </v-flex>
-      <v-flex hidden-sm-and-down md4 style="margin-right: 35px;align-items:center;">
+      <v-flex hidden-xs-only style="margin-right: 35px;align-items:center;">
         <bars
                 :data="data"
                 :gradient="['#e7d7b7', '#ffa046']"
