@@ -29,26 +29,26 @@ export default {
   getPortfolios() {
     return axios
       .get("http://70.12.246.138:3000/portfolios")
-      .then(response => (this.posts = response.data));
+      .then(response => (this.portfolios = response.data));
   },
   getPortfolio(id) {
     return axios
       .get("http://70.12.246.138:3000/portfolios" + id)
-      .then(response => (this.posts = response.data));
+      .then(response => (this.portfolios = response.data));
   },
   insertPortfolio(data) {
     return axios
       .post("http://70.12.246.138:3000/portfolios", data)
-      .then(response => (this.posts = response.data));
+      .then(response => (this.portfolios = response.data));
   },
   deletePortfolio(id) {
     return axios
       .delete("http://70.12.246.138:3000/portfolios" + id)
-      .then(response => (this.posts = response.data));
+      .then(response => (this.portfolios = response.data));
   },
   updatePortfolio(id, data) {
     return axios
       .put("http://70.12.246.138:3000/portfolios" + id, data)
-      .then(response => (this.posts = response.data));
+      .then(response => (this.portfolios = response.data));
   }
 };
