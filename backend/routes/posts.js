@@ -6,7 +6,22 @@ const knex = require("knex")(require("../knexfile"));
 router.get("/", (req, res) => {
   knex("post")
     .select("*")
+    .orderBy("post_date", "desc")
     .then(data => res.json(data));
+});
+
+// Get all posts sorted by datetime (EN)
+router.get("/en", (req, res) => {
+  knex("post")
+    .select("*")
+    .orderBy("post_date", "desc")
+    .then(data => {
+      for (let index = 0; index < data.length; index++) {
+        data[index].post_title = "안녕하세요";
+        data[index].post_content = "!!";
+      }
+      res.json(data);
+    });
 });
 
 // Get one detailed post

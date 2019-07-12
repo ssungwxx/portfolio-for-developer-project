@@ -7,7 +7,7 @@ var logger = require("morgan");
 var indexRouter = require("./routes/index");
 
 var users = require("./routes/users");
-var repositories = require("./routes/repositories");
+var portfolios = require("./routes/portfolios");
 var posts = require("./routes/posts");
 
 var bodyParser = require("body-parser");
@@ -16,7 +16,7 @@ var cors = require("cors");
 
 var app = express();
 
-var whitelist = ["http://localhost:8080", "70.12.246.138:8080"];
+var whitelist = ["70.12.246.138:8080"];
 
 var corsOptions = {
   origin: function(origin, callback) {
@@ -44,7 +44,7 @@ app.use("/", indexRouter);
 
 // users REST API
 app.use("/users", users);
-app.use("/repositories", repositories);
+app.use("/portfolios", portfolios);
 app.use("/posts", posts);
 
 // catch 404 and forward to error handler

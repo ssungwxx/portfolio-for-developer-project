@@ -21,7 +21,6 @@
 </template>
 <script>
 import Post from "@/components/Post";
-import FirebaseService from "@/services/FirebaseService";
 import RestService from "@/services/RestService";
 
 export default {
@@ -40,10 +39,7 @@ export default {
     Post
   },
   mounted() {
-    //this.getPosts();
-    axios
-      .get("http://70.12.246.138:3000/posts")
-      .then(response => (this.posts = response.data));
+    this.getPosts();
   },
   methods: {
     async getPosts() {

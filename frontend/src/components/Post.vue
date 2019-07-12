@@ -14,7 +14,7 @@ export default {
   props: {
     post_title: { type: String },
     post_content: { type: String },
-    post_date: { type: Date }
+    post_date: { type: String }
   },
   computed: {}
 };
