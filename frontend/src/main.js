@@ -12,6 +12,10 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+//그래프 관련
+import Bars from 'vuebars'
+Vue.use(Bars)
+
 //날씨 관련 Vue-Resource
 // npm install vue-resource"
 import VueResource from "vue-resource";
