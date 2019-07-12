@@ -1,11 +1,13 @@
 var express = require("express");
 var router = express.Router();
 const knex = require("knex")(require("../knexfile"));
+const translate = require("google-translate-api");
 
 // Get all posts sorted by datetime
 router.get("/", (req, res) => {
   knex("post")
     .select("*")
+    .orderBy("post_date", "desc")
     .then(data => res.json(data));
 });
 
