@@ -63,8 +63,8 @@ methods:{
           this.latitude = parseFloat(this.latitude).toFixed(2);
           this.longitude = parseFloat(this.longitude).toFixed(2);
 
-                console.warn(`ERROR(${err.code}): ${err.message}`);
-                console.warn(this.errorMsg);
+                //console.warn(`ERROR(${err.code}): ${err.message}`);
+              //  console.warn(this.errorMsg);
             },
             getWeather: function () {
                 var reqURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + this.latitude + '&lon=' + this.longitude + '&APPID=' + this.apikey;
