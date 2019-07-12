@@ -10,12 +10,12 @@
         </v-content>
 
         <v-content>
-            <Footer/>
+            <TopButton/>
+            <AddFavorite/>
         </v-content>
 
         <v-content>
-            <TopButton/>
-            <AddFavorite/>
+            <Footer/>
         </v-content>
     </v-app>
 </template>

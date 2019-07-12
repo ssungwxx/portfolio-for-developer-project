@@ -1,75 +1,59 @@
 var express = require("express");
 var router = express.Router();
-var mongoose = require("mongoose");
-var User = require("../model/User");
+const knex = require("knex")(require("../knexfile"));
 
-mongoose.set("useNewUrlParser", true);
-mongoose.set("useFindAndModify", false);
-
-// Get Specific User's All Posts
-router.get("/:id", function(req, res, next) {
-  User.find({
-    "user_id": req.param.id
-  }).select({
-    "posts": 1,
-    "_id": 0
-  }).exec(function(err, posts) {
-    if (err) return next(err);
-    res.json(posts);
-  });
-  //   var v = posts[0]["posts"][0];
-  //   console.log(v.post_name);
+// Get all posts sorted by datetime
+router.get("/", (req, res) => {
+  knex("post")
+    .select("*")
+    .orderBy("post_date", "desc")
+    .then(data => res.json(data));
 });
 
-// Get Specific User's One Post
-router.get("/:id/:pname", function(req, res, next) {
-  User.findOne({
-      "user_id": req.params.id
-    }, {
-      "posts": {
-        $elemMatch: {
-          "post_name": req.params.pname
-        }
+// Get all posts sorted by datetime (EN)
+router.get("/en", (req, res) => {
+  knex("post")
+    .select("*")
+    .orderBy("post_date", "desc")
+    .then(data => {
+      for (let index = 0; index < data.length; index++) {
+        data[index].post_title = "안녕하세요";
+        data[index].post_content = "!!";
       }
-    })
-    .exec(function(err, post) {
-      if (err) return next(err);
-      res.json(post);
+      res.json(data);
     });
 });
 
-// Add New Post
-// Problem: Object_id가 같이 들어가는 문제 해결해야함
-router.put("/add/:id", function(req, res, next) {
-  User.updateOne({
-    "user_id": req.param.id
-  }, {
-    $push: {
-      "posts": req.body
-    }
-  }).exec(function(err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+// Get one detailed post
+router.get("/:id", (req, res) => {
+  knex("post")
+    .select("*")
+    .where("user_id", req.params.id)
+    .then(data => res.json(data));
 });
 
-// Modify Post
+// Add new post
+router.post("/", (req, res) => {
+  knex("post")
+    .insert(req.body)
+    .then(data => res.json(data));
+});
 
+// Delete selected post
+router.delete("/:no", (req, res) => {
+  console.log(req.params.no);
+  knex("post")
+    .delete(req.body)
+    .where("post_no", req.params.no)
+    .then(data => res.json(data));
+});
 
-// Delete Post
-router.put("/delete/:id/:pname", function(req, res, next) {
-  User.updateOne({
-    "user_id": req.params.id
-  }, {
-    $pull: {
-      "posts": {
-        "post_name": req.params.pname
-      }
-    }
-  }).exec(function(err, post) {
-    if (err) return next(err);
-    res.json(post);
-  });
+// Modify selected post
+router.put("/:no", (req, res) => {
+  knex("post")
+    .update(req.body)
+    .where("post_no", req.params.no)
+    .then(data => res.json(data));
 });
 
 module.exports = router;
