@@ -28,6 +28,8 @@
 
       <Login class="login"></Login>
 
+      <Register class="login"></Register>
+
       <!-- <router-link :to="login" style="text-decoration: none;">
                   <v-btn icon href="./Login">
                   <v-icon color="yellow">perm_identity</v-icon>
@@ -45,6 +47,7 @@ import {
 } from 'vue-facebook-login-component'
 
 import Login from './Login'
+import Register from './Register'
 
 export default {
   name: "Header",
@@ -69,7 +72,8 @@ export default {
   }),
   components: {
     VFacebookLogin,
-    Login
+    Login,
+    Register
   },
   methods: {}
 }
