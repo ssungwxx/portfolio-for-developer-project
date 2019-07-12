@@ -1,8 +1,8 @@
 <template>
     <div :class="!isTop?'top-button':'top-button-d-none'">
-        <a href="#">
+        <button @click="gotop">
             <img src="../../public/img/arrow-up.png" alt="logo" height="60px"/>
-        </a>
+        </button>
     </div>
 </template>
 
@@ -23,6 +23,14 @@
                 } else {
                     this.isTop = false;
                 }
+            },
+            gotop() {
+                window.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'smooth'
+                })
+
             }
         },
         created() {
@@ -41,6 +49,7 @@
         margin: 0;
         padding: 0;
         height: 60px;
+        z-index: 2;
     }
 
     .top-button-d-none {

@@ -6,22 +6,29 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 
-var mongoose = require("mongoose");
-var bodyParser = require("body-parser");
-
 var users = require("./routes/users");
-
 var repositories = require("./routes/repositories");
 var posts = require("./routes/posts");
 
-mongoose.Promise = global.Promise;
+var bodyParser = require("body-parser");
 
-mongoose
-  .connect("mongodb://localhost:27017/ssafy")
-  .then(() => console.log("connected successful"))
-  .catch(err => console.err(err));
+var cors = require("cors");
 
 var app = express();
+
+var whitelist = ["http://localhost:8080", "70.12.246.138:8080"];
+
+var corsOptions = {
+  origin: function(origin, callback) {
+    var isWhitelisted = whitelist.indexOf(origin) !== -1;
+    callback(null, isWhitelisted);
+  },
+  credentials: true
+};
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(cors(corsOptions));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -33,16 +40,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-// body-parser middle-ware 등록
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
 app.use("/", indexRouter);
 
 // users REST API
 app.use("/users", users);
 app.use("/repositories", repositories);
-
 app.use("/posts", posts);
 
 // catch 404 and forward to error handler
