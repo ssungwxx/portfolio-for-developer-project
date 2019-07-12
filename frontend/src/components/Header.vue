@@ -34,11 +34,11 @@
                   <v-btn icon href="./Login">
                   <v-icon color="yellow">perm_identity</v-icon>
                   </v-btn>
-                </router-link>
+                </router-link> -->
 
-            </div>
-        </v-toolbar>
     </div>
+  </v-toolbar>
+</div>
 </template>
 
 <script>
@@ -102,26 +102,30 @@
 </script>
 
 <style>
-    .theme--light.v-list {
-        background: yellow;
-        color: darkgreen;
-        font-weight: bold;
-    }
+.theme--light.v-list {
+  background: yellow;
+  color: darkgreen;
+  font-weight: bold;
+}
 
-    @media screen and (max-width: 600px) {
-        .icons {
-            display: none;
-        }
-    }
+@media screen and (max-width: 600px) {
+  .icons {
+    display: none;
+  }
+}
 
-    .header {
-        z-index: 1;
-        position: relative;
-    }
+.header {
+  z-index: 1;
+  position: relative;
+}
 
-    @media screen and (min-width: 600px) {
-        .menu {
-            display: none;
-        }
-    }
+@media screen and (min-width: 600px) {
+  .menu {
+    display: none;
+  }
+}
+
+.login {
+  display: inline-block;
+}
 </style>

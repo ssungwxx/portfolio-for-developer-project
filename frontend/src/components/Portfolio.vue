@@ -1,40 +1,39 @@
 <template>
-    <router-link :to="detaillink" style="text-decoration:none">
-        <v-card class="ma-3">
-            <v-img :src="imgSrc" height="200px">
-            </v-img>
-            <v-card-title primary-title>
-                <div>
-                    <div class="headline">{{ title }}</div>
-                    <div class="grey--text">
-                        <span>{{ body }}</span>
-                    </div>
-                </div>
-            </v-card-title>
-        </v-card>
-    </router-link>
+  <router-link :to="detaillink" style="text-decoration:none">
+    <v-card class="ma-3">
+      <v-img :src="portfolio_img" height="200px"></v-img>
+      <v-card-title primary-title>
+        <div>
+          <div class="headline">{{ portfolio_title }}</div>
+          <div class="grey--text">
+            <span>{{ portfolio_subTitle }}</span>
+          </div>
+        </div>
+      </v-card-title>
+    </v-card>
+  </router-link>
 </template>
 
 <script>
-    import DetailPortfolio from "../views/DetailPortfolio"
+import DetailPortfolio from "../views/DetailPortfolio";
 
-    export default {
-        name: 'Portfolio',
-        props: {
-            date: {type: String},
-            title: {type: String},
-            body: {type: String},
-            imgSrc: {type: String},
-            idx: {type: String},
-        },
-        components: {
-            DetailPortfolio
-        },
-        data() {
-            return {
-                detaillink: "/DetailPortfolio/" + this.idx
-            }
-        }
-    }
+export default {
+  name: "Portfolio",
+  props: {
+    portfolio_no: { type: String },
+    portfolio_title: { type: String },
+    portfolio_subTitle: { type: String },
+    //body: {type: String},
+    portfolio_img: { type: String }
+  },
+  components: {
+    DetailPortfolio
+  },
+  data() {
+    return {
+      detaillink: "/DetailPortfolios/" + this.portfolio_no
+    };
+  }
+};
 </script>
 
