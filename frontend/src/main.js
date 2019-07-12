@@ -16,7 +16,7 @@ import "./registerServiceWorker";
 import Bars from 'vuebars'
 Vue.use(Bars)
 
-Vue.use(Bars)
+Vue.use(axios)
 
 //날씨 관련 Vue-Resource
 // npm install vue-resource"
