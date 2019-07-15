@@ -40,7 +40,6 @@
 <script>
     import FirebaseService from '@/services/FirebaseService'
     import Unsplash from "unsplash-js";
-    import MarkdownEditor from "../components/MarkdownEditor"
 
     const ClientId = "";
     const unsplash = new Unsplash({
@@ -50,8 +49,7 @@
 
     export default {
         name: "PortfolioWrite",
-        components: {
-        },
+        components: {},
         data() {
             return {
                 title: "Image Upload",
@@ -59,7 +57,6 @@
                 imageName: '',
                 imageUrl: '',
                 imageFile: '',
-                bodyData: "",
             }
         },
         methods: {
