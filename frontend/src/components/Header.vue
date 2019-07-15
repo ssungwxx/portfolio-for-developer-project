@@ -1,40 +1,42 @@
 <template>
-  <div class="header">
-    <v-toolbar dark color="success darken-1" fixed>
-      <v-btn icon href="/">
-        <v-icon>home</v-icon>
-      </v-btn>
+    <div class="header">
+        <v-toolbar class="insta" dark color="#ffc0cb" fixed>
+            <v-btn icon href="/">
+                <v-icon>home</v-icon>
+            </v-btn>
 
-      <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
-      <v-spacer></v-spacer>
+            <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
+            <v-spacer></v-spacer>
 
-      <div class="icons">
-        <router-link to style="text-decoration: none;">
-          <v-btn icon>
-            <v-icon color="yellow" id="bookMark">star</v-icon>
-          </v-btn>
-        </router-link>
+            <div class="icons">
 
-        <router-link :to="port" style="text-decoration: none;">
-          <v-btn icon>
-            <v-icon color="yellow">markunread_mailbox</v-icon>
-          </v-btn>
-        </router-link>
+              <router-link to style="text-decoration: none;">
+                  <v-btn icon>
+                      <v-icon color="white" id="bookMark">star</v-icon>
+                  </v-btn>
+              </router-link>
 
-        <router-link :to="posts" style="text-decoration: none;">
-          <v-btn icon href="./Post">
-            <v-icon color="yellow">description</v-icon>
-          </v-btn>
-        </router-link>
+                <router-link :to="port" style="text-decoration: none;">
+                    <v-btn icon>
+                        <v-icon color="white">markunread_mailbox</v-icon>
+                    </v-btn>
+                </router-link>
 
-        <router-link :to="login" style="text-decoration: none;">
-          <v-btn icon href="./Login">
-            <v-icon color="yellow">perm_identity</v-icon>
-          </v-btn>
-        </router-link>
-      </div>
-    </v-toolbar>
-  </div>
+                <router-link :to="posts" style="text-decoration: none;">
+                    <v-btn icon href="./Post">
+                        <v-icon color="white">description</v-icon>
+                    </v-btn>
+                </router-link>
+
+                <router-link :to="login" style="text-decoration: none;">
+                  <v-btn icon href="./Login">
+                  <v-icon color="white">perm_identity</v-icon>
+                  </v-btn>
+                </router-link>
+
+            </div>
+        </v-toolbar>
+    </div>
 </template>
 
 <script>
