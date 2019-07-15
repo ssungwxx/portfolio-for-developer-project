@@ -115,12 +115,13 @@
       async setCommit() {
         const result = await GitlabService.getCommits(this.member.id)
         this.allCommits = result.data.length
+        // console.log(result.data)
         this.commitToVuex(result)
       }
     },
     watch:{
       valueall: function(new_val){
-        console.log("hihi")
+        // console.log("hihi")
       },
     }
   }
