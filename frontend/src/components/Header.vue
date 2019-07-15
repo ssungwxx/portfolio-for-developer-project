@@ -34,7 +34,7 @@
                   <v-btn icon href="./Login">
                   <v-icon color="yellow">perm_identity</v-icon>
                   </v-btn>
-                </router-link> -->
+                </router-link>
 
     </div>
   </v-toolbar>
