@@ -66,7 +66,6 @@
 
             onFilePicked(e) {
                 const files = e.target.files;
-                console.log(files)
                 if (files[0] !== undefined) {
                     this.imageName = files[0].name
                     if (this.imageName.lastIndexOf('.') <= 0) {
@@ -110,6 +109,7 @@
                 const URL = "https://api.imgur.com/3/image";
                 axios.post(URL, form, {
                     headers: {
+                        // Bearer 뒤에 window.localStorage.getItem("imgur_token") 으로 발급받은 token 추가해야 함
                         "Authorization": "Bearer "
                     }
                 })

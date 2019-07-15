@@ -102,7 +102,7 @@
                 const gitrepoDay = parseInt(oneData.created_at.slice(8, 10));
                 if (gitrepoDay === parseInt(this.todayDate) && oneData.action_name === "pushed to") {
                     this.numberPush += 1;
-                    this.pushMessage = `${this.numberPush}번 push했습니다.`
+                    this.pushMessage = `오늘 ${this.numberPush}번 push했습니다.`
                 }
                 if (new_value[gitrepoDay - 8] < 10) {
                     new_value[gitrepoDay - 8] += 1;
