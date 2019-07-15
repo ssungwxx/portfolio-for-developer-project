@@ -3,7 +3,7 @@ var router = express.Router();
 const knex = require("knex")(require("../knexfile"));
 
 // Get all posts sorted by datetime
-router.get("/", (req, res) => {
+router.get("/test", (req, res) => {
   knex("post")
     .select("*")
     .orderBy("post_date", "desc")
@@ -11,14 +11,14 @@ router.get("/", (req, res) => {
 });
 
 // Get all posts sorted by datetime (EN)
-router.get("/en", (req, res) => {
+router.get("/", (req, res) => {
   knex("post")
     .select("*")
     .orderBy("post_date", "desc")
     .then(data => {
       for (let index = 0; index < data.length; index++) {
-        data[index].post_title = "안녕하세요";
-        data[index].post_content = "!!";
+        let temp = data[index].post_date.toString();
+        data[index].post_date = temp.slice(0, 16);
       }
       res.json(data);
     });
