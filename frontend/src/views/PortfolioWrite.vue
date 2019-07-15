@@ -50,8 +50,7 @@
 
     export default {
         name: "PortfolioWrite",
-        components: {
-        },
+        components: {},
         data() {
             return {
                 title: "Image Upload",
@@ -59,7 +58,6 @@
                 imageName: '',
                 imageUrl: '',
                 imageFile: '',
-                bodyData: "",
             }
         },
         methods: {
