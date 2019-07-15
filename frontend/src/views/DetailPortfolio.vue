@@ -48,8 +48,8 @@ export default {
           portfolio_title: "",
           portfolio_subTitle: "",
           portfolio_img: "",
-          portfolio_date: "",
-          dummy: ""
+          portfolio_date: ""
+
         }
       ],
       port: "/Portfolio",
