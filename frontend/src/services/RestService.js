@@ -23,7 +23,7 @@ export default {
   },
   insertPost(data) {
     return axios
-      .put("http://70.12.246.138:3000/posts/", data)
+      .put("http://70.12.246.138:3000/posts", data)
       .then(response => (this.posts = response.data));
   },
   getPortfolios() {
@@ -33,7 +33,7 @@ export default {
   },
   getPortfolio(id) {
     return axios
-      .get("http://70.12.246.138:3000/portfolios" + id)
+      .get("http://70.12.246.138:3000/portfolios/" + id)
       .then(response => (this.portfolios = response.data));
   },
   insertPortfolio(data) {
@@ -43,12 +43,37 @@ export default {
   },
   deletePortfolio(id) {
     return axios
-      .delete("http://70.12.246.138:3000/portfolios" + id)
+      .delete("http://70.12.246.138:3000/portfolios/" + id)
       .then(response => (this.portfolios = response.data));
   },
   updatePortfolio(id, data) {
     return axios
-      .put("http://70.12.246.138:3000/portfolios" + id, data)
+      .put("http://70.12.246.138:3000/portfolios/" + id, data)
+      .then(response => (this.portfolios = response.data));
+  },
+  getUsers() {
+    return axios
+      .get("http://70.12.246.138:3000/users")
+      .then(response => (this.portfolios = response.data));
+  },
+  getUser(id) {
+    return axios
+      .get("http://70.12.246.138:3000/users/" + id)
+      .then(response => (this.portfolios = response.data));
+  },
+  insertUser(data) {
+    return axios
+      .post("http://70.12.246.138:3000/users", data)
+      .then(response => (this.portfolios = response.data));
+  },
+  updateUser(id, data) {
+    return axios
+      .put("http://70.12.246.138:3000/users/" + id, data)
+      .then(response => (this.portfolios = response.data));
+  },
+  deleteUser(id) {
+    return axios
+      .delete("http://70.12.246.138:3000/users/" + id)
       .then(response => (this.portfolios = response.data));
   }
 };
