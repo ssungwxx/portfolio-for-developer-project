@@ -33,7 +33,7 @@ export default {
   },
   getPortfolio(id) {
     return axios
-      .get("http://70.12.246.138:3000/portfolios" + id)
+      .get("http://70.12.246.138:3000/portfolios/" + id)
       .then(response => (this.portfolios = response.data));
   },
   insertPortfolio(data) {
@@ -48,7 +48,7 @@ export default {
   },
   updatePortfolio(id, data) {
     return axios
-      .put("http://70.12.246.138:3000/portfolios" + id, data)
+      .put("http://70.12.246.138:3000/portfolios/" + id, data)
       .then(response => (this.portfolios = response.data));
   }
 };

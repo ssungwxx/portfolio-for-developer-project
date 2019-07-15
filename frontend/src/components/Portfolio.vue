@@ -20,10 +20,9 @@ import DetailPortfolio from "../views/DetailPortfolio";
 export default {
   name: "Portfolio",
   props: {
-    portfolio_no: { type: String },
+    portfolio_no: { type: Number },
     portfolio_title: { type: String },
     portfolio_subTitle: { type: String },
-    //body: {type: String},
     portfolio_img: { type: String }
   },
   components: {
@@ -31,7 +30,7 @@ export default {
   },
   data() {
     return {
-      detaillink: "/DetailPortfolios/" + this.portfolio_no
+      detaillink: "/detailportfolio/" + this.portfolio_no
     };
   }
 };
