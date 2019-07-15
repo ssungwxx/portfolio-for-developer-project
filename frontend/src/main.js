@@ -13,10 +13,13 @@ import store from "./store";
 import "./registerServiceWorker";
 
 //그래프 관련
-import Bars from 'vuebars'
-Vue.use(Bars)
+import Bars from "vuebars";
+Vue.use(Bars);
 
-Vue.use(axios)
+Vue.use(axios);
+
+// date 관련
+Vue.use(require("vue-moment"));
 
 //날씨 관련 Vue-Resource
 // npm install vue-resource"

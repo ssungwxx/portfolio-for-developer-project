@@ -4,20 +4,20 @@
       <table class="table">
         <tr>
           <td colspan="2">
-            <img class="table-img" :src="portfolios[idx - 1].img" />
+            <img class="table-img" :src="portfolio[0].portfolio_img" />
           </td>
         </tr>
         <tr>
           <td class="table-left">날짜</td>
-          <td class="table-right">{{ portfolios[idx - 1].created_at.toString() }}</td>
+          <td class="table-right">{{ portfolio[0].portfolio_date }}</td>
         </tr>
         <tr>
           <td class="table-left">제목</td>
-          <td class="table-right">{{ portfolios[idx - 1].title }}</td>
+          <td class="table-right">{{ portfolio[0].portfolio_title }}</td>
         </tr>
         <tr>
           <td class="table-left">내용</td>
-          <td class="table-right">{{ portfolios[idx - 1].body }}</td>
+          <td class="table-right">{{ portfolio[0].portfolio_subTitle }}</td>
         </tr>
       </table>
     </div>
@@ -34,29 +34,38 @@
 </template>
 <script>
 import Portfolio from "@/components/Portfolio";
-import FirebaseService from "@/services/FirebaseService";
+import RestService from "@/services/RestService";
 
 export default {
   name: "DetailPortfolios",
   props: {},
   data() {
     return {
-      portfolios: [],
-      idx: document.URL.slice(38),
-      port: "/Portfolio"
+      portfolio: [
+        {
+          portfolio_no: "",
+          user_id: "",
+          portfolio_title: "",
+          portfolio_subTitle: "",
+          portfolio_img: "",
+          portfolio_date: ""
+
+        }
+      ],
+      port: "/Portfolio",
+      id: this.$route.params.id
     };
   },
   components: {
     Portfolio
   },
   mounted() {
-    this.getPortfolios();
+    this.getPortfolio();
   },
   methods: {
-    async getPortfolios() {
-      this.portfolios = await FirebaseService.getPortfolios();
-    },
-    loadMorePortfolios() {}
+    async getPortfolio() {
+      this.portfolio = await RestService.getPortfolio(this.id);
+    }
   }
 };
 </script>

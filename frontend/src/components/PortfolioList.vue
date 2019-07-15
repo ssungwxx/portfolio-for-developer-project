@@ -3,11 +3,11 @@
     <v-flex v-for="i in portfolios.length > limits ? limits : portfolios.length" xs12 sm6>
       <Portfolio
         class="ma-3"
+        :portfolio_no="portfolios[i - 1].portfolio_no"
         :portfolio_date="portfolios[i - 1].portfolio_date"
         :portfolio_title="portfolios[i - 1].portfolio_title"
         :portfolio_subTitle="portfolios[i - 1].portfolio_subTitle"
         :portfolio_img="portfolios[i - 1].portfolio_img"
-        :idx="i.toString()"
       ></Portfolio>
     </v-flex>
 

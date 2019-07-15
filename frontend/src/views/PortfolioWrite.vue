@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="title-div">
         <div>
             <p class="port-title">Write New Portfolio</p>
         </div>
@@ -14,10 +14,12 @@
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             <img :src="imageUrl" height="150" v-if="imageUrl"/>
             <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
-                          prepend-icon='attach_file'></v-text-field>
+                          prepend-icon='attach_file' v-if="imageUrl"></v-text-field>
+            <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
+                          prepend-icon='attach_file' v-else="imageUrl" style="margin-top: 150px;"></v-text-field>
             <input id="imgup"
                    type="file"
-                   style="display: none"
+                   style="display: none;"
                    ref="image"
                    accept="image/*"
                    @change="onFilePicked"
@@ -64,6 +66,7 @@
 
             onFilePicked(e) {
                 const files = e.target.files;
+                console.log(files)
                 if (files[0] !== undefined) {
                     this.imageName = files[0].name
                     if (this.imageName.lastIndexOf('.') <= 0) {
@@ -96,32 +99,41 @@
                     .then(imgurl => axios.get(imgurl)
                         .then(res => res.data.urls.custom)
                         .then(image => this.imageUrl = image)
+                        .then(url => console.log(url))
                     )
             },
 
             uploadImageByImgur(file, callback) {
                 const form = new FormData();
                 form.append('image', file);
-                $.ajax({
-                    req: function () {
-                        const req = new window.XMLHttpRequest();
-                        req.upload.addEventListener("progress", function (event) { // 업로드상태이벤트리스너등록
-                            if (event.lengthComputable) {
-                                console.log("업로드 진행률:" + parseInt((event.loaded / event.total * 100), 10) + "%");
-                            }
-                        }, false);
-                        return req
-                    },
-                    url: 'https://api.imgur.com/3/image',// 업로드요청주소
-                    headers: {Authorization: 'Client-ID 24321b230a75815'},
-                    type: 'POST',
-                    data: form,
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                }).always(callback);
-            }
-            ,
+                form.append("gallery", "test")
+                const URL = "https://api.imgur.com/3/image";
+                axios.post(URL, form, {
+                    headers: {
+                        "Authorization": "Client-ID 24321b230a75815"
+                    }
+                })
+                    .then(req => console.log(req))
+
+            //     $.ajax({
+            //         req: function () {
+            //             const req = new window.XMLHttpRequest();
+            //             req.upload.addEventListener("progress", function (event) { // 업로드상태이벤트리스너등록
+            //                 if (event.lengthComputable) {
+            //                     console.log("업로드 진행률:" + parseInt((event.loaded / event.total * 100), 10) + "%");
+            //                 }
+            //             }, false);
+            //             return req
+            //         },
+            //         url: 'https://api.imgur.com/3/image',// 업로드요청주소
+            //         headers: {Authorization: 'Client-ID 24321b230a75815'},
+            //         method: 'POST',
+            //         data: form,
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false,
+            //     }).always(callback);
+            },
 
             /* 파일 변경 이벤트가 감지되면 자동으로 이미지 업로드 */
             imgupload() { // 사용자가 파일을 변경했을때 발생됨
@@ -153,5 +165,8 @@
 <style>
     .port-title {
         font-size: 5vw;
+    }
+    .title-div {
+        margin-top: 50px;
     }
 </style>

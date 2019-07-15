@@ -10,11 +10,6 @@
         </v-content>
 
         <v-content>
-            <TopButton/>
-            <AddFavorite/>
-        </v-content>
-
-        <v-content>
             <Footer/>
         </v-content>
     </v-app>
@@ -25,15 +20,10 @@
     import Footer from "./components/Footer"
     import Header from "./components/Header"
     import Sidebar from "./components/Sidebar"
-    import TopButton from "./components/TopButton";
-    import AddFavorite from "./components/AddFavorite";
-
 
     export default {
         name: 'App',
         components: {
-            AddFavorite,
-            TopButton,
             store,
             Footer,
             Header,
