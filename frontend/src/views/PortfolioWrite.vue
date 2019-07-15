@@ -100,30 +100,19 @@
                     )
             },
 
-            uploadImageByImgur(file, callback) {
+            uploadImageByImgur(file) {
                 const form = new FormData();
                 form.append('image', file);
-                $.ajax({
-                    req: function () {
-                        const req = new window.XMLHttpRequest();
-                        req.upload.addEventListener("progress", function (event) { // 업로드상태이벤트리스너등록
-                            if (event.lengthComputable) {
-                                console.log("업로드 진행률:" + parseInt((event.loaded / event.total * 100), 10) + "%");
-                            }
-                        }, false);
-                        return req
-                    },
-                    url: 'https://api.imgur.com/3/image',// 업로드요청주소
-                    headers: {Authorization: 'Client-ID 24321b230a75815'},
-                    type: 'POST',
-                    data: form,
-                    cache: false,
-                    contentType: false,
-                    processData: false
-                }).always(callback);
-            }
-            ,
 
+                const URL = "https://api.imgur.com/3/image";
+                axios.post(URL, form, {
+                    headers: {
+                        // Bearer 뒤에 window.localStorage.getItem("imgur_token") 으로 발급받은 token 추가해야 함
+                        "Authorization": "Bearer "
+                    }
+                })
+                    .then(req => console.log(req))
+            },
             /* 파일 변경 이벤트가 감지되면 자동으로 이미지 업로드 */
             imgupload() { // 사용자가 파일을 변경했을때 발생됨
                 const inputImg = document.querySelector("#imgup");
