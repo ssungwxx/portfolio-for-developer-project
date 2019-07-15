@@ -1,11 +1,9 @@
 <template>
     <div class="header">
-        <v-toolbar dark color="success darken-1" fixed>
+        <v-toolbar dark color="red" fixed>
             <v-btn icon href="/">
                 <v-icon>home</v-icon>
             </v-btn>
-
-          
 
             <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -14,38 +12,37 @@
 
               <router-link to style="text-decoration: none;">
                   <v-btn icon>
-                      <v-icon color="yellow" id="bookMark">star</v-icon>
+                      <v-icon color="white" id="bookMark">star</v-icon>
                   </v-btn>
               </router-link>
 
                 <router-link :to="port" style="text-decoration: none;">
                     <v-btn icon>
-                        <v-icon color="yellow">markunread_mailbox</v-icon>
+                        <v-icon color="white">markunread_mailbox</v-icon>
                     </v-btn>
                 </router-link>
 
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn icon href="./Post">
-                        <v-icon color="yellow">description</v-icon>
+                        <v-icon color="white">description</v-icon>
                     </v-btn>
                 </router-link>
 
                 <router-link :to="login" style="text-decoration: none;">
                   <v-btn icon href="./Login">
-                  <v-icon color="yellow">perm_identity</v-icon>
+                  <v-icon color="white">perm_identity</v-icon>
                   </v-btn>
-                </router-link> -->
+                </router-link>
 
+            </div>
+        </v-toolbar>
     </div>
-  </v-toolbar>
-</div>
 </template>
 
 <script>
     export default {
         name: "Header",
         data: () => ({
-
             title: document.title,
             port: "/Portfolio",
             posts: "/Post",
@@ -92,7 +89,6 @@
 
                 window.external.AddFavorite(bookmarkURL, bookmarkTitle);
             } else {
-
                 alert((navigator.userAgent.toLowerCase()
                     .indexOf('mac') != -1 ? 'Cmd' : 'Ctrl') + '+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다.');
             }
@@ -102,30 +98,27 @@
 </script>
 
 <style>
-.theme--light.v-list {
-  background: yellow;
-  color: darkgreen;
-  font-weight: bold;
-}
+    .theme--light.v-list {
+        background: yellow;
+        color: darkgreen;
+        font-weight: bold;
+    }
 
-@media screen and (max-width: 600px) {
-  .icons {
-    display: none;
-  }
-}
+    @media screen and (max-width: 600px) {
+        .icons {
+            display: none;
+        }
+    }
 
-.header {
-  z-index: 1;
-  position: relative;
-}
+    .header {
+        z-index: 1;
+        position: relative;
+        background-color: yellow;
+    }
 
-@media screen and (min-width: 600px) {
-  .menu {
-    display: none;
-  }
-}
-
-.login {
-  display: inline-block;
-}
+    @media screen and (min-width: 600px) {
+        .menu {
+            display: none;
+        }
+    }
 </style>
