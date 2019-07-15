@@ -10,18 +10,12 @@ router.get("/test", (req, res) => {
     .then(data => res.json(data));
 });
 
-// Get all posts sorted by datetime (EN)
+// Get all posts sorted by datetime
 router.get("/", (req, res) => {
   knex("post")
     .select("*")
     .orderBy("post_date", "desc")
-    .then(data => {
-      for (let index = 0; index < data.length; index++) {
-        let temp = data[index].post_date.toString();
-        data[index].post_date = temp.slice(0, 16);
-      }
-      res.json(data);
-    });
+    .then(data => res.json(data));
 });
 
 // Get one detailed post

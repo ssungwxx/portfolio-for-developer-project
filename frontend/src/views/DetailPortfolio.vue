@@ -49,7 +49,6 @@ export default {
           portfolio_subTitle: "",
           portfolio_img: "",
           portfolio_date: ""
-
         }
       ],
       port: "/Portfolio",
@@ -61,10 +60,15 @@ export default {
   },
   mounted() {
     this.getPortfolio();
+    this.slicingDate();
   },
   methods: {
     async getPortfolio() {
       this.portfolio = await RestService.getPortfolio(this.id);
+      this.portfolio[0].portfolio_date =
+        this.portfolio[0].portfolio_date.slice(0, 10) +
+        " " +
+        this.portfolio[0].portfolio_date.slice(11, 19);
     }
   }
 };
