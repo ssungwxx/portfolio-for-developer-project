@@ -40,7 +40,6 @@
 <script>
     import FirebaseService from '@/services/FirebaseService'
     import Unsplash from "unsplash-js";
-    import MarkdownEditor from "../components/MarkdownEditor"
 
     const ClientId = "";
     const unsplash = new Unsplash({
