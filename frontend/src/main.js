@@ -44,6 +44,10 @@ import VueResizeText from "vue-resize-text";
 
 Vue.use(VueResizeText);
 
+// 배경화면 캐러셀
+import VueCarousel from 'vue-carousel';
+Vue.use(VueCarousel);
+
 new Vue({
   router,
   store,

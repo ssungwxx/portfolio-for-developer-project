@@ -1,6 +1,6 @@
 <template>
     <div class="header">
-        <v-toolbar dark color="red" fixed>
+        <v-toolbar class="insta" dark color="#ffc0cb" fixed>
             <v-btn icon href="/">
                 <v-icon>home</v-icon>
             </v-btn>
