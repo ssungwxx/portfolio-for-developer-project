@@ -64,6 +64,7 @@
 
             onFilePicked(e) {
                 const files = e.target.files;
+                console.log(files)
                 if (files[0] !== undefined) {
                     this.imageName = files[0].name
                     if (this.imageName.lastIndexOf('.') <= 0) {
