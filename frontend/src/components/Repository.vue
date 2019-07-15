@@ -107,7 +107,7 @@
           new_value[gitrepoDay-8] += 1;
         }
         this.valueall = new_value
-        // console.log(this.value)
+        // console.log(this.valueall)
       },
       commitToVuex(severalData) {
         severalData.data.forEach(this.commitToValue);
