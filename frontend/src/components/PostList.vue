@@ -44,6 +44,12 @@ export default {
   methods: {
     async getPosts() {
       this.posts = await RestService.getPosts();
+      for (let idx = 0; idx < this.posts.length; idx++) {
+        this.posts[idx].post_date =
+          this.posts[idx].post_date.slice(0, 10) +
+          " " +
+          this.posts[idx].post_date.slice(11, 19);
+      }
     },
     loadMorePosts() {
       this.limits += 4;

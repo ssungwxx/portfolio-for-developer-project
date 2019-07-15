@@ -1,5 +1,5 @@
 <template>
-    <v-container>
+    <v-container class="title-div">
         <div>
             <p class="port-title">Write New Portfolio</p>
         </div>
@@ -14,10 +14,12 @@
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
             <img :src="imageUrl" height="150" v-if="imageUrl"/>
             <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
-                          prepend-icon='attach_file'></v-text-field>
+                          prepend-icon='attach_file' v-if="imageUrl"></v-text-field>
+            <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
+                          prepend-icon='attach_file' v-else="imageUrl" style="margin-top: 150px;"></v-text-field>
             <input id="imgup"
                    type="file"
-                   style="display: none"
+                   style="display: none;"
                    ref="image"
                    accept="image/*"
                    @change="onFilePicked"
@@ -39,7 +41,7 @@
     import FirebaseService from '@/services/FirebaseService'
     import Unsplash from "unsplash-js";
 
-    const ClientId = "f54eed5a9fa625008ff25b3ac52e0af07388084d294f4c2e495f60e6c3ad5e22";
+    const ClientId = "";
     const unsplash = new Unsplash({
         applicationId: ClientId,
     });
@@ -54,7 +56,7 @@
                 dialog: false,
                 imageName: '',
                 imageUrl: '',
-                imageFile: ''
+                imageFile: '',
             }
         },
         methods: {
@@ -96,6 +98,7 @@
                     .then(imgurl => axios.get(imgurl)
                         .then(res => res.data.urls.custom)
                         .then(image => this.imageUrl = image)
+                        .then(url => console.log(url))
                     )
             },
 
@@ -131,10 +134,8 @@
                         }
                     });
                 }
-            }
-            ,
+            },
         }
-
     }
 
 </script>
@@ -142,5 +143,9 @@
 <style>
     .port-title {
         font-size: 5vw;
+    }
+
+    .title-div {
+        margin-top: 50px;
     }
 </style>

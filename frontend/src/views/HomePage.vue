@@ -1,8 +1,8 @@
 <template>
 <div>
-  <ImgBanner imgSrc="https://lorempixel.com/1600/900">
-    <div style="line-height:1.2em;" slot="text">I can do this all day</div>
-  </ImgBanner>
+
+  <Carousel class="carouselimg">
+  </Carousel>
 
   <v-container>
 
@@ -55,19 +55,16 @@
         <RepositoryList :limits="6" :load-more="true"></RepositoryList>
       </v-flex>
     </v-layout>
-
-
-
   </v-container>
 
 </div>
 </template>
 
 <script>
-import ImgBanner from '../components/ImgBanner'
 import PortfolioList from '../components/PortfolioList'
 import PostList from '../components/PostList'
 import RepositoryList from '../components/RepositoryList'
+import Carousel from '../components/Carousel'
 
 export default {
   name: 'HomePage',
@@ -80,10 +77,10 @@ export default {
     }
   },
   components: {
-    ImgBanner,
     PortfolioList,
     PostList,
     RepositoryList,
+    Carousel
   },
   methods: {
     getImgUrl(img) {
@@ -93,6 +90,12 @@ export default {
 }
 </script>
 <style>
+.carouselimg{
+    padding-top: 10%;
+    padding-bottom: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
 .profile-img {
   max-width: 350px;
   margin-top: auto;
