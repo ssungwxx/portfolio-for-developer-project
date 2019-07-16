@@ -35,6 +35,7 @@
     import ImgBanner from '../components/ImgBanner'
     import PostList from '../components/PostList'
     import Header from "../components/Header"
+    import RestService from "@/services/RestService";
 
     export default {
         name: 'PostPage',
@@ -43,10 +44,20 @@
                 home: "/"
             }
         },
+
+  beforeMount() {
+   this.insertLog();
+  },
+
         components: {
             ImgBanner,
             PostList,
             Header,
+        },
+        methods: {
+          async insertLog(){
+            this.insertLog = await RestService.insertLog('PostPage');
+          }
         }
     }
 </script>
