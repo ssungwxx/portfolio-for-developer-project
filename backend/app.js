@@ -9,12 +9,14 @@ var indexRouter = require("./routes/index");
 var users = require("./routes/users");
 var portfolios = require("./routes/portfolios");
 var posts = require("./routes/posts");
+var logs = require("./routes/webLog");
 
 var bodyParser = require("body-parser");
 
 var cors = require("cors");
 
 var app = express();
+// cors 부분 허용
 
 var whitelist = ["70.12.246.138:8080"];
 
@@ -26,9 +28,21 @@ var corsOptions = {
   credentials: true
 };
 
-app.use(bodyParser.urlencoded({ extended: false }));
-
 app.use(cors(corsOptions));
+
+// CORS 회피용
+/*
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "GET", "POST");
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With, content-type, Authorization"
+  );
+});
+*/
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -46,6 +60,7 @@ app.use("/", indexRouter);
 app.use("/users", users);
 app.use("/portfolios", portfolios);
 app.use("/posts", posts);
+app.use("/logs", logs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
