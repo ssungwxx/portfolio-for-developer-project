@@ -29,12 +29,10 @@ router.post("/login", (req, res) => {
         res.json({
           token: token
         });
-        console.log("cookie success");
       } else {
         res.json({
-          token: null
+          token: "null"
         });
-        console.log("cookie fail");
       }
     });
 });
