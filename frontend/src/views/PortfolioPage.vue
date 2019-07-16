@@ -9,15 +9,8 @@
             <div style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
         </ImgBanner>
         <v-container>
-        <v-flex xs12 text-xs-center round my-5>
-            <router-link :to="home" style="text-decoration: none;">
-                <v-btn color="primary" dark>
-                    <v-icon size="25" class="mr-2">home</v-icon>
-                    홈으로
-                </v-btn>
-            </router-link>
-            <v-btn center href="/PortfolioWrite">New Portfolio</v-btn>
-        </v-flex>
+
+
 
             <!-- Portfolio -->
             <v-layout>
@@ -25,7 +18,6 @@
                     <PortfolioList :limits="6" :load-more="true"></PortfolioList>
                 </v-flex>
             </v-layout>
-
         </v-container>
     </div>
 </template>
