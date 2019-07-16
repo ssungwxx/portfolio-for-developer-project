@@ -39,13 +39,7 @@
 
 <script>
     import FirebaseService from '@/services/FirebaseService'
-    import Unsplash from "unsplash-js";
-
-    const ClientId = "";
-    const unsplash = new Unsplash({
-        applicationId: ClientId,
-    });
-
+    import Image from "../image.js"
 
     export default {
         name: "PortfolioWrite",
@@ -63,7 +57,6 @@
             pickFile() {
                 this.$refs.image.click();
             },
-
             onFilePicked(e) {
                 const files = e.target.files;
                 if (files[0] !== undefined) {
@@ -90,51 +83,14 @@
                     this.imageUrl = '';
                 }
             },
-            randomPhoto() {
-                unsplash.photos.getRandomPhoto({width: 1000, height: 1000})
-                    .then(function (toJson) {
-                        return toJson.url + "&client_id=" + ClientId;
-                    })
-                    .then(imgurl => axios.get(imgurl)
-                        .then(res => res.data.urls.custom)
-                        .then(image => this.imageUrl = image)
-                        .then(url => console.log(url))
-                    )
+            async randomPhoto() {
+                const ret = await Image.randomPhoto();
+                this.imageName = ret[0];
+                this.imageUrl = ret[1];
             },
-
-            uploadImageByImgur(file) {
-                const form = new FormData();
-                form.append('image', file);
-
-                const URL = "https://api.imgur.com/3/image";
-                axios.post(URL, form, {
-                    headers: {
-                        // Bearer 뒤에 window.localStorage.getItem("imgur_token") 으로 발급받은 token 추가해야 함
-                        "Authorization": "Bearer "
-                    }
-                })
-                    .then(req => console.log(req))
-            },
-            /* 파일 변경 이벤트가 감지되면 자동으로 이미지 업로드 */
-            imgupload() { // 사용자가 파일을 변경했을때 발생됨
-                const inputImg = document.querySelector("#imgup");
-                if (inputImg.files.length === 1) {
-                    const file = inputImg.files[0];
-                    this.uploadImageByImgur(file, function (result) {
-                        console.log(result);
-                        console.log('업로드결과:' + result.status);
-
-                        if (result.status != 200) {
-                            result = $.parseJSON(result.responseText);
-                        }
-                        if (result.data.error) {
-                            console.log('지원하지않는 파일형식..');
-                        } else {
-                            console.log('업로드된 파일경로:' + result.data.link);
-                        }
-                    });
-                }
-            },
+            imgupload () {
+                Image.imgupload();
+            }
         }
     }
 

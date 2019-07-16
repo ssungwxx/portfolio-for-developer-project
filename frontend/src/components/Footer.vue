@@ -1,29 +1,25 @@
 <template>
   <v-footer
-    id="core-footer"
+    class="corefooter"
+    absolute
     height="82"
   >
-    <div class="footer-items">
-      <span
-        v-for="link in links"
-        :key="link.name"
-      >
-        <a
-          :href="link.Link"
-          class="ftitem">{{ link.name }}</a>
-      </span>
-    </div>
-    <v-spacer/>
+         <h3 class="findus">Find us</h3>
+         <hr>
+         <div class="fdiv">
+            (SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)
+         </div>
 
-    <span class="ftweather">
-      &copy;
-      {{ (new Date()).getFullYear() }}
-      <a
-        href="https://edu.ssafy.com/"
-        target="_blank">SSAFY In {{ city }}</a>
-        <br>
-        {{ temperature }}℃  {{ weatherMain }}
-    </span>
+             <div class="ftweather">
+               &copy;
+               {{ (new Date()).getFullYear() }}
+               <a
+               href="https://edu.ssafy.com/"
+               target="_blank">SSAFY {{ city }}</a>
+               <br>
+               {{ temperature }}℃  {{ weatherMain }}
+             </div>
+    <v-spacer/>
   </v-footer>
 </template>
 
@@ -32,12 +28,6 @@
 export default {
    data() {
   return {
-   links: [
-         { name: "Home", Link: "/dashboard" },
-         { name: "Creative Tim", Link: "https://www.creative-tim.com" },
-         { name: "About Us", Link: "https://creative-tim.com/presentation" },
-         { name: "Blog", Link: "https://blog.creative-tim.com" }
-           ],
          dataObj: null,
          city: "Seoul",
          temperature: null,
@@ -95,18 +85,33 @@ export default {
            }
        }
        </script>
-
 <style>
+
+.findus{
+  margin-left: 14%;
+}
+.corefooter{
+  text-align: center;
+}
+.img{
+  margin-right:15px;
+
+}
+
+.fdiv{
+    margin-left: 15%;
+    margin-bottom: 10px;
+}
+
+
 .ftitem{
 padding: 25px;color: black;font-size: 18px;
 }
+
 .ftweather{
-margin-right: 50px;text-align:
-right;font-family:
-sans-serif;font-size:
-15px;
+margin-left: 12%;
+text-align:right;
+font-family:sans-serif;
+font-size:15px;
 }
-
-
-
 </style>
