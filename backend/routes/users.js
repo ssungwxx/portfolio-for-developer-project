@@ -1,6 +1,43 @@
 var express = require("express");
 var router = express.Router();
+
+// knex
 const knex = require("knex")(require("../knexfile"));
+
+// JWT
+var jwt = require("jsonwebtoken");
+var secretObj = require("../config/jwt");
+
+// Login Authenticate
+router.post("/login", (req, res) => {
+  let token = jwt.sign(
+    {
+      user_id: req.body.user_id
+    },
+    secretObj.secret,
+    {
+      expiresIn: "5m"
+    }
+  );
+
+  knex("user")
+    .select("user_pw")
+    .where("user_id", req.body.user_id)
+    .then(data => {
+      if (req.body.user_pw == data[0].user_pw) {
+        res.cookie("user", token);
+        res.json({
+          token: token
+        });
+        console.log("cookie success");
+      } else {
+        res.json({
+          token: null
+        });
+        console.log("cookie fail");
+      }
+    });
+});
 
 // Get All Users Info
 router.get("/", (req, res) => {
