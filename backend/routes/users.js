@@ -21,7 +21,7 @@ router.post("/login", (req, res) => {
   );
 
   knex("user")
-    .select("user_pw")
+    .select("*")
     .where("user_id", req.body.user_id)
     .then(data => {
       if (req.body.user_pw == data[0].user_pw) {
@@ -29,14 +29,14 @@ router.post("/login", (req, res) => {
           expires: new Date(Date.now() + 900000),
           httpOnly: true
         });
+        knex("user_log")
+          .insert({
+            user_id: req.body.user_id,
+            user_token: token
+          })
+          .then();
         res.json({
           token: token
-        });
-
-        // insert token info user_log
-        knex("user_log").insert({
-          user_id: "ykk2006",
-          user_token: token
         });
       } else {
         res.json({
