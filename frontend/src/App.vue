@@ -7,8 +7,7 @@
 
         <v-content>
             <router-view/>
-            <TopButton>
-            </TopButton>
+            <TopButton/>
         </v-content>
 
         <v-content>
