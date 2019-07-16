@@ -12,13 +12,13 @@
         <v-container grid-list-md>
           <v-layout wrap>
             <v-flex xs12 sm6 md4>
-              <v-text-field label="Full name*" required></v-text-field>
+              <v-text-field v-model="user.user_name" label="Full name*" required></v-text-field>
             </v-flex>
             <v-flex xs12>
-              <v-text-field label="ID*" required></v-text-field>
+              <v-text-field v-model="user.user_id" label="ID*" required></v-text-field>
             </v-flex>
             <v-flex xs12>
-              <v-text-field label="Password*" type="password" required></v-text-field>
+              <v-text-field v-model="user.user_pw" label="Password*" type="password" required></v-text-field>
             </v-flex>
           </v-layout>
         </v-container>
@@ -27,7 +27,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-        <v-btn color="blue darken-1" flat @click="signUp">Register</v-btn>
+        <v-btn color="blue darken-1" flat @click="insertUser">Register</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -39,7 +39,17 @@ import RestService from "../services/RestService"
 
 export default {
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+    user: {
+      user_id: '',
+      user_pw: '',
+      user_name: ''
+    }
+  }),
+  methods: {
+    insertUser: function(event) {
+      RestService.insertUser(this.user);
+    }
+  }
 }
 </script>
