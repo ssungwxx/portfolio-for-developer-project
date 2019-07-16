@@ -20,23 +20,40 @@ router.post("/login", (req, res) => {
     }
   );
 
+  let refresh_token = jwt.sign(
+    {
+      token: req.body.user_id
+    },
+    secretObj.secret,
+    {
+      expiresIn: "1d"
+    }
+  );
+
   knex("user")
     .select("*")
     .where("user_id", req.body.user_id)
     .then(data => {
       if (req.body.user_pw == data[0].user_pw) {
+        // user cookie 설정
         res.cookie("user", token, {
           expires: new Date(Date.now() + 900000),
           httpOnly: true
         });
+        // user refresh cookir 설정
+        res.cookie("refresh_user", refresh_token, {
+          expires: new Date(Date.now() + 86400000),
+          httpOnly: true
+        });
+        // 로그인시 사용자마다 토큰 기록
         knex("user_log")
           .insert({
-            user_id: req.body.user_id,
             user_token: token
           })
           .then();
         res.json({
-          token: token
+          token: token,
+          refresh: refresh_token
         });
       } else {
         res.json({
