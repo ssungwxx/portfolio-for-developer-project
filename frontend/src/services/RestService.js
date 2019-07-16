@@ -62,23 +62,20 @@ export default {
       .then(response => (this.user = response.data));
   },
   insertUser(data) {
-    return axios
+    var result;
+    axios
       .post("http://70.12.246.138:3000/users", data)
-      .then(response => {console.log(response.data);})
-      .then(data => {
-        console.log(response)
+      .then(response => {
         if (response.status == 200) {
-          response.json({
-            success: true,
-            message: '가입 성공!'
-          });
+          result = true;
+          console.log('sssss');
         } else {
-          response.json({
-            success: false,
-            message: '중복된 ID입니다!'
-          });
+          result = false;
+          console.log('asasas');
         }
       });
+      console.log(result);
+      return result;
   },
   updateUser(id, data) {
     return axios
@@ -88,10 +85,6 @@ export default {
   deleteUser(id) {
     return axios
       .delete("http://70.12.246.138:3000/users/" + id)
-<<<<<<< HEAD
-      .then(response => (this.user = response.data));
-  }
-=======
       .then(response => (this.portfolios = response.data));
   },
   insertLog(path) {
@@ -99,5 +92,4 @@ export default {
       .post("http://70.12.246.138:3000/logs/" + path);
   },
 
->>>>>>> master
 };
