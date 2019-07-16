@@ -27,8 +27,6 @@ export default {
                 "Authorization": "Bearer fdd96e042daf51bfa75e115b4e49daffc7616ef2"
             }
         })
-            .then(req => console.log(req)
-    )
     },
     imgupload() {
         const inputImg = document.querySelector("#imgup");
