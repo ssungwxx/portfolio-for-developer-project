@@ -39,11 +39,23 @@
 
 <script>
     import FirebaseService from '@/services/FirebaseService'
-    import Image from "../image.js"
+    import Unsplash from "unsplash-js";
+    import RestService from "@/services/RestService";
+
+
+    const ClientId = "f54eed5a9fa625008ff25b3ac52e0af07388084d294f4c2e495f60e6c3ad5e22";
+    const unsplash = new Unsplash({
+        applicationId: ClientId,
+    });
+
 
     export default {
         name: "PortfolioWrite",
         components: {},
+        beforeMount() {
+          this.insertLog();
+        },
+
         data() {
             return {
                 title: "Image Upload",
@@ -90,6 +102,11 @@
             },
             imgupload () {
                 Image.imgupload();
+            }
+            ,
+
+            async insertLog(){
+              this.insertLog = await RestService.insertLog('PortfolioWrite');
             }
         }
     }

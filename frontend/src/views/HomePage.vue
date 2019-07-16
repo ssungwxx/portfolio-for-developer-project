@@ -66,8 +66,13 @@ import PostList from '../components/PostList'
 import RepositoryList from '../components/RepositoryList'
 import Carousel from '../components/Carousel'
 
+import RestService from "@/services/RestService";
+
 export default {
   name: 'HomePage',
+  beforeMount() {
+   this.insertLog();
+  },
   data() {
     return {
       y: window.scrollY,
@@ -76,6 +81,7 @@ export default {
       posts: "/Post",
     }
   },
+
   components: {
     PortfolioList,
     PostList,
@@ -86,6 +92,9 @@ export default {
     getImgUrl(img) {
       return require('../assets/' + img)
     },
+    async insertLog(){
+      this.insertLog = await RestService.insertLog('HomePage');
+    }
   }
 }
 </script>

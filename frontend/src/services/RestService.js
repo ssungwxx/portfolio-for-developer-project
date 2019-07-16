@@ -88,6 +88,16 @@ export default {
   deleteUser(id) {
     return axios
       .delete("http://70.12.246.138:3000/users/" + id)
+<<<<<<< HEAD
       .then(response => (this.user = response.data));
   }
+=======
+      .then(response => (this.portfolios = response.data));
+  },
+  insertLog(path) {
+    return axios
+      .post("http://70.12.246.138:3000/logs/" + path);
+  },
+
+>>>>>>> master
 };

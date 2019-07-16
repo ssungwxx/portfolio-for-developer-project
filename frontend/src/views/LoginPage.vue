@@ -33,11 +33,16 @@ import {
   VFBLogin as VFacebookLogin
 } from 'vue-facebook-login-component'
 
+import RestService from "@/services/RestService";
+
 export default {
   name: 'LoginPage',
   data() {
     return {}
   },
+  beforeMount() {
+ this.insertLog();
+},
   components: {
     Login,
     Register,
@@ -49,7 +54,10 @@ export default {
       const result = await FirebaseService.loginWithGoogle()
       this.$store.state.accessToken = result.credential.accessToken
       this.$store.state.user = result.user
-    }
+    },
+    async insertLog(){
+     this.insertLog = await RestService.insertLog('LoginPage');
+   }
   },
   mounted() {
     console.log(this.$store.state)
