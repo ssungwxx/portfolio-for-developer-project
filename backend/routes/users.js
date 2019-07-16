@@ -25,7 +25,10 @@ router.post("/login", (req, res) => {
     .where("user_id", req.body.user_id)
     .then(data => {
       if (req.body.user_pw == data[0].user_pw) {
-        res.cookie("user", token);
+        res.cookie("user", token, {
+          expires: new Date(Date.now() + 900000),
+          httpOnly: true
+        });
         res.json({
           token: token
         });
