@@ -12,8 +12,8 @@
         <h2 class="mb-3 text-sm-left text-xs-center" v-resize-text="{ratio:1.0, minFontSize: '15px', maxFontSize: '30px', delay: 100}">About
           Me</h2>
         <p class="mr-4 text-sm-left text-xs-center" v-resize-text="{ratio:1.5, minFontSize: '10px', maxFontSize: '20px', delay: 100}">안녕하세요,
-          SSAFY 1기 이원진입니다!<br />
-          python 할 줄 알아요! java, vue, js 공부하고 있어요! 살려주세요 :(</p>
+          SSAFY 1기 서울 2반 11조입니다!<br />
+          그만하고 싶어요...</p>
       </v-flex>
       <v-flex class="profile-img">
         <v-img :src="getImgUrl('profile.png')" aspect-ratio="1" />
@@ -21,12 +21,12 @@
     </v-layout>
 
     <!-- Portfolio -->
+
     <v-layout my-5>
       <v-flex xs12>
         <h2 class="headline my-5 text-xs-center">
-
           <router-link :to="port" style="text-decoration:none">
-            <v-btn color="orange">Portfolio</v-btn>
+            <v-btn color="#DDDDFF">Portfolio</v-btn>
           </router-link>
         </h2>
         <PortfolioList></PortfolioList>
@@ -35,10 +35,16 @@
 
     <!-- Post -->
     <v-layout my-5>
-      <v-flex xs12>
+      <v-flex xs6>
+        <h2 class="headline my-5 text-xs-center">
+          <v-btn color="#DDDDFF">Project</v-btn>
+        </h2>
+        <RepositoryList :limits="6" :load-more="true"></RepositoryList>
+      </v-flex>
+      <v-flex xs6>
         <h2 class="headline my-5 text-xs-center">
           <router-link :to="posts" style="text-decoration:none">
-            <v-btn color="orange">Post</v-btn>
+            <v-btn color="#DDDDFF">Post</v-btn>
           </router-link>
         </h2>
         <PostList :column="2"></PostList>
@@ -46,15 +52,6 @@
     </v-layout>
 
 
-    <!-- Github -->
-    <v-layout my-5>
-      <v-flex xs12>
-        <h2 class="headline my-5 text-xs-center">
-          <v-btn color="orange">Project</v-btn>
-        </h2>
-        <RepositoryList :limits="6" :load-more="true"></RepositoryList>
-      </v-flex>
-    </v-layout>
   </v-container>
 
 </div>

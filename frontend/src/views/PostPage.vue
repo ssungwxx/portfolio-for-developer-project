@@ -9,17 +9,8 @@
             <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
         </ImgBanner>
         <v-container>
-        <div>
-            <v-flex xs12 text-xs-center round my-5>
-                <router-link :to="home" style="text-decoration: none;">
-                    <v-btn color="primary" dark>
-                        <v-icon size="25" class="mr-2">home</v-icon>
-                        홈으로
-                    </v-btn>
-                </router-link>
-            </v-flex>
-        </div>
 
+      
             <!-- Post -->
             <v-layout>
                 <v-flex xs12>
@@ -48,7 +39,6 @@
   beforeMount() {
    this.insertLog();
   },
-
         components: {
             ImgBanner,
             PostList,
