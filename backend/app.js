@@ -9,6 +9,7 @@ var indexRouter = require("./routes/index");
 var users = require("./routes/users");
 var portfolios = require("./routes/portfolios");
 var posts = require("./routes/posts");
+var logs = require("./routes/webLog");
 
 var bodyParser = require("body-parser");
 
@@ -59,6 +60,7 @@ app.use("/", indexRouter);
 app.use("/users", users);
 app.use("/portfolios", portfolios);
 app.use("/posts", posts);
+app.use("/logs", logs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
