@@ -32,6 +32,12 @@ router.post("/login", (req, res) => {
         res.json({
           token: token
         });
+
+        // insert token info user_log
+        knex("user_log").insert({
+          user_id: "ykk2006",
+          user_token: token
+        });
       } else {
         res.json({
           token: "null"
