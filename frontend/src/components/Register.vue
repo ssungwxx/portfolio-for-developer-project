@@ -48,7 +48,18 @@ export default {
   }),
   methods: {
     insertUser: function(event) {
-      RestService.insertUser(this.user);
+      RestService.insertUser(this.user)
+      .then((response) => {
+        if (response.data.success == true) {
+          this.dialog = false;
+          alert(response.data.message);
+        } else {
+          alert(response.data.message);
+        }
+      })
+      // .catch(function (error) {
+      //   alert('error');
+      // })
     }
   }
 }
