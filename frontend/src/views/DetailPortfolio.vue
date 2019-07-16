@@ -21,15 +21,17 @@
         </tr>
       </table>
     </div>
+
     <div>
       <v-flex xs12 text-xs-center round my-5>
         <router-link :to="port" style="text-decoration: none;">
-          <v-btn color="primary" dark>
+          <v-btn color="info" dark>
             <v-icon size="25" class="mr-2">home</v-icon>목록으로
           </v-btn>
         </router-link>
       </v-flex>
     </div>
+
   </v-container>
 </template>
 <script>

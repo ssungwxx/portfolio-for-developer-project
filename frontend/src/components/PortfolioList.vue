@@ -9,13 +9,19 @@
         :portfolio_subTitle="portfolios[i - 1].portfolio_subTitle"
         :portfolio_img="portfolios[i - 1].portfolio_img"
       ></Portfolio>
+
     </v-flex>
 
-    <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-      <v-btn color="info" dark v-on:click="loadMorePortfolios">
-        <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
-      </v-btn>
+
+    <div class="plusbutton">
+    <v-flex xs12 text-xs-center round my-5>
+        <v-btn color="info" dark center href="/PortfolioWrite" style="width:106px;" >
+          <v-icon size="25" class="mr-2">fa-plus</v-icon>
+          Write
+        </v-btn>
     </v-flex>
+  </div>
+
   </v-layout>
 </template>
 <script>
@@ -50,6 +56,10 @@ export default {
 };
 </script>
 <style>
+.plusbutton{
+  margin-bottom: 50px;
+  margin-left: 45%;
+}
 .mw-700 {
   max-width: 700px;
   margin: auto;
