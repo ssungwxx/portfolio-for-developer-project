@@ -1,7 +1,7 @@
 <template>
     <div :class="!isTop?'top-button':'top-button-d-none'">
         <button @click="gotop">
-            <img src="../../public/img/arrow-up.png" alt="logo" height="60px"/>
+            <img src="../../public/img/arrow-up.png" alt="logo" height="30px"/>
         </button>
     </div>
 </template>
@@ -44,8 +44,8 @@
 <style>
     .top-button {
         position: fixed;
-        bottom: 50px;
-        left: 50px;
+        top:50%;
+        left: 95%;
         margin: 0;
         padding: 0;
         height: 60px;
