@@ -75,5 +75,10 @@ export default {
     return axios
       .delete("http://70.12.246.138:3000/users/" + id)
       .then(response => (this.portfolios = response.data));
-  }
+  },
+  insertLog(path) {
+    return axios
+      .post("http://70.12.246.138:3000/logs/" + path);
+  },
+
 };

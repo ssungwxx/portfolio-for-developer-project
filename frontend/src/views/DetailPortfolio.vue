@@ -55,6 +55,9 @@ export default {
       id: this.$route.params.id
     };
   },
+  beforeMount() {
+ this.insertLog();
+},
   components: {
     Portfolio
   },
@@ -69,6 +72,10 @@ export default {
         this.portfolio[0].portfolio_date.slice(0, 10) +
         " " +
         this.portfolio[0].portfolio_date.slice(11, 19);
+    },
+
+  async insertLog(){
+      this.insertLog = await RestService.insertLog('DetailPortfolio');
     }
   }
 };
