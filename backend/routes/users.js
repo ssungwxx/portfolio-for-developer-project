@@ -69,11 +69,7 @@ router.get("/", (req, res) => {
 // Get One User Information
 router.get("/:id", (req, res) => {
   knex("users")
-<<<<<<< HEAD
-    .select("*")
-=======
     .count("* as cnt")
->>>>>>> backend2
     .where("user_id", req.params.id)
     .then(data => res.json(data));
 });
