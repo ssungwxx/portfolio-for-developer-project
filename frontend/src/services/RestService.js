@@ -62,20 +62,17 @@ export default {
       .then(response => (this.user = response.data));
   },
   insertUser(data) {
-    var result;
-    axios
+    return axios
       .post("http://70.12.246.138:3000/users", data)
       .then(response => {
         if (response.status == 200) {
-          result = true;
-          console.log('sssss');
-        } else {
-          result = false;
-          console.log('asasas');
+          alert("가입 성공!");
+          this.dialog = false;
         }
-      });
-      console.log(result);
-      return result;
+      })
+      .catch(function(error) {
+        alert(error.message);
+      })
   },
   updateUser(id, data) {
     return axios
