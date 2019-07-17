@@ -9,9 +9,6 @@
             <div style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
         </ImgBanner>
         <v-container>
-
-
-
             <!-- Portfolio -->
             <v-layout>
                 <v-flex xs12>

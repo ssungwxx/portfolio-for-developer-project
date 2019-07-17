@@ -1,9 +1,16 @@
 <template>
-<v-layout row justify-center>
+<v-layout>
   <v-dialog v-model="dialog" max-width="500">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" dark v-on="on">Login</v-btn>
+
+      <v-btn icon v-on="on">
+        <v-icon color="white">perm_identity</v-icon>
+      </v-btn>
+
     </template>
+
+
+
     <v-card>
       <v-card-title class="headline">Login</v-card-title>
       <div class="form">
@@ -11,11 +18,17 @@
         <v-text-field label="Password*" required></v-text-field>
       </div>
       <small>*indicates required field</small>
+
       <v-btn round color="#df4a31" dark v-on:click="loginWithGoogle" style="width:80%;">
         <v-icon size="25" class="mr-2">fa-google</v-icon> Google 로그인
       </v-btn>
       <br>
-      <v-facebook-login app-id="2340768596039099" style="width:80%;"></v-facebook-login>
+
+      <div class="modalface">
+      <v-facebook-login app-id="2340768596039099" style="width:100%;">
+      </v-facebook-login>
+      </div>
+
       <br>
 
       <v-card-actions>
@@ -66,6 +79,12 @@ export default {
 <style>
 .headline {
   padding-bottom: 50px;
+}
+
+.modalface{
+  padding-left: 10%;
+  padding-right: 11%;
+  width: 100%;
 }
 
 .form {
