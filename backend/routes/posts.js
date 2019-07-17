@@ -4,7 +4,7 @@ const knex = require("knex")(require("../knexfile"));
 
 // Get all posts sorted by datetime
 router.get("/test", (req, res) => {
-  knex("post")
+  knex("posts")
     .select("*")
     .orderBy("post_date", "desc")
     .then(data => res.json(data));
@@ -12,7 +12,7 @@ router.get("/test", (req, res) => {
 
 // Get all posts sorted by datetime
 router.get("/", (req, res) => {
-  knex("post")
+  knex("posts")
     .select("*")
     .orderBy("post_date", "desc")
     .then(data => res.json(data));
@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
 
 // Get one detailed post
 router.get("/:id", (req, res) => {
-  knex("post")
+  knex("posts")
     .select("*")
     .where("user_id", req.params.id)
     .then(data => res.json(data));
@@ -28,7 +28,7 @@ router.get("/:id", (req, res) => {
 
 // Add new post
 router.post("/", (req, res) => {
-  knex("post")
+  knex("posts")
     .insert(req.body)
     .then(data => res.json(data));
 });
@@ -36,7 +36,7 @@ router.post("/", (req, res) => {
 // Delete selected post
 router.delete("/:no", (req, res) => {
   console.log(req.params.no);
-  knex("post")
+  knex("posts")
     .delete(req.body)
     .where("post_no", req.params.no)
     .then(data => res.json(data));
@@ -44,7 +44,7 @@ router.delete("/:no", (req, res) => {
 
 // Modify selected post
 router.put("/:no", (req, res) => {
-  knex("post")
+  knex("posts")
     .update(req.body)
     .where("post_no", req.params.no)
     .then(data => res.json(data));
