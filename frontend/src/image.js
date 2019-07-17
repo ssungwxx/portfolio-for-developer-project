@@ -17,34 +17,35 @@ export default {
         return ret
     },
 
-    uploadImageByImgur(file) {
+    async uploadImageByImgur(file) {
         const form = new FormData();
         form.append('image', file);
 
         const URL = "https://api.imgur.com/3/image";
-        axios.post(URL, form, {
+        await axios.post(URL, form, {
             headers: {
                 "Authorization": "Bearer fdd96e042daf51bfa75e115b4e49daffc7616ef2"
             }
         })
     },
-    imgupload() {
+    async imgupload() {
         const inputImg = document.querySelector("#imgup");
         if (inputImg.files.length === 1) {
             const file = inputImg.files[0];
-            this.uploadImageByImgur(file, function (result) {
-                console.log(result);
-                console.log('업로드결과:' + result.status);
-
-                if (result.status != 200) {
-                    result = $.parseJSON(result.responseText);
-                }
-                if (result.data.error) {
-                    console.log('지원하지않는 파일형식..');
-                } else {
-                    console.log('업로드된 파일경로:' + result.data.link);
-                }
-            });
+            await this.uploadImageByImgur(file)
+                .then(result => console.log(result))
+                // .then(function (result) {
+                //     console.log(result);
+                //     console.log("result: " + result.status);
+                //     if (result.status != 200) {
+                //         result = $.parseJSON(result.responseText);
+                //     }
+                //     if (result.data.error) {
+                //         console.log('지원하지않는 파일형식..');
+                //     } else {
+                //         console.log('업로드된 파일경로:' + result.data.link);
+                //     }
+                // })
+            }
         }
-    },
-}
+    }

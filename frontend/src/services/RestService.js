@@ -29,7 +29,7 @@ export default {
   getPortfolios() {
     return axios
       .get("http://70.12.246.138:3000/portfolios")
-      .then(response => (this.portfolios = response.data));
+      .then(response => this.portfolios = response.data)
   },
   getPortfolio(id) {
     return axios
