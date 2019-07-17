@@ -85,6 +85,6 @@ export default {
         user_id: id,
         user_pw: pw
       })
-      .then();
+      .then(response => (this.token = response.data));
   }
 };
