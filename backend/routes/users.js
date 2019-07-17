@@ -10,18 +10,22 @@ var secretObj = require("../config/jwt");
 
 // Login Authenticate
 router.post("/login", (req, res) => {
-  let token = jwt.sign({
+  let token = jwt.sign(
+    {
       user_id: req.body.user_id
     },
-    secretObj.secret, {
+    secretObj.secret,
+    {
       expiresIn: "5m"
     }
   );
 
-  let refresh_token = jwt.sign({
+  let refresh_token = jwt.sign(
+    {
       token: req.body.user_id
     },
-    secretObj.secret, {
+    secretObj.secret,
+    {
       expiresIn: "1d"
     }
   );
@@ -69,11 +73,7 @@ router.get("/", (req, res) => {
 // Get One User Info
 router.get("/:id", (req, res) => {
   knex("users")
-<<<<<<< HEAD
-    .select("*")
-=======
     .count("* as cnt")
->>>>>>> backend2
     .where("user_id", req.params.id)
     .then(data => res.json(data));
 });
@@ -82,10 +82,12 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   knex("users")
     .insert(req.body)
-    .then(data => res.json({
-      status: "1",
-      code: "success"
-    }))
+    .then(data =>
+      res.json({
+        status: "1",
+        code: "success"
+      })
+    )
     .catch(function(error) {
       res.json({
         status: "-1",
