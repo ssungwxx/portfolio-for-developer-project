@@ -5,12 +5,15 @@
                 <Header></Header>
             </v-flex>
         </v-layout>
-        <ImgBanner imgSrc="https://lorempixel.com/1600/900">
+        <!--1번 이미지
+        https://ifh.cc/g/dAPdA.jpg
+      -->
+        <ImgBanner imgSrc="https://ifh.cc/g/rNlxw.jpg">
             <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
         </ImgBanner>
         <v-container>
 
-      
+
             <!-- Post -->
             <v-layout>
                 <v-flex xs12>

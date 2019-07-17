@@ -9,7 +9,6 @@
         :portfolio_subTitle="portfolios[i - 1].portfolio_subTitle"
         :portfolio_img="portfolios[i - 1].portfolio_img"
       ></Portfolio>
-
     </v-flex>
 
 

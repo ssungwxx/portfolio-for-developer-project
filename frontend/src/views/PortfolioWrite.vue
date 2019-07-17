@@ -11,12 +11,12 @@
                 <markdown-editor></markdown-editor>
             </div>
         </div>
-        <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
+        <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center" style="" >
             <img :src="imageUrl" height="150" v-if="imageUrl"/>
             <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
                           prepend-icon='attach_file' v-if="imageUrl"></v-text-field>
             <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
-                          prepend-icon='attach_file' v-else="imageUrl" style="margin-top: 150px;"></v-text-field>
+                          prepend-icon='attach_file' v-else="imageUrl" style="margin-top: 100px"></v-text-field>
             <input id="imgup"
                    type="file"
                    style="display: none;"
@@ -32,8 +32,6 @@
         <v-btn @click="randomPhoto">
             Get Random Photo
         </v-btn>
-
-
     </v-container>
 </template>
 
