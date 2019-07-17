@@ -60,7 +60,7 @@ router.post("/login", (req, res) => {
     });
 });
 
-// Get All Users Info
+// Get All Users Information
 router.get("/", (req, res) => {
   knex("users")
     .select("*")
