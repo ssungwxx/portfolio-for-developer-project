@@ -64,7 +64,6 @@ export default {
   },
   mounted() {
     this.getPortfolio();
-    this.slicingDate();
   },
   methods: {
     async getPortfolio() {
