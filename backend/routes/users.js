@@ -30,7 +30,7 @@ router.post("/login", (req, res) => {
     }
   );
 
-  knex("user")
+  knex("users")
     .select("*")
     .where("user_id", req.body.user_id)
     .then(data => {
@@ -46,7 +46,7 @@ router.post("/login", (req, res) => {
           httpOnly: true
         });
         // 로그인시 사용자마다 토큰 기록
-        knex("user_log")
+        knex("user_logs")
           .insert({
             user_token: token
           })
@@ -65,14 +65,14 @@ router.post("/login", (req, res) => {
 
 // Get All Users Info
 router.get("/", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .then(data => res.json(data));
 });
 
 // Get One User Info
 router.get("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .where("user_id", req.params.id)
     .then(data => res.json(data));
@@ -80,21 +80,21 @@ router.get("/:id", (req, res) => {
 
 // Add User
 router.post("/", (req, res) => {
-  knex("user")
+  knex("users")
     .insert(req.body)
     .then(data => res.json(data));
 });
 
 // Update User
 router.put("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .update(req.body)
     .then(data => res.json(data));
 });
 // Delete User
 router.delete("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .delete(req.body)
     .then(data => res.json(data));
