@@ -1,11 +1,12 @@
 <template>
 <div>
 
+
+
   <Carousel class="carouselimg">
   </Carousel>
 
   <v-container>
-
     <!-- About Me -->
     <v-layout my-5 class="laybout">
       <v-flex class="aboutme ma-3">
@@ -97,10 +98,8 @@ export default {
 </script>
 <style>
 .carouselimg{
-    padding-top: 10%;
-    padding-bottom: 10%;
-    padding-left: 10%;
-    padding-right: 10%;
+    padding : 10%;
+    
 }
 .profile-img {
   max-width: 350px;
