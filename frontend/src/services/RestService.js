@@ -63,19 +63,17 @@ export default {
   },
   insertUser(data) {
     var result;
-    axios
-      .post("http://70.12.246.138:3000/users", data)
-      .then(response => {
-        if (response.status == 200) {
-          result = true;
-          console.log('sssss');
-        } else {
-          result = false;
-          console.log('asasas');
-        }
-      });
-      console.log(result);
-      return result;
+    axios.post("http://70.12.246.138:3000/users", data).then(response => {
+      if (response.status == 200) {
+        result = true;
+        console.log("sssss");
+      } else {
+        result = false;
+        console.log("asasas");
+      }
+    });
+    console.log(result);
+    return result;
   },
   updateUser(id, data) {
     return axios
@@ -88,8 +86,14 @@ export default {
       .then(response => (this.portfolios = response.data));
   },
   insertLog(path) {
-    return axios
-      .post("http://70.12.246.138:3000/logs/" + path);
+    return axios.post("http://70.12.246.138:3000/logs/" + path);
   },
-
+  loginUser(id, pw) {
+    return axios
+      .post("http://70.12.246.138:3000/users/login", {
+        user_id: id,
+        user_pw: pw
+      })
+      .then();
+  }
 };
