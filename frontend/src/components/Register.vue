@@ -47,8 +47,8 @@ export default {
     }
   }),
   methods: {
-    insertUser: function(event) {
-      RestService.insertUser(this.user);
+    insertUser: async function(event) {
+      await RestService.insertUser(this.user);
     }
   }
 }

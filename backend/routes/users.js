@@ -10,27 +10,23 @@ var secretObj = require("../config/jwt");
 
 // Login Authenticate
 router.post("/login", (req, res) => {
-  let token = jwt.sign(
-    {
+  let token = jwt.sign({
       user_id: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "5m"
     }
   );
 
-  let refresh_token = jwt.sign(
-    {
+  let refresh_token = jwt.sign({
       token: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "1d"
     }
   );
 
-  knex("user")
+  knex("users")
     .select("*")
     .where("user_id", req.body.user_id)
     .then(data => {
@@ -46,7 +42,7 @@ router.post("/login", (req, res) => {
           httpOnly: true
         });
         // 로그인시 사용자마다 토큰 기록
-        knex("user_log")
+        knex("user_logs")
           .insert({
             user_token: token
           })
@@ -65,14 +61,14 @@ router.post("/login", (req, res) => {
 
 // Get All Users Info
 router.get("/", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .then(data => res.json(data));
 });
 
 // Get One User Info
 router.get("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .where("user_id", req.params.id)
     .then(data => res.json(data));
@@ -81,20 +77,29 @@ router.get("/:id", (req, res) => {
 // Add User
 router.post("/", (req, res) => {
   knex("user")
-    .insert(req.body)
-    .then(data => res.json(data));
+    .select()
+    .where("user_id", req.params.user_id)
+    .then(function(rows) {
+      if (rows.length == 0) {
+        knex("user")
+          .insert(req.body)
+          .then(data => res.json(data));
+      } else {
+        throw new Error("중복된 ID");
+      }
+    });
 });
 
 // Update User
 router.put("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .update(req.body)
     .then(data => res.json(data));
 });
 // Delete User
 router.delete("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .delete(req.body)
     .then(data => res.json(data));
