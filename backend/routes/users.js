@@ -10,22 +10,18 @@ var secretObj = require("../config/jwt");
 
 // Login Authenticate
 router.post("/login", (req, res) => {
-  let token = jwt.sign(
-    {
+  let token = jwt.sign({
       user_id: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "5m"
     }
   );
 
-  let refresh_token = jwt.sign(
-    {
+  let refresh_token = jwt.sign({
       token: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "1d"
     }
   );
@@ -57,7 +53,8 @@ router.post("/login", (req, res) => {
         });
       } else {
         res.json({
-          token: "null"
+          token: null,
+          refresh: null
         });
       }
     });
