@@ -38,6 +38,7 @@
 </template>
 
 <script>
+    import RestService from "../services/RestService"
     import FirebaseService from '@/services/FirebaseService'
     import Image from "../image.js"
 
@@ -94,14 +95,24 @@
             },
             async upload() {
                 this.imageUrl = await Image.imgupload();
+                const portTitle = document.querySelector("#title").value;
+                const portBody = document.querySelector(".editor-preview.editor-preview-active").innerText;
+
+                const data = {
+                    portfolio_title: portTitle,
+                    portfolio_subTitle: portBody,
+                    portfolio_img: this.imageUrl
+                };
+                console.log(data);
+                // this.insertPortfolio(data);
             },
 
             async insertLog() {
                 this.insertLog = await RestService.insertLog('PortfolioWrite');
             },
 
-            async insertPortfolio() {
-                await RestService.insertPortfolio(data);
+            insertPortfolio(data) {
+                RestService.insertPortfolio(data);
             }
         }
     };
@@ -114,5 +125,9 @@
 
     .title-div {
         margin-top: 50px;
+    }
+
+    .CodeMirror-line  {
+        text-align: left;
     }
 </style>
