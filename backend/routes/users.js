@@ -70,7 +70,7 @@ router.get("/", (req, res) => {
     .then(data => res.json(data));
 });
 
-// Get One User Info
+// Get One User Information
 router.get("/:id", (req, res) => {
   knex("users")
     .count("* as cnt")
