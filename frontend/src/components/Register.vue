@@ -27,7 +27,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-        <v-btn color="blue darken-1" flat @click="insertUser">Register</v-btn>
+        <v-btn color="blue darken-1" flat @click="check_user()">Register</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -38,18 +38,37 @@
 import RestService from "../services/RestService"
 
 export default {
-  data: () => ({
-    dialog: false,
-    user: {
-      user_id: '',
-      user_pw: '',
-      user_name: ''
+  data() {
+    return {
+      dialog: false,
+      user: {
+        user_id: '',
+        user_pw: '',
+        user_name: ''
+      },
+      check: [{
+        cnt: ""
+      }],
+      err_stat: {
+        status: '',
+        code: ''
+      }
     }
-  }),
+  },
   methods: {
-    insertUser: async function(event) {
-      await RestService.insertUser(this.user);
-    }
+    async check_user() {
+      this.check = await RestService.getUser(this.user.user_id);
+      if (this.check[0].cnt == 0) {
+        this.err_stat = await RestService.insertUser(this.user);
+        if (this.err_stat.status == 1) {
+          alert('가입 성공!');
+        } else {
+          alert(this.err_stat.code);
+        }
+      } else {
+        alert('중복된 ID입니다.');
+      }
+    },
   }
 }
 </script>
