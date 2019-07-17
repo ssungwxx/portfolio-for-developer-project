@@ -8,8 +8,8 @@
             <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
 
-            <div class="icons">
 
+            <div class="icons">
               <router-link to style="text-decoration: none;">
                   <v-btn icon>
                       <v-icon color="white" id="bookMark">star</v-icon>
@@ -27,19 +27,19 @@
                         <v-icon color="white">description</v-icon>
                     </v-btn>
                 </router-link>
-
-                <router-link :to="login" style="text-decoration: none;">
-                  <v-btn icon href="./Login">
-                  <v-icon color="white">perm_identity</v-icon>
-                  </v-btn>
-                </router-link>
-
             </div>
+
+            <div class="icons">
+              <Login/>
+            </div>
+            
         </v-toolbar>
     </div>
 </template>
 
 <script>
+import Login from "../components/Login"
+
 export default {
   name: "Header",
   data: () => ({
@@ -62,8 +62,11 @@ export default {
       }
     ]
   }),
-  components: {},
-  methods: {}
+  components: {
+    Login
+  },
+  methods: {
+  }
 };
 
 $(document).ready(function() {
