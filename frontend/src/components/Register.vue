@@ -48,7 +48,31 @@ export default {
   }),
   methods: {
     insertUser: function(event) {
-      RestService.insertUser(this.user);
+      var tmp = RestService.insertUser(this.user);
+      console.log(tmp);
+      if (tmp == true) {
+        alert('가입 성공!');
+        this.dialog = false;
+      } else {
+        alert('중복된 ID입니다!')
+      }
+      // console.log(this.result);
+      // alert(this.result.message);
+      // if(this.result.success == true) {
+      //   this.dialog = false;
+      // }
+        // .then(data => {
+        //   console.log(data);
+        //   if (data[0].success == true) {
+        //     this.dialog = false;
+        //     alert(data[0].message);
+        //   } else {
+        //     alert(data[0].message);
+        //   }
+        // })
+        // .catch(function(error) {
+        //   alert(error);
+        // })
     }
   }
 }

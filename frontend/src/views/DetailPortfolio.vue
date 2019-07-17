@@ -34,7 +34,6 @@
         </router-link>
       </v-flex>
     </div>
-
   </v-container>
 </template>
 <script>
@@ -61,14 +60,13 @@ export default {
     };
   },
   beforeMount() {
- this.insertLog();
-},
+    this.insertLog();
+  },
   components: {
     Portfolio
   },
   mounted() {
     this.getPortfolio();
-    this.slicingDate();
   },
   methods: {
     async getPortfolio() {
@@ -79,8 +77,8 @@ export default {
         this.portfolio[0].portfolio_date.slice(11, 19);
     },
 
-  async insertLog(){
-      this.insertLog = await RestService.insertLog('DetailPortfolio');
+    async insertLog() {
+      this.insertLog = await RestService.insertLog("DetailPortfolio");
     }
   }
 };

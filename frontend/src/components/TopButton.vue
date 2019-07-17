@@ -44,7 +44,7 @@
 <style>
     .top-button {
         position: fixed;
-        top:50%;
+        bottom: 50px;
         left: 95%;
         margin: 0;
         padding: 0;

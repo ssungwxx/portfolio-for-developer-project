@@ -1,20 +1,22 @@
 <template>
     <div class="py-3">
         <v-layout row wrap>
-            <v-flex xl3 lg3 md3 sm3 xs3>
-                <v-flex text-xs-left>
-                    <h2 class="font-weight-regular headline_truncate">{{member.name}}</h2>
-                    <p class="subheading mb-1 grey--text text--darken-1
-             font-weight-light">Point : {{allCommits}}</p>
-                </v-flex>
-                <v-flex text-xs-left>
-                    <v-btn :href="member.web_url" small flat icon outline>
+            <v-flex xl12 lg12 md12 sm12 xs12 style="display: flex; justify-content: space-around">
+                <div style="display: flex; align-items: center">
+                    <div>
+                        <h2 class="font-weight-regular headline_truncate">{{member.name}}</h2>
+                        <p class="subheading text--darken-1 font-weight-light">Point : {{allCommits}}</p>
+                    </div>
+                    <v-btn :href="member.web_url" small flat icon outline style="margin-left: 10px;">
                         <v-icon small>fa-arrow-right</v-icon>
                     </v-btn>
-                </v-flex>
-                <p>{{pushMessage}}</p>
+                </div>
+                <div style="display: flex">
+                    <p>{{pushMessage}}</p>
+                </div>
+
             </v-flex>
-            <v-flex xl8 lg8 md8 sm8 hidden-xs-only>
+            <v-flex xl12 lg12 md12 sm12 hidden-xs-only>
                 <v-sheet
                         class="v-sheet--offset mx-auto"
                         color="grey lighten-5"
@@ -153,5 +155,13 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
+    }
+
+    p {
+        height: auto;
+        line-height: 1.2;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        align-self: center;
     }
 </style>

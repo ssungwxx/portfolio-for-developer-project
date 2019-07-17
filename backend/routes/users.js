@@ -20,23 +20,40 @@ router.post("/login", (req, res) => {
     }
   );
 
-  knex("user")
+  let refresh_token = jwt.sign(
+    {
+      token: req.body.user_id
+    },
+    secretObj.secret,
+    {
+      expiresIn: "1d"
+    }
+  );
+
+  knex("users")
     .select("*")
     .where("user_id", req.body.user_id)
     .then(data => {
       if (req.body.user_pw == data[0].user_pw) {
+        // user cookie 설정
         res.cookie("user", token, {
           expires: new Date(Date.now() + 900000),
           httpOnly: true
         });
-        knex("user_log")
+        // user refresh cookir 설정
+        res.cookie("refresh_user", refresh_token, {
+          expires: new Date(Date.now() + 86400000),
+          httpOnly: true
+        });
+        // 로그인시 사용자마다 토큰 기록
+        knex("user_logs")
           .insert({
-            user_id: req.body.user_id,
             user_token: token
           })
           .then();
         res.json({
-          token: token
+          token: token,
+          refresh: refresh_token
         });
       } else {
         res.json({
@@ -48,14 +65,14 @@ router.post("/login", (req, res) => {
 
 // Get All Users Info
 router.get("/", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .then(data => res.json(data));
 });
 
 // Get One User Info
 router.get("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .select("*")
     .where("user_id", req.params.id)
     .then(data => res.json(data));
@@ -63,21 +80,21 @@ router.get("/:id", (req, res) => {
 
 // Add User
 router.post("/", (req, res) => {
-  knex("user")
+  knex("users")
     .insert(req.body)
     .then(data => res.json(data));
 });
 
 // Update User
 router.put("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .update(req.body)
     .then(data => res.json(data));
 });
 // Delete User
 router.delete("/:id", (req, res) => {
-  knex("user")
+  knex("users")
     .where("user_id", req.params.id)
     .delete(req.body)
     .then(data => res.json(data));
