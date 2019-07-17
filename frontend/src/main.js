@@ -14,6 +14,7 @@ import "./registerServiceWorker";
 
 //그래프 관련
 import Bars from "vuebars";
+
 Vue.use(Bars);
 
 Vue.use(axios);
@@ -45,7 +46,7 @@ import VueResizeText from "vue-resize-text";
 Vue.use(VueResizeText);
 
 // 배경화면 캐러셀
-import VueCarousel from 'vue-carousel';
+import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
 
 new Vue({
