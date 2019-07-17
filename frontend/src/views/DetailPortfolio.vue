@@ -17,7 +17,7 @@
         </tr>
         <tr>
           <td class="table-left">내용</td>
-          <td class="table-right">{{ portfolio[0].portfolio_subTitle }}</td>
+          <td class="table-right">{{ portfolio[0].portfolio_content }}</td>
         </tr>
       </table>
     </div>
@@ -31,7 +31,6 @@
         </router-link>
       </v-flex>
     </div>
-
   </v-container>
 </template>
 <script>
@@ -48,7 +47,7 @@ export default {
           portfolio_no: "",
           user_id: "",
           portfolio_title: "",
-          portfolio_subTitle: "",
+          portfolio_content: "",
           portfolio_img: "",
           portfolio_date: ""
         }
@@ -58,14 +57,13 @@ export default {
     };
   },
   beforeMount() {
- this.insertLog();
-},
+    this.insertLog();
+  },
   components: {
     Portfolio
   },
   mounted() {
     this.getPortfolio();
-    this.slicingDate();
   },
   methods: {
     async getPortfolio() {
@@ -76,8 +74,8 @@ export default {
         this.portfolio[0].portfolio_date.slice(11, 19);
     },
 
-  async insertLog(){
-      this.insertLog = await RestService.insertLog('DetailPortfolio');
+    async insertLog() {
+      this.insertLog = await RestService.insertLog("DetailPortfolio");
     }
   }
 };

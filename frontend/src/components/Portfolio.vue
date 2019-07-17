@@ -6,7 +6,7 @@
         <div>
           <div class="headline">{{ portfolio_title }}</div>
           <div class="grey--text">
-            <span>{{ portfolio_subTitle }}</span>
+            <span>{{ portfolio_content }}</span>
           </div>
         </div>
       </v-card-title>
@@ -22,7 +22,7 @@ export default {
   props: {
     portfolio_no: { type: Number },
     portfolio_title: { type: String },
-    portfolio_subTitle: { type: String },
+    portfolio_content: { type: String },
     portfolio_img: { type: String }
   },
   components: {

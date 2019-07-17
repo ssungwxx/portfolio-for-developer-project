@@ -11,6 +11,8 @@ var portfolios = require("./routes/portfolios");
 var posts = require("./routes/posts");
 var logs = require("./routes/webLog");
 
+var enPage = require("./routes/enPage");
+
 var bodyParser = require("body-parser");
 
 var cors = require("cors");
@@ -61,6 +63,7 @@ app.use("/users", users);
 app.use("/portfolios", portfolios);
 app.use("/posts", posts);
 app.use("/logs", logs);
+app.use("/en", enPage);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

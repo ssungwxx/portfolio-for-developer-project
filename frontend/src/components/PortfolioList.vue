@@ -6,21 +6,18 @@
         :portfolio_no="portfolios[i - 1].portfolio_no"
         :portfolio_date="portfolios[i - 1].portfolio_date"
         :portfolio_title="portfolios[i - 1].portfolio_title"
-        :portfolio_subTitle="portfolios[i - 1].portfolio_subTitle"
+        :portfolio_content="portfolios[i - 1].portfolio_content"
         :portfolio_img="portfolios[i - 1].portfolio_img"
       ></Portfolio>
     </v-flex>
 
-
     <div class="plusbutton">
-    <v-flex xs12 text-xs-center round my-5>
-        <v-btn color="info" dark center href="/PortfolioWrite" style="width:106px;" >
-          <v-icon size="25" class="mr-2">fa-plus</v-icon>
-          Write
+      <v-flex xs12 text-xs-center round my-5>
+        <v-btn color="info" dark center href="/PortfolioWrite" style="width:106px;">
+          <v-icon size="25" class="mr-2">fa-plus</v-icon>Write
         </v-btn>
-    </v-flex>
-  </div>
-
+      </v-flex>
+    </div>
   </v-layout>
 </template>
 <script>
@@ -55,7 +52,7 @@ export default {
 };
 </script>
 <style>
-.plusbutton{
+.plusbutton {
   margin-bottom: 50px;
   margin-left: 45%;
 }

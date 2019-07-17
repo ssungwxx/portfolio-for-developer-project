@@ -1,7 +1,6 @@
 <template>
   <v-footer
     class="corefooter"
-    absolute
     height="82"
   >
          <h3 class="findus">Find us</h3>
