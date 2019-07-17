@@ -76,7 +76,7 @@ export default {
         }
         this.clear_user();
       } else {
-        alert("Email형식으로 입력해주세요");
+        alert("ID를 Email형식으로 입력해주세요");
       }
     },
     clear_user() {
