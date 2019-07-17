@@ -5,9 +5,7 @@
       <v-card-title primary-title>
         <div>
           <div class="headline">{{ portfolio_title }}</div>
-          <div class="grey--text">
-            <span>{{ portfolio_content }}</span>
-          </div>
+          <span class="grey--text">{{ portfolio_content }}</span>
         </div>
       </v-card-title>
     </v-card>

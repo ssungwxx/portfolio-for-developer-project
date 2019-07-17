@@ -10,22 +10,18 @@ var secretObj = require("../config/jwt");
 
 // Login Authenticate
 router.post("/login", (req, res) => {
-  let token = jwt.sign(
-    {
+  let token = jwt.sign({
       user_id: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "5m"
     }
   );
 
-  let refresh_token = jwt.sign(
-    {
+  let refresh_token = jwt.sign({
       token: req.body.user_id
     },
-    secretObj.secret,
-    {
+    secretObj.secret, {
       expiresIn: "1d"
     }
   );
@@ -80,9 +76,18 @@ router.get("/:id", (req, res) => {
 
 // Add User
 router.post("/", (req, res) => {
-  knex("users")
-    .insert(req.body)
-    .then(data => res.json(data));
+  knex("user")
+    .select()
+    .where("user_id", req.params.user_id)
+    .then(function(rows) {
+      if (rows.length == 0) {
+        knex("user")
+          .insert(req.body)
+          .then(data => res.json(data));
+      } else {
+        throw new Error("중복된 ID");
+      }
+    });
 });
 
 // Update User
