@@ -1,9 +1,6 @@
 <template>
 <div>
-
-
-
-  <Carousel class="carouselimg">
+<Carousel class="carouselimg">
   </Carousel>
 
   <v-container>
@@ -99,7 +96,7 @@ export default {
 <style>
 .carouselimg{
     padding : 10%;
-    
+
 }
 .profile-img {
   max-width: 350px;
