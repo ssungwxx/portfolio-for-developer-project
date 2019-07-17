@@ -33,7 +33,7 @@
       </v-flex>
     </v-layout>
 
-    <!-- Post -->
+    <!-- Repository & Post -->
     <v-layout my-5>
       <v-flex xs6>
         <h2 class="headline my-5 text-xs-center">

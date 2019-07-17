@@ -6,7 +6,7 @@
         <div>
             <div class="markdown">
                 <v-flex>
-                    <v-text-field label="title"></v-text-field>
+                    <v-text-field id="title" label="title"></v-text-field>
                 </v-flex>
                 <markdown-editor></markdown-editor>
             </div>
@@ -26,7 +26,7 @@
             >
         </v-flex>
 
-        <v-btn @click="imgupload">
+        <v-btn @click="upload">
             Submit
         </v-btn>
         <v-btn @click="randomPhoto">
@@ -39,15 +39,7 @@
 
 <script>
     import FirebaseService from '@/services/FirebaseService'
-    import Unsplash from "unsplash-js";
-    import RestService from "@/services/RestService";
-
-
-    const ClientId = "f54eed5a9fa625008ff25b3ac52e0af07388084d294f4c2e495f60e6c3ad5e22";
-    const unsplash = new Unsplash({
-        applicationId: ClientId,
-    });
-
+    import Image from "../image.js"
 
     export default {
         name: "PortfolioWrite",
@@ -100,10 +92,10 @@
                 this.imageName = ret[0];
                 this.imageUrl = ret[1];
             },
-            imgupload () {
-                Image.imgupload();
-            }
-            ,
+            async upload () {
+                this.imageUrl = await Image.imgupload();
+                // console.log(this.imageUrl);
+            },
 
             async insertLog(){
               this.insertLog = await RestService.insertLog('PortfolioWrite');
