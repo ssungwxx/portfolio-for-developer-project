@@ -32,13 +32,18 @@
             <div class="icons">
               <Login/>
             </div>
-            
+
+            <div class="icons">
+              <Register/>
+            </div>
+
         </v-toolbar>
     </div>
 </template>
 
 <script>
 import Login from "../components/Login"
+import Register from "../components/Register"
 
 export default {
   name: "Header",
@@ -63,7 +68,8 @@ export default {
     ]
   }),
   components: {
-    Login
+    Login,
+    Register
   },
   methods: {
   }

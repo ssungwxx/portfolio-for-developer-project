@@ -1,9 +1,13 @@
 <template>
 <v-layout row justify-center>
   <v-dialog v-model="dialog" max-width="600px">
+
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" dark v-on="on">Join Us</v-btn>
+      <v-btn icon v-on="on">
+        <v-icon color="white">assignment_ind</v-icon>
+      </v-btn>
     </template>
+
     <v-card>
       <v-card-title>
         <span class="headline">Register</span>
