@@ -59,20 +59,12 @@ export default {
   getUser(id) {
     return axios
       .get("http://70.12.246.138:3000/users/" + id)
-      .then(response => (this.user = response.data));
+      .then(response => (this.check = response.data));
   },
   insertUser(data) {
     return axios
       .post("http://70.12.246.138:3000/users", data)
-      .then(response => {
-        if (response.status == 200) {
-          alert("가입 성공!");
-          this.dialog = false;
-        }
-      })
-      .catch(function(error) {
-        alert(error.message);
-      })
+      .then(response => (this.err_stat = response.data));
   },
   updateUser(id, data) {
     return axios

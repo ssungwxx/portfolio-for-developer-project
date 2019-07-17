@@ -69,24 +69,28 @@ router.get("/", (req, res) => {
 // Get One User Info
 router.get("/:id", (req, res) => {
   knex("users")
+<<<<<<< HEAD
     .select("*")
+=======
+    .count("* as cnt")
+>>>>>>> backend2
     .where("user_id", req.params.id)
     .then(data => res.json(data));
 });
 
 // Add User
 router.post("/", (req, res) => {
-  knex("user")
-    .select()
-    .where("user_id", req.params.user_id)
-    .then(function(rows) {
-      if (rows.length == 0) {
-        knex("user")
-          .insert(req.body)
-          .then(data => res.json(data));
-      } else {
-        throw new Error("중복된 ID");
-      }
+  knex("users")
+    .insert(req.body)
+    .then(data => res.json({
+      status: "1",
+      code: "success"
+    }))
+    .catch(function(error) {
+      res.json({
+        status: "-1",
+        code: error.code
+      });
     });
 });
 
@@ -97,6 +101,7 @@ router.put("/:id", (req, res) => {
     .update(req.body)
     .then(data => res.json(data));
 });
+
 // Delete User
 router.delete("/:id", (req, res) => {
   knex("users")
