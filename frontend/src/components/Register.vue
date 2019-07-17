@@ -62,21 +62,25 @@ export default {
   },
   methods: {
     async check_user() {
-      if (this.check_email()) {
-        this.check = await RestService.getUser(this.user.user_id);
-        if (this.check[0].cnt == 0) {
-          this.err_stat = await RestService.insertUser(this.user);
-          if (this.err_stat.status == 1) {
-            alert("가입 성공!");
+      if (this.check_null()) {
+        if (this.check_email()) {
+          this.check = await RestService.getUser(this.user.user_id);
+          if (this.check[0].cnt == 0) {
+            this.err_stat = await RestService.insertUser(this.user);
+            if (this.err_stat.status == 1) {
+              alert("가입 성공!");
+            } else {
+              alert(this.err_stat.code);
+            }
           } else {
-            alert(this.err_stat.code);
+            alert("중복된 Email입니다.");
           }
+          this.clear_user();
         } else {
-          alert("중복된 Email입니다.");
+          alert("ID를 Email형식으로 입력해주세요");
         }
-        this.clear_user();
       } else {
-        alert("ID를 Email형식으로 입력해주세요");
+        alert("입력된 데이터에 공백값이 포함되어 있습니다.");
       }
     },
     clear_user() {
@@ -91,6 +95,15 @@ export default {
       } else {
         return false;
       }
+    },
+    check_null() {
+      if (
+        this.user.user_id == "" ||
+        this.user.user_pw == "" ||
+        this.user.user_name == ""
+      )
+        return false;
+      return true;
     }
   }
 };
