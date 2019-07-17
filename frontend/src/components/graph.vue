@@ -37,12 +37,13 @@
             <!--                    ></v-sparkline>-->
             <!--                </v-sheet>-->
             <!--            </v-flex>-->
-                <ejs-chart id="container" :title='title' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'>
-                    <e-series-collection>
-                        <e-series :dataSource='seData' type='Line' xName='date' yName='counts' name='commits'
-                                  :marker='marker'></e-series>
-                    </e-series-collection>
-                </ejs-chart>
+            <ejs-chart id="container" :title='title' :primaryXAxis='primaryXAxis' :primaryYAxis='primaryYAxis'
+                       :tooltip='tooltip'>
+                <e-series-collection>
+                    <e-series :dataSource='seriesData' type='Line' xName='date' yName='counts' name='Sales'
+                              :marker='marker'></e-series>
+                </e-series-collection>
+            </ejs-chart>
         </v-layout>
     </div>
 </template>
@@ -76,12 +77,26 @@
             return {
                 numberPush: 0,
                 pushMessage: "아직 Push 하지 않았습니다.",
+                stats: {},
+                labels: [
+                    '7/8',
+                    '7/9',
+                    '7/10',
+                    '7/11',
+                    '7/12',
+                    '7/13',
+                    '7/14',
+                    '7/15',
+                    '7/16',
+                    '7/17',
+                    '7/18',
+                    '7/19',
+                ],
                 valueall: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 allCommits: 0,
-                labels: [
-                    '7/8', '7/9', '7/10', '7/11', '7/12', '7/13',
-                    '7/14', '7/15', '7/16', '7/17', '7/18', '7/19',
-                ],
+                radius: 5,
+                gradient: gradients[0],
+                lineCap: 'round',
                 seriesData: [
                     {date: '7/8', counts: 0}, {date: '7/9', counts: 0},
                     {date: '7/10', counts: 0}, {date: '7/11', counts: 0},
@@ -106,39 +121,32 @@
                 },
                 tooltip: {enable: true},
                 title: "Gitlab Repository Graph",
-                seData: []
             }
         },
         mounted() {
             const today = new Date();
             this.todayDate = String(today.getDate()).padStart(2, '0');
-            this.series();
+            this.setCommit();
         },
         methods: {
-            async series() {
-                await this.setCommit();
-                for (let i = 0; this.valueall.length > i; i++) {
-                    this.seData.push({date: this.labels[i], counts: this.valueall[i]})
-                }
-                // console.log(this.seData)
-            },
             commitToValue(oneData) {
+                // let authorId = oneData.author_id
+                const new_value = this.valueall.slice()
                 const gitrepoDay = parseInt(oneData.created_at.slice(8, 10));
                 if (gitrepoDay === parseInt(this.todayDate) && oneData.action_name === "pushed to") {
                     this.numberPush += 1;
                     this.pushMessage = `오늘 ${this.numberPush}번 push했습니다.`
                 }
-                if (this.valueall[gitrepoDay - 8] < 100) {
-                    this.valueall[gitrepoDay - 8] += 1;
+                if (new_value[gitrepoDay - 8] < 10) {
+                    new_value[gitrepoDay - 8] += 1;
                 }
-                // this.valueall = new_value;
+                this.valueall = new_value;
             },
             commitToVuex(severalData) {
                 severalData.data.forEach(this.commitToValue);
-                // console.log("얍")
-                // for (let i = 0; this.valueall.length > i; i++) {
-                //     this.seriesData[i].counts = this.valueall[i];
-                // }
+                for (let i = 0; this.valueall.length > i; i++) {
+                    this.seriesData[i].counts = this.valueall[i];
+                }
             },
             async setCommit() {
                 const result = await GitlabService.getCommits(this.member.id);

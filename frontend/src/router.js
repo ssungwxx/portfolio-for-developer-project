@@ -6,6 +6,7 @@ import PortfolioPage from "./views/PortfolioPage.vue";
 import LoginPage from "./views/LoginPage.vue";
 import PortfolioWrite from "./views/PortfolioWrite.vue";
 import DetailPortfolio from "./views/DetailPortfolio.vue";
+import graph from "./components/graph.vue"
 
 Vue.use(Router);
 
@@ -42,6 +43,11 @@ export default new Router({
       path: "/portfoliowrite",
       name: "portfoliowrite",
       component: PortfolioWrite
+    },
+    {
+      path:"/graph",
+      name:"graph",
+      component: graph
     }
   ]
 });
