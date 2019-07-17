@@ -62,23 +62,35 @@ export default {
   },
   methods: {
     async check_user() {
-      this.check = await RestService.getUser(this.user.user_id);
-      if (this.check[0].cnt == 0) {
-        this.err_stat = await RestService.insertUser(this.user);
-        if (this.err_stat.status == 1) {
-          alert("가입 성공!");
+      if (this.check_email()) {
+        this.check = await RestService.getUser(this.user.user_id);
+        if (this.check[0].cnt == 0) {
+          this.err_stat = await RestService.insertUser(this.user);
+          if (this.err_stat.status == 1) {
+            alert("가입 성공!");
+          } else {
+            alert(this.err_stat.code);
+          }
         } else {
-          alert(this.err_stat.code);
+          alert("중복된 Email입니다.");
         }
+        this.clear_user();
       } else {
-        alert("중복된 ID입니다.");
+        alert("Email형식으로 입력해주세요");
       }
-      this.clear_user();
     },
     clear_user() {
       this.user.user_id = "";
       this.user.user_pw = "";
       this.user.user_name = "";
+    },
+    check_email() {
+      let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+      if (this.user.user_id.match(regExp) != null) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 };
