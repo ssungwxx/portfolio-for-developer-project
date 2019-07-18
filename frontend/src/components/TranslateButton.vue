@@ -1,22 +1,29 @@
 <template>
-    <v-tooltip top>
-        <v-icon
-            slot="activator"
-            color="rgb(102, 102, 102)"
-            large
-            class="translate"
-            @click="select"
-        >g_translate</v-icon>
-        <span>페이지 번역</span>
-    </v-tooltip>
+    <v-icon color="red" large class="translate" @click="getEn">g_translate</v-icon>
 </template>
 
 <script>
-export default {
-    name: "TranslateButton",
-    methods: {
-        select() {
-            const selected = document.querySelectorAll(".v-content")[1];
+import RestService from "../services/RestService"
+
+
+    export default {
+        name: "TranslateButton",
+        data () {
+            return {
+                koText: "",
+                enText: "",
+            }
+        },
+        methods: {
+            async select () {
+                const selected = document.querySelectorAll(".v-content")[1];
+                console.log(selected);
+                this.enText = await RestService.translateText(selected);
+                console.log(this.enText)
+            },
+            getEn () {
+                RestService.getEn();
+            }
         }
     }
 };
