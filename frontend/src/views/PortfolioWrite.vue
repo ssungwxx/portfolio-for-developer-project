@@ -96,15 +96,15 @@
             async upload() {
                 this.imageUrl = await Image.imgupload();
                 const portTitle = document.querySelector("#title").value;
-                const portBody = document.querySelector(".editor-preview.editor-preview-active").innerText;
+                const portBody = document.querySelector(".CodeMirror-code").innerText;
 
                 const data = {
                     portfolio_title: portTitle,
                     portfolio_subTitle: portBody,
                     portfolio_img: this.imageUrl
                 };
-                console.log(data);
-                // this.insertPortfolio(data);
+                // console.log(data);
+                this.insertPortfolio(data);
             },
 
             async insertLog() {

@@ -8,6 +8,7 @@
         <v-content>
             <router-view/>
             <TopButton/>
+            <TranslateButton/>
         </v-content>
 
         <v-content>
@@ -22,6 +23,7 @@
     import Header from "./components/Header"
     import Sidebar from "./components/Sidebar"
     import TopButton from "./components/TopButton"
+    import TranslateButton from "./components/TranslateButton"
 
     export default {
         name: 'App',
@@ -30,7 +32,8 @@
             Footer,
             Header,
             Sidebar,
-            TopButton
+            TopButton,
+            TranslateButton
         },
         data() {
             return {
