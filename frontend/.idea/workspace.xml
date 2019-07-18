@@ -87,8 +87,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/views/PortfolioWrite.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="82" column="23" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
+            <state relative-caret-position="567">
+              <caret line="118" column="9" selection-start-line="118" selection-start-column="9" selection-end-line="118" selection-end-column="9" />
               <folding>
                 <element signature="n#style#0;n#v-text-field#1;n#v-flex#0;n#v-container#0;n#template#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#input#0;n#v-flex#0;n#v-container#0;n#template#0;n#!!top" expanded="true" />
@@ -262,12 +262,12 @@
       <workItem from="1563149819829" duration="8059000" />
       <workItem from="1563185270986" duration="87000" />
       <workItem from="1563321293369" duration="15839000" />
-      <workItem from="1563408110547" duration="9848000" />
+      <workItem from="1563408110547" duration="10339000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123366000" />
+    <option name="totallyTimeSpent" value="123857000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -567,8 +567,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/views/PortfolioWrite.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="82" column="23" selection-start-line="82" selection-start-column="23" selection-end-line="82" selection-end-column="23" />
+        <state relative-caret-position="567">
+          <caret line="118" column="9" selection-start-line="118" selection-start-column="9" selection-end-line="118" selection-end-column="9" />
           <folding>
             <element signature="n#style#0;n#v-text-field#1;n#v-flex#0;n#v-container#0;n#template#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#input#0;n#v-flex#0;n#v-container#0;n#template#0;n#!!top" expanded="true" />
