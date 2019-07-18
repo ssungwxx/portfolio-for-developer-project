@@ -12,29 +12,29 @@
             </div>
         </div>
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-            <img :src="imageUrl" height="150" v-if="imageUrl"/>
+            <img :src="imageUrl" height="150" v-if="imageUrl" />
             <v-text-field
-                    label="Select Image"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
-                    v-if="imageUrl"
+                label="Select Image"
+                @click="pickFile"
+                v-model="imageName"
+                prepend-icon="attach_file"
+                v-if="imageUrl"
             ></v-text-field>
             <v-text-field
-                    label="Select Image"
-                    @click="pickFile"
-                    v-model="imageName"
-                    prepend-icon="attach_file"
-                    v-else="imageUrl"
-                    style="margin-top: 150px;"
+                label="Select Image"
+                @click="pickFile"
+                v-model="imageName"
+                prepend-icon="attach_file"
+                v-else="imageUrl"
+                style="margin-top: 150px;"
             ></v-text-field>
             <input
-                    id="imgup"
-                    type="file"
-                    style="display: none;"
-                    ref="image"
-                    accept="image/*"
-                    @change="onFilePicked"
+                id="imgup"
+                type="file"
+                style="display: none;"
+                ref="image"
+                accept="image/*"
+                @change="onFilePicked"
             />
         </v-flex>
 
@@ -44,25 +44,29 @@
 </template>
 
 <script>
-    import RestService from "../services/RestService";
-    import FirebaseService from "@/services/FirebaseService";
-    import Image from "../image.js";
+import RestService from "../services/RestService";
+import FirebaseService from "@/services/FirebaseService";
+import Image from "../image.js";
 
-    export default {
-        name: "PortfolioWrite",
-        components: {},
-        beforeMount() {
-            this.insertLog();
-        },
+export default {
+    name: "PortfolioWrite",
+    components: {},
+    beforeMount() {
+        this.insertLog();
+    },
 
-        data() {
-            return {
-                title: "Image Upload",
-                dialog: false,
-                imageName: "",
-                imageUrl: "",
-                imageFile: ""
-            };
+    data() {
+        return {
+            title: "Image Upload",
+            dialog: false,
+            imageName: "",
+            imageUrl: "",
+            imageFile: ""
+        };
+    },
+    methods: {
+        pickFile() {
+            this.$refs.image.click();
         },
         methods: {
             pickFile() {
@@ -87,47 +91,51 @@
                     this.imageUrl = "";
 
                 }
-            },
-            async randomPhoto() {
-                const ret = await Image.randomPhoto();
-                this.imageName = ret[0];
-                this.imageUrl = ret[1];
-            },
-            async upload() {
-                this.imageUrl = await Image.imgupload();
-                const portTitle = document.querySelector("#title").value;
-                const portBody = document.querySelector(".CodeMirror-code").innerText;
-
-                const data = {
-                    portfolio_title: portTitle,
-                    portfolio_subTitle: portBody,
-                    portfolio_img: this.imageUrl
-                };
-                // console.log(data);
-                this.insertPortfolio(data);
-            },
-
-            async insertLog() {
-                this.insertLog = await RestService.insertLog("PortfolioWrite");
-            },
-
-            insertPortfolio(data) {
-                RestService.insertPortfolio(data);
             }
         },
+        async randomPhoto() {
+            const ret = await Image.randomPhoto();
+            this.imageName = ret[0];
+            this.imageUrl = ret[1];
+        },
+        async upload() {
+            this.imageUrl = await Image.imgupload();
+            const portTitle = document.querySelector("#title").value;
+
+            const portBody = document.querySelector(".CodeMirror-code")
+                .innerText;
+
+            const data = {
+                portfolio_title: portTitle,
+                portfolio_subTitle: portBody,
+                portfolio_img: this.imageUrl
+            };
+
+            // console.log(data);
+            this.insertPortfolio(data);
+        },
+
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("PortfolioWrite");
+        },
+
+        insertPortfolio(data) {
+            RestService.insertPortfolio(data);
+        }
     }
+};
 </script>
 
 <style>
-    .port-title {
-        font-size: 5vw;
-    }
+.port-title {
+    font-size: 5vw;
+}
 
-    .title-div {
-        margin-top: 50px;
-    }
+.title-div {
+    margin-top: 50px;
+}
 
-    .CodeMirror-line {
-        text-align: left;
-    }
+.CodeMirror-line {
+    text-align: left;
+}
 </style>

@@ -5,7 +5,7 @@ import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import PortfolioWrite from "./views/PortfolioWrite.vue";
 import DetailPortfolio from "./views/DetailPortfolio.vue";
-import en from "./views/en.vue"
+import en from "./views/en.vue";
 
 //import LoginPage from "./views/LoginPage.vue";
 
