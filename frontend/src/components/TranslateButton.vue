@@ -1,33 +1,54 @@
 <template>
-<v-tooltip top>
-  <v-icon color="rgb(102, 102, 102)" large class="translate" @click="getEn">g_translate</v-icon>
-  <span>맨 위로 이동</span>
-</v-tooltip>
+    <div>
+        <div v-html="enText">
+
+        </div>
+
+        <textarea name="translate" id="translate" style="display: none"></textarea>
+        <v-icon color="red" large class="translate" @click="select">g_translate</v-icon>
+    </div>
 </template>
 
 <script>
-import RestService from "../services/RestService";
+import RestService from "../services/RestService"
+import enPage from "../views/enPage.vue"
 
-export default {
-  name: "TranslateButton",
-  data() {
-    return {
-      koText: "",
-      enText: ""
-    };
-  },
-  methods: {
-    async select() {
-      const selected = document.querySelectorAll(".v-content")[1];
-      console.log(selected);
-      this.enText = await RestService.translateText(selected);
-      console.log(this.enText);
-    },
-    getEn() {
-      RestService.getEn();
+    export default {
+        name: "TranslateButton",
+        component: {
+            enPage,
+        },
+        data () {
+            return {
+                koText: "",
+                enText: "",
+            }
+        },
+        methods: {
+            ko() {
+                const text = document.querySelector("#translate");
+                text.value = document.querySelectorAll(".v-content")[1];
+                this.koText = text.value;
+                text.value = ""
+                console.log("한글" + this.koText)
+            },
+            async select () {
+                if (this.koText === "") {
+                    this.ko();
+                    const text = document.querySelector("#translate");
+                    text.value = document.querySelectorAll(".v-content")[1];
+                    const data = {
+                        translate : text.value
+                    };
+                    const res = await RestService.translateText(data);
+                    this.enText = res.toString();
+                } else {
+                    this.enText = "";
+                }
+                console.log("영어" + this.enText)
+            },
+        }
     }
-  }
-};
 </script>
 
 <style>
