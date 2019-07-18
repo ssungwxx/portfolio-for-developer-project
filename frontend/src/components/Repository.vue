@@ -192,18 +192,24 @@
                 <div style="display: flex; align-items: center">
                     <div>
                         <h2 class="font-weight-regular headline_truncate">{{member.name}}</h2>
-                        <p class="subheading text--darken-1 font-weight-light">Point : {{allCommits}}</p>
+                        <p
+                            class="subheading text--darken-1 font-weight-light"
+                        >Point : {{allCommits}}</p>
                     </div>
-                    <v-btn :href="member.web_url" small flat icon outline style="margin-left: 10px;">
-                        <v-icon small class="material-icons">
-                            vpn_key
-                       </v-icon>
+                    <v-btn
+                        :href="member.web_url"
+                        small
+                        flat
+                        icon
+                        outline
+                        style="margin-left: 10px;"
+                    >
+                        <v-icon small class="material-icons">vpn_key</v-icon>
                     </v-btn>
                 </div>
                 <div style="display: flex">
                     <p>{{pushMessage}}</p>
                 </div>
-
             </v-flex>
             <v-flex xl12 lg12 md12 sm12 hidden-xs-only>
                 <v-sheet
@@ -337,18 +343,18 @@ export default {
     overflow: hidden;
 }
 
-    .content_truncate {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+.content_truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-    p {
-        height: auto;
-        line-height: 1.2;
-        -ms-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        align-self: center;
-    }
+p {
+    height: auto;
+    line-height: 1.2;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    align-self: center;
+}
 </style>
