@@ -2,7 +2,7 @@
     <v-layout py-4 h-100>
         <v-flex row>
             <div class="caption">{{post_date}}</div>
-            <h2 class="color-333 headline font-weight-light">{{post_title}}</h2>
+            <h2 class="color-332 headline font-weight-light">{{post_title}}</h2>
             <p class="mb-1 color-666 font-weight-light subheading">{{post_content}}</p>
         </v-flex>
     </v-layout>
@@ -23,8 +23,9 @@ export default {
 .color-666 {
     color: #666;
 }
-.color-333 {
+.color-332 {
     color: #333;
+    height: 95px;
 }
 .h-100 {
     height: 100%;
