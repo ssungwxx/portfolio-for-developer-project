@@ -85,7 +85,6 @@ export default {
                 this.imageName = "";
                 this.imageFile = "";
                 this.imageUrl = "";
-
             }
         },
         async randomPhoto() {
@@ -101,8 +100,9 @@ export default {
                 .innerText;
 
             const data = {
+                user_id: "ykk2006@naver.com",
                 portfolio_title: portTitle,
-                portfolio_subTitle: portBody,
+                portfolio_content: portBody,
                 portfolio_img: this.imageUrl
             };
 
