@@ -45,29 +45,17 @@ export default {
         return ret;
     },
     async imgupload() {
-        const hash = `https://api.imgur.com/oauth2/authorize?${qs.stringify(
-            queryString
-        )}`;
-        console.log(hash);
-        return;
+
+        // const hash = `https://api.imgur.com/oauth2/authorize?${qs.stringify(queryString)}`;
+        // console.log(hash)
+        // return
 
         const inputImg = document.querySelector("#imgup");
         if (inputImg.files.length === 1) {
             const file = inputImg.files[0];
-            const ret = await this.uploadImageByImgur(file);
-            return ret;
-            // {
-            //         console.log(result);
-            //         console.log("result: " + result.status);
-            //         if (result.status != 200) {
-            //             result = $.parseJSON(result.responseText);
-            //         }
-            //         if (result.data.error) {
-            //             console.log('지원하지않는 파일형식..');
-            //         } else {
-            //             console.log('업로드된 파일경로:' + result.data.link);
-            //         }
-            //     })
+            const ret = await this.uploadImageByImgur(file)
+            return ret
+            }
         }
     }
 };
