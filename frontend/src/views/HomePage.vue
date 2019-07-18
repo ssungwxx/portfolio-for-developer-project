@@ -1,6 +1,7 @@
 <template>
     <div>
-        <Carousel class="carouselimg"></Carousel>
+              <Carousel class="carouselimg"></Carousel>
+
 
         <v-container>
             <!-- About Me -->
@@ -100,7 +101,7 @@ export default {
 };
 </script>
 <style>
-.carouselimg {
+.carouselimg {  
     padding: 10%;
 }
 .profile-img {

@@ -1,28 +1,18 @@
 <template>
-    <carousel>
-        <Slide class="slide">
-            <div id="divcont1"></div>
+    <carousel class="ca">
+        <Slide class="slide" v-for="i in 6">
+          <v-img :src="getImgUrl(i)"  aspect-ratio="1.7">
+              <v-layout align-center justify-center row fill-height>
+                  <v-flex text-xs-center>
+                      <span class="text-shadow display-3 font-weight-bold">
+                          <slot name="text" />
+                      </span>
+                  </v-flex>
+              </v-layout>
+          </v-img>
         </Slide>
 
-        <Slide class="slide">
-            <div id="divcont2"></div>
-        </Slide>
 
-        <Slide class="slide">
-            <div id="divcont3"></div>
-        </Slide>
-
-        <Slide class="slide">
-            <div id="divcont4"></div>
-        </Slide>
-
-        <Slide class="slide">
-            <div id="divcont5"></div>
-        </Slide>
-
-        <Slide class="slide">
-            <div id="divcont6"></div>
-        </Slide>
     </carousel>
 </template>
 
@@ -30,75 +20,23 @@
 import { Carousel, Slide } from "vue-carousel";
 
 export default {
+
     components: {
         Carousel,
         Slide
-    }
-};
+    },
+    methods: {
+          getImgUrl(i) {
+              return require("../assets/"+i+".jpg");
+      }
+}
+}
 </script>
 
 <style>
+
 .slide {
     padding: 20px;
 }
 
-#divcont1 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/1.jpg");
-}
-
-#divcont2 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/2.jpg");
-}
-
-#divcont3 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/3.jpg");
-}
-
-#divcont4 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/4.jpg");
-}
-
-#divcont5 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/5.jpg");
-}
-
-#divcont6 {
-    padding-top: 5%;
-    padding-bottom: 5%;
-    align-items: center;
-    padding-left: 10%;
-    padding-right: 10%;
-    height: 500px;
-    background-image: url("../assets/6.jpg");
-}
 </style>

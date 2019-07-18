@@ -47,6 +47,5 @@ export default {
             this.insertLog = await RestService.insertLog('PostPage');
           }
         }
-    }
-};
+}
 </script>
