@@ -11,7 +11,7 @@
         methods: {
             select () {
                 const selected = document.querySelectorAll(".v-content")[1];
-                
+
             }
         }
     }
@@ -21,8 +21,8 @@
 <style>
     .translate {
         position: fixed;
-        bottom: 50px;
-        left: 50px;
+        bottom: 20%;
+        left: 95%;
         margin: 0;
         padding: 0;
         z-index: 5;
