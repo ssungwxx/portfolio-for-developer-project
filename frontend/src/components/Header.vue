@@ -1,39 +1,57 @@
 <template>
-    <div class="header">
+    <div class="Header">
         <v-toolbar class="insta" dark color="#ffc0cb" fixed>
-            <v-btn icon href="/">
-                <v-icon>home</v-icon>
-            </v-btn>
+            <v-tooltip bottom>
+                <v-btn slot="activator" icon href="/">
+                    <v-icon>home</v-icon>
+                </v-btn>
+                <span>홈으로 이동</span>
+            </v-tooltip>
 
             <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
 
             <div class="icons">
-              <router-link to style="text-decoration: none;">
-                  <v-btn icon>
-                      <v-icon color="white" id="bookMark">star</v-icon>
-                  </v-btn>
-            </router-link>
+                <router-link to style="text-decoration: none;">
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon v-on:click="favorite()">
+                            <v-icon color="white" id="bookMark">star</v-icon>
+                        </v-btn>
+                        <span>북마크</span>
+                    </v-tooltip>
+                </router-link>
 
-            <router-link :to="port" style="text-decoration: none;">
-                    <v-btn icon>
-                        <v-icon color="white">markunread_mailbox</v-icon>
-                    </v-btn>
-            </router-link>
+                <router-link :to="port" style="text-decoration: none;">
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon>
+                            <v-icon color="white">markunread_mailbox</v-icon>
+                        </v-btn>
+                        <span>포트폴리오</span>
+                    </v-tooltip>
+                </router-link>
 
                 <router-link :to="posts" style="text-decoration: none;">
-                    <v-btn icon href="./Post">
-                        <v-icon color="white">description</v-icon>
-                    </v-btn>
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon href="./Post">
+                            <v-icon color="white">description</v-icon>
+                        </v-btn>
+                        <span>포스트</span>
+                    </v-tooltip>
                 </router-link>
             </div>
 
             <div class="icons">
-                <Login />
+                <v-tooltip bottom>
+                    <Login slot="activator" />
+                    <span>로그인</span>
+                </v-tooltip>
             </div>
 
             <div class="icons">
-                <Register />
+                <v-tooltip bottom>
+                    <Register slot="activator" />
+                    <span>회원가입</span>
+                </v-tooltip>
             </div>
         </v-toolbar>
     </div>
@@ -117,8 +135,8 @@ export default {
     }
 }
 
-.header {
-    z-index: 1;
+.Header {
+    z-index: 2;
     position: absolute;
     background-color: yellow;
 }

@@ -2,7 +2,8 @@
     <v-layout row wrap mw-700>
         <v-flex
             v-for="i in posts.length > limits ? limits : posts.length"
-            :class="'xs' + 12 / column"
+            :class="'md' + 12 / column"
+            xs12
             px-3
         >
             <Post
@@ -16,7 +17,7 @@
         <div class="plusbutton">
             <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
                 <v-btn color="info" dark v-on:click="loadMorePosts" style="width:106px;">
-                    <v-icon size="25" class="mr-2">fa-plus</v-icon>Write
+                    <v-icon size="25" class="mr-2">fa-plus</v-icon>더보기
                 </v-btn>
             </v-flex>
         </div>
@@ -30,7 +31,7 @@ export default {
     name: "PostList",
     props: {
         column: { type: Number, default: 2 },
-        limits: { type: Number, default: 12 },
+        limits: { type: Number, default: 4 },
         loadMore: { type: Boolean, default: false }
     },
     data() {

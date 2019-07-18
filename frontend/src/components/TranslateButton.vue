@@ -26,16 +26,16 @@ import RestService from "../services/RestService"
             }
         }
     }
-
+};
 </script>
 
 <style>
-    .translate {
-        position: fixed;
-        bottom: 50px;
-        left: 50px;
-        margin: 0;
-        padding: 0;
-        z-index: 5;
-    }
+.translate {
+    position: fixed;
+    bottom: 20%;
+    left: 95%;
+    margin: 0;
+    padding: 0;
+    z-index: 5;
+}
 </style>
