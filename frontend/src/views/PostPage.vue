@@ -35,6 +35,7 @@ export default {
     };
   },
 
+<<<<<<< HEAD
   beforeMount() {
     this.insertLog();
   },
@@ -48,4 +49,19 @@ export default {
     }
   }
 }
+=======
+    beforeMount() {
+        this.insertLog();
+    },
+    components: {
+        ImgBanner,
+        PostList
+    },
+    methods: {
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("PostPage");
+        }
+    }
+};
+>>>>>>> 558381c37f642f836e917fed3fd32d0db48d2f66
 </script>
