@@ -1,13 +1,8 @@
 <template>
-  <v-footer
-    class="corefooter"
-    height="82"
-  >
-         <h3 class="findus">Find us</h3>
-         <hr>
-         <div class="fdiv">
-            (SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)
-         </div>
+    <v-footer class="corefooter" height="82">
+        <h3 class="findus">Find us</h3>
+        <hr />
+        <div class="fdiv">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
 
              <div class="ftweather">
                &copy;
@@ -25,7 +20,6 @@
 </template>
 
 <script>
-
 export default {
    data() {
   return {
@@ -81,32 +75,31 @@ export default {
        }
        </script>
 <style>
-
-.findus{
-  margin-left: 14%;
+.findus {
+    margin-left: 14%;
 }
-.corefooter{
-  text-align: center;
+.corefooter {
+    text-align: center;
 }
-.img{
-  margin-right:15px;
-
+.img {
+    margin-right: 15px;
 }
 
-.fdiv{
+.fdiv {
     margin-left: 15%;
     margin-bottom: 10px;
 }
 
-
-.ftitem{
-padding: 25px;color: black;font-size: 18px;
+.ftitem {
+    padding: 25px;
+    color: black;
+    font-size: 18px;
 }
 
-.ftweather{
-margin-left: 12%;
-text-align:right;
-font-family:sans-serif;
-font-size:15px;
+.ftweather {
+    margin-left: 12%;
+    text-align: right;
+    font-family: sans-serif;
+    font-size: 15px;
 }
 </style>

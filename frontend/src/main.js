@@ -14,6 +14,7 @@ import "./registerServiceWorker";
 
 //그래프 관련
 import Bars from "vuebars";
+
 Vue.use(Bars);
 
 Vue.use(axios);
@@ -27,13 +28,13 @@ import VueResource from "vue-resource";
 Vue.use(VueResource);
 
 Vue.use(Vuetify, {
-  iconfont: "fa",
-  theme: {
-    primary: "#3f51b5",
-    secondary: "#b0bec5",
-    accent: "#8c9eff",
-    error: "#b71c1c"
-  }
+    iconfont: "fa",
+    theme: {
+        primary: "#3f51b5",
+        secondary: "#b0bec5",
+        accent: "#8c9eff",
+        error: "#b71c1c"
+    }
 });
 
 Vue.use(VueSimplemde);
@@ -45,11 +46,11 @@ import VueResizeText from "vue-resize-text";
 Vue.use(VueResizeText);
 
 // 배경화면 캐러셀
-import VueCarousel from 'vue-carousel';
+import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
 
 new Vue({
-  router,
-  store,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount("#app");
