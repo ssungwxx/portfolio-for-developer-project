@@ -31,9 +31,6 @@ export default {
   name: "Sidebar",
   data() {
     return {
-      port: "/Portfolio",
-      posts: "/Post",
-      login: "/Login",
       items: [
       {
           title: "bookmark_border",
@@ -71,8 +68,9 @@ export default {
   position: fixed;
   z-index: 2;
   margin-top: 5px;
-  width: 100%;
+  width: 50%;
   display: flex;
+  right: 0%;
 }
 
 .v-btn {
