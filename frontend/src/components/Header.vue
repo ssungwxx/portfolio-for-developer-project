@@ -124,12 +124,12 @@ export default {
 
 <style>
 .theme--light.v-list {
-    background: yellow;
-    color: darkgreen;
+    background: #ffc0cb;
+    color: white;
     font-weight: bold;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 599px) {
     .icons {
         display: none;
     }
@@ -139,11 +139,5 @@ export default {
     z-index: 2;
     position: absolute;
     background-color: yellow;
-}
-
-@media screen and (min-width: 600px) {
-    .menu {
-        display: none;
-    }
 }
 </style>

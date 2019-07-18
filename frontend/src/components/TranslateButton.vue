@@ -53,11 +53,11 @@ import enPage from "../views/enPage.vue"
 
 <style>
 .translate {
-    position: fixed;
-    bottom: 20%;
-    left: 95%;
-    margin: 0;
-    padding: 0;
-    z-index: 5;
+  position: fixed;
+  bottom: 20%;
+  left: 95%;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
 }
 </style>

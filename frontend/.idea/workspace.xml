@@ -22,7 +22,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/services/RestService.js">
+        <entry file="file://$PROJECT_DIR$/src/components/Header.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="439">
               <caret line="90" column="6" lean-forward="true" selection-start-line="90" selection-start-column="6" selection-end-line="90" selection-end-column="6" />
@@ -86,11 +86,14 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main.js">
+        <entry file="file://$PROJECT_DIR$/src/components/Login.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="147">
+              <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
               <folding>
-                <element signature="e#0#22#0" expanded="true" />
+                <element signature="n#style#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#v-icon#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
+                <element signature="e#1448#1505#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,6 +159,10 @@
         <option value="$PROJECT_DIR$/src/views/enPage.vue" />
         <option value="$PROJECT_DIR$/src/components/Portfolio.vue" />
         <option value="$PROJECT_DIR$/src/components/TranslateButton.vue" />
+        <option value="$PROJECT_DIR$/src/components/Header.vue" />
+        <option value="$PROJECT_DIR$/src/components/Sidebar.vue" />
+        <option value="$PROJECT_DIR$/src/components/Login.vue" />
+        <option value="$PROJECT_DIR$/src/components/Register.vue" />
       </list>
     </option>
   </component>
@@ -173,33 +180,28 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope">
         <subPane subId="Scope 'Project Files'; set:Project Files; class com.intellij.psi.search.scope.ProjectFilesScope">
           <expand>
             <path>
               <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\multicampus\Desktop\gitlab_ss2\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
             </path>
             <path>
               <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\multicampus\Desktop\gitlab_ss2\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\multicampus\Desktop\gitlab_ss2\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="C:\Users\multicampus\Desktop\gitlab_ss2\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="views" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
@@ -207,7 +209,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="ProjectPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -273,7 +274,7 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13217483" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16912335" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -287,7 +288,7 @@
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.2588889" />
+      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.1661055" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -603,6 +604,65 @@
           <folding>
             <element signature="n#style#0;n#textarea#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#274#323#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Sidebar.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="51" column="45" selection-start-line="51" selection-start-column="45" selection-end-line="51" selection-end-column="45" />
+          <folding>
+            <element signature="n#style#0;n#v-list#0;n#v-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#v-list-tile-action#0;n#v-list-tile#1;n#v-list#0;n#v-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#v-list-tile-action#0;n#v-list-tile#2;n#v-list#0;n#v-menu#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2219#2247#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Header.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="41" selection-start-line="41" selection-end-line="41" />
+          <folding>
+            <element signature="n#style#0;n#router-link#0;n#div#0;n#v-toolbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#router-link#1;n#div#0;n#v-toolbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#router-link#2;n#div#0;n#v-toolbar#0;n#div#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#2106#2146#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/views/LoginPage.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="17" column="17" lean-forward="true" selection-start-line="17" selection-start-column="17" selection-end-line="17" selection-end-column="17" />
+          <folding>
+            <element signature="e#1425#1482#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Login.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="7" column="29" selection-start-line="7" selection-start-column="29" selection-end-line="7" selection-end-column="29" />
+          <folding>
+            <element signature="n#style#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#v-icon#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="e#1448#1505#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Register.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="71" column="9" selection-start-line="71" selection-start-column="9" selection-end-line="71" selection-end-column="9" />
+          <folding>
+            <element signature="n#style#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#v-icon#0;n#v-btn#1;n#template#0;n#v-dialog#0;n#v-layout#0;n#template#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

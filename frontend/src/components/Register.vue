@@ -2,8 +2,11 @@
     <v-layout row justify-center>
         <v-dialog v-model="dialog" max-width="600px">
             <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on">
-                    <v-icon color="white">assignment_ind</v-icon>
+                <v-btn v-if="WIDTH" icon v-on="on">
+                    <v-icon color="white">person_add</v-icon>
+                </v-btn>
+                <v-btn v-else flat v-on="on" style="width: 160px; left: 0px; height: 48px; z-index: 2;" fixed>
+                    <v-icon style="margin-right: auto; margin-left: 17px;">person_add</v-icon>
                 </v-btn>
             </template>
 
@@ -48,6 +51,7 @@ import RestService from "../services/RestService";
 export default {
     data() {
         return {
+            WIDTH: false,
             dialog: false,
             user: {
                 user_id: "",
@@ -66,6 +70,14 @@ export default {
         };
     },
     methods: {
+        Width(e) {
+            if (window.innerWidth >= 600) {
+                this.WIDTH = false;
+            } else {
+                this.WIDTH = true;
+            }
+
+        },
         async check_user() {
             if (this.check_null()) {
                 if (this.check_email()) {

@@ -2,8 +2,11 @@
     <v-layout>
         <v-dialog v-model="dialog" max-width="500">
             <template v-slot:activator="{ on }">
-                <v-btn icon v-on="on">
-                    <v-icon color="white">perm_identity</v-icon>
+                <v-btn v-if="WIDTH" icon v-on="on">
+                        <v-icon color="white">perm_identity</v-icon>
+                </v-btn>
+                <v-btn v-else flat v-on="on" style="width: 160px; left: 0px; height: 48px; z-index: 2;" fixed>
+                    <v-icon style="margin-right: auto; margin-left: 17px;">perm_identity</v-icon>
                 </v-btn>
             </template>
 
@@ -44,6 +47,7 @@ import RestService from "@/services/RestService";
 export default {
     data() {
         return {
+            WIDTH: false,
             dialog: false,
             id: "",
             password: "",
@@ -65,6 +69,13 @@ export default {
         VFacebookLogin
     },
     methods: {
+        Width(e) {
+            if (window.innerWidth >= 600) {
+                this.WIDTH = false;
+            } else {
+                this.WIDTH = true;
+            }
+        },
         async loginWithGoogle() {
             const result = await FirebaseService.loginWithGoogle();
             this.$store.state.accessToken = result.credential.accessToken;
@@ -94,11 +105,11 @@ export default {
         clear_user() {
             this.id = "";
             this.password = "";
-        }
+        },
     },
     mounted() {
         //console.log(this.$store.state);
-    }
+    },
 };
 </script>
 
@@ -117,4 +128,10 @@ export default {
     padding-left: 10px;
     padding-right: 10px;
 }
+
+    @media screen and (max-width: 600px) {
+        .ICON {
+
+        }
+    }
 </style>
