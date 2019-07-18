@@ -293,7 +293,7 @@ export default {
                 this.numberPush += 1;
                 this.pushMessage = `오늘 ${this.numberPush}번 push했습니다.`;
             }
-            if (new_value[gitrepoDay - 8] < 10) {
+            if (new_value[gitrepoDay - 8] < 30) {
                 new_value[gitrepoDay - 8] += 1;
             }
             this.valueall = new_value;
