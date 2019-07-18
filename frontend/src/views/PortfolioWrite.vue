@@ -75,23 +75,6 @@ export default {
                 if (this.imageName.lastIndexOf(".") <= 0) {
                     return;
                 }
-                const fr = new FileReader();
-                fr.readAsDataURL(files[0]);
-                fr.addEventListener("load", () => {
-                    this.imageUrl = fr.result;
-                    this.imageFile = files[0]; // this is an image file that can be sent to server...
-                });
-            } else if (this.imageUrl !== "") {
-                this.imageName = "Random_Image";
-                const fr = new FileReader();
-                fr.readAsDataURL(this.imageUrl);
-                fr.addEventListener("load", () => {
-                    this.imageFile = this.imageUrl;
-                });
-            } else {
-                this.imageName = "";
-                this.imageFile = "";
-                this.imageUrl = "";
             }
         },
         async randomPhoto() {
@@ -102,17 +85,18 @@ export default {
         async upload() {
             this.imageUrl = await Image.imgupload();
             const portTitle = document.querySelector("#title").value;
-            const portBody = document.querySelector(
-                ".editor-preview.editor-preview-active"
-            ).innerText;
+
+            const portBody = document.querySelector(".CodeMirror-code")
+                .innerText;
 
             const data = {
                 portfolio_title: portTitle,
                 portfolio_subTitle: portBody,
                 portfolio_img: this.imageUrl
             };
-            console.log(data);
-            // this.insertPortfolio(data);
+
+            // console.log(data);
+            this.insertPortfolio(data);
         },
 
         async insertLog() {
