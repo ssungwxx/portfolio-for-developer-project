@@ -5,7 +5,7 @@ import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import PortfolioWrite from "./views/PortfolioWrite.vue";
 import DetailPortfolio from "./views/DetailPortfolio.vue";
-import en from "./views/en.vue"
+import en from "./views/en.vue";
 
 //import LoginPage from "./views/LoginPage.vue";
 
@@ -30,26 +30,27 @@ export default new Router({
             name: "portfolio",
             component: PortfolioPage
         },
-        /*  Login Page 삭제
-  {
-      path: "/login",
-      name: "login",
-      component: LoginPage
-    },
-    {
-      path: "/detailportfolio/:id",
-      name: "detailportfolio",
-      component: DetailPortfolio
-    },
-    {
-      path: "/portfoliowrite",
-      name: "portfoliowrite",
-      component: PortfolioWrite
-    },
-    {
-      path: "/en",
-      name: "en",
-      component: en
-    }
-  ]
+        //Login Page 삭제
+        {
+            path: "/login",
+            name: "login",
+            component: LoginPage
+        },
+
+        {
+            path: "/detailportfolio/:id",
+            name: "detailportfolio",
+            component: DetailPortfolio
+        },
+        {
+            path: "/portfoliowrite",
+            name: "portfoliowrite",
+            component: PortfolioWrite
+        },
+        {
+            path: "/en",
+            name: "en",
+            component: en
+        }
+    ]
 });

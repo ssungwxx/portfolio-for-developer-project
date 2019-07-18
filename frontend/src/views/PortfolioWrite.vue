@@ -75,25 +75,45 @@ export default {
                 if (this.imageName.lastIndexOf(".") <= 0) {
                     return;
                 }
-            },
-            async randomPhoto() {
-                const ret = await Image.randomPhoto();
-                this.imageName = ret[0];
-                this.imageUrl = ret[1];
-            },
-            async upload() {
-                this.imageUrl = await Image.imgupload();
-                const portTitle = document.querySelector("#title").value;
-                const portBody = document.querySelector(".CodeMirror-code").innerText;
+                const fr = new FileReader();
+                fr.readAsDataURL(files[0]);
+                fr.addEventListener("load", () => {
+                    this.imageUrl = fr.result;
+                    this.imageFile = files[0]; // this is an image file that can be sent to server...
+                });
+            } else if (this.imageUrl !== "") {
+                this.imageName = "Random_Image";
+                const fr = new FileReader();
+                fr.readAsDataURL(this.imageUrl);
+                fr.addEventListener("load", () => {
+                    this.imageFile = this.imageUrl;
+                });
+            } else {
+                this.imageName = "";
+                this.imageFile = "";
+                this.imageUrl = "";
+            }
+        },
+        async randomPhoto() {
+            const ret = await Image.randomPhoto();
+            this.imageName = ret[0];
+            this.imageUrl = ret[1];
+        },
+        async upload() {
+            this.imageUrl = await Image.imgupload();
+            const portTitle = document.querySelector("#title").value;
+            const portBody = document.querySelector(
+                ".editor-preview.editor-preview-active"
+            ).innerText;
 
-                const data = {
-                    portfolio_title: portTitle,
-                    portfolio_subTitle: portBody,
-                    portfolio_img: this.imageUrl
-                };
-                // console.log(data);
-                this.insertPortfolio(data);
-            },
+            const data = {
+                portfolio_title: portTitle,
+                portfolio_subTitle: portBody,
+                portfolio_img: this.imageUrl
+            };
+            console.log(data);
+            // this.insertPortfolio(data);
+        },
 
         async insertLog() {
             this.insertLog = await RestService.insertLog("PortfolioWrite");
@@ -117,8 +137,5 @@ export default {
 
 .CodeMirror-line {
     text-align: left;
-}
-.markdown {
-    z-index: 0;
 }
 </style>
