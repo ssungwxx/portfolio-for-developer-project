@@ -11,27 +11,18 @@ export default {
   methods: {
     select() {
       const selected = document.querySelectorAll(".v-content")[1];
-
-    export default {
-        name: "TranslateButton",
-        methods: {
-            select () {
-                const selected = document.querySelectorAll(".v-content")[1];
-
-            }
-        }
     }
   }
 }
 </script>
 
 <style>
-    .translate {
-        position: fixed;
-        bottom: 20%;
-        left: 95%;
-        margin: 0;
-        padding: 0;
-        z-index: 5;
-    }
+.translate {
+  position: fixed;
+  bottom: 20%;
+  left: 95%;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+}
 </style>
