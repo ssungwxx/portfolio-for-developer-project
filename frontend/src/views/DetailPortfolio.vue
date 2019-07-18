@@ -3,21 +3,24 @@
     <div class="table-div">
       <table class="table">
         <tr>
-          <td colspan="2">
+          <td class="table-left" style="text-align:center">{{ portfolio[0].portfolio_title }}</td>
+        </tr>
+        <tr>
+          <td>
+             <a class="time">{{ portfolio[0].portfolio_date }}
+             </a>
+             </td>
+        </tr>
+        <tr>
+          <div class="tablecontent"></div>
+        </tr>
+        <tr>
+          <td>
             <img class="table-img" :src="portfolio[0].portfolio_img" />
           </td>
         </tr>
         <tr>
-          <td class="table-left">날짜</td>
-          <td class="table-right">{{ portfolio[0].portfolio_date }}</td>
-        </tr>
-        <tr>
-          <td class="table-left">제목</td>
-          <td class="table-right">{{ portfolio[0].portfolio_title }}</td>
-        </tr>
-        <tr>
-          <td class="table-left">내용</td>
-          <td class="table-right">{{ portfolio[0].portfolio_subTitle }}</td>
+          <div class="tablecontent">{{portfolio[0]. portfolio_content}}</div>
         </tr>
       </table>
     </div>
@@ -31,7 +34,6 @@
         </router-link>
       </v-flex>
     </div>
-
   </v-container>
 </template>
 <script>
@@ -48,7 +50,7 @@ export default {
           portfolio_no: "",
           user_id: "",
           portfolio_title: "",
-          portfolio_subTitle: "",
+          portfolio_content: "",
           portfolio_img: "",
           portfolio_date: ""
         }
@@ -58,14 +60,13 @@ export default {
     };
   },
   beforeMount() {
- this.insertLog();
-},
+    this.insertLog();
+  },
   components: {
     Portfolio
   },
   mounted() {
     this.getPortfolio();
-    this.slicingDate();
   },
   methods: {
     async getPortfolio() {
@@ -76,16 +77,31 @@ export default {
         this.portfolio[0].portfolio_date.slice(11, 19);
     },
 
-  async insertLog(){
-      this.insertLog = await RestService.insertLog('DetailPortfolio');
+    async insertLog() {
+      this.insertLog = await RestService.insertLog("DetailPortfolio");
     }
   }
 };
 </script>
 <style>
+
+.time{
+font-size: 1.2vw;
+margin-left: 80%;
+font-color: black;
+}
 .mw-700 {
   max-width: 700px;
   margin: auto;
+}
+
+.tablecontent{
+  width:auto;
+  height:auto;
+  text-align: left;
+  margin-top: 5%;
+  margin-left: 20%;
+  font-size: 20px;
 }
 
 .headline {

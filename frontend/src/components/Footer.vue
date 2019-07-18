@@ -1,29 +1,25 @@
 <template>
-  <v-footer
-    class="corefooter"
-    height="82"
-  >
-         <h3 class="findus">Find us</h3>
-         <hr>
-         <div class="fdiv">
-            (SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)
-         </div>
+    <v-footer class="corefooter" height="82">
+        <h3 class="findus">Find us</h3>
+        <hr />
+        <div class="fdiv">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
 
              <div class="ftweather">
                &copy;
-               {{ (new Date()).getFullYear() }}
+               2019.07.19
                <a
-               href="https://edu.ssafy.com/"
-               target="_blank">SSAFY {{ city }}</a>
+               href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
+               target="_blank">GitLab
+               </a>
+
                <br>
-               {{ temperature }}℃  {{ weatherMain }}
+               {{city}}  {{ temperature }}℃  {{ weatherMain }}
              </div>
     <v-spacer/>
   </v-footer>
 </template>
 
 <script>
-
 export default {
    data() {
   return {
@@ -41,14 +37,13 @@ export default {
                    if (!navigator.geolocation) {
                        this.errorMsg = "Geolocation is not supported by your browser";
                        this.city = this.errorMsg;
-                       console.warn(this.errorMsg);
+
                        return;
                    }
                    var options = { timeout: 10000 };
                    navigator.geolocation.getCurrentPosition(this.success, this.error, options);
                },
                success: function (position) {
-                   console.log(position);
                    this.latitude = position.coords.latitude;
                    this.longitude = position.coords.longitude;
                    this.latitude = parseFloat(this.latitude).toFixed(2);
@@ -59,9 +54,6 @@ export default {
                error: function (err) {
                    this.errorMsg = "Unable to retrieve your location";
                    this.city = this.errorMsg;
-
-                   console.warn(`ERROR(${err.code}): ${err.message}`);
-                   console.warn(this.errorMsg);
                },
                getWeather: function(){
                    var reqURL = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + this.latitude + '&lon=' + this.longitude + '&APPID=' + this.apikey;
@@ -71,11 +63,9 @@ export default {
                        this.temperature = (this.dataObj.main.temp - 273.15).toFixed(0);
                        this.city = this.dataObj.name + ', ' + this.dataObj.sys.country;
                        this.weatherMain = this.dataObj.weather[0].main;
-                       console.log(response);
+
                    }, function (response) {
-                       console.log('error');
-                       console.log(response);
-                       this.errorMsg = "Unable to retrive weather information.";
+
                    });
                }
            },
@@ -85,32 +75,31 @@ export default {
        }
        </script>
 <style>
-
-.findus{
-  margin-left: 14%;
+.findus {
+    margin-left: 14%;
 }
-.corefooter{
-  text-align: center;
+.corefooter {
+    text-align: center;
 }
-.img{
-  margin-right:15px;
-
+.img {
+    margin-right: 15px;
 }
 
-.fdiv{
+.fdiv {
     margin-left: 15%;
     margin-bottom: 10px;
 }
 
-
-.ftitem{
-padding: 25px;color: black;font-size: 18px;
+.ftitem {
+    padding: 25px;
+    color: black;
+    font-size: 18px;
 }
 
-.ftweather{
-margin-left: 12%;
-text-align:right;
-font-family:sans-serif;
-font-size:15px;
+.ftweather {
+    margin-left: 12%;
+    text-align: right;
+    font-family: sans-serif;
+    font-size: 15px;
 }
 </style>
