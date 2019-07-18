@@ -26,7 +26,7 @@ import RestService from "../services/RestService"
             }
         }
     }
-};
+
 </script>
 
 <style>
