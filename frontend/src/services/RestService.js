@@ -86,5 +86,15 @@ export default {
                 user_pw: pw
             })
             .then(response => (this.token = response.data));
+    },
+    translateText(text) {
+      return axios
+          .post("http://70.12.246.138:3000/en", data)
+          .then(response => console.log(response))
+    },
+    getEn() {
+      return axios
+          .get("http://70.12.246.138:3000/en")
+          .then(response => console.log(response))
     }
 };
