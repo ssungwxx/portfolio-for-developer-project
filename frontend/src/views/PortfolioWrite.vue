@@ -138,4 +138,7 @@ export default {
 .CodeMirror-line {
     text-align: left;
 }
+.markdown {
+    z-index: 0;
+}
 </style>
