@@ -75,6 +75,17 @@
                     if (this.imageName.lastIndexOf(".") <= 0) {
                         return;
                     }
+                    const fr = new FileReader();
+                    fr.readAsDataURL(files[0]);
+                    fr.addEventListener("load", () => {
+                        this.imageUrl = fr.result;
+                        this.imageFile = files[0];
+                    });
+                } else {
+                    this.imageName = "";
+                    this.imageFile = "";
+                    this.imageUrl = "";
+
                 }
             },
             async randomPhoto() {
