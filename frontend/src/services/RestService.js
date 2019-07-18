@@ -79,12 +79,9 @@ export default {
     insertLog(path) {
         return axios.post("http://70.12.246.138:3000/logs/" + path);
     },
-    loginUser(id, pw) {
+    loginUser(data) {
         return axios
-            .post("http://70.12.246.138:3000/users/login", {
-                user_id: id,
-                user_pw: pw
-            })
+            .post("http://70.12.246.138:3000/users/login", data)
             .then(response => (this.token = response.data));
     }
 };
