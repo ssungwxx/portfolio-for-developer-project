@@ -36,20 +36,21 @@ export default new Router({
       name: "login",
       component: LoginPage
     },
-    {
-      path: "/detailportfolio/:id",
-      name: "detailportfolio",
-      component: DetailPortfolio
-    },
-    {
-      path: "/portfoliowrite",
-      name: "portfoliowrite",
-      component: PortfolioWrite
-    },
-    {
-      path: "/en",
-      name: "en",
-      component: en
-    }
-  ]
+         */
+        {
+            path: "/detailportfolio/:id",
+            name: "detailportfolio",
+            component: DetailPortfolio
+        },
+        {
+            path: "/portfoliowrite",
+            name: "portfoliowrite",
+            component: PortfolioWrite
+        },
+        {
+            path: "/en",
+            name: "en",
+            component: en
+        }
+    ]
 });

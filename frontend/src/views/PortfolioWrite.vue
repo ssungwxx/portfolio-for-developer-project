@@ -75,25 +75,27 @@ export default {
                 if (this.imageName.lastIndexOf(".") <= 0) {
                     return;
                 }
-            },
-            async randomPhoto() {
-                const ret = await Image.randomPhoto();
-                this.imageName = ret[0];
-                this.imageUrl = ret[1];
-            },
-            async upload() {
-                this.imageUrl = await Image.imgupload();
-                const portTitle = document.querySelector("#title").value;
-                const portBody = document.querySelector(".CodeMirror-code").innerText;
+            }
+        },
+        async randomPhoto() {
+            const ret = await Image.randomPhoto();
+            this.imageName = ret[0];
+            this.imageUrl = ret[1];
+        },
+        async upload() {
+            this.imageUrl = await Image.imgupload();
+            const portTitle = document.querySelector("#title").value;
+            const portBody = document.querySelector(".CodeMirror-code")
+                .innerText;
 
-                const data = {
-                    portfolio_title: portTitle,
-                    portfolio_subTitle: portBody,
-                    portfolio_img: this.imageUrl
-                };
-                // console.log(data);
-                this.insertPortfolio(data);
-            },
+            const data = {
+                portfolio_title: portTitle,
+                portfolio_subTitle: portBody,
+                portfolio_img: this.imageUrl
+            };
+            // console.log(data);
+            this.insertPortfolio(data);
+        },
 
         async insertLog() {
             this.insertLog = await RestService.insertLog("PortfolioWrite");
@@ -117,8 +119,5 @@ export default {
 
 .CodeMirror-line {
     text-align: left;
-}
-.markdown {
-    z-index: 0;
 }
 </style>
