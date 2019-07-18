@@ -12,29 +12,29 @@
             </div>
         </div>
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-            <img :src="imageUrl" height="150" v-if="imageUrl" />
+            <img :src="imageUrl" height="150" v-if="imageUrl"/>
             <v-text-field
-                label="Select Image"
-                @click="pickFile"
-                v-model="imageName"
-                prepend-icon="attach_file"
-                v-if="imageUrl"
+                    label="Select Image"
+                    @click="pickFile"
+                    v-model="imageName"
+                    prepend-icon="attach_file"
+                    v-if="imageUrl"
             ></v-text-field>
             <v-text-field
-                label="Select Image"
-                @click="pickFile"
-                v-model="imageName"
-                prepend-icon="attach_file"
-                v-else="imageUrl"
-                style="margin-top: 150px;"
+                    label="Select Image"
+                    @click="pickFile"
+                    v-model="imageName"
+                    prepend-icon="attach_file"
+                    v-else="imageUrl"
+                    style="margin-top: 150px;"
             ></v-text-field>
             <input
-                id="imgup"
-                type="file"
-                style="display: none;"
-                ref="image"
-                accept="image/*"
-                @change="onFilePicked"
+                    id="imgup"
+                    type="file"
+                    style="display: none;"
+                    ref="image"
+                    accept="image/*"
+                    @change="onFilePicked"
             />
         </v-flex>
 
@@ -44,36 +44,37 @@
 </template>
 
 <script>
-import RestService from "../services/RestService";
-import FirebaseService from "@/services/FirebaseService";
-import Image from "../image.js";
+    import RestService from "../services/RestService";
+    import FirebaseService from "@/services/FirebaseService";
+    import Image from "../image.js";
 
-export default {
-    name: "PortfolioWrite",
-    components: {},
-    beforeMount() {
-        this.insertLog();
-    },
-
-    data() {
-        return {
-            title: "Image Upload",
-            dialog: false,
-            imageName: "",
-            imageUrl: "",
-            imageFile: ""
-        };
-    },
-    methods: {
-        pickFile() {
-            this.$refs.image.click();
+    export default {
+        name: "PortfolioWrite",
+        components: {},
+        beforeMount() {
+            this.insertLog();
         },
-        onFilePicked(e) {
-            const files = e.target.files;
-            if (files[0] !== undefined) {
-                this.imageName = files[0].name;
-                if (this.imageName.lastIndexOf(".") <= 0) {
-                    return;
+
+        data() {
+            return {
+                title: "Image Upload",
+                dialog: false,
+                imageName: "",
+                imageUrl: "",
+                imageFile: ""
+            };
+        },
+        methods: {
+            pickFile() {
+                this.$refs.image.click();
+            },
+            onFilePicked(e) {
+                const files = e.target.files;
+                if (files[0] !== undefined) {
+                    this.imageName = files[0].name;
+                    if (this.imageName.lastIndexOf(".") <= 0) {
+                        return;
+                    }
                 }
             },
             async randomPhoto() {
@@ -95,27 +96,27 @@ export default {
                 this.insertPortfolio(data);
             },
 
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("PortfolioWrite");
-        },
+            async insertLog() {
+                this.insertLog = await RestService.insertLog("PortfolioWrite");
+            },
 
-        insertPortfolio(data) {
-            RestService.insertPortfolio(data);
-        }
+            insertPortfolio(data) {
+                RestService.insertPortfolio(data);
+            }
+        },
     }
-};
 </script>
 
 <style>
-.port-title {
-    font-size: 5vw;
-}
+    .port-title {
+        font-size: 5vw;
+    }
 
-.title-div {
-    margin-top: 50px;
-}
+    .title-div {
+        margin-top: 50px;
+    }
 
-.CodeMirror-line {
-    text-align: left;
-}
+    .CodeMirror-line {
+        text-align: left;
+    }
 </style>
