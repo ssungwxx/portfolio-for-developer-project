@@ -66,12 +66,12 @@ export default {
         if (this.check_email()) {
           this.check = await RestService.getUser(this.user.user_id);
           if (this.check[0].cnt == 0) {
+            this.err_stat = await RestService.insertUser(this.user);
             if (this.err_stat.status == 1) {
               alert("가입 성공!");
             } else {
               alert(this.err_stat.code);
             }
-            this.err_stat = await RestService.insertUser(this.user);
           } else {
             alert("중복된 Email입니다.");
           }
