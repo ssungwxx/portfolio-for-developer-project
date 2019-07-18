@@ -17,12 +17,9 @@ async function translateText(newText) {
     return text;
 }
 
-router.get("/", function(req, res, next) {
-    res.render("enPage");
+router.post("/", function(req, res) {
+    translateText(req.body.translate).then(text => res.json(text));
 });
 
-router.post("/", function(req, res, next) {
-    translateText(req.body.translate).then(text => res.send(text));
-});
 
 module.exports = router;

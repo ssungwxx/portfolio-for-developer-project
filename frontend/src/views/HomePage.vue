@@ -42,19 +42,22 @@
 
             <!-- Repository & Post -->
             <v-layout my-5>
-                <v-flex xs6>
+                <v-flex xs12>
                     <h2 class="headline my-5 text-xs-center">
-                        <v-btn color="#DDDDFF">Project</v-btn>
-                    </h2>
-                    <RepositoryList :limits="6" :load-more="true"></RepositoryList>
-                </v-flex>
-                <v-flex xs6>
-                    <h2 class="headline my-5 text-xs-center">
-                        <router-link :to="posts" style="text-decoration:none">
+                        <router-link :to="posts" style="text-decoration:none" :limits="10">
                             <v-btn color="#DDDDFF">Post</v-btn>
                         </router-link>
                     </h2>
                     <PostList :column="2"></PostList>
+                </v-flex>
+            </v-layout>
+
+            <v-layout my-5>
+                <v-flex xs12>
+                    <h2 class="headline my-5 text-xs-center">
+                        <v-btn color="#DDDDFF">Project</v-btn>
+                    </h2>
+                    <RepositoryList :limits="6" :load-more="true"></RepositoryList>
                 </v-flex>
             </v-layout>
         </v-container>

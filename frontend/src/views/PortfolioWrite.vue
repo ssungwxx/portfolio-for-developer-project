@@ -91,11 +91,14 @@ export default {
             const ret = await Image.randomPhoto();
             this.imageName = ret[0];
             this.imageUrl = ret[1];
+            this.imageFile = "Random";
         },
         async upload() {
-            this.imageUrl = await Image.imgupload();
-            const portTitle = document.querySelector("#title").value;
+            if (this.imageFile !== "Random") {
+                this.imageUrl = await Image.imgupload();
+            }
 
+            const portTitle = document.querySelector("#title").value;
             const portBody = document.querySelector(".CodeMirror-code")
                 .innerText;
 
@@ -106,7 +109,7 @@ export default {
                 portfolio_img: this.imageUrl
             };
 
-            // console.log(data);
+            console.log(data);
             this.insertPortfolio(data);
         },
 
