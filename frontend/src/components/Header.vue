@@ -119,7 +119,7 @@ export default {
 
 .header {
     z-index: 1;
-    position: relative;
+    position: absolute;
     background-color: yellow;
 }
 
