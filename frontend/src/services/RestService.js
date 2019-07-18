@@ -84,14 +84,9 @@ export default {
             .post("http://70.12.246.138:3000/users/login", data)
             .then(response => (this.token = response.data));
     },
-    translateText(text) {
+    translateText(data) {
       return axios
-          .post("http://70.12.246.138:3000/en", data)
-          .then(response => console.log(response))
+          .post("http://70.12.247.68:3000/en", data)
+          .then(response => response.data)
     },
-    getEn() {
-      return axios
-          .get("http://70.12.246.138:3000/en")
-          .then(response => console.log(response))
-    }
 };
