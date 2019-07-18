@@ -23,9 +23,9 @@
 </template>
 
 <script>
-    import ImgBanner from '../components/ImgBanner'
-    import PostList from '../components/PostList'
-    import RestService from "@/services/RestService";
+import ImgBanner from "../components/ImgBanner";
+import PostList from "../components/PostList";
+import RestService from "@/services/RestService";
 
 export default {
     name: "PostPage",
@@ -35,17 +35,16 @@ export default {
         };
     },
 
-  beforeMount() {
-   this.insertLog();
-  },
-        components: {
-            ImgBanner,
-            PostList
-        },
-        methods: {
-          async insertLog(){
-            this.insertLog = await RestService.insertLog('PostPage');
-          }
+    beforeMount() {
+        this.insertLog();
+    },
+    components: {
+        ImgBanner,
+        PostList
+    },
+    methods: {
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("PostPage");
         }
     }
 };
