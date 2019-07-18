@@ -30,15 +30,6 @@ export default new Router({
             name: "portfolio",
             component: PortfolioPage
         },
-<<<<<<< HEAD
-        //Login Page 삭제
-        {
-            path: "/login",
-            name: "login",
-            component: LoginPage
-        },
-
-=======
         /*  Login Page 삭제
   {
       path: "/login",
@@ -46,7 +37,6 @@ export default new Router({
       component: LoginPage
     },
          */
->>>>>>> master
         {
             path: "/detailportfolio/:id",
             name: "detailportfolio",
