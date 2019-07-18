@@ -12,122 +12,130 @@
             </div>
         </div>
         <v-flex xs12 class="text-xs-center text-sm-center text-md-center text-lg-center">
-            <img :src="imageUrl" height="150" v-if="imageUrl"/>
-            <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
-                          prepend-icon='attach_file' v-if="imageUrl"></v-text-field>
-            <v-text-field label="Select Image" @click='pickFile' v-model='imageName'
-                          prepend-icon='attach_file' v-else="imageUrl" style="margin-top: 150px;"></v-text-field>
-            <input id="imgup"
-                   type="file"
-                   style="display: none;"
-                   ref="image"
-                   accept="image/*"
-                   @change="onFilePicked"
-            >
+            <img :src="imageUrl" height="150" v-if="imageUrl" />
+            <v-text-field
+                label="Select Image"
+                @click="pickFile"
+                v-model="imageName"
+                prepend-icon="attach_file"
+                v-if="imageUrl"
+            ></v-text-field>
+            <v-text-field
+                label="Select Image"
+                @click="pickFile"
+                v-model="imageName"
+                prepend-icon="attach_file"
+                v-else="imageUrl"
+                style="margin-top: 150px;"
+            ></v-text-field>
+            <input
+                id="imgup"
+                type="file"
+                style="display: none;"
+                ref="image"
+                accept="image/*"
+                @change="onFilePicked"
+            />
         </v-flex>
 
-        <v-btn @click="upload">
-            Submit
-        </v-btn>
-        <v-btn @click="randomPhoto">
-            Get Random Photo
-        </v-btn>
-
-
+        <v-btn @click="upload">Submit</v-btn>
+        <v-btn @click="randomPhoto">Get Random Photo</v-btn>
     </v-container>
 </template>
 
 <script>
-    import RestService from "../services/RestService"
-    import FirebaseService from '@/services/FirebaseService'
-    import Image from "../image.js"
+import RestService from "../services/RestService";
+import FirebaseService from "@/services/FirebaseService";
+import Image from "../image.js";
 
-    export default {
-        name: "PortfolioWrite",
-        components: {},
-        beforeMount() {
-            this.insertLog();
-        },
+export default {
+    name: "PortfolioWrite",
+    components: {},
+    beforeMount() {
+        this.insertLog();
+    },
 
-        data() {
-            return {
-                title: "Image Upload",
-                dialog: false,
-                imageName: '',
-                imageUrl: '',
-                imageFile: '',
-            }
+    data() {
+        return {
+            title: "Image Upload",
+            dialog: false,
+            imageName: "",
+            imageUrl: "",
+            imageFile: ""
+        };
+    },
+    methods: {
+        pickFile() {
+            this.$refs.image.click();
         },
-        methods: {
-            pickFile() {
-                this.$refs.image.click();
-            },
-            onFilePicked(e) {
-                const files = e.target.files;
-                if (files[0] !== undefined) {
-                    this.imageName = files[0].name
-                    if (this.imageName.lastIndexOf('.') <= 0) {
-                        return
-                    }
-                    const fr = new FileReader()
-                    fr.readAsDataURL(files[0])
-                    fr.addEventListener('load', () => {
-                        this.imageUrl = fr.result;
-                        this.imageFile = files[0] // this is an image file that can be sent to server...
-                    })
-                } else if (this.imageUrl !== "") {
-                    this.imageName = "Random_Image";
-                    const fr = new FileReader();
-                    fr.readAsDataURL(this.imageUrl);
-                    fr.addEventListener("load", () => {
-                        this.imageFile = this.imageUrl;
-                    });
-                } else {
-                    this.imageName = '';
-                    this.imageFile = '';
-                    this.imageUrl = '';
+        onFilePicked(e) {
+            const files = e.target.files;
+            if (files[0] !== undefined) {
+                this.imageName = files[0].name;
+                if (this.imageName.lastIndexOf(".") <= 0) {
+                    return;
                 }
-            },
-            async randomPhoto() {
-                const ret = await Image.randomPhoto();
-                this.imageName = ret[0];
-                this.imageUrl = ret[1];
-            },
-            async upload() {
-                this.imageUrl = await Image.imgupload();
-                const portTitle = document.querySelector("#title").value;
-                const portBody = document.querySelector(".editor-preview.editor-preview-active").innerText;
-
-                const data = {
-                    portfolio_title: portTitle,
-                    portfolio_subTitle: portBody,
-                    portfolio_img: this.imageUrl
-                };
-                console.log(data);
-                // this.insertPortfolio(data);
-            },
-
-            async insertLog() {
-                this.insertLog = await RestService.insertLog('PortfolioWrite');
-            },
-
-            insertPortfolio(data) {
-                RestService.insertPortfolio(data);
+                const fr = new FileReader();
+                fr.readAsDataURL(files[0]);
+                fr.addEventListener("load", () => {
+                    this.imageUrl = fr.result;
+                    this.imageFile = files[0]; // this is an image file that can be sent to server...
+                });
+            } else if (this.imageUrl !== "") {
+                this.imageName = "Random_Image";
+                const fr = new FileReader();
+                fr.readAsDataURL(this.imageUrl);
+                fr.addEventListener("load", () => {
+                    this.imageFile = this.imageUrl;
+                });
+            } else {
+                this.imageName = "";
+                this.imageFile = "";
+                this.imageUrl = "";
             }
+        },
+        async randomPhoto() {
+            const ret = await Image.randomPhoto();
+            this.imageName = ret[0];
+            this.imageUrl = ret[1];
+        },
+        async upload() {
+            this.imageUrl = await Image.imgupload();
+            const portTitle = document.querySelector("#title").value;
+            const portBody = document.querySelector(
+                ".editor-preview.editor-preview-active"
+            ).innerText;
+
+            const data = {
+                portfolio_title: portTitle,
+                portfolio_subTitle: portBody,
+                portfolio_img: this.imageUrl
+            };
+            console.log(data);
+            // this.insertPortfolio(data);
+        },
+
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("PortfolioWrite");
+        },
+
+        insertPortfolio(data) {
+            RestService.insertPortfolio(data);
         }
-    };
+    }
+};
 </script>
 
 <style>
-    .port-title {
-        font-size: 5vw;
-    }
+.port-title {
+    font-size: 5vw;
+}
 
-    .title-div {
-        margin-top: 50px;
-    }
+.title-div {
+    margin-top: 50px;
+}
 
-    .CodeMirror-line  {
-        text-align: left;
-    }
+.CodeMirror-line {
+    text-align: left;
+}
 </style>
