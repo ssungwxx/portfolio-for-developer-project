@@ -20,29 +20,28 @@
 </template>
 
 <script>
-import ImgBanner from "../components/ImgBanner";
-import PortfolioList from "../components/PortfolioList";
-import Header from "../components/Header";
-import RestService from "@/services/RestService";
+    import ImgBanner from '../components/ImgBanner'
+    import PortfolioList from '../components/PortfolioList'
+    import RestService from "@/services/RestService";
 
-export default {
-    name: "PortfolioPage",
-    beforeMount() {
-        this.insertLog();
-    },
-    components: {
-        ImgBanner,
-        PortfolioList,
-        Header
-    },
-    data() {
-        return {
-            home: "/"
-        };
-    },
-    methods: {
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("PortfolioPage");
+    export default {
+        name: 'PortfolioPage',
+        beforeMount() {
+          this.insertLog();
+          },
+        components: {
+            ImgBanner,
+            PortfolioList
+        },
+        data() {
+            return {
+                home: "/",
+            }
+        },
+        methods:{
+          async insertLog(){
+            this.insertLog = await RestService.insertLog('PortfolioPage');
+          }
         }
     }
 };
