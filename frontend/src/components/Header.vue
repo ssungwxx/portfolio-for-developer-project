@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="Header">
         <v-toolbar class="insta" dark color="#ffc0cb" fixed>
             <v-btn icon href="/">
                 <v-icon>home</v-icon>
@@ -117,8 +117,8 @@ export default {
     }
 }
 
-.header {
-    z-index: 1;
+.Header {
+    z-index: 2;
     position: absolute;
     background-color: yellow;
 }
