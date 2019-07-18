@@ -68,29 +68,24 @@ export default {
         pickFile() {
             this.$refs.image.click();
         },
-        methods: {
-            pickFile() {
-                this.$refs.image.click();
-            },
-            onFilePicked(e) {
-                const files = e.target.files;
-                if (files[0] !== undefined) {
-                    this.imageName = files[0].name;
-                    if (this.imageName.lastIndexOf(".") <= 0) {
-                        return;
-                    }
-                    const fr = new FileReader();
-                    fr.readAsDataURL(files[0]);
-                    fr.addEventListener("load", () => {
-                        this.imageUrl = fr.result;
-                        this.imageFile = files[0];
-                    });
-                } else {
-                    this.imageName = "";
-                    this.imageFile = "";
-                    this.imageUrl = "";
-
+        onFilePicked(e) {
+            const files = e.target.files;
+            if (files[0] !== undefined) {
+                this.imageName = files[0].name;
+                if (this.imageName.lastIndexOf(".") <= 0) {
+                    return;
                 }
+                const fr = new FileReader();
+                fr.readAsDataURL(files[0]);
+                fr.addEventListener("load", () => {
+                    this.imageUrl = fr.result;
+                    this.imageFile = files[0];
+                });
+            } else {
+                this.imageName = "";
+                this.imageFile = "";
+                this.imageUrl = "";
+
             }
         },
         async randomPhoto() {
@@ -116,7 +111,7 @@ export default {
         },
 
         async insertLog() {
-            this.insertLog = await RestService.insertLog("PortfolioWrite");
+            // this.insertLog = await RestService.insertLog("PortfolioWrite");
         },
 
         insertPortfolio(data) {
