@@ -43,5 +43,5 @@ export default {
             this.insertLog = await RestService.insertLog("PortfolioPage");
         }
     }
-
+}
 </script>
