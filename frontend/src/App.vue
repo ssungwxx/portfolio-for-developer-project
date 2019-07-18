@@ -1,8 +1,8 @@
 <template>
     <v-app>
         <v-content>
-            <Header/>
-            <Sidebar/>
+            <Header />
+            <Sidebar />
         </v-content>
 
         <v-content>
@@ -12,7 +12,7 @@
         </v-content>
 
         <v-content>
-            <Footer/>
+            <Footer />
         </v-content>
     </v-app>
 </template>
@@ -45,16 +45,16 @@
                 alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
             }
         }
-  }
+    }
+};
 </script>
 
 <style>
-
-    #app {
-        font-family: "Avenir", Helvetica, Arial, sans-serif;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: #2c3e50;
-    }
+#app {
+    font-family: "Avenir", Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #2c3e50;
+}
 </style>
