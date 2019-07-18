@@ -8,19 +8,18 @@
             <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
             <v-spacer></v-spacer>
 
-
             <div class="icons">
               <router-link to style="text-decoration: none;">
                   <v-btn icon>
                       <v-icon color="white" id="bookMark">star</v-icon>
                   </v-btn>
-              </router-link>
+            </router-link>
 
-                <router-link :to="port" style="text-decoration: none;">
+            <router-link :to="port" style="text-decoration: none;">
                     <v-btn icon>
                         <v-icon color="white">markunread_mailbox</v-icon>
                     </v-btn>
-                </router-link>
+            </router-link>
 
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn icon href="./Post">
@@ -80,13 +79,16 @@ $(document).ready(function() {
     var bookmarkURL = window.location.href;
     var bookmarkTitle = document.title;
     var triggerDefault = false;
+
     if (window.sidebar && window.sidebar.addPanel) {
+      alert("1번")
       window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
     } else if (
       (window.sidebar &&
         navigator.userAgent.toLowerCase().indexOf("firefox") > -1) ||
       (window.opera && window.print)
     ) {
+      alert("2번")
       var $this = $(this);
       $this.attr("href", bookmarkURL);
       $this.attr("title", bookmarkTitle);
@@ -94,6 +96,7 @@ $(document).ready(function() {
       $this.off(e);
       triggerDefault = true;
     } else if (window.external && "AddFavorite" in window.external) {
+      alert("3번")
       window.external.AddFavorite(bookmarkURL, bookmarkTitle);
     } else {
       alert(

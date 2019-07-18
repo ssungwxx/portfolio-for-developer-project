@@ -22,7 +22,6 @@
 <script>
     import ImgBanner from '../components/ImgBanner'
     import PortfolioList from '../components/PortfolioList'
-    import Header from "../components/Header"
     import RestService from "@/services/RestService";
 
     export default {
@@ -32,8 +31,7 @@
           },
         components: {
             ImgBanner,
-            PortfolioList,
-            Header,
+            PortfolioList
         },
         data() {
             return {

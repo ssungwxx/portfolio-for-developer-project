@@ -1,7 +1,7 @@
 <template>
 <div>
 <Carousel class="carouselimg">
-  </Carousel>
+</Carousel>
 
   <v-container>
     <!-- About Me -->
@@ -60,7 +60,6 @@ import PortfolioList from '../components/PortfolioList'
 import PostList from '../components/PostList'
 import RepositoryList from '../components/RepositoryList'
 import Carousel from '../components/Carousel'
-
 import RestService from "@/services/RestService";
 
 export default {
