@@ -84,6 +84,10 @@ export default {
 .font{
   font-size: 13px;
   }
+.ftweather {
+    text-align: right;
+    margin-right: 5%;
+  }
 }
 
 @media (max-width:599px) {
@@ -96,7 +100,10 @@ export default {
   }
 .fdiv {
     display: none;
-}
+  }
+.ftweather {
+    text-align: center;
+  }
 }
 
 .findus {
@@ -121,8 +128,6 @@ export default {
 }
 
 .ftweather {
-    margin-left: 17%;
-    text-align: right;
     font-family: sans-serif;
     font-size: 15px;
 }
