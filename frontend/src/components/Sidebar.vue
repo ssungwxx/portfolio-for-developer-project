@@ -9,18 +9,6 @@
           </v-btn>
         <div>
         </div>
-<!--    <v-list class="menus">-->
-<!--      <v-list-tile v-for="item in items" @click="">-->
-<!--        <v-list-tile-title>-->
-<!--          <router-link :to="item.go" text-decoration="none">-->
-<!--            <v-tooltip left>-->
-<!--              <v-icon slot="activator" color="white">{{ item.title }}</v-icon>-->
-<!--              <span>{{ item.tooltip }}</span>-->
-<!--            </v-tooltip>-->
-<!--          </router-link>-->
-<!--        </v-list-tile-title>-->
-<!--      </v-list-tile>-->
-<!--    </v-list>-->
 
         <v-list class="menuButton" style="overflow: hidden;">
 
@@ -72,40 +60,7 @@
 </template>
 
 <script>
-// export default {
-//   name: "Sidebar",
-//   data() {
-//     return {
-//       items: [
-//       {
-//           title: "bookmark_border",
-//           go: "/Bookmark",
-//           tooltip: "즐겨찾기"
-//       },
-//         {
-//           title: "markunread_mailbox",
-//           go: "/Portfolio",
-//           tooltip: "포트폴리오"
-//         },
-//       {
-//           title: "description",
-//           go: "/Post",
-//           tooltip: "포스트"
-//       },
-//       {
-//           title: "perm_identity",
-//           go: "/Login",
-//           tooltip: "로그인"
-//       },
-//       {
-//         title: "person_add",
-//         go: "/Signup",
-//         tooltip: "회원가입"
-//       },
-//       ]
-//     }
-//   }
-// }
+
 import Login from "./Login";
 import Register from "./Register";
 
