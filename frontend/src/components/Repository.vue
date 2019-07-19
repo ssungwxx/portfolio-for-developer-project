@@ -124,17 +124,20 @@ export default {
             severalData.data.forEach(this.commitToValue);
         },
         async setCommit() {
-            const result = await GitlabService.getCommits(this.member.id);
+            const resultArray = await GitlabService.getCommits(this.member.id);
+
             // this.allCommits = result.data.length
             // console.log(result.data)
-            for (const rdata of result.data) {
-                // console.log(rdata);
-                if (rdata.action_name === "pushed to") {
-                    this.allCommits += 1;
+            for (const result of resultArray) {
+                for (const rdata of result.data) {
+                    if (rdata.action_name === "pushed to") {
+                        this.allCommits += 1;
+                    }
                 }
             }
             // console.log(result.data)
-            this.commitToVuex(result);
+            this.commitToVuex(resultArray[0]);
+            this.commitToVuex(resultArray[1]);
         }
     },
     watch: {

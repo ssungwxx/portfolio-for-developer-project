@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Footer.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Repository.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Repository.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/GitlabService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/GitlabService.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -19,14 +20,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/Footer.vue">
+        <entry file="file://$PROJECT_DIR$/src/components/Repository.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="514">
-              <caret line="104" column="23" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#v-footer#0;n#template#0;n#!!top" expanded="true" />
-                <element signature="e#278#284#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="304">
+              <caret line="131" column="50" lean-forward="true" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/RepositoryList.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/services/GitlabService.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="378">
+              <caret line="18" column="85" selection-start-line="18" selection-start-column="85" selection-end-line="18" selection-end-column="85" />
             </state>
           </provider>
         </entry>
@@ -73,9 +88,6 @@
         <option value="$PROJECT_DIR$/upload.php" />
         <option value="$PROJECT_DIR$/test.html" />
         <option value="$PROJECT_DIR$/src/services/Api.js" />
-        <option value="$PROJECT_DIR$/src/services/GitlabService.js" />
-        <option value="$PROJECT_DIR$/src/components/RepositoryList.vue" />
-        <option value="$PROJECT_DIR$/src/components/Repository.vue" />
         <option value="$PROJECT_DIR$/src/components/TopButton.vue" />
         <option value="$PROJECT_DIR$/src/image.js" />
         <option value="$PROJECT_DIR$/package.json" />
@@ -97,13 +109,17 @@
         <option value="$PROJECT_DIR$/src/views/PortfolioWrite.vue" />
         <option value="$PROJECT_DIR$/src/components/TranslateButton.vue" />
         <option value="$PROJECT_DIR$/src/components/Footer.vue" />
+        <option value="$PROJECT_DIR$/src/components/RepositoryList.vue" />
+        <option value="$PROJECT_DIR$/src/services/GitlabService.js" />
+        <option value="$PROJECT_DIR$/src/components/Repository.vue" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="260" />
+    <option name="y" value="20" />
+    <option name="width" value="1400" />
+    <option name="height" value="1000" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -132,6 +148,12 @@
               <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="components" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="frontend" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="D:\ss2_prj\webmobile-sub2\frontend" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="src" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
           </expand>
           <select />
@@ -198,12 +220,12 @@
       <workItem from="1563321293369" duration="15839000" />
       <workItem from="1563408110547" duration="32542000" />
       <workItem from="1563457086604" duration="8937000" />
-      <workItem from="1563495221837" duration="6279000" />
+      <workItem from="1563495221837" duration="10422000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="161276000" />
+    <option name="totallyTimeSpent" value="165419000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -233,9 +255,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SSAFY-SS2-TRANSLATE.json" />
-    <entry file="file://$PROJECT_DIR$/node_modules/process/index.js" />
-    <entry file="file://$PROJECT_DIR$/node_modules/process/browser.js" />
     <entry file="file://$PROJECT_DIR$/vue.config.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -342,23 +361,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/MarkdownEditor.vue" />
-    <entry file="file://$PROJECT_DIR$/src/services/GitlabService.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/RepositoryList.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
-          <folding>
-            <element signature="e#281#329#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
@@ -511,13 +513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/Repository.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="175" lean-forward="true" selection-start-line="175" selection-end-line="175" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Portfolio.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -548,12 +543,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/Footer.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
+        <state relative-caret-position="1081">
           <caret line="104" column="23" selection-start-line="104" selection-start-column="23" selection-end-line="104" selection-end-column="23" />
           <folding>
             <element signature="n#style#0;n#div#0;n#v-footer#0;n#template#0;n#!!top" expanded="true" />
             <element signature="e#278#284#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/FirebaseService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="26" column="53" lean-forward="true" selection-start-line="26" selection-start-column="53" selection-end-line="26" selection-end-column="53" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/RepositoryList.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/services/GitlabService.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="18" column="85" selection-start-line="18" selection-start-column="85" selection-end-line="18" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/Repository.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="131" column="50" lean-forward="true" selection-start-line="131" selection-start-column="50" selection-end-line="131" selection-end-column="50" />
         </state>
       </provider>
     </entry>
