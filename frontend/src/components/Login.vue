@@ -22,10 +22,12 @@
                     <v-icon size="25" class="mr-2">fa-google</v-icon>Google 로그인
                 </v-btn>
                 <br />
+                <v-btn color="blue" v-on:click="loginWithFacebook" style="width:80%;" dark round>
+                <v-icon size="25" class="mr-2">fa-facebook</v-icon>
+                Facebook 로그인
+                </v-btn>
 
-                <div class="modalface">
-                    <v-facebook-login app-id="2340768596039099" style="width:100%;"></v-facebook-login>
-                </div>
+
 
                 <br />
 
@@ -73,6 +75,15 @@ export default {
             this.$store.state.accessToken = result.credential.accessToken;
             this.$store.state.user = result.user;
         },
+        async loginWithFacebook() {
+        const result = await FirebaseService.loginWithFacebook();
+        this.$store.state.accessToken = result.credential.accessToken;
+        this.$store.state.user = result.user;
+        if(this.$store.state.accessToken != '' && this.$store.state.user != '') {
+         this.$session.set('email', this.$store.state.user.email);
+      }
+      this.$emit('update:loginvisible', !this.loginvisible);
+      },
         async insertLog() {
             this.insertLog = await RestService.insertLog("LoginPage");
         },
