@@ -1,20 +1,22 @@
 <template>
     <v-footer class="corefooter" height="82">
+        <div>
         <h3 class="findus" id="font">Find us</h3>
+        </div>
         <hr />
         <div class="fdiv" id="font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
 
-             <div class="ftweather" id="font">
-               &copy;
-               2019.07.19
-               <a
-               href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
-               target="_blank" id="font">GitLab
-               </a>
+         <div class="ftweather" id="font">
+           &copy;
+           2019.07.19
+           <a
+           href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
+           target="_blank" id="font">GitLab
+           </a>
 
-               <br>
-              <a id="font"> {{city}}  {{ temperature }}℃  {{ weatherMain }}</a>
-             </div>
+           <br>
+          <a id="font"> {{city}}  {{ temperature }}℃  {{ weatherMain }}</a>
+         </div>
     <v-spacer/>
   </v-footer>
 </template>
@@ -76,7 +78,6 @@ export default {
        </script>
 <style>
 
-<style>
 @media (min-width: 768px) and (max-width: 1024px) {
 #font{
   font-size: 13px;
@@ -90,7 +91,7 @@ export default {
   }
 
 .findus {
-    margin-left: 14%;
+    margin-left: 5%;
 }
 .corefooter {
     text-align: center;
@@ -111,9 +112,10 @@ export default {
 }
 
 .ftweather {
-    margin-left: 12%;
+    margin-right: 5%;
     text-align: right;
     font-family: sans-serif;
     font-size: 15px;
+
 }
 </style>
