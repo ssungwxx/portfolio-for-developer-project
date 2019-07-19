@@ -121,10 +121,9 @@ export default {
 }
 
 .ftweather {
-    margin-right: 5%;
+    margin-left: 17%;
     text-align: right;
     font-family: sans-serif;
     font-size: 15px;
-
 }
 </style>
