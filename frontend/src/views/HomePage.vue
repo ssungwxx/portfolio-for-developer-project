@@ -48,7 +48,7 @@
                             <v-btn color="#DDDDFF">Post</v-btn>
                         </router-link>
                     </h2>
-                    <PostList :column="2"></PostList>
+                    <PostList :column="4"></PostList>
                 </v-flex>
             </v-layout>
 
