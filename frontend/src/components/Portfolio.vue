@@ -4,8 +4,8 @@
             <v-img :src="portfolio_img" height="200px"></v-img>
             <v-card-title primary-title>
                 <div>
-                    <div class="headline" style="height : 65px">{{ portfolio_title }}</div>
-                    <span class="grey--text">{{ portfolio_content }}</span>
+                    <div class="headline target" style="height : 65px">{{ portfolio_title }}</div>
+                    <span class="grey--text target">{{ portfolio_content }}</span>
                 </div>
             </v-card-title>
         </v-card>

@@ -5,7 +5,7 @@
         <v-container>
             <!-- About Me -->
             <v-layout my-5 class="laybout">
-                <v-flex class="aboutme ma-3">
+                <v-flex class="aboutme ma-3 target">
                     <h2
                         class="mb-3 text-sm-left text-xs-center"
                         v-resize-text="{ratio:1.0, minFontSize: '15px', maxFontSize: '30px', delay: 100}"

@@ -37,7 +37,6 @@
                 @change="onFilePicked"
             />
         </v-flex>
-
         <v-btn @click="upload">Submit</v-btn>
         <v-btn @click="randomPhoto">Get Random Photo</v-btn>
     <TranslateButton/>
@@ -48,12 +47,10 @@
 import RestService from "../services/RestService";
 import FirebaseService from "@/services/FirebaseService";
 import Image from "../image.js";
-import TranslateButton from "../components/TranslateButton"
 
 export default {
     name: "PortfolioWrite",
     components: {
-        TranslateButton,
     },
     beforeMount() {
         this.insertLog();
@@ -65,7 +62,7 @@ export default {
             dialog: false,
             imageName: "",
             imageUrl: "",
-            imageFile: ""
+            imageFile: "",
         };
     },
     methods: {
@@ -142,5 +139,10 @@ export default {
 } 
 .editor-preview{
     text-align: left;
+}
+
+
+.none {
+    display: none;
 }
 </style>
