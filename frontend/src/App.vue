@@ -10,7 +10,7 @@
             <TopButton />
         </v-content>
 
-        <v-content>
+        <v-content class="footerwrap">
             <Footer />
         </v-content>
     </v-app>
@@ -54,5 +54,8 @@ export default {
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+}
+.v-content.footerwrap > .v-content__wrap {
+    margin-top: auto;
 }
 </style>
