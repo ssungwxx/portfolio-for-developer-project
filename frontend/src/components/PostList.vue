@@ -30,7 +30,7 @@ import RestService from "@/services/RestService";
 export default {
     name: "PostList",
     props: {
-        column: { type: Number, default: 2 },
+        column: { type: Number, default: 4 },
         limits: { type: Number, default: 4 },
         loadMore: { type: Boolean, default: false }
     },
