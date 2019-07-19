@@ -1,20 +1,24 @@
 <template>
     <v-footer class="corefooter" height="82">
-        <div>
-        <h3 class="findus" id="font">Find us</h3>
+        <div style="display: flex; justify-content: space-around; width: 100%; align-items: center;">
+        <div class="findus">
+            <h3 class="font">Find us</h3>
+            <hr />
         </div>
-        <hr/>
-        <div class="fdiv" id="font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
-         <div class="ftweather" id="font">
+        <div class="fdiv font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
+
+        <div class="ftweather font">
            &copy;
            2019.07.19
            <a
            href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
-           target="_blank" id="font">GitLab
+           target="_blank" class="font">GitLab
            </a>
-          <br>
-          <a id="font"> {{city}}  {{ temperature }}℃  {{ weatherMain }}</a>
+
+           <br/>
+          <a class="font"> {{city}}  {{ temperature }}℃  {{ weatherMain }}</a>
          </div>
+        </div>
     <v-spacer/>
   </v-footer>
 </template>
@@ -76,17 +80,24 @@ export default {
        </script>
 <style>
 
-@media (min-width: 768px) and (max-width: 1024px) {
-#font{
+@media (min-width: 600px) {
+.font{
   font-size: 13px;
   }
-       }
+}
 
-@media (max-width:767px) {
-  #font{
-    font-size: 8px;
-    }
+@media (max-width:599px) {
+.font {
+  font-size: 8px;
   }
+
+.findus {
+    display: none;
+  }
+.fdiv {
+    display: none;
+}
+}
 
 .findus {
     margin-left: 5%;
@@ -99,8 +110,8 @@ export default {
 }
 
 .fdiv {
-    margin-left: 27%;
-    margin-bottom: 10px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .ftitem {
