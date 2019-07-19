@@ -140,5 +140,4 @@ export default {
     position: absolute;
     background-color: yellow;
 }
-
 </style>
