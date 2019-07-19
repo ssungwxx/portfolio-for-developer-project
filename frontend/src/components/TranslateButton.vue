@@ -1,6 +1,6 @@
 <template>
 <v-layout>
-  <v-tooltip left>
+  <v-tooltip right>
     <v-icon slot="activator" color="rgb(102, 102, 102)" large class="translate" @click="select">g_translate</v-icon>
     <span>번역하기</span>
   </v-tooltip>
@@ -53,8 +53,8 @@ import RestService from "../services/RestService"
 <style>
 .translate {
   position: fixed;
-  bottom: 20%;
-  left: 95%;
+  bottom: 5%;
+  right: 96%;
   margin: 0;
   padding: 0;
   z-index: 5;
