@@ -1,63 +1,55 @@
 <template>
-    <div>
-        <div v-html="enText">
-
-        </div>
-
-        <textarea name="translate" id="translate" style="display: none"></textarea>
+    <v-layout>
         <v-icon color="red" large class="translate" @click="select">g_translate</v-icon>
-    </div>
+    </v-layout>
 </template>
 
 <script>
-import RestService from "../services/RestService"
-import enPage from "../views/enPage.vue"
+    import RestService from "../services/RestService"
 
     export default {
         name: "TranslateButton",
-        component: {
-            enPage,
-        },
-        data () {
+        component: {},
+        data() {
             return {
                 koText: "",
                 enText: "",
+                now: "",
             }
         },
         methods: {
-            ko() {
-                const text = document.querySelector("#translate");
-                text.value = document.querySelectorAll(".v-content")[1];
-                this.koText = text.value;
-                text.value = ""
-                console.log("한글" + this.koText)
-            },
-            async select () {
-                if (this.koText === "") {
-                    this.ko();
-                    const text = document.querySelector("#translate");
-                    text.value = document.querySelectorAll(".v-content")[1];
+            async select() {
+                if (this.now === "" || this.now === "ko") {
                     const data = {
-                        translate : text.value
+                        source: "ko-KR",
+                        target: "en-US",
+                        translate: document.querySelector(".CodeMirror-scroll").outerHTML,
                     };
-                    const res = await RestService.translateText(data);
-                    this.enText = res.toString();
+                    this.now = "en";
+                    this.enText = await RestService.translateText(data);
+                    document.querySelector(".CodeMirror-scroll").outerHTML = this.enText;
                 } else {
-                    this.enText = "";
+                    const data = {
+                        source: "en-US",
+                        target: "ko-KR",
+                        translate: document.querySelector(".CodeMirror-scroll").outerHTML,
+                    };
+                    this.now = "ko";
+                    this.koText = await RestService.translateText(data);
+                    document.querySelector(".CodeMirror-scroll").outerHTML = this.koText;
                 }
-                console.log("영어" + this.enText)
-            },
-        }
+            }
+        },
     }
 </script>
 
 <style>
-.translate {
-  position: fixed;
-  bottom: 20%;
-  left: 95%;
-  margin: 0;
-  padding: 0;
-  z-index: 5;
-}
+    .translate {
+        position: fixed;
+        bottom: 20%;
+        left: 95%;
+        margin: 0;
+        padding: 0;
+        z-index: 5;
+    }
 </style>
