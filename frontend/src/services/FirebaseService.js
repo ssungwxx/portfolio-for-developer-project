@@ -7,11 +7,13 @@ const PORTFOLIOS = "portfolios";
 
 // Setup Firebase
 const config = {
-    projectId: "first-prj-ssafy",
-    authDomain: "first-prj-ssafy.firebaseapp.com",
-    apiKey: "AIzaSyCYQr9NXqztsDey5UN-SsaOb2-UHiY9h3s",
-    databaseURL: "https://first-prj-ssafy.firebaseio.com",
-    storageBucket: "gs://first-prj-ssafy.appspot.com"
+  projectId: "webmobile-f08a4",
+     authDomain: "webmobile-f08a4.firebaseapp.com",
+     apiKey: "AIzaSyCYZ31KO8mTVKstx0wODkNVQ_FLSDA_USk",
+     databaseURL: "https://webmobile-f08a4.firebaseio.com",
+     storageBucket: "webmobile-f08a4.appspot.com",
+     messagingSenderId: "771916903533",
+     appId: "1:771916903533:web:7c49487dac48829b"
 };
 
 firebase.initializeApp(config);
@@ -61,16 +63,29 @@ export default {
     },
     loginWithGoogle() {
         let provider = new firebase.auth.GoogleAuthProvider();
+        console.log(provider);
         return firebase
             .auth()
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
+    console.log(accessToken);
                 let user = result.user;
+    console.log(user);
                 return result;
             })
             .catch(function(error) {
                 console.error("[Google Login Error]", error);
             });
-    }
+    },
+    loginWithFacebook() {
+        let provider = new firebase.auth.FacebookAuthProvider()
+        return firebase.auth().signInWithPopup(provider).then(function(result) {
+            let accessToken = result.credential.accessToken;
+            let user = result.user;
+            return result
+        }).catch(function(error) {
+            console.error('[Facebook Login Error]', error)
+        });
+    },
 };
