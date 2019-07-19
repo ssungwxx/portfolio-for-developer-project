@@ -3,9 +3,8 @@
         <div>
         <h3 class="findus" id="font">Find us</h3>
         </div>
-        <hr />
+        <hr/>
         <div class="fdiv" id="font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
-
          <div class="ftweather" id="font">
            &copy;
            2019.07.19
@@ -13,8 +12,7 @@
            href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
            target="_blank" id="font">GitLab
            </a>
-
-           <br>
+          <br>
           <a id="font"> {{city}}  {{ temperature }}℃  {{ weatherMain }}</a>
          </div>
     <v-spacer/>
@@ -101,7 +99,7 @@ export default {
 }
 
 .fdiv {
-    margin-left: 15%;
+    margin-left: 27%;
     margin-bottom: 10px;
 }
 
@@ -112,10 +110,9 @@ export default {
 }
 
 .ftweather {
-    margin-right: 5%;
+    margin-left: 17%;
     text-align: right;
     font-family: sans-serif;
     font-size: 15px;
-
 }
 </style>
