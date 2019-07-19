@@ -6,7 +6,7 @@
             </v-flex>
         </v-layout>
         <ImgBanner imgSrc="https://ifh.cc/g/rTwNE.jpg">
-            <div style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
+            <div class="target" style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
         </ImgBanner>
         <v-container>
             <!-- Portfolio -->
