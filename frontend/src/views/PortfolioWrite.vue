@@ -139,5 +139,8 @@ export default {
 
 .CodeMirror-line {
     text-align: left;
+} 
+.editor-preview{
+    text-align: left;
 }
 </style>
