@@ -124,9 +124,9 @@ export default {
 
 <style>
 .theme--light.v-list {
-    background: lightgrey;
+    background: #ffc0cb;
     color: white;
-    /*font-weight: bold;*/
+    font-weight: bold;
 }
 
 @media screen and (max-width: 599px) {
