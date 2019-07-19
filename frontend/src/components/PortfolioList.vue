@@ -13,12 +13,12 @@
 
         <div class="plusbutton">
             <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-                <v-btn color="info" dark v-on:click="loadMorePortfolios" style="width:106px;">
+                <v-btn color="#ffc0cb" dark v-on:click="loadMorePortfolios" style="width:106px;">
                     <v-icon size="25" class="mr-2">fa-plus</v-icon>더보기
                 </v-btn>
             </v-flex>
             <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-                <v-btn color="info" dark href="/PortfolioWrite" style="width:106px;">
+                <v-btn color="#ffc0cb" href="/PortfolioWrite" style="width:106px;" dark>
                     <v-icon size="25" class="mr-2">fa-edit</v-icon>Write
                 </v-btn>
             </v-flex>

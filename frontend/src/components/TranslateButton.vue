@@ -1,11 +1,14 @@
 <template>
-    <v-layout>
-        <v-icon color="red" large class="translate" @click="select">g_translate</v-icon>
-    </v-layout>
+<v-layout>
+  <v-tooltip left>
+    <v-icon slot="activator" color="rgb(102, 102, 102)" large class="translate" @click="select">g_translate</v-icon>
+    <span>번역하기</span>
+  </v-tooltip>
+</v-layout>
 </template>
 
 <script>
-    import RestService from "../services/RestService"
+import RestService from "../services/RestService"
 
     export default {
         name: "TranslateButton",
@@ -48,12 +51,12 @@
 </script>
 
 <style>
-    .translate {
-        position: fixed;
-        bottom: 20%;
-        left: 95%;
-        margin: 0;
-        padding: 0;
-        z-index: 5;
-    }
+.translate {
+  position: fixed;
+  bottom: 20%;
+  left: 95%;
+  margin: 0;
+  padding: 0;
+  z-index: 5;
+}
 </style>

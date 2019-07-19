@@ -2,10 +2,10 @@
     <v-layout>
         <v-dialog v-model="dialog" max-width="500">
             <template v-slot:activator="{ on }">
-                <v-btn v-if="WIDTH" icon v-on="on">
+                <v-btn class="headerButton" icon v-on="on">
                         <v-icon color="white">perm_identity</v-icon>
                 </v-btn>
-                <v-btn v-else flat v-on="on" style="width: 160px; left: 0px; height: 48px; z-index: 2;" fixed>
+                <v-btn class="sidebarButton" flat v-on="on" style="width: 160px; left: 0px; height: 48px; z-index: 2;" fixed>
                     <v-icon style="margin-right: auto; margin-left: 17px;">perm_identity</v-icon>
                 </v-btn>
             </template>
@@ -47,7 +47,6 @@ import RestService from "@/services/RestService";
 export default {
     data() {
         return {
-            WIDTH: false,
             dialog: false,
             id: "",
             password: "",
@@ -69,13 +68,6 @@ export default {
         VFacebookLogin
     },
     methods: {
-        Width(e) {
-            if (window.innerWidth >= 600) {
-                this.WIDTH = false;
-            } else {
-                this.WIDTH = true;
-            }
-        },
         async loginWithGoogle() {
             const result = await FirebaseService.loginWithGoogle();
             this.$store.state.accessToken = result.credential.accessToken;
@@ -129,9 +121,15 @@ export default {
     padding-right: 10px;
 }
 
-    @media screen and (max-width: 600px) {
-        .ICON {
-
-        }
+@media screen and (max-width: 599px) {
+    .headerButton {
+        display: none;
     }
+}
+
+@media screen and (min-width: 600px) {
+    .sidebarButton {
+        display: none;
+    }
+}
 </style>
