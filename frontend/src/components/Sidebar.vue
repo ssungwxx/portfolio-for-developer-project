@@ -23,19 +23,23 @@
 <!--    </v-list>-->
 
         <v-list style="overflow: hidden;">
+
+
           <v-list-tile
                   v-for="(item, i) in items"
                   :key="i"
                   :to="item.url"
           >
               <v-list-tile-action>
-                  <v-icon>{{ item.icon }}</v-icon>
+                  <v-icon v-if="item.icon!='star'">{{ item.icon }}</v-icon>
+                  <v-icon v-if="item.icon=='star'" v-on:click="favorite()">{{item.icon}}</v-icon>
               </v-list-tile-action>
-
               <v-list-tile-content>
                   <v-list-tile-title>{{ item.title }}</v-list-tile-title>
               </v-list-tile-content>
           </v-list-tile>
+
+
             <v-list-tile>
                 <v-list-tile-action style="margin-bottom: 48px;">
                     <Login/>
@@ -52,6 +56,7 @@
                     <v-list-tile-title>SignUp</v-list-tile-title>
                 </v-list-tile-content>
             </v-list-tile>
+
         </v-list>
     </v-menu>
 </div>
@@ -105,7 +110,7 @@ export default {
     data: () => ({
         title: document.title,
         items: [
-            { title: 'Bookmark', icon: 'star', url: './bookmark'},
+            { title: 'Bookmark', icon: 'star'},
             { title: 'Post', icon: 'description', url: './post' },
             { title: 'Portfolio', icon: 'assignment_ind', url: './portfolio' },
             // { title: 'Login', icon: 'face', url: './login'},
@@ -117,6 +122,36 @@ export default {
         text: {type: String}
     },
     methods: {
+      favorite() {
+          var bookmarkURL = window.location.href;
+          var bookmarkTitle = adocument.title;
+          var triggerDefault = false;
+          if (window.sidebar && window.sidebar.addPanel) {
+              window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
+          } else if (
+              (window.sidebar &&
+                  navigator.userAgent.toLowerCase().indexOf("firefox") >
+                      -1) ||
+              (window.opera && window.print)
+          ) {
+              var $this = $(this);
+              $this.attr("href", bookmarkURL);
+              $this.attr("title", bookmarkTitle);
+              $this.attr("rel", "sidebar");
+              $this.off(e);
+              triggerDefault = true;
+          } else if (window.external && "AddFavorite" in window.external) {
+              window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+          } else {
+              alert(
+                  (navigator.userAgent.toLowerCase().indexOf("mac") != -1
+                      ? "Cmd"
+                      : "Ctrl") +
+                      "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
+              );
+          }
+          return triggerDefault;
+      }
     },
 }
 </script>
