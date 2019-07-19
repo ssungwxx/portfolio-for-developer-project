@@ -40,6 +40,7 @@
 
         <v-btn @click="upload">Submit</v-btn>
         <v-btn @click="randomPhoto">Get Random Photo</v-btn>
+    <TranslateButton/>
     </v-container>
 </template>
 
@@ -47,10 +48,13 @@
 import RestService from "../services/RestService";
 import FirebaseService from "@/services/FirebaseService";
 import Image from "../image.js";
+import TranslateButton from "../components/TranslateButton"
 
 export default {
     name: "PortfolioWrite",
-    components: {},
+    components: {
+        TranslateButton,
+    },
     beforeMount() {
         this.insertLog();
     },
