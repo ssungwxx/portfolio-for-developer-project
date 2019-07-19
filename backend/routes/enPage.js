@@ -4,13 +4,13 @@ const router = express.Router();
 const { TranslationServiceClient } = require("@google-cloud/translate").v3beta1;
 const translationClient = new TranslationServiceClient();
 
-async function translateText(newText) {
+async function translateText(newText, source, target) {
     const request = {
         parent: translationClient.locationPath("ssafy-ss2", "global"),
         contents: [newText],
-        mimeType: "text/html", // mime types: text/plain, text/html
-        sourceLanguageCode: "en-US",
-        targetLanguageCode: "ko-KR"
+        mimeType: "text/html",
+        sourceLanguageCode: source,
+        targetLanguageCode: target
     };
     const [response] = await translationClient.translateText(request);
     const text = response.translations[0].translatedText;
@@ -18,7 +18,7 @@ async function translateText(newText) {
 }
 
 router.post("/", function(req, res) {
-    translateText(req.body.translate).then(text => res.json(text));
+    translateText(req.body.translate, req.body.source, req.body.target).then(data => res.json(data));
 });
 
 

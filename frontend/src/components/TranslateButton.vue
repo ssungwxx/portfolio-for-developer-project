@@ -10,39 +10,43 @@
 <script>
 import RestService from "../services/RestService"
 
-export default {
-  name: "TranslateButton",
-  component: {},
-  data() {
-    return {
-      koText: "",
-      enText: "",
-      now: "",
-    }
-  },
-  methods: {
-    async select() {
-      if (this.now === "" || this.now === "ko") {
-        const data = {
-          source: "ko-KR",
-          target: "en-US",
-          translate: document.querySelector(".CodeMirror-scroll").outerHTML,
-        };
-        this.now = "en";
-        this.enText = await RestService.translateText(data);
-        document.querySelector(".CodeMirror-scroll").outerHTML = this.enText;
-      } else {
-        const data = {
-          source: "en-US",
-          target: "ko-KR",
-          translate: document.querySelector(".CodeMirror-scroll").outerHTML,
-        };
-        this.now = "ko";
-        this.koText = await RestService.translateText(data);
-        document.querySelector(".CodeMirror-scroll").outerHTML = this.koText;
-      }
-    }
-  },
+    export default {
+        name: "TranslateButton",
+        component: {},
+        data() {
+            return {
+                koText: "",
+                enText: "",
+                now: "",
+            }
+        },
+        methods: {
+            async select() {
+                if (document.querySelector(".editor-preview.editor-preview-active") === null) {
+                    alert("Preview를 활성화 해주세요.")
+                } else {
+                if (this.now === "" || this.now === "ko") {
+                    const data = {
+                        source: "ko-KR",
+                        target: "en-US",
+                        translate: document.querySelector(".editor-preview.editor-preview-active").outerHTML,
+                    };
+                    this.now = "en";
+                    this.enText = await RestService.translateText(data);
+                    document.querySelector(".editor-preview.editor-preview-active").outerHTML = this.enText;
+                } else {
+                    const data = {
+                        source: "en-US",
+                        target: "ko-KR",
+                        translate: document.querySelector(".editor-preview.editor-preview-active").outerHTML,
+                    };
+                    this.now = "ko";
+                    this.koText = await RestService.translateText(data);
+                    document.querySelector(".editor-preview.editor-preview-active").outerHTML = this.koText;
+                }
+            }
+        }
+    },
 }
 </script>
 
