@@ -32,8 +32,8 @@ import RestService from "@/services/RestService";
 export default {
     name: "PostList",
     props: {
-        column: { type: Number, default: 4 },
-        limits: { type: Number, default: 4 },
+        column: { type: Number, default: 3 },
+        limits: { type: Number, default: 6 },
         loadMore: { type: Boolean, default: false }
     },
     data() {
@@ -58,7 +58,7 @@ export default {
             }
         },
         loadMorePosts() {
-            this.limits += 4;
+            this.limits += 6;
         }
     }
 };
