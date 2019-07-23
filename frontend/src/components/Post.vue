@@ -27,7 +27,7 @@ export default {
     },
     data() {
         return {
-            detaillink: "/detailpost/" + this.post_user_id,
+            detaillink: "/detailpost/" + this.post_no,
         };
     }
 };
