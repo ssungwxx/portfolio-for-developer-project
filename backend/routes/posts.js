@@ -50,4 +50,11 @@ router.put("/:no", (req, res) => {
         .then(data => res.json(data));
 });
 
+// Get count(*)
+router.get("/count/all", (req, res) => {
+    knex("posts")
+        .count("post_no as cnt")
+        .then(data => res.json(data[0].cnt));
+});
+
 module.exports = router;
