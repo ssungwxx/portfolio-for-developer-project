@@ -22,7 +22,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
     knex("posts")
         .select("*")
-        .where("user_id", req.params.id)
+        .where("post_no", req.params.id)
         .then(data => res.json(data));
 });
 
@@ -48,6 +48,13 @@ router.put("/:no", (req, res) => {
         .update(req.body)
         .where("post_no", req.params.no)
         .then(data => res.json(data));
+});
+
+// Get count(*)
+router.get("/count/all", (req, res) => {
+    knex("posts")
+        .count("post_no as cnt")
+        .then(data => res.json(data[0].cnt));
 });
 
 module.exports = router;

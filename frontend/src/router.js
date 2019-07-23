@@ -5,6 +5,7 @@ import PostPage from "./views/PostPage.vue";
 import PortfolioPage from "./views/PortfolioPage.vue";
 import PortfolioWrite from "./views/PortfolioWrite.vue";
 import DetailPortfolio from "./views/DetailPortfolio.vue";
+import DetailPost from "./views/DetailPost.vue";
 import graph from "./components/graph.vue"
 
 //import LoginPage from "./views/LoginPage.vue";
@@ -47,5 +48,10 @@ export default new Router({
             name: "portfoliowrite",
             component: PortfolioWrite
         },
+        {
+            path: "/detailpost/:id",
+            name: "detailpost",
+            component: DetailPost
+        }
     ]
 });
