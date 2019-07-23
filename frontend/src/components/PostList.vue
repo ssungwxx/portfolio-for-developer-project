@@ -7,9 +7,11 @@
             px-3
         >
             <Post
+                :post_no="posts[i - 1].post_no"
                 :post_date="posts[i - 1].post_date"
                 :post_title="posts[i - 1].post_title"
                 :post_content="posts[i - 1].post_content"
+                :post_user_id="posts[i - 1].user_id"
             ></Post>
             <v-divider></v-divider>
         </v-flex>
