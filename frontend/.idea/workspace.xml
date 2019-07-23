@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Post.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Post.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -194,7 +197,7 @@
       <workItem from="1563408110547" duration="32542000" />
       <workItem from="1563457086604" duration="8937000" />
       <workItem from="1563495221837" duration="19260000" />
-      <workItem from="1563864152074" duration="992000" />
+      <workItem from="1563858177329" duration="4781000" />
     </task>
     <servers />
   </component>
