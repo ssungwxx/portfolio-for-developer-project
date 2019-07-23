@@ -8,7 +8,7 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
-// Login Authenticate
+// Login Authenticate by pwa
 router.post("/login", (req, res) => {
     let token = jwt.sign(
         {
@@ -63,6 +63,16 @@ router.post("/login", (req, res) => {
             }
         });
 });
+
+// Login ver2
+/*
+router.post("/login", (req, res) => {
+    knex("users")
+        .select("*")
+        .where("user_id", req.body.user_id)
+        .then(data => res.json(data));
+});
+*/
 
 // Get All Users Info
 router.get("/", (req, res) => {

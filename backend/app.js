@@ -10,6 +10,7 @@ var users = require("./routes/users");
 var portfolios = require("./routes/portfolios");
 var posts = require("./routes/posts");
 var logs = require("./routes/webLog");
+var replies = require("./routes/replies");
 
 var enPage = require("./routes/enPage");
 
@@ -70,6 +71,7 @@ app.use("/", indexRouter);
 app.use("/users", users);
 app.use("/portfolios", portfolios);
 app.use("/posts", posts);
+app.use("/replies", replies);
 app.use("/logs", logs);
 app.use("/en", enPage);
 
