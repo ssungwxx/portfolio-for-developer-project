@@ -9,13 +9,8 @@
     </div>
 </template>
 
-<style>
-
-</style>
 <script>
-
 import RestService from "@/services/RestService";
-
 
 export default {
     name: "Admin",
@@ -56,7 +51,7 @@ export default {
                   icon: 'fa fa-hand-o-right',
                   child: [
                       {
-                          href: '/charts/sublink',
+                          href: '../Delegate',
                           title: 'Delegate Admin',
                       }
                   ]

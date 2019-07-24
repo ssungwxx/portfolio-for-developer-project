@@ -7,6 +7,7 @@ import PortfolioWrite from "./views/PortfolioWrite.vue";
 import DetailPortfolio from "./views/DetailPortfolio.vue";
 import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
+import Delegate from "./views/Delegate.vue";
 
 import graph from "./components/graph.vue"
 
@@ -59,6 +60,11 @@ export default new Router({
             path: "/admin",
             name: "admin",
             component: Admin
+        },
+        {
+          path: "/delegate",
+          name: "delegate",
+          component: Delegate
         }
     ]
 });
