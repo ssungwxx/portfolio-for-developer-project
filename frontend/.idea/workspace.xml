@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Post.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Post.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/DetailPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DetailPost.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/HomePage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/HomePage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,37 +16,10 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>editor-tool</find>
-      <find>prototype</find>
-      <find>Vue</find>
-      <find>function Vue</find>
-      <find>style</find>
-      <find>ref</find>
-      <find>console.</find>
-      <find>random</find>
-      <find>valueall</find>
-      <find>ondeData</find>
-      <find>oneData</find>
-      <find>committoValue</find>
-      <find>committoVuex</find>
-      <find>setcommit</find>
-      <find>insert</find>
-      <find>console.log</find>
-      <find>plus</find>
-      <find>target</find>
-    </findStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="577" />
-    <option name="y" value="23" />
-    <option name="width" value="1400" />
-    <option name="height" value="1000" />
-  </component>
+  <component name="ProjectId" id="1OR6zB8q1fE7TMJQFZVN3ocBrof" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
   </component>
@@ -108,10 +84,24 @@
       <workItem from="1563457086604" duration="8937000" />
       <workItem from="1563495221837" duration="19260000" />
       <workItem from="1563858177329" duration="4781000" />
+      <workItem from="1563928323017" duration="6185000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

@@ -53,12 +53,14 @@ router.post("/login", (req, res) => {
                     .then();
                 res.json({
                     token: token,
-                    refresh: refresh_token
+                    refresh: refresh_token,
+                    grade: data[0].user_grade
                 });
             } else {
                 res.json({
                     token: null,
-                    refresh: null
+                    refresh: null,
+                    grade: null
                 });
             }
         });

@@ -22,7 +22,7 @@
 
         <div>
             <v-flex xs12 text-xs-center round my-5>
-                <router-link :to="post" style="text-decoration: none;">
+                <router-link :to="posts" style="text-decoration: none;">
                     <v-btn color="info" dark>
                         <v-icon size="25" class="mr-2">home</v-icon>목록으로
                     </v-btn>
@@ -40,7 +40,7 @@
         props: {},
         data() {
             return {
-                portfolio: [
+                post: [
                     {
                         post_no: "",
                         user_id: "",
@@ -49,8 +49,9 @@
                         post_date: ""
                     }
                 ],
-                post: "/Post",
-                id: this.$route.params.id
+                id: this.$route.params.id,
+                posts: "/post",
+                status: "비회원",
             };
         },
         beforeMount() {
@@ -73,6 +74,12 @@
 
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPortfolio");
+            },
+
+            loginCheck() {
+                if (this.$store.state.user !== "") {
+
+                }
             }
         }
     };
