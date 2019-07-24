@@ -67,16 +67,6 @@ router.post("/login", (req, res) => {
         });
 });
 
-// Login ver2
-/*
-router.post("/login", (req, res) => {
-    knex("users")
-        .select("*")
-        .where("user_id", req.body.user_id)
-        .then(data => res.json(data));
-});
-*/
-
 // Get All Users Info
 router.get("/", (req, res) => {
     knex("users")
@@ -133,7 +123,8 @@ router.post("/crypto/test", (req, res) => {
             user_id: req.body.user_id,
             user_name: req.body.user_name
         })
-        .then(data => res.json(data));
+        .then(data => res.json(data))
+        .catch(error => res.json(error));
 
     crypto.randomBytes(64, (err, buf) => {
         crypto.pbkdf2(
@@ -147,7 +138,8 @@ router.post("/crypto/test", (req, res) => {
                 knex("users")
                     .update("user_pw", key.toString("base64"))
                     .where("user_id", req.body.user_id)
-                    .then(data => res.json(data));
+                    .then(data => res.json(data))
+                    .catch(error => res.json(error));
             }
         );
     });
