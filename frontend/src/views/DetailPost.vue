@@ -62,6 +62,7 @@
         },
         mounted() {
             this.getPost();
+            console.log(this.$store.state)
         },
         methods: {
             async getPost() {
@@ -78,7 +79,7 @@
 
             loginCheck() {
                 if (this.$store.state.user !== "") {
-
+                    this.status = this.$store.state.user;
                 }
             }
         }

@@ -4,9 +4,18 @@
     <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-buttons/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-buttons/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-calendars/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-calendars/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-charts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-charts/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-data/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-data/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-inputs/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-inputs/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-pdf-export/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-pdf-export/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-popups/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-popups/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-vue-charts/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/node_modules/@syncfusion/ej2-vue-charts/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PortfolioList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PortfolioList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/DetailPost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/DetailPost.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +68,7 @@
       <workItem from="1563495222018" duration="4062000" />
       <workItem from="1563861247523" duration="3233000" />
       <workItem from="1563927491701" duration="2631000" />
+      <workItem from="1563945797781" duration="1159000" />
     </task>
     <servers />
   </component>

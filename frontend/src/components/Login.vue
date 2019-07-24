@@ -74,11 +74,13 @@ export default {
             const result = await FirebaseService.loginWithGoogle();
             this.$store.state.accessToken = result.credential.accessToken;
             this.$store.state.user = result.user;
+            this.$store.state.grade = "1";
         },
         async loginWithFacebook() {
         const result = await FirebaseService.loginWithFacebook();
         this.$store.state.accessToken = result.credential.accessToken;
         this.$store.state.user = result.user;
+            this.$store.state.grade = "1";
         if(this.$store.state.accessToken != '' && this.$store.state.user != '') {
          this.$session.set('email', this.$store.state.user.email);
       }
