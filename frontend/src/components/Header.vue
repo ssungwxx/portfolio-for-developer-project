@@ -17,7 +17,7 @@
 
             <v-spacer></v-spacer>
 
-            <div class="icons">
+            <div class="icons" v-if="this.$store.state.user">
                 <router-link to style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon v-on:click="favorite()">
@@ -136,7 +136,7 @@ export default {
             const users = await RestService.getUsers();
             for (const user of users) {
                 if (this.search === user.user_id.slice(0, this.search.length)) {
-                    
+
                 }
             }
         },
