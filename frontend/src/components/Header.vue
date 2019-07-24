@@ -12,7 +12,8 @@
                 <v-toolbar-title style="align-self: center" class="white--text">{{ title }}</v-toolbar-title>
             </div>
             <div v-else>
-                <input v-model="search" type="text" style="background: white; width: 20rem; color: black; padding: 5px;">
+                <label for="search" style="color: blue; font-weight: bold;">Search</label>
+                <input id="search" v-model="search" @click="resetInput" type="text">
             </div>
 
             <v-spacer></v-spacer>
@@ -89,7 +90,7 @@ export default {
                 go: "/Portfolio"
             }
         ],
-        search: "",
+        search: "검색할 아이디를 입력해주세요.",
         users: [],
     }),
     components: {
@@ -140,7 +141,9 @@ export default {
                 }
             }
         },
-
+        resetInput() {
+            this.search = "";
+        }
     }
 };
 </script>
@@ -162,5 +165,13 @@ export default {
     z-index: 2;
     position: absolute;
     background-color: yellow;
+}
+#search {
+    background: white;
+    width: 25vw;
+    color: black;
+    padding: 5px;
+    margin-left: 1vw;
+    border: solid skyblue 2px;
 }
 </style>
