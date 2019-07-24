@@ -8,6 +8,9 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
+// crypto
+var crypto = require("crypto");
+
 // Login Authenticate by pwa
 router.post("/login", (req, res) => {
     let token = jwt.sign(
@@ -121,6 +124,33 @@ router.delete("/:id", (req, res) => {
         .where("user_id", req.params.id)
         .delete(req.body)
         .then(data => res.json(data));
+});
+
+// crypto register
+router.post("/crypto/test", (req, res) => {
+    knex("users")
+        .insert({
+            user_id: req.body.user_id,
+            user_name: req.body.user_name
+        })
+        .then(data => res.json(data));
+
+    crypto.randomBytes(64, (err, buf) => {
+        crypto.pbkdf2(
+            req.body.user_pw,
+            buf.toString("base64"),
+            157913, // hash 함수 반복횟수
+            64,
+            "sha512",
+            (err, key) => {
+                console.log(key.toString("base64"));
+                knex("users")
+                    .update("user_pw", key.toString("base64"))
+                    .where("user_id", req.body.user_id)
+                    .then(data => res.json(data));
+            }
+        );
+    });
 });
 
 module.exports = router;
