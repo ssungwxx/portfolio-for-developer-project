@@ -50,8 +50,7 @@ export default {
       user: {
         user_id: "",
         user_pw: "",
-        user_name: "",
-        user_grade: "방문자"
+        user_name: ""
       },
       check: [{
         cnt: ""
