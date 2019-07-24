@@ -100,6 +100,9 @@ export default {
                     alert("비밀번호를 확인해주세요.");
                 } else {
                     alert("로그인 성공!");
+                    this.$store.state.accessToken = this.token.token;
+                    this.$store.state.user = this.id;
+                    // this.$store.state.grade = this.
                     this.dialog = false;
                     this.clear_user();
                 }

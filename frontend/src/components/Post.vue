@@ -29,7 +29,7 @@ export default {
         return {
             detaillink: "/detailpost/" + this.post_no,
         };
-    }
+    },
 };
 </script>
 <style>
