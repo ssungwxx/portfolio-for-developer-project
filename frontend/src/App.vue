@@ -24,6 +24,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TopButton from "./components/TopButton";
 import TranslateButton from "./components/TranslateButton";
+import SidebarMenu from 'vue-sidebar-menu'
 
 export default {
     name: "App",
@@ -34,7 +35,7 @@ export default {
         Sidebar,
         TopButton,
         TranslateButton,
-
+        SidebarMenu
     },
     data() {
         return {};
