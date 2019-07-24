@@ -8,7 +8,7 @@
         <v-content>
             <router-view />
             <TopButton />
-            <TranslateButton/>
+            <!--<TranslateButton/>-->
         </v-content>
 
         <v-content class="footerwrap">
@@ -24,7 +24,7 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import TopButton from "./components/TopButton";
 import TranslateButton from "./components/TranslateButton";
-import SidebarMenu from 'vue-sidebar-menu'
+import SidebarMenu from "vue-sidebar-menu";
 
 export default {
     name: "App",
