@@ -8,6 +8,9 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
+// User model
+var User = require("../models/User");
+
 // crypto
 var crypto = require("crypto");
 
@@ -120,14 +123,13 @@ router.delete("/:id", (req, res) => {
 
 // crypto register
 router.post("/crypto/test", (req, res) => {
-    knex("users")
-        .insert({
-            user_id: req.body.user_id,
-            user_name: req.body.user_name
-        })
-        .then(data => res.json(data))
-        .catch(error => res.json(error));
-
+    if (!req.body.user_pw) {
+        res.json({
+            status: "400",
+            msg: "no data"
+        });
+        return;
+    }
     crypto.randomBytes(64, (err, buf) => {
         crypto.pbkdf2(
             req.body.user_pw,
@@ -136,12 +138,31 @@ router.post("/crypto/test", (req, res) => {
             64,
             "sha512",
             (err, key) => {
-                console.log(key.toString("base64"));
-                knex("users")
-                    .update("user_pw", key.toString("base64"))
-                    .where("user_id", req.body.user_id)
-                    .then(data => res.json(data))
-                    .catch(error => res.json(error));
+                User.user_id = req.body.user_id;
+                User.user_pw = key.toString("base64");
+                User.user_name = req.body.user_name;
+
+                if (User.user_id && User.user_pw && User.user_name) {
+                    knex("users")
+                        .insert(User)
+                        .then(data =>
+                            res.json({
+                                status: 200,
+                                msg: "success"
+                            })
+                        )
+                        .catch(err =>
+                            res.json({
+                                status: 400,
+                                msg: "overlap id"
+                            })
+                        );
+                } else {
+                    res.json({
+                        status: 400,
+                        msg: "no data"
+                    });
+                }
             }
         );
     });
