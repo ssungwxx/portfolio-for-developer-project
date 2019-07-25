@@ -3,6 +3,6 @@ module.exports = {
     connection: {
         user: "root",
         password: "ssafyssafy",
-        database: "ssafy"
+        database: "ssafy_jarvis"
     }
 };
