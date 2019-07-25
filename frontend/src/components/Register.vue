@@ -9,33 +9,60 @@
         <v-icon style="margin-right: auto; margin-left: 17px;">person_add</v-icon>
       </v-btn>
     </template>
-
-    <v-card>
-      <v-card-title>
+    <v-card-title>
         <span class="headline">Register</span>
       </v-card-title>
-      <v-card-text>
-        <v-container grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="user.user_name" label="Full name*" required></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field v-model="user.user_id" label="ID*" required></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field v-model="user.user_pw" label="Password*" type="password" required></v-text-field>
-            </v-flex>
-          </v-layout>
-        </v-container>
-        <small>*indicates required field</small>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-        <v-btn color="blue darken-1" flat @click="check_user()">Register</v-btn>
-      </v-card-actions>
-    </v-card>
+      <v-form
+      ref="form"
+      lazy-validation>
+
+          <v-text-field
+          v-model="user.user_name"
+          :rules="[() => !!user.user_name || 'This field is required']"
+          label="Full Name*"
+          required></v-text-field>
+
+          <v-text-field
+          v-model="user.user_id"
+          :rules="[
+              () => !!user.user_id || 'This field is required',
+              () => !!user.user_id && id.length <= 20 || 'ID must be less than 20 characters']"
+              label="ID*"
+              counter="20"
+              required></v-text-field>
+
+          <v-text-field
+          v-model="user.user_pw"
+          :append-icon="show ? 'visibility' : 'visibility_off'"
+          :rules="[() => !!user.user_pw || 'This field is required',
+            () => !!user.user_pw && password.length >= 8 || 'Password must be at least 8 characters']" :type="show ? 'text' : 'password'"
+            counter
+            @click:append="show = !show"
+            label="Password"
+            required></v-text-field>
+
+          <v-text-field
+          v-model="user.user_email"
+          :rules="[
+          () => !!user.user_email || 'This field is required',
+          () => /.+@.+\..+/.test(user.user_email) || 'E-mail must be valid.']"
+          label="E-mail"
+          required></v-text-field>
+
+          <v-btn text @click="dialog = false">Cancel</v-btn>
+          <v-spacer></v-spacer>
+          <v-slide-x-reverse-transition>
+            <v-tooltip v-if="formHasErrors" left>
+              <template v-slot:activator="{ on }">
+                <v-btn icon class="my-0" @click="resetForm" v-on="on">
+                  <v-icon>refresh</v-icon>
+                </v-btn>
+              </template>
+              <span>양식 새로고침</span>
+            </v-tooltip>
+          </v-slide-x-reverse-transition>
+          <v-btn color="primary" text @click="submit">Submit</v-btn>
+      </v-form>
   </v-dialog>
 </v-layout>
 </template>
@@ -50,8 +77,11 @@ export default {
       user: {
         user_id: "",
         user_pw: "",
-        user_name: ""
+        user_name: "",
+        user_email: ""
       },
+      formHasErrors: false,
+      show: false,
       check: [{
         cnt: ""
       }],
@@ -62,49 +92,53 @@ export default {
     };
   },
   methods: {
+    submit() {
+      if(this.$refs.form.validate()) {
+        this.check_user();
+      }
+    },
+    resetForm() {
+      this.$refs.form.reset();
+    },
     async check_user() {
-      if (this.check_null()) {
-        if (this.check_email()) {
-          this.check = await RestService.getUser(this.user.user_id);
-          if (this.check[0].cnt == 0) {
-            this.err_stat = await RestService.insertUser(this.user);
-            if (this.err_stat.status == 1) {
-              alert("가입 성공!");
-            } else {
-              alert(this.err_stat.code);
-            }
-          } else {
-            alert("중복된 Email입니다.");
-          }
+      if (this.check_email()) {
+        this.err_stat = await RestService.insertUser(this.user);
+        if (this.err_stat.status == 200) {
+          alert("가입 성공!");
           this.clear_user();
+          this.dialog = false;
         } else {
-          alert("ID를 Email형식으로 입력해주세요");
+          if (this.err_stat.msg.equals("overlap id")) {
+            alert("중복된 ID입니다.");
+          } else {
+            alert(this.err_stat.msg);
+          }
         }
       } else {
-        alert("입력된 데이터에 공백값이 포함되어 있습니다.");
+        alert("E-mail형식이 올바르지 않습니다.");
       }
     },
     clear_user() {
       this.user.user_id = "";
       this.user.user_pw = "";
       this.user.user_name = "";
-      this.user.user_pw = "";
+      this.user.user_email = "";
+      this.user.user_gitAdd = "";
+      this.user.user_gitToken = "";
     },
     check_email() {
       let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      if (this.user.user_id.match(regExp) != null) {
+      if (this.user.user_email.match(regExp) != null) {
         return true;
       } else {
         return false;
       }
     },
     check_null() {
-      if (
-        this.user.user_id == "" ||
-        this.user.user_pw == "" ||
-        this.user.user_name == ""
-      )
+      if (this.user.user_id == "") {
+        document.getElementById('iddd').focus();
         return false;
+      }
       return true;
     }
   }
