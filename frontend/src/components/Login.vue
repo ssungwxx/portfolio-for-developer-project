@@ -74,11 +74,13 @@ export default {
             const result = await FirebaseService.loginWithGoogle();
             this.$store.state.accessToken = result.credential.accessToken;
             this.$store.state.user = result.user;
+            this.$store.state.grade = "1";
         },
         async loginWithFacebook() {
         const result = await FirebaseService.loginWithFacebook();
         this.$store.state.accessToken = result.credential.accessToken;
         this.$store.state.user = result.user;
+            this.$store.state.grade = "1";
         if(this.$store.state.accessToken != '' && this.$store.state.user != '') {
          this.$session.set('email', this.$store.state.user.email);
       }
@@ -100,6 +102,9 @@ export default {
                     alert("비밀번호를 확인해주세요.");
                 } else {
                     alert("로그인 성공!");
+                    this.$store.state.accessToken = this.token.token;
+                    this.$store.state.user = this.id;
+                    this.$store.state.grade = this.token.grade;
                     this.dialog = false;
                     this.clear_user();
                 }

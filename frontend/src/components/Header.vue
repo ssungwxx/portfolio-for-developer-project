@@ -1,17 +1,24 @@
 <template>
     <div class="Header">
-        <v-toolbar class="insta" dark color="#ffc0cb" fixed>
-            <v-tooltip bottom>
+        <v-toolbar dark color="#ffc0cb" fixed>
+            <div style="display: flex;" v-if="this.$store.state.user">
+                <v-tooltip bottom>
                 <v-btn slot="activator" icon href="/">
                     <v-icon>home</v-icon>
                 </v-btn>
-                <span>홈으로 이동</span>
-            </v-tooltip>
+                    <span>홈으로 이동</span>
+                </v-tooltip>
 
-            <v-toolbar-title class="white--text">{{ title }}</v-toolbar-title>
+                <v-toolbar-title style="align-self: center" class="white--text">{{ title }}</v-toolbar-title>
+            </div>
+            <div v-else>
+                <label for="search" style="color: blue; font-weight: bold;">Search</label>
+                <input id="search" v-model="search" @click="resetInput" type="text">
+            </div>
+
             <v-spacer></v-spacer>
 
-            <div class="icons">
+            <div class="icons" v-if="this.$store.state.user">
                 <router-link to style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon v-on:click="favorite()">
@@ -60,6 +67,7 @@
 <script>
 import Login from "../components/Login";
 import Register from "../components/Register";
+import RestService from "../services/RestService";
 
 export default {
     name: "Header",
@@ -81,11 +89,18 @@ export default {
                 title: "markunread_mailbox",
                 go: "/Portfolio"
             }
-        ]
+        ],
+        search: "검색할 아이디를 입력해주세요.",
+        users: [],
     }),
     components: {
         Login,
         Register
+    },
+    watch: {
+        search: function () {
+            this.getUsers();
+        }
     },
     methods: {
         favorite() {
@@ -117,6 +132,17 @@ export default {
                 );
             }
             return triggerDefault;
+        },
+        async getUsers() {
+            const users = await RestService.getUsers();
+            for (const user of users) {
+                if (this.search === user.user_id.slice(0, this.search.length)) {
+
+                }
+            }
+        },
+        resetInput() {
+            this.search = "";
         }
     }
 };
@@ -139,5 +165,13 @@ export default {
     z-index: 2;
     position: absolute;
     background-color: yellow;
+}
+#search {
+    background: white;
+    width: 25vw;
+    color: black;
+    padding: 5px;
+    margin-left: 1vw;
+    border: solid skyblue 2px;
 }
 </style>

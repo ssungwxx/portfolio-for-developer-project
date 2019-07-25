@@ -8,10 +8,8 @@ import DetailPortfolio from "./views/DetailPortfolio.vue";
 import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
-
+import MainPage from "./views/MainPage.vue";
 import graph from "./components/graph.vue"
-
-//import LoginPage from "./views/LoginPage.vue";
 
 Vue.use(Router);
 
@@ -21,8 +19,8 @@ export default new Router({
     routes: [
         {
             path: "/",
-            name: "home",
-            component: HomePage
+            name: "mainpage",
+            component: MainPage
         },
         {
             path: "/post",

@@ -44,11 +44,11 @@
             <v-layout my-5>
                 <v-flex xs12>
                     <h2 class="headline my-5 text-xs-center">
-                        <router-link :to="posts" style="text-decoration:none" :limits="10">
+                        <router-link :to="posts" style="text-decoration:none" :limits="6">
                             <v-btn color="#DDDDFF">Post</v-btn>
                         </router-link>
                     </h2>
-                    <PostList :column="4"></PostList>
+                    <PostList :column="3"></PostList>
                 </v-flex>
             </v-layout>
 
