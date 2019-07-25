@@ -68,28 +68,35 @@ router.post("/login", (req, res) => {
         .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
         .then(data => {
-            crypto.pbkdf2(
-                req.body.user_pw,
-                data[0].user_salt,
-                157913,
-                64,
-                "sha512",
-                (err, key) => {
-                    console.log(key.toString("base64"));
-                    console.log(data[0].user_pw);
-                    if (data[0].user_pw == key.toString("base64")) {
-                        res.json({
-                            status: 200,
-                            msg: "success"
-                        });
-                    } else {
-                        res.json({
-                            status: 400,
-                            msg: "wrong password"
-                        });
+            if (data[0] == null) {
+                res.json({
+                    status: 400,
+                    msg: "wrong id"
+                });
+            } else {
+                crypto.pbkdf2(
+                    req.body.user_pw,
+                    data[0].user_salt,
+                    157913,
+                    64,
+                    "sha512",
+                    (err, key) => {
+                        console.log(key.toString("base64"));
+                        console.log(data[0].user_pw);
+                        if (data[0].user_pw == key.toString("base64")) {
+                            res.json({
+                                status: 200,
+                                msg: "success"
+                            });
+                        } else {
+                            res.json({
+                                status: 400,
+                                msg: "wrong password"
+                            });
+                        }
                     }
-                }
-            );
+                );
+            }
         });
 });
 
