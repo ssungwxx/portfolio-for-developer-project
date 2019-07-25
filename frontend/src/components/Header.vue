@@ -3,17 +3,29 @@
         <v-toolbar dark color="#ffc0cb" fixed>
             <div style="display: flex;" v-if="this.$store.state.user">
                 <v-tooltip bottom>
-                <v-btn slot="activator" icon href="/">
-                    <v-icon>home</v-icon>
-                </v-btn>
+                    <v-btn slot="activator" icon href="/">
+                        <v-icon>home</v-icon>
+                    </v-btn>
                     <span>홈으로 이동</span>
                 </v-tooltip>
 
                 <v-toolbar-title style="align-self: center" class="white--text">{{ title }}</v-toolbar-title>
             </div>
             <div v-else>
-                <label for="search" style="color: blue; font-weight: bold;">Search</label>
-                <input id="search" v-model="search" @click="resetInput" type="text">
+                <div style="display: flex; ">
+                    <v-icon style="margin-right: 10px;">search</v-icon>
+                    <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+                </div>
+                <v-card v-if="search !== '검색할 아이디를 입력해주세요.'">
+                    <v-list-tile v-for="(user, i) in users" :key="i">
+                        <v-list-tile-action>
+                            <v-icon @click="">people</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ user }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
+                </v-card>
             </div>
 
             <v-spacer></v-spacer>
@@ -49,14 +61,14 @@
 
             <div class="icons">
                 <v-tooltip bottom>
-                    <Login slot="activator" />
+                    <Login slot="activator"/>
                     <span>로그인</span>
                 </v-tooltip>
             </div>
 
             <div class="icons">
                 <v-tooltip bottom>
-                    <Register slot="activator" />
+                    <Register slot="activator"/>
                     <span>회원가입</span>
                 </v-tooltip>
             </div>
@@ -65,113 +77,133 @@
 </template>
 
 <script>
-import Login from "../components/Login";
-import Register from "../components/Register";
-import RestService from "../services/RestService";
+    import Login from "../components/Login";
+    import Register from "../components/Register";
+    import RestService from "../services/RestService";
 
-export default {
-    name: "Header",
-    data: () => ({
-        title: document.title,
-        port: "/Portfolio",
-        posts: "/Post",
-        login: "/Login",
-        items: [
-            {
-                title: "perm_identity",
-                go: "/Login"
-            },
-            {
-                title: "description",
-                go: "/Post"
-            },
-            {
-                title: "markunread_mailbox",
-                go: "/Portfolio"
-            }
-        ],
-        search: "검색할 아이디를 입력해주세요.",
-        users: [],
-    }),
-    components: {
-        Login,
-        Register
-    },
-    watch: {
-        search: function () {
-            this.getUsers();
-        }
-    },
-    methods: {
-        favorite() {
-            var bookmarkURL = window.location.href;
-            var bookmarkTitle = document.title;
-            var triggerDefault = false;
-            if (window.sidebar && window.sidebar.addPanel) {
-                window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
-            } else if (
-                (window.sidebar &&
-                    navigator.userAgent.toLowerCase().indexOf("firefox") >
-                        -1) ||
-                (window.opera && window.print)
-            ) {
-                var $this = $(this);
-                $this.attr("href", bookmarkURL);
-                $this.attr("title", bookmarkTitle);
-                $this.attr("rel", "sidebar");
-                $this.off(e);
-                triggerDefault = true;
-            } else if (window.external && "AddFavorite" in window.external) {
-                window.external.AddFavorite(bookmarkURL, bookmarkTitle);
-            } else {
-                alert(
-                    (navigator.userAgent.toLowerCase().indexOf("mac") != -1
-                        ? "Cmd"
-                        : "Ctrl") +
-                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
-                );
-            }
-            return triggerDefault;
-        },
-        async getUsers() {
-            const users = await RestService.getUsers();
-            for (const user of users) {
-                if (this.search === user.user_id.slice(0, this.search.length)) {
-
+    export default {
+        name: "Header",
+        data: () => ({
+            title: document.title,
+            port: "/Portfolio",
+            posts: "/Post",
+            login: "/Login",
+            items: [
+                {
+                    title: "perm_identity",
+                    go: "/Login"
+                },
+                {
+                    title: "description",
+                    go: "/Post"
+                },
+                {
+                    title: "markunread_mailbox",
+                    go: "/Portfolio"
                 }
+            ],
+            search: "검색할 아이디를 입력해주세요.",
+            users: [],
+        }),
+        components: {
+            Login,
+            Register
+        },
+        watch: {
+            search: function () {
+                this.getUsers();
             }
         },
-        resetInput() {
-            this.search = "";
+        methods: {
+            favorite() {
+                var bookmarkURL = window.location.href;
+                var bookmarkTitle = document.title;
+                var triggerDefault = false;
+                if (window.sidebar && window.sidebar.addPanel) {
+                    window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
+                } else if (
+                    (window.sidebar &&
+                        navigator.userAgent.toLowerCase().indexOf("firefox") >
+                        -1) ||
+                    (window.opera && window.print)
+                ) {
+                    var $this = $(this);
+                    $this.attr("href", bookmarkURL);
+                    $this.attr("title", bookmarkTitle);
+                    $this.attr("rel", "sidebar");
+                    $this.off(e);
+                    triggerDefault = true;
+                } else if (window.external && "AddFavorite" in window.external) {
+                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+                } else {
+                    alert(
+                        (navigator.userAgent.toLowerCase().indexOf("mac") != -1
+                            ? "Cmd"
+                            : "Ctrl") +
+                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
+                    );
+                }
+                return triggerDefault;
+            },
+            async getUsers() {
+                const users = await RestService.getUsers();
+                const userGroup = [];
+                for (let i = 0; i < 5; i++) {
+                    if (this.search === users[i].user_id.slice(0, this.search.length)) {
+                        userGroup.push(users[i].user_id)
+                    }
+                }
+                this.users = userGroup;
+            },
+            resetInput() {
+                this.search = "";
+            }
         }
-    }
-};
+    };
 </script>
 
 <style>
-.theme--light.v-list {
-    background: #ffc0cb;
-    color: white;
-    font-weight: bold;
-}
-
-@media screen and (max-width: 599px) {
-    .icons {
-        display: none;
+    .theme--light.v-list {
+        background: #ffc0cb;
+        color: white;
+        font-weight: bold;
     }
-}
 
-.Header {
-    z-index: 2;
-    position: absolute;
-    background-color: yellow;
-}
-#search {
-    background: white;
-    width: 25vw;
-    color: black;
-    padding: 5px;
-    margin-left: 1vw;
-    border: solid skyblue 2px;
-}
+    @media screen and (max-width: 599px) {
+        .icons {
+            display: none;
+        }
+    }
+
+    .Header {
+        z-index: 2;
+        position: absolute;
+        background-color: yellow;
+    }
+
+    #search {
+        background: white;
+        width: 30vw;
+        min-width: 25vw;
+        color: black;
+        padding: 5px;
+        border: solid yellow 2px;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
+
+    .v-input__slot {
+        margin-bottom: 0px;
+    }
+
+    .v-input {
+        width: 30vw;
+        min-width: 25vw;
+    }
+
+    .v-card {
+        position: absolute;
+        min-width: auto;
+        margin-left: 34px;
+    }
 </style>
