@@ -16,7 +16,7 @@
                     <v-icon style="margin-right: 10px;">search</v-icon>
                     <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
                 </div>
-                <v-card v-if="search">
+                <v-card v-if="search !== '검색할 아이디를 입력해주세요.'">
                     <v-list-tile v-for="(user, i) in users" :key="i">
                         <v-list-tile-action>
                             <v-icon @click="">people</v-icon>
@@ -148,9 +148,9 @@
             async getUsers() {
                 const users = await RestService.getUsers();
                 const userGroup = [];
-                for (const user of users) {
-                    if (this.search === user.user_id.slice(0, this.search.length)) {
-                        userGroup.push(user.user_id)
+                for (let i = 0; i < 5; i++) {
+                    if (this.search === users[i].user_id.slice(0, this.search.length)) {
+                        userGroup.push(users[i].user_id)
                     }
                 }
                 this.users = userGroup;
@@ -205,7 +205,5 @@
         position: absolute;
         min-width: auto;
         margin-left: 34px;
-        max-height: 160px;
-        overflow: scroll;
     }
 </style>
