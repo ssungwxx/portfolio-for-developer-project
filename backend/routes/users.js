@@ -189,23 +189,5 @@ router.delete("/:id", (req, res) => {
         .delete(req.body)
         .then(data => res.json(data));
 });
-/*
-// Add User
-router.post("/crypto/test", (req, res) => {
-    knex("users")
-        .insert(req.body)
-        .then(data =>
-            res.json({
-                status: "1",
-                code: "success"
-            })
-        )
-        .catch(function(error) {
-            res.json({
-                status: "-1",
-                code: error.code
-            });
-        });
-});
-*/
+
 module.exports = router;
