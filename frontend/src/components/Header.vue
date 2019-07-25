@@ -12,16 +12,19 @@
                 <v-toolbar-title style="align-self: center" class="white--text">{{ title }}</v-toolbar-title>
             </div>
             <div v-else>
-                <v-text-field id="search" v-model="search" @click="resetInput" value=""></v-text-field>
+                <div style="display: flex; ">
+                    <v-icon style="margin-right: 10px;">search</v-icon>
+                    <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+                </div>
                 <v-card v-if="search">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-                    <v-list-tile-action>
-                        <v-icon @click="">people</v-icon>
-                    </v-list-tile-action>
-                    <v-list-tile-content>
-                        <v-list-tile-title>{{ user }}</v-list-tile-title>
-                    </v-list-tile-content>
-                </v-list-tile>
+                        <v-list-tile-action>
+                            <v-icon @click="">people</v-icon>
+                        </v-list-tile-action>
+                        <v-list-tile-content>
+                            <v-list-tile-title>{{ user }}</v-list-tile-title>
+                        </v-list-tile-content>
+                    </v-list-tile>
                 </v-card>
             </div>
 
@@ -99,7 +102,7 @@
                     go: "/Portfolio"
                 }
             ],
-            search: "",
+            search: "검색할 아이디를 입력해주세요.",
             users: [],
         }),
         components: {
@@ -180,19 +183,29 @@
 
     #search {
         background: white;
-        width: 25vw;
+        width: 30vw;
+        min-width: 25vw;
         color: black;
         padding: 5px;
         border: solid yellow 2px;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
     }
+
     .v-input__slot {
         margin-bottom: 0px;
     }
+
     .v-input {
-        width: 25vw;
+        width: 30vw;
+        min-width: 25vw;
     }
+
     .v-card {
         position: absolute;
-        width: 25vw;
+        min-width: auto;
+        margin-left: 34px;
+        max-height: 160px;
+        overflow: scroll;
     }
 </style>
