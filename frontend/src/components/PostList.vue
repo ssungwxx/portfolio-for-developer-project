@@ -7,19 +7,22 @@
             px-3
         >
             <Post
+                :post_no="posts[i - 1].post_no"
                 :post_date="posts[i - 1].post_date"
                 :post_title="posts[i - 1].post_title"
                 :post_content="posts[i - 1].post_content"
+                :post_user_id="posts[i - 1].user_id"
             ></Post>
             <v-divider></v-divider>
         </v-flex>
 
-        <div class="plusbutton">
-            <v-flex xs12 text-xs-center round my-5 v-if="loadMore">
-                <v-btn color="#ffc0cb" dark v-on:click="loadMorePosts" style="width:106px;">
-                    <v-icon size="25" class="mr-2">fa-plus</v-icon>더보기
-                </v-btn>
-            </v-flex>
+        <div class="plus" v-if="loadMore">
+            <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
+                <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+            </v-btn>
+            <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" href="/PortfolioWrite" dark>
+                <v-icon size="25" class="mr-2">fa-edit</v-icon>Write
+            </v-btn>
         </div>
     </v-layout>
 </template>
@@ -30,8 +33,8 @@ import RestService from "@/services/RestService";
 export default {
     name: "PostList",
     props: {
-        column: { type: Number, default: 4 },
-        limits: { type: Number, default: 4 },
+        column: { type: Number, default: 3 },
+        limits: { type: Number, default: 6 },
         loadMore: { type: Boolean, default: false }
     },
     data() {
@@ -56,15 +59,16 @@ export default {
             }
         },
         loadMorePosts() {
-            this.limits += 4;
+            this.limits += 6;
         }
     }
 };
 </script>
 <style>
-.plusbutton {
-    margin-bottom: 50px;
-    margin-left: 45%;
+.plus {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 .mw-700 {

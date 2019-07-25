@@ -18,11 +18,18 @@ router.get("/", (req, res) => {
         .then(data => res.json(data));
 });
 
+// Get count(*)
+router.get("/count", (req, res) => {
+    knex("posts")
+        .count("post_no as cnt")
+        .then(data => res.json(data[0].cnt));
+});
+
 // Get one detailed post
 router.get("/:id", (req, res) => {
     knex("posts")
         .select("*")
-        .where("user_id", req.params.id)
+        .where("post_no", req.params.id)
         .then(data => res.json(data));
 });
 

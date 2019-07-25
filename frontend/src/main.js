@@ -27,6 +27,12 @@ Vue.use(require("vue-moment"));
 import VueResource from "vue-resource";
 Vue.use(VueResource);
 
+//관리자 페이지를 위한 side bar
+import VueSidebarMenu from 'vue-sidebar-menu'
+import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
+Vue.use(VueSidebarMenu)
+
+
 Vue.use(Vuetify, {
     iconfont: "fa",
     theme: {
