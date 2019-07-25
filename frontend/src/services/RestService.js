@@ -85,8 +85,13 @@ export default {
             .then(response => (this.token = response.data));
     },
     translateText(data) {
-      return axios
-          .post("http://70.12.247.68:3000/en", data)
-          .then(response => (this.enText = response.data));
+        return axios
+            .post("http://70.12.247.68:3000/en", data)
+            .then(response => (this.enText = response.data));
     },
+    getSearchUsers(data) {
+        return axios
+            .get("http://70.12.247.68:3000/users/search" + data)
+            .then(response => (this.users = response.data));
+    }
 };
