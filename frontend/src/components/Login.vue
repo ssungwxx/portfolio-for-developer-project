@@ -3,9 +3,15 @@
         <v-dialog v-model="dialog" max-width="500">
             <template v-slot:activator="{ on }">
                 <v-btn class="headerButton" icon v-on="on">
-                        <v-icon color="white">perm_identity</v-icon>
+                    <v-icon color="white">perm_identity</v-icon>
                 </v-btn>
-                <v-btn class="sidebarButton" flat v-on="on" style="width: 160px; left: 0px; height: 48px; z-index: 2;" fixed>
+                <v-btn
+                    class="sidebarButton"
+                    flat
+                    v-on="on"
+                    style="width: 160px; left: 0px; height: 48px; z-index: 2;"
+                    fixed
+                >
                     <v-icon style="margin-right: auto; margin-left: 17px;">perm_identity</v-icon>
                 </v-btn>
             </template>
@@ -23,11 +29,8 @@
                 </v-btn>
                 <br />
                 <v-btn color="blue" v-on:click="loginWithFacebook" style="width:80%;" dark round>
-                <v-icon size="25" class="mr-2">fa-facebook</v-icon>
-                Facebook 로그인
+                    <v-icon size="25" class="mr-2">fa-facebook</v-icon>Facebook 로그인
                 </v-btn>
-
-
 
                 <br />
 
@@ -77,15 +80,18 @@ export default {
             this.$store.state.grade = "1";
         },
         async loginWithFacebook() {
-        const result = await FirebaseService.loginWithFacebook();
-        this.$store.state.accessToken = result.credential.accessToken;
-        this.$store.state.user = result.user;
+            const result = await FirebaseService.loginWithFacebook();
+            this.$store.state.accessToken = result.credential.accessToken;
+            this.$store.state.user = result.user;
             this.$store.state.grade = "1";
-        if(this.$store.state.accessToken != '' && this.$store.state.user != '') {
-         this.$session.set('email', this.$store.state.user.email);
-      }
-      this.$emit('update:loginvisible', !this.loginvisible);
-      },
+            if (
+                this.$store.state.accessToken != "" &&
+                this.$store.state.user != ""
+            ) {
+                this.$session.set("email", this.$store.state.user.email);
+            }
+            this.$emit("update:loginvisible", !this.loginvisible);
+        },
         async insertLog() {
             this.insertLog = await RestService.insertLog("LoginPage");
         },
@@ -113,11 +119,11 @@ export default {
         clear_user() {
             this.id = "";
             this.password = "";
-        },
+        }
     },
     mounted() {
         //console.log(this.$store.state);
-    },
+    }
 };
 </script>
 
