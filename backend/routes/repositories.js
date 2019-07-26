@@ -66,7 +66,7 @@ router.post("/repos", (req, res) => {
                 data = JSON.parse(data);
                 for (let idx = 0; idx < data.length; idx++) {
                     result[idx] = {
-                        user_id: req.body.user_gitId,
+                        user_id: req.body.user_id,
                         repo_title: data[idx].name,
                         repo_add: data[idx].web_url,
                         repo_recentDate:
