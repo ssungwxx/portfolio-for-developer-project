@@ -9,60 +9,32 @@
         <v-icon style="margin-right: auto; margin-left: 17px;">person_add</v-icon>
       </v-btn>
     </template>
-    <v-card-title>
+
+    <v-card>
+      <v-card-title>
         <span class="headline">Register</span>
       </v-card-title>
-      <v-form
-      ref="form"
-      lazy-validation>
-
-          <v-text-field
-          v-model="user.user_name"
-          :rules="[() => !!user.user_name || 'This field is required']"
-          label="Full Name*"
-          required></v-text-field>
-
-          <v-text-field
-          v-model="user.user_id"
-          :rules="[
-              () => !!user.user_id || 'This field is required',
-              () => !!user.user_id && id.length <= 20 || 'ID must be less than 20 characters']"
-              label="ID*"
-              counter="20"
-              required></v-text-field>
-
-          <v-text-field
-          v-model="user.user_pw"
-          :append-icon="show ? 'visibility' : 'visibility_off'"
-          :rules="[() => !!user.user_pw || 'This field is required',
-            () => !!user.user_pw && password.length >= 8 || 'Password must be at least 8 characters']" :type="show ? 'text' : 'password'"
-            counter
-            @click:append="show = !show"
-            label="Password"
-            required></v-text-field>
-
-          <v-text-field
-          v-model="user.user_email"
-          :rules="[
-          () => !!user.user_email || 'This field is required',
-          () => /.+@.+\..+/.test(user.user_email) || 'E-mail must be valid.']"
-          label="E-mail"
-          required></v-text-field>
-
-          <v-btn text @click="dialog = false">Cancel</v-btn>
-          <v-spacer></v-spacer>
-          <v-slide-x-reverse-transition>
-            <v-tooltip v-if="formHasErrors" left>
-              <template v-slot:activator="{ on }">
-                <v-btn icon class="my-0" @click="resetForm" v-on="on">
-                  <v-icon>refresh</v-icon>
-                </v-btn>
-              </template>
-              <span>양식 새로고침</span>
-            </v-tooltip>
-          </v-slide-x-reverse-transition>
-          <v-btn color="primary" text @click="submit">Submit</v-btn>
-      </v-form>
+      <v-card-text>
+        <v-container grid-list-md>
+          <v-layout column wrap>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-text-field v-model="user.user_name" :rules="nameRules" label="Full name*" required></v-text-field>
+              <v-text-field v-model="user.user_id" :rules="idRules" label="ID*" :counter="20" required></v-text-field>
+              <v-text-field v-model="user.user_pw" :append-icon="show ? 'visibility' : 'visibility_off'" :rules="pwRules" :type="show ? 'text' : 'password'" label="Password*" hint="Password must be at least 8 characters." counter
+                @click:append="show = !show" required></v-text-field>
+              <v-text-field v-model="user.user_email" :rules="emailRules" label="E-mail*" required></v-text-field>
+            </v-form>
+          </v-layout>
+        </v-container>
+        <small>*indicates required field</small>
+      </v-card-text>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="blue darken-1" flat @click="close">Close</v-btn>
+        <v-btn color="blue darken-1" flat @click="reset">Reset</v-btn>
+        <v-btn color="blue darken-1" flat @click="submit">Submit</v-btn>
+      </v-card-actions>
+    </v-card>
   </v-dialog>
 </v-layout>
 </template>
@@ -73,73 +45,62 @@ import RestService from "../services/RestService";
 export default {
   data() {
     return {
+      valid: true,
       dialog: false,
+      nameRules: [v => !!v || 'User name is required'],
+      idRules: [
+        v => !!v || 'ID is required',
+        v => (v && v.length <= 20) || 'ID must be less than 20 characters'
+      ],
+      pwRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+      ],
+      show: false,
       user: {
         user_id: "",
         user_pw: "",
         user_name: "",
         user_email: ""
       },
-      formHasErrors: false,
-      show: false,
-      check: [{
-        cnt: ""
-      }],
       err_stat: {
         status: "",
-        code: ""
+        msg: ""
       }
     };
   },
   methods: {
-    submit() {
-      if(this.$refs.form.validate()) {
-        this.check_user();
-      }
-    },
-    resetForm() {
-      this.$refs.form.reset();
-    },
-    async check_user() {
-      if (this.check_email()) {
+    async submit() {
+      if (this.$refs.form.validate()) {
         this.err_stat = await RestService.insertUser(this.user);
         if (this.err_stat.status == 200) {
           alert("가입 성공!");
-          this.clear_user();
+          this.$refs.form.reset();
           this.dialog = false;
         } else {
-          if (this.err_stat.msg.equals("overlap id")) {
+          if (this.err_stat.msg == "overlap id") {
             alert("중복된 ID입니다.");
           } else {
-            alert(this.err_stat.msg);
+            alert("유효하지 않은 양식이 있습니다.");
           }
         }
-      } else {
-        alert("E-mail형식이 올바르지 않습니다.");
       }
     },
-    clear_user() {
-      this.user.user_id = "";
-      this.user.user_pw = "";
-      this.user.user_name = "";
-      this.user.user_email = "";
-      this.user.user_gitAdd = "";
-      this.user.user_gitToken = "";
+    reset() {
+      this.$refs.form.reset();
     },
-    check_email() {
-      let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      if (this.user.user_email.match(regExp) != null) {
-        return true;
-      } else {
-        return false;
-      }
+    close() {
+      this.$refs.form.reset();
+      this.dialog = false;
     },
-    check_null() {
-      if (this.user.user_id == "") {
-        document.getElementById('iddd').focus();
-        return false;
-      }
-      return true;
+  },
+  watch: {
+    dialog: function() {
+      this.$refs.form.reset();
     }
   }
 };
