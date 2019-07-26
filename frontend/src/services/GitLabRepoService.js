@@ -1,7 +1,6 @@
 import Api from "../services/Api";
 
 const BASE_URL = "https://lab.ssafy.com/api/v4";
-
 export default {
     async getPushed(project_id) {
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
@@ -21,12 +20,11 @@ export default {
                 if (!(created_at in date)) {
                     date[created_at] = 0
                 }
-                if (event.action_name === "pushed") {
+                if (event.action_name === "pushed to") {
                     date[created_at] += 1
                 }
             }
         }
-        console.log(date)
         return date
     },
     calendar(created_at) {
@@ -38,7 +36,6 @@ export default {
         if (hour >= 24) {
             hour -= 24;
             day += 1;
-
             if (month in [1, 3, 5, 7, 8, 10, 12]) {
                 if (day > 31) {
                     day -= 31;
@@ -57,7 +54,6 @@ export default {
                     }
                 }
             }
-
             if (month > 12) {
                 month -= 12;
                 year += 1;
