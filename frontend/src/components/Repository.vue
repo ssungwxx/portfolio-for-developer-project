@@ -104,7 +104,6 @@ export default {
     },
     methods: {
         commitToValue(oneData) {
-            // let authorId = oneData.author_id
             const new_value = this.valueall.slice();
             const gitrepoDay = parseInt(oneData.created_at.slice(8, 10));
             if (
@@ -118,16 +117,12 @@ export default {
                 new_value[gitrepoDay - 8] += 1;
             }
             this.valueall = new_value;
-            // console.log(this.valueall)
         },
         commitToVuex(severalData) {
             severalData.data.forEach(this.commitToValue);
         },
         async setCommit() {
             const resultArray = await GitlabService.getCommits(this.member.id);
-
-            // this.allCommits = result.data.length
-            // console.log(result.data)
             for (const result of resultArray) {
                 for (const rdata of result.data) {
                     if (rdata.action_name === "pushed to") {
@@ -135,21 +130,18 @@ export default {
                     }
                 }
             }
-            // console.log(result.data)
             this.commitToVuex(resultArray[0]);
             this.commitToVuex(resultArray[1]);
         }
     },
     watch: {
         valueall: function(new_val) {
-            // console.log("hihi")
         }
     }
 };
 </script>
 <style>
 .zoom {
-    /*zoom: 200%;*/
     width: 100%;
     height: 100%;
 }
