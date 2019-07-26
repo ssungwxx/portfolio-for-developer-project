@@ -8,11 +8,7 @@
         <v-content>
             <router-view />
             <TopButton />
-<<<<<<< HEAD
             <!--<TranslateButton/>-->
-=======
-<!--            <TranslateButton/>-->
->>>>>>> master
         </v-content>
 
         <v-content class="footerwrap">
