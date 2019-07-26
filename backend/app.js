@@ -5,7 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var users = require("./routes/users");
-var portfolios = require("./routes/portfolios");
+var repositories = require("./routes/repositories");
 var posts = require("./routes/posts");
 var logs = require("./routes/webLog");
 
@@ -64,7 +64,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // users REST API
 app.use("/users", users);
-app.use("/portfolios", portfolios);
+app.use("/repositories", repositories);
 app.use("/posts", posts);
 app.use("/logs", logs);
 app.use("/en", enPage);
