@@ -7,8 +7,9 @@ var logger = require("morgan");
 var users = require("./routes/users");
 var repositories = require("./routes/repositories");
 var posts = require("./routes/posts");
+var repository_comments = require("./routes/repo_comment");
+var post_comments = require("./routes/post_comment");
 var logs = require("./routes/webLog");
-
 var enPage = require("./routes/enPage");
 
 var bodyParser = require("body-parser");
@@ -68,6 +69,8 @@ app.use("/repositories", repositories);
 app.use("/posts", posts);
 app.use("/logs", logs);
 app.use("/en", enPage);
+app.use("/rcom", repository_comments);
+app.use("/pcom", post_comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
