@@ -17,8 +17,8 @@ var bodyParser = require("body-parser");
 var cors = require("cors");
 
 var app = express();
-// cors 부분 허용
 
+// cors 부분 허용
 var whitelist = ["70.12.246.138:8080"];
 
 var corsOptions = {

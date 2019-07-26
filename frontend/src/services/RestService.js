@@ -26,29 +26,29 @@ export default {
             .put("http://70.12.246.138:3000/posts", data)
             .then(response => (this.posts = response.data));
     },
-    getPortfolios() {
+    getRepositories() {
         return axios
-            .get("http://70.12.246.138:3000/portfolios")
+            .get("http://70.12.246.138:3000/repositories")
             .then(response => (this.portfolios = response.data));
     },
-    getPortfolio(id) {
+    getRepository(id) {
         return axios
-            .get("http://70.12.246.138:3000/portfolios/" + id)
+            .get("http://70.12.246.138:3000/repositories/" + id)
             .then(response => (this.portfolios = response.data));
     },
-    insertPortfolio(data) {
+    insertRepository(data) {
         return axios
-            .post("http://70.12.246.138:3000/portfolios", data)
+            .post("http://70.12.246.138:3000/repositories", data)
             .then(response => (this.portfolios = response.data));
     },
-    deletePortfolio(id) {
+    deleteRepository(id) {
         return axios
-            .delete("http://70.12.246.138:3000/portfolios/" + id)
+            .delete("http://70.12.246.138:3000/repositories/" + id)
             .then(response => (this.portfolios = response.data));
     },
-    updatePortfolio(id, data) {
+    updateRepository(id, data) {
         return axios
-            .put("http://70.12.246.138:3000/portfolios/" + id, data)
+            .put("http://70.12.246.138:3000/repositories/" + id, data)
             .then(response => (this.portfolios = response.data));
     },
     getUsers() {
