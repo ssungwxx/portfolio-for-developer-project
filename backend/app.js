@@ -7,8 +7,9 @@ var logger = require("morgan");
 var users = require("./routes/users");
 var repositories = require("./routes/repositories");
 var posts = require("./routes/posts");
+var repository_comments = require("./routes/repo_comment");
+var post_comments = require("./routes/post_comment");
 var logs = require("./routes/webLog");
-
 var enPage = require("./routes/enPage");
 
 var bodyParser = require("body-parser");
@@ -16,8 +17,8 @@ var bodyParser = require("body-parser");
 var cors = require("cors");
 
 var app = express();
-// cors 부분 허용
 
+// cors 부분 허용
 var whitelist = ["70.12.246.138:8080"];
 
 var corsOptions = {
@@ -29,18 +30,6 @@ var corsOptions = {
 };
 
 app.use(cors(corsOptions));
-
-// CORS 회피용
-/*
-app.use(function(req, res, next) {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET", "POST");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With, content-type, Authorization"
-  );
-});
-*/
 
 app.use(
     bodyParser.urlencoded({
@@ -68,6 +57,8 @@ app.use("/repositories", repositories);
 app.use("/posts", posts);
 app.use("/logs", logs);
 app.use("/en", enPage);
+app.use("/rcom", repository_comments);
+app.use("/pcom", post_comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
