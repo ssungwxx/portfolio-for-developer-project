@@ -8,7 +8,7 @@
         <v-content>
             <router-view />
             <TopButton />
-            <!--<TranslateButton/>-->
+<!--            <TranslateButton/>-->
         </v-content>
 
         <v-content class="footerwrap">

@@ -4,7 +4,8 @@
     <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/GitLabRepoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/GitLabRepoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -58,6 +59,7 @@
       <workItem from="1563861247523" duration="3233000" />
       <workItem from="1563927491701" duration="2631000" />
       <workItem from="1563945797781" duration="1234000" />
+      <workItem from="1564040169387" duration="604000" />
     </task>
     <servers />
   </component>
