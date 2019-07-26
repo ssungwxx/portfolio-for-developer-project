@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export default {
+    // Post 관련 함수
     getPosts() {
         return axios
             .get("http://70.12.246.138:3000/posts")
@@ -26,31 +27,33 @@ export default {
             .put("http://70.12.246.138:3000/posts", data)
             .then(response => (this.posts = response.data));
     },
-    getPortfolios() {
+    // Repository 관련 함수
+    getRepositories() {
         return axios
-            .get("http://70.12.246.138:3000/portfolios")
+            .get("http://70.12.246.138:3000/repositories")
             .then(response => (this.portfolios = response.data));
     },
-    getPortfolio(id) {
+    getRepository(id) {
         return axios
-            .get("http://70.12.246.138:3000/portfolios/" + id)
+            .get("http://70.12.246.138:3000/repositories/" + id)
             .then(response => (this.portfolios = response.data));
     },
-    insertPortfolio(data) {
+    insertRepository(data) {
         return axios
-            .post("http://70.12.246.138:3000/portfolios", data)
+            .post("http://70.12.246.138:3000/repositories", data)
             .then(response => (this.portfolios = response.data));
     },
-    deletePortfolio(id) {
+    deleteRepository(id) {
         return axios
-            .delete("http://70.12.246.138:3000/portfolios/" + id)
+            .delete("http://70.12.246.138:3000/repositories/" + id)
             .then(response => (this.portfolios = response.data));
     },
-    updatePortfolio(id, data) {
+    updateRepository(id, data) {
         return axios
-            .put("http://70.12.246.138:3000/portfolios/" + id, data)
+            .put("http://70.12.246.138:3000/repositories/" + id, data)
             .then(response => (this.portfolios = response.data));
     },
+    // User 관련 함수
     getUsers() {
         return axios
             .get("http://70.12.246.138:3000/users")
@@ -76,22 +79,56 @@ export default {
             .delete("http://70.12.246.138:3000/users/" + id)
             .then(response => (this.portfolios = response.data));
     },
-    insertLog(path) {
-        return axios.post("http://70.12.246.138:3000/logs/" + path);
-    },
     loginUser(data) {
         return axios
             .post("http://70.12.246.138:3000/users/login", data)
             .then(response => (this.token = response.data));
     },
+    getSearchUsers(data) {
+        return axios
+            .get("http://70.12.247.68:3000/users/search" + data)
+            .then(response => (this.users = response.data));
+    },
+    // 번역 관련 함수
     translateText(data) {
         return axios
             .post("http://70.12.247.68:3000/en", data)
             .then(response => (this.enText = response.data));
     },
-    getSearchUsers(data) {
-        return axios
-            .get("http://70.12.247.68:3000/users/search" + data)
-            .then(response => (this.users = response.data));
+    //Log관련 함수
+    insertLog(path) {
+        return axios.post("http://70.12.246.138:3000/logs/" + path);
+    },
+    //Post Comment관련 함수
+    getAllPostComments() {
+        return axios.get("http://70.12.246.138:3000/pcom");
+    },
+    getOnePostComments(post_no) {
+        return axios.get("http://70.12.246.138:3000/pcom/" + post_no);
+    },
+    insertPostComment(data) {
+        return axios.post("http://70.12.246.138:3000/pcom", data);
+    },
+    deletePostComment(pcom_no) {
+        return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
+    },
+    updatePostComment(data) {
+        return axios.put("http://70.12.246.138:3000/pcom", data);
+    },
+    //Repository comment관련 함수
+    getAllRepoComments() {
+        return axios.get("http://70.12.246.138:3000/rcom");
+    },
+    getOneRepoCommeents(repo_no) {
+        return axios.get("http://70.12.246.138:3000/rcom/" + repo_no);
+    },
+    insertRepoComment(data) {
+        return axios.post("http://70.12.246.138:3000/rom", data);
+    },
+    deleteRepoComment(rcom_no) {
+        return axios.delete("http://70.12.246.138:3000/rcom" + rcom_no);
+    },
+    updateRepoComment(data) {
+        return axios.put("http://70.12.246.138:3000/rcom", data);
     }
 };

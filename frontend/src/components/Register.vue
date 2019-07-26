@@ -16,24 +16,23 @@
       </v-card-title>
       <v-card-text>
         <v-container grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="user.user_name" label="Full name*" required></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field v-model="user.user_id" label="ID*" required></v-text-field>
-            </v-flex>
-            <v-flex xs12>
-              <v-text-field v-model="user.user_pw" label="Password*" type="password" required></v-text-field>
-            </v-flex>
+          <v-layout column wrap>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <v-text-field v-model="user.user_name" :rules="nameRules" label="Full name*" required></v-text-field>
+              <v-text-field v-model="user.user_id" :rules="idRules" label="ID*" :counter="20" required></v-text-field>
+              <v-text-field v-model="user.user_pw" :append-icon="show ? 'visibility' : 'visibility_off'" :rules="pwRules" :type="show ? 'text' : 'password'" label="Password*" hint="Password must be at least 8 characters." counter
+                @click:append="show = !show" required></v-text-field>
+              <v-text-field v-model="user.user_email" :rules="emailRules" label="E-mail*" required></v-text-field>
+            </v-form>
           </v-layout>
         </v-container>
         <small>*indicates required field</small>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn color="blue darken-1" flat @click="dialog = false">Close</v-btn>
-        <v-btn color="blue darken-1" flat @click="check_user()">Register</v-btn>
+        <v-btn color="blue darken-1" flat @click="close">Close</v-btn>
+        <v-btn color="blue darken-1" flat @click="reset">Reset</v-btn>
+        <v-btn color="blue darken-1" flat @click="submit">Submit</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -46,66 +45,62 @@ import RestService from "../services/RestService";
 export default {
   data() {
     return {
+      valid: true,
       dialog: false,
+      nameRules: [v => !!v || 'User name is required'],
+      idRules: [
+        v => !!v || 'ID is required',
+        v => (v && v.length <= 20) || 'ID must be less than 20 characters'
+      ],
+      pwRules: [
+        v => !!v || 'Password is required',
+        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+      ],
+      show: false,
       user: {
         user_id: "",
         user_pw: "",
-        user_name: ""
+        user_name: "",
+        user_email: ""
       },
-      check: [{
-        cnt: ""
-      }],
       err_stat: {
         status: "",
-        code: ""
+        msg: ""
       }
     };
   },
   methods: {
-    async check_user() {
-      if (this.check_null()) {
-        if (this.check_email()) {
-          this.check = await RestService.getUser(this.user.user_id);
-          if (this.check[0].cnt == 0) {
-            this.err_stat = await RestService.insertUser(this.user);
-            if (this.err_stat.status == 1) {
-              alert("가입 성공!");
-            } else {
-              alert(this.err_stat.code);
-            }
-          } else {
-            alert("중복된 Email입니다.");
-          }
-          this.clear_user();
+    async submit() {
+      if (this.$refs.form.validate()) {
+        this.err_stat = await RestService.insertUser(this.user);
+        if (this.err_stat.status == 200) {
+          alert("가입 성공!");
+          this.$refs.form.reset();
+          this.dialog = false;
         } else {
-          alert("ID를 Email형식으로 입력해주세요");
+          if (this.err_stat.msg == "overlap id") {
+            alert("중복된 ID입니다.");
+          } else {
+            alert("유효하지 않은 양식이 있습니다.");
+          }
         }
-      } else {
-        alert("입력된 데이터에 공백값이 포함되어 있습니다.");
       }
     },
-    clear_user() {
-      this.user.user_id = "";
-      this.user.user_pw = "";
-      this.user.user_name = "";
-      this.user.user_pw = "";
+    reset() {
+      this.$refs.form.reset();
     },
-    check_email() {
-      let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-      if (this.user.user_id.match(regExp) != null) {
-        return true;
-      } else {
-        return false;
-      }
+    close() {
+      this.$refs.form.reset();
+      this.dialog = false;
     },
-    check_null() {
-      if (
-        this.user.user_id == "" ||
-        this.user.user_pw == "" ||
-        this.user.user_name == ""
-      )
-        return false;
-      return true;
+  },
+  watch: {
+    dialog: function() {
+      this.$refs.form.reset();
     }
   }
 };
