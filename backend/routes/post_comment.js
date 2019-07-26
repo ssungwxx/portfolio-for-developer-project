@@ -1,45 +1,44 @@
 var express = require("express");
 var router = express.Router();
-
-// knex
 const knex = require("knex")(require("../knexfile"));
 
-// Get All replies
+// Get all post's comments sorted by datetime
 router.get("/", (req, res) => {
-    knex("replies")
+    knex("posts_comment")
         .select("*")
+        .orderBy("pcom_date", "desc")
         .then(data => res.json(data));
 });
 
-// Get post's replies
+// Get one post's comments sorted by datetime
 router.get("/:post_no", (req, res) => {
-    knex("replies")
+    knex("posts_comment")
         .select("*")
         .where("post_no", req.params.post_no)
-        .orderBy("reply_date", "desc")
+        .orderBy("")
         .then(data => res.json(data));
 });
 
-// insert reply
+// Insert One comment
 router.post("/", (req, res) => {
-    knex("replies")
+    knex("posts_comment")
         .insert(req.body)
         .then(data => res.json(data));
 });
 
-// update reply
-router.put("/", (req, res) => {
-    knex("replies")
+// Update One comment
+router.put("/:pcom_no", (req, res) => {
+    knex("posts_comment")
         .update(req.body)
-        .where("reply_no", req.body.reply_no)
+        .where("pcom_no", req.params.pcom_no)
         .then(data => res.json(data));
 });
 
-// delete reply
-router.delete("/:reply_no", (req, res) => {
-    knex("replies")
+// Delete One comment
+router.delete("/:pcom_no", (req, res) => {
+    knex("posts_comment")
         .delete()
-        .where("reply_no", req.params.reply_no)
+        .where("pcom_no", req.params.pcom_no)
         .then(data => res.json(data));
 });
 

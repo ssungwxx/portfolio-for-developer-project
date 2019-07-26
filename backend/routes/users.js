@@ -8,7 +8,101 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
+// User model
+var User = require("../models/User");
+
+// crypto
+var crypto = require("crypto");
+
+// crypto register
+router.post("/", (req, res) => {
+    if (!req.body.user_pw) {
+        res.json({
+            status: "400",
+            msg: "no data"
+        });
+        return;
+    }
+    crypto.randomBytes(64, (err, buf) => {
+        crypto.pbkdf2(
+            req.body.user_pw,
+            buf.toString("base64"),
+            157913, // hash 함수 반복횟수
+            64,
+            "sha512",
+            (err, key) => {
+                User.user_id = req.body.user_id;
+                User.user_pw = key.toString("base64");
+                User.user_salt = buf.toString("base64");
+                User.user_name = req.body.user_name;
+                User.user_email = req.body.user_email;
+
+                if (User.user_id && User.user_pw && User.user_name) {
+                    knex("users")
+                        .insert(User)
+                        .then(data =>
+                            res.json({
+                                status: 200,
+                                msg: "success"
+                            })
+                        )
+                        .catch(err =>
+                            res.json({
+                                status: 400,
+                                msg: "overlap id"
+                            })
+                        );
+                } else {
+                    res.json({
+                        status: 400,
+                        msg: "no data"
+                    });
+                }
+            }
+        );
+    });
+});
+
+//Login
+router.post("/login", (req, res) => {
+    knex("users")
+        .select("user_salt", "user_pw")
+        .where("user_id", req.body.user_id)
+        .then(data => {
+            if (data[0] == null) {
+                res.json({
+                    status: 400,
+                    msg: "wrong id"
+                });
+            } else {
+                crypto.pbkdf2(
+                    req.body.user_pw,
+                    data[0].user_salt,
+                    157913,
+                    64,
+                    "sha512",
+                    (err, key) => {
+                        console.log(key.toString("base64"));
+                        console.log(data[0].user_pw);
+                        if (data[0].user_pw == key.toString("base64")) {
+                            res.json({
+                                status: 200,
+                                msg: "success"
+                            });
+                        } else {
+                            res.json({
+                                status: 400,
+                                msg: "wrong password"
+                            });
+                        }
+                    }
+                );
+            }
+        });
+});
+
 // Login Authenticate by pwa
+/*
 router.post("/login", (req, res) => {
     let token = jwt.sign(
         {
@@ -65,15 +159,6 @@ router.post("/login", (req, res) => {
             }
         });
 });
-
-// Login ver2
-/*
-router.post("/login", (req, res) => {
-    knex("users")
-        .select("*")
-        .where("user_id", req.body.user_id)
-        .then(data => res.json(data));
-});
 */
 
 // Get All Users Info
@@ -83,30 +168,20 @@ router.get("/", (req, res) => {
         .then(data => res.json(data));
 });
 
-// Get One User Information
-router.get("/:id", (req, res) => {
+// Get User Search
+router.get("/search/:id", (req, res) => {
     knex("users")
-        .count("* as cnt")
-        .where("user_id", req.params.id)
+        .where("user_id", "like", req.params.id + "%")
+        .limit(5)
+        .orderBy("user_id", "desc")
         .then(data => res.json(data));
 });
 
-// Add User
-router.post("/", (req, res) => {
+// Get One User Information
+router.get("/:id", (req, res) => {
     knex("users")
-        .insert(req.body)
-        .then(data =>
-            res.json({
-                status: "1",
-                code: "success"
-            })
-        )
-        .catch(function(error) {
-            res.json({
-                status: "-1",
-                code: error.code
-            });
-        });
+        .where("user_id", req.params.id)
+        .then(data => res.json(data));
 });
 
 // Update User
