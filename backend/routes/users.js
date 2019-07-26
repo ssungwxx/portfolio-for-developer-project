@@ -35,6 +35,7 @@ router.post("/", (req, res) => {
                 User.user_pw = key.toString("base64");
                 User.user_salt = buf.toString("base64");
                 User.user_name = req.body.user_name;
+                User.user_email = req.body.user_email;
 
                 if (User.user_id && User.user_pw && User.user_name) {
                     knex("users")
