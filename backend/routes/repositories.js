@@ -4,9 +4,6 @@ const knex = require("knex")(require("../knexfile"));
 
 var request = require("request");
 
-// User model
-//var Repository = require("../models/Repository");
-
 // Get All Repositories
 router.get("/", (req, res) => {
     knex("repositories")
