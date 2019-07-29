@@ -4,8 +4,12 @@
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/GitLabRepoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/GitLabRepoService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/RestService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,12 +19,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="910" />
-    <option name="y" value="5" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
   </component>
   <component name="ProjectId" id="1OR6zB8q1fE7TMJQFZVN3ocBrof" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -93,7 +91,7 @@
       <workItem from="1564014971882" duration="14834000" />
       <workItem from="1564099835123" duration="14589000" />
       <workItem from="1564130309557" duration="471000" />
-      <workItem from="1564360942070" duration="9958000" />
+      <workItem from="1564360942070" duration="21841000" />
     </task>
     <servers />
   </component>
@@ -126,5 +124,22 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/views/HomePage.vue</url>
+          <line>18</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/views/UserPage.vue</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -2,7 +2,7 @@ import Api from "../services/Api";
 
 export default {
     async getPushed(user_add, project_id) {
-        const BASE_URL = user_add;
+        const BASE_URL = `${user_add}/api/v4`;
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
         const date = {};
         const pushed = [0] * 14;
@@ -60,5 +60,5 @@ export default {
             }
         }
         return String(month) + "-" + String(day)
-    }
+    },
 };

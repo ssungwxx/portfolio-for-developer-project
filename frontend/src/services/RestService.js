@@ -31,22 +31,22 @@ export default {
     getRepositories() {
         return axios
             .get("http://70.12.246.138:3000/repositories")
-            .then(response => (this.repositories = response.data));
+            .then(response => (this.repos = response.data));
     },
     getRepository(id) {
         return axios
             .get("http://70.12.246.138:3000/repositories/" + id)
-            .then(response => (this.repositories = response.data));
+            .then(response => (this.repos = response.data));
     },
     insertRepository(data) {
         return axios
             .post("http://70.12.246.138:3000/repositories", data)
-            .then(response => console.log(response.data));
+            .then(response => (this.repos = response.data));
     },
     deleteRepository(id) {
         return axios
             .delete("http://70.12.246.138:3000/repositories/" + id)
-            .then(response => (this.repositories = response.data));
+            .then(response => (this.repos = response.data));
     },
     updateRepository(id, data) {
         return axios
