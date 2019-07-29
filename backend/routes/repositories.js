@@ -8,7 +8,7 @@ var request = require("request");
 router.get("/", (req, res) => {
     knex("repositories")
         .select("*")
-        .orderBy("repo_date", "desc")
+        .orderBy("repo_createdDate", "desc")
         .then(data => res.json(data));
 });
 
@@ -17,7 +17,7 @@ router.get("/:user_id", (req, res) => {
     knex("repositories")
         .select("*")
         .where("user_id", req.params.user_id)
-        .orderBy("repo_date", "desc")
+        .orderBy("repo_createdDate", "desc")
         .then(data => res.json(data));
 });
 
