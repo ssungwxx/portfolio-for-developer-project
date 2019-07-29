@@ -4,14 +4,11 @@ const knex = require("knex")(require("../knexfile"));
 
 var request = require("request");
 
-// User model
-//var Repository = require("../models/Repository");
-
 // Get All Repositories
 router.get("/", (req, res) => {
     knex("repositories")
         .select("*")
-        .orderBy("repo_date", "desc")
+        .orderBy("repo_createdDate", "desc")
         .then(data => res.json(data));
 });
 
@@ -20,7 +17,7 @@ router.get("/:user_id", (req, res) => {
     knex("repositories")
         .select("*")
         .where("user_id", req.params.user_id)
-        .orderBy("repo_date", "desc")
+        .orderBy("repo_createdDate", "desc")
         .then(data => res.json(data));
 });
 
@@ -80,6 +77,12 @@ router.post("/repos", (req, res) => {
                     };
                 }
 
+                // 기존 repositories 삭제
+                knex("repositories")
+                    .delete()
+                    .where("user_id", result.user_id);
+
+                // 새로운 repositories 등록
                 knex("repositories")
                     .insert(result)
                     .then(data =>
@@ -91,7 +94,10 @@ router.post("/repos", (req, res) => {
 
                 //res.json(result);
             } else {
-                data[0] = { status: 400 };
+                res.json({
+                    status: 400,
+                    msg: "fail"
+                });
             }
         }
     );

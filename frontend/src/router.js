@@ -32,13 +32,6 @@ export default new Router({
             name: "portfolio",
             component: PortfolioPage
         },
-        /*  Login Page 삭제
-  {
-      path: "/login",
-      name: "login",
-      component: LoginPage
-    },
-         */
         {
             path: "/detailportfolio/:id",
             name: "detailportfolio",

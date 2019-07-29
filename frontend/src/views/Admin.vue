@@ -1,17 +1,10 @@
 <template>
-    <div>
-        <v-layout>
-            <v-flex xs12>
-                <Header></Header>
-            </v-flex>
-             <sidebar-menu :menu="menu" />
-        </v-layout>
-    </div>
+    <sidebar-menu :menu="menu" class="menubar"/>
 </template>
+
 
 <script>
 import RestService from "@/services/RestService";
-
 export default {
     name: "Admin",
     beforeMount() {
