@@ -4,19 +4,18 @@
     <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/services/GitLabRepoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/GitLabRepoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/RestService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/UserPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>index</find>
-    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />

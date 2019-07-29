@@ -2,18 +2,23 @@
     <div>
         <div class="des">
             <h1>설명</h1>
-            <v-btn @click="log">눌러</v-btn>
+            <v-btn>눌러</v-btn>
         </div>
     </div>
 </template>
 
 <script>
     import GitLab from "../services/GitLabRepoService"
+    import RestService from "../services/RestService"
+
 
     export default {
         name: "mainpage",
         data() {
-            return {}
+            return {
+            }
+        },
+        methods: {
         },
     }
 </script>

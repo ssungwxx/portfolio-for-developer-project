@@ -9,7 +9,7 @@ import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
 import MainPage from "./views/MainPage.vue";
-
+import UserPage from "./views/UserPage.vue";
 
 Vue.use(Router);
 
@@ -56,6 +56,11 @@ export default new Router({
           path: "/delegate",
           name: "delegate",
           component: Delegate
+        },
+        {
+            path: "/:id",
+            name: "UserPage",
+            component: UserPage,
         }
     ]
 });
