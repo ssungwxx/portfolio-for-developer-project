@@ -1,29 +1,31 @@
 <template>
     <v-layout mt-5 wrap>
-        <v-flex v-for="i in users.length > limits ? limits : users.length">
-            {{users[i-1].user_id}}
-            <br />
-            {{users[i-1].user_name}}
-            <br />
-            {{users[i-1].user_grade}}
-        </v-flex>
 
-        <div class="plus">
-            <v-btn
-                class="target"
-                style="margin-right: auto;"
-                color="#ffc0cb"
-                href="/PortfolioWrite"
-                dark
-            >
-                <v-icon size="25" class="mr-2">fa-edit</v-icon>Write
-            </v-btn>
-        </div>
+        <v-flex v-for="i in users" v-if="i.user_grade!==10">
+            {{i.user_id}}
+            <br />
+            {{i.user_name}}
+            <br />
+            {{i.user_grade}}
+            <br />
+
+              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===0" @change="updateUser(i.user_id)">
+                <option value="0" selected>방문자</option>
+                <option value="5">팀원</option>
+              </select>
+
+              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===5" @change="updateUser(i.user_id)">
+                <option value="0">방문자</option>
+                <option value="5" selected>팀원</option>
+              </select>
+
+        </v-flex>
     </v-layout>
 </template>
 <script>
-import RestService from "@/services/RestService";
 
+
+import RestService from "@/services/RestService";
 export default {
     name: "Delegate",
     props: {
@@ -43,29 +45,78 @@ export default {
     methods: {
         async getUsers() {
             this.users = await RestService.getUsers();
+        },
+
+        updateUser(id){
+          var yourTestSelect = document.getElementById("TestSelect");
+          var selectedValue = {
+            "user_grade" : yourTestSelect.options[yourTestSelect.selectedIndex].value
+          };
+          RestService.updateUser(id,selectedValue);
+          yourTestSelect="";
+          selectedValue="";
+          location.reload();
         }
     }
 };
 </script>
 <style>
-.plus {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
+
+.customselect{
+  position: relative;
+  font-family: Arial;
+   background-color: DodgerBlue;
 }
+
+.customselect-selected::after{
+  position: absolute;
+  content: "";
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #ffftransparent transparent transparent;
+}
+
+.customselect-itemsdiv,.select-selected {
+  color: #ffffff;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-color: transparent transparentrgba(0, 0, 0, 0.1) transparent;
+  cursor: pointer;
+}
+
+/* Style items (options): */
+.customselect-items {
+  position: absolute;
+  background-color: DodgerBlue;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+
+/* Hide the itemswhen the select box is closed: */
+.customselect-hide {
+  display: none;
+}
+
+.customselect-items div:hover, .same-as-selected {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
 
 .mw-700 {
     max-width: 700px;
     margin: auto;
 }
-
 .headline {
     overflow: hidden;
     line-height: 1.5;
     text-overflow: ellipsis;
     height: 1.5em;
 }
-
 .grey--text {
     overflow: hidden;
     line-height: 1.2;
