@@ -9,7 +9,7 @@ import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
 import MainPage from "./views/MainPage.vue";
-import graph from "./components/graph.vue"
+
 
 Vue.use(Router);
 
@@ -32,13 +32,6 @@ export default new Router({
             name: "portfolio",
             component: PortfolioPage
         },
-        /*  Login Page 삭제
-  {
-      path: "/login",
-      name: "login",
-      component: LoginPage
-    },
-         */
         {
             path: "/detailportfolio/:id",
             name: "detailportfolio",
