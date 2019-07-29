@@ -80,6 +80,12 @@ router.post("/repos", (req, res) => {
                     };
                 }
 
+                // 기존 repositories 삭제
+                knex("repositories")
+                    .delete()
+                    .where("user_id", result.user_id);
+
+                // 새로운 repositories 등록
                 knex("repositories")
                     .insert(result)
                     .then(data =>
@@ -91,7 +97,10 @@ router.post("/repos", (req, res) => {
 
                 //res.json(result);
             } else {
-                data[0] = { status: 400 };
+                res.json({
+                    status: 400,
+                    msg: "fail"
+                });
             }
         }
     );
