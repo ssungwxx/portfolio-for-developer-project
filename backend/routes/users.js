@@ -174,6 +174,7 @@ router.get("/search/:id", (req, res) => {
         .where("user_id", "like", req.params.id + "%")
         .limit(5)
         .orderBy("user_id", "desc")
+        .whereIn("user_grade", [0, 5])
         .then(data => res.json(data));
 });
 
