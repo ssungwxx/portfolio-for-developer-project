@@ -1,8 +1,8 @@
 import Api from "../services/Api";
 
-const BASE_URL = "https://lab.ssafy.com/api/v4";
 export default {
-    async getPushed(project_id) {
+    async getPushed(user_add, project_id) {
+        const BASE_URL = user_add;
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
         const date = {};
         const pushed = [0] * 14;

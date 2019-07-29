@@ -19,6 +19,9 @@ import GitLab from "../services/GitLabRepoService";
 
 export default {
     name: "UserPage",
+    props: {
+        user: {type: String},
+    },
     data() {
         return {
             data: {},
@@ -29,7 +32,7 @@ export default {
     },
     methods: {
         async gitGraph() {
-            this.data = await GitLab.getPushed(7513);
+            this.data = await GitLab.getPushed();
         },
     },
     mounted() {

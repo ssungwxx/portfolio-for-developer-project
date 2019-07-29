@@ -2,19 +2,32 @@
     <div>
         <div class="des">
             <h1>설명</h1>
-            <v-btn @click="log">눌러</v-btn>
+            <v-btn @click="ttt">눌러</v-btn>
         </div>
     </div>
 </template>
 
 <script>
     import GitLab from "../services/GitLabRepoService"
+    import RestService from "../services/RestService"
 
     export default {
         name: "mainpage",
         data() {
-            return {}
+            return {
+                portfolios: [],
+            }
         },
+        methods: {
+            async ttt() {
+                const data = {
+                    "user_gitAdd" : "https://lab.ssafy.com",
+                    "user_gitId" : "terpe66",
+                    "token" : "e_CnCxsi3fLRjDisDMmx"
+                };
+                await RestService.insertRepository(data)
+            },
+        }
     }
 </script>
 

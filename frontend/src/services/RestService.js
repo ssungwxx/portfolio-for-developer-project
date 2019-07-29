@@ -41,7 +41,7 @@ export default {
     insertRepository(data) {
         return axios
             .post("http://70.12.246.138:3000/repositories", data)
-            .then(response => (this.portfolios = response.data));
+            .then(response => (console.log(response)));
     },
     deleteRepository(id) {
         return axios
