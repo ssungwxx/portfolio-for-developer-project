@@ -1,9 +1,9 @@
 <template>
-    <v-card class="ma-3" :href="repo_add">
+    <v-card class="ma-3 vcard" :href="repo_add">
         <v-card-title primary-title>
             <div>
-                <div class="headline target" style="height : 65px">{{ repo_title }}</div>
-                <span class="grey--text target">recent push: {{ repo_recent.slice(0, 10) }}</span>
+                <p class="flex repotitle">{{ repo_title }}</p>
+                <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
             </div>
         </v-card-title>
         <div class="py-3">
@@ -73,8 +73,6 @@
 </script>
 
 <style>
-
-
     .headline_truncate {
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -96,11 +94,34 @@
         text-overflow: ellipsis;
         align-self: center;
     }
+
+    .repotitle {
+        overflow: hidden;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        height: 100%;
+        font-size: 2.5vw;
+        margin: 0;
+        text-align: left;
+    }
+
+    p.grey--text {
+        font-size: 1.15vw;
+        height: 100%;
+        margin: 0;
+        text-align: left;
+    }
+
     a.v-card {
         position: relative;
     }
+    
     .zoom {
         width: 100%;
         height: 100%;
+    }
+    
+    .vcard {
+        padding: 5px;
     }
 </style>
