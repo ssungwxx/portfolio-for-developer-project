@@ -152,7 +152,7 @@
             async getUsers() {
                 const users = await RestService.getUsers();
                 const userGroup = [];
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < users.length && this.users.length < 5; i++) {
                     if (this.search === users[i].user_id.slice(0, this.search.length) && users[i].user_grade !== 10) {
                         userGroup.push(users[i].user_id)
                     }
