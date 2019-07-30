@@ -14,7 +14,7 @@ router.get("/", (req, res) => {
 router.get("/count", (req, res) => {
     knex("posts")
         .count("post_no as cnt")
-        .then(data => res.json(data[0].cnt));
+        .then(data => res.json(data));
 });
 
 // Get one post's count
