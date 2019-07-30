@@ -16,6 +16,7 @@
         name: "mainpage",
         data() {
             return {
+
             }
         },
         methods: {

@@ -1,15 +1,9 @@
 <template>
     <div>
-        <v-layout>
-            <v-flex xs12>
-                <Header></Header>
-            </v-flex>
-        </v-layout>
         <ImgBanner imgSrc="https://ifh.cc/g/rTwNE.jpg">
             <div class="target" style="line-height:1.2em;font-size:1.2em;" slot="text">Portfolio</div>
         </ImgBanner>
         <v-container>
-            <!-- Portfolio -->
             <v-layout>
                 <v-flex xs12>
                     <PortfolioList :limits="6" :load-more="true"></PortfolioList>

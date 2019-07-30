@@ -18,12 +18,14 @@
                 </div>
                 <v-card v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-                        <router-link :to="'/' + user" :user="user" style="text-decoration: none">
+<!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
+                        <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
                             <div style="display: flex;">
                                 <v-icon>people</v-icon>
                                 <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}</v-list-tile-title>
                             </div>
-                        </router-link>
+                        </v-btn>
+<!--                        </router-link>-->
                     </v-list-tile>
                 </v-card>
             </div>
@@ -209,5 +211,9 @@
         position: absolute;
         min-width: auto;
         margin-left: 34px;
+    }
+
+    .v-list__tile {
+        padding: 0;
     }
 </style>
