@@ -1,21 +1,12 @@
 <template>
     <div>
-        <v-layout>
-            <v-flex xs12>
-                <Header></Header>
-            </v-flex>
-        </v-layout>
-        <!--1번 이미지
-        https://ifh.cc/g/dAPdA.jpg
-        -->
         <ImgBanner imgSrc="https://ifh.cc/g/rNlxw.jpg">
             <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
         </ImgBanner>
         <v-container>
-            <!-- Post -->
             <v-layout>
                 <v-flex xs12>
-                    <PostList :limits="6" :load-more="true"></PostList>
+                    <PostList :limits="6" :load-more="true" :user_id="user_id"></PostList>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -31,10 +22,9 @@ export default {
     name: "PostPage",
     data() {
         return {
-            home: "/"
+            user_id: this.$route.params.id,
         };
     },
-
     beforeMount() {
         this.insertLog();
     },
