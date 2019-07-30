@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout mt-5 wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl12 lg12 md12 sm12 hidden-xs-only>
+            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl8 lg8 md8 sm8 hidden-xs-only>
                 <Repo
                     class="ma-3"
                     :repo_title="repos[i - 1].repo_title"
@@ -79,6 +79,7 @@ import RestService from "@/services/RestService"
         height: 100%;
     }
     .flexlist {
-        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
     }
 </style>
