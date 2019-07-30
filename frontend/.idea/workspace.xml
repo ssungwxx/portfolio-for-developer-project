@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/routes/repositories.js" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/routes/repositories.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/PortfolioPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PortfolioPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Repo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Repo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/Api.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Api.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/GitLabRepoService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/GitLabRepoService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/RepoPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RepoPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -88,7 +94,7 @@
       <workItem from="1564014971882" duration="14834000" />
       <workItem from="1564099835123" duration="14589000" />
       <workItem from="1564130309557" duration="471000" />
-      <workItem from="1564360942070" duration="29537000" />
+      <workItem from="1564360942070" duration="39908000" />
     </task>
     <servers />
   </component>

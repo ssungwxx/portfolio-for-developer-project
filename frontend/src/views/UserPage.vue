@@ -4,7 +4,7 @@
         <v-layout my-5>
             <v-flex xs12>
                 <h2 class="headline my-5 text-xs-center">
-                    <router-link :to="repos" style="text-decoration:none">
+                    <router-link :to="repos + '/' + user_id" style="text-decoration:none">
                         <v-btn color="#DDDDFF">Repositories</v-btn>
                     </router-link>
                 </h2>
@@ -25,12 +25,13 @@ export default {
     data() {
         return {
             repos: "/Repos",
-            user_id: this.$route.params.user,
+            user_id: this.$route.params.id,
         }
     },
     methods: {
     },
     mounted() {
+
     }
 }
 </script>

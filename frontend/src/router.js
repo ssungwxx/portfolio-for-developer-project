@@ -11,6 +11,7 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
+import RepoPage from "./views/RepoPage.vue";
 
 Vue.use(Router);
 
@@ -57,10 +58,21 @@ export default new Router({
           path: "/delegate",
           name: "delegate",
           component: Delegate
-        },{
+        },
+        {
           path: "/WebLog",
           name: "weblog",
           component: WebLog
+        },
+        {
+            path: "/users/:id",
+            name: "UserPage",
+            component: UserPage
+        },
+        {
+            path: "/repos/:id",
+            name: "RepoPage",
+            component: RepoPage
         }
     ]
 });

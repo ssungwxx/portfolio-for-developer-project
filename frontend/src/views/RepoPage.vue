@@ -20,15 +20,13 @@ import RestService from "@/services/RestService";
 
 export default {
     name: "RepoPage",
-    props: {
-        user_id: {type: String}
-    },
     components: {
         RepoList,
         ImgBanner,
     },
     data() {
         return {
+            user_id: this.$route.params.id,
         }
     },
     methods: {
