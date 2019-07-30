@@ -27,14 +27,11 @@ export default {
                   icon: 'fa fa-bar-chart',
                   child: [
                       {
-                          title : 'Portfolio',
-                          href: '/charts/sublink',
+                          title : 'Portfolio/Post',
+                          href: '../Charts',
 
                       },
-                      {
-                        title : 'Post',
-                        href: '',
-                      },
+
                       {
                         title : 'Log',
                         href: '../WebLog',

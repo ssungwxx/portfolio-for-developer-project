@@ -22,6 +22,11 @@ export default {
             .delete("http://70.12.246.138:3000/posts/" + id)
             .then(response => (this.posts = response.data));
     },
+    countPost() {
+        return axios
+            .get("http://70.12.246.138:3000/posts/count")
+            .then(response => (this.posts = response.data));
+    },
     insertPost(data) {
         return axios
             .put("http://70.12.246.138:3000/posts", data)
@@ -52,6 +57,11 @@ export default {
         return axios
             .put("http://70.12.246.138:3000/repositories/" + id, data)
             .then(response => (this.repositories = response.data));
+    },
+    countRepositories() {
+        return axios
+            .get("http://70.12.246.138:3000/repositories/count")
+            .then(response => (this.repos = response.data));
     },
     // User 관련 함수
     getUsers() {
@@ -101,7 +111,6 @@ export default {
     },
 
     getLog(){
-      console.log("getLogggggfff")
       return axios
         .get("http://70.12.246.138:3000/logs")
         .then(response=> (this.Logs = response.data));

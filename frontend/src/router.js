@@ -11,6 +11,7 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
+import Charts from "./views/Charts.vue";
 
 Vue.use(Router);
 
@@ -61,6 +62,10 @@ export default new Router({
           path: "/WebLog",
           name: "weblog",
           component: WebLog
+        },{
+          path: "/Charts",
+          name: "charts",
+          component: Charts
         }
     ]
 });
