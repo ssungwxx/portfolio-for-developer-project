@@ -1,24 +1,14 @@
 <template>
     <v-layout mt-5 wrap>
 
-        <v-flex v-for="i in users" v-if="i.user_grade!==10">
-            {{i.user_id}}
-            <br />
-            {{i.user_name}}
-            <br />
-            {{i.user_grade}}
-            <br />
-
-              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===0" @change="updateUser(i.user_id)">
-                <option value="0" selected>방문자</option>
-                <option value="5">팀원</option>
-              </select>
-
-              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===5" @change="updateUser(i.user_id)">
-                <option value="0">방문자</option>
-                <option value="5" selected>팀원</option>
-              </select>
-
+        <v-flex v-for="log in Logs" >
+          {{log.wlog_no}}
+          <br />
+          {{log.user_id}}
+          <br />
+          {{log.wlog_path}}
+          <br />
+          {{log.wlog_date}}
         </v-flex>
     </v-layout>
 </template>
@@ -27,38 +17,27 @@
 
 import RestService from "@/services/RestService";
 export default {
-    name: "Delegate",
+    name: "WebLog",
     props: {
+        wlog_no: { type: String },
         user_id: { type: String },
-        user_name: { type: String },
-        user_grade: { type: Number }
+        wlog_path: { type: String },
+        wlog_date: { type: String }
     },
     data() {
         return {
-            users: []
+            Logs: []
         };
     },
     components: {},
     mounted() {
-        this.getUsers();
-        this.insertLog();
+        console.log("aaa");
+        this.getLog();
     },
     methods: {
-        async getUsers() {
-            this.users = await RestService.getUsers();
-        },
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("Delegate");
-        },
-        updateUser(id){
-          var yourTestSelect = document.getElementById("TestSelect");
-          var selectedValue = {
-            "user_grade" : yourTestSelect.options[yourTestSelect.selectedIndex].value
-          };
-          RestService.updateUser(id,selectedValue);
-          yourTestSelect="";
-          selectedValue="";
-          location.reload();
+        async getLog() {
+            console.log("TTT");
+            this.Logs = await RestService.getLog();
         }
     }
 };

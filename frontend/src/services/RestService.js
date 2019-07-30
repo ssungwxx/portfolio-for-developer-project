@@ -99,6 +99,14 @@ export default {
     insertLog(path) {
         return axios.post("http://70.12.246.138:3000/logs/" + path);
     },
+
+    getLog(){
+      console.log("getLogggggfff")
+      return axios
+        .get("http://70.12.246.138:3000/logs")
+        .then(response=> (this.Logs = response.data));
+    },
+
     //Post Comment관련 함수
     getAllPostComments() {
         return axios.get("http://70.12.246.138:3000/pcom");
