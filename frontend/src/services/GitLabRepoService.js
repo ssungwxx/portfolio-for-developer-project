@@ -1,14 +1,14 @@
 import Api from "../services/Api";
 
-const BASE_URL = "https://lab.ssafy.com/api/v4";
 export default {
-    async getPushed(project_id) {
+    async getPushed(user_add, project_id, token) {
+        const BASE_URL = user_add + "/api/v4";
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
         const date = {};
         const pushed = [0] * 14;
-
+        
         for (let i = 1; Object.keys(date).length < 14; i++) {
-            let events = await Api(BASE_URL).get(eventsURL + String(i))
+            let events = await Api(BASE_URL, token).get(eventsURL + String(i))
             if (events.data.length === 0) {
                 break
             }
@@ -60,5 +60,5 @@ export default {
             }
         }
         return String(month) + "-" + String(day)
-    }
+    },
 };

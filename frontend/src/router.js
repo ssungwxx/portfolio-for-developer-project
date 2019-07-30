@@ -8,8 +8,10 @@ import DetailPortfolio from "./views/DetailPortfolio.vue";
 import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
+import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
-import graph from "./components/graph.vue"
+import UserPage from "./views/UserPage.vue";
+import Charts from "./views/Charts.vue";
 
 Vue.use(Router);
 
@@ -32,13 +34,6 @@ export default new Router({
             name: "portfolio",
             component: PortfolioPage
         },
-        /*  Login Page 삭제
-  {
-      path: "/login",
-      name: "login",
-      component: LoginPage
-    },
-         */
         {
             path: "/detailportfolio/:id",
             name: "detailportfolio",
@@ -63,6 +58,15 @@ export default new Router({
           path: "/delegate",
           name: "delegate",
           component: Delegate
+        },
+        {
+          path: "/WebLog",
+          name: "weblog",
+          component: WebLog
+        },{
+          path: "/Charts",
+          name: "charts",
+          component: Charts
         }
     ]
 });

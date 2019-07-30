@@ -1,39 +1,37 @@
 <template>
-    <div class="py-3">
-        <v-layout row wrap>
-            <v-flex xl12 lg12 md12 sm12 hidden-xs-only>
-                <v-sheet class="v-sheet--offset mx-auto" color="grey lighten-5" elevation="12"
-                         max-width="calc(100% - 32px)" height="60%">
-                    <v-sparkline :labels="Object.keys(data).reverse()" :value="Object.values(data).reverse()" :smooth="radius || false"
-                                 :stroke-linecap="lineCap" :gradient="gradient" color="grey"
-                                 line-width="2" padding="16" auto-draw class="zoom">
-                    </v-sparkline>
-                </v-sheet>
+    <div>
+        <h1>{{ user_id }}</h1>
+        <v-layout my-5>
+            <v-flex xs12>
+                <h2 class="headline my-5 text-xs-center">
+                    <router-link :to="repos + '/' + user_id" style="text-decoration:none">
+                        <v-btn color="#DDDDFF">Repositories</v-btn>
+                    </router-link>
+                </h2>
+                <RepoList :limits="4" :load-more="true" :user_id="user_id"></RepoList>
             </v-flex>
         </v-layout>
     </div>
 </template>
 <script>
-import GitLab from "../services/GitLabRepoService";
-
+import RestService from "../services/RestService";
+import RepoList from "../components/RepoList";
 
 export default {
     name: "UserPage",
+    components: {
+        RepoList
+    },
     data() {
         return {
-            data: {},
-            radius: 5,
-            gradient: ["#1feaea", "#ffd200", "#f72047"],
-            lineCap: "round"
+            repos: "/Repos",
+            user_id: this.$route.params.id,
         }
     },
     methods: {
-        async gitGraph() {
-            this.data = await GitLab.getPushed(7513);
-        },
     },
     mounted() {
-        this.gitGraph();
+
     }
 }
 </script>

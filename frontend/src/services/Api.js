@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export default baseURL => {
+export default (baseURL, token) => {
     return axios.create({
         baseURL: baseURL,
         withCredentials: false,
         headers: {
-            "Private-Token": "wTE9n9Ye1MZujw4BPd2j",
+            "Private-Token": token,
             Accept: "application/json",
             "Content-Type": "application/json"
         }

@@ -41,12 +41,15 @@ export default {
     components: {},
     mounted() {
         this.getUsers();
+        this.insertLog();
     },
     methods: {
         async getUsers() {
             this.users = await RestService.getUsers();
         },
-
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("Delegate");
+        },
         updateUser(id){
           var yourTestSelect = document.getElementById("TestSelect");
           var selectedValue = {

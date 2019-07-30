@@ -16,14 +16,16 @@
                     <v-icon style="margin-right: 10px;">search</v-icon>
                     <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
                 </div>
-                <v-card v-if="search !== '검색할 아이디를 입력해주세요.'">
+                <v-card v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-                        <v-list-tile-action>
-                            <v-icon @click="">people</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>{{ user }}</v-list-tile-title>
-                        </v-list-tile-content>
+<!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
+                        <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
+                            <div style="display: flex;">
+                                <v-icon>people</v-icon>
+                                <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}</v-list-tile-title>
+                            </div>
+                        </v-btn>
+<!--                        </router-link>-->
                     </v-list-tile>
                 </v-card>
             </div>
@@ -80,6 +82,7 @@
     import Login from "../components/Login";
     import Register from "../components/Register";
     import RestService from "../services/RestService";
+    import UserPage from "../views/UserPage"
 
     export default {
         name: "Header",
@@ -107,12 +110,15 @@
         }),
         components: {
             Login,
-            Register
+            Register,
+            UserPage
         },
         watch: {
             search: function () {
-                this.getUsers();
-            }
+                if (this.search !== "") {
+                    this.getUsers();
+                }
+            },
         },
         methods: {
             favorite() {
@@ -148,8 +154,8 @@
             async getUsers() {
                 const users = await RestService.getUsers();
                 const userGroup = [];
-                for (let i = 0; i < 5; i++) {
-                    if (this.search === users[i].user_id.slice(0, this.search.length)) {
+                for (let i = 0; i < users.length && this.users.length < 5; i++) {
+                    if (this.search === users[i].user_id.slice(0, this.search.length) && users[i].user_grade !== 10) {
                         userGroup.push(users[i].user_id)
                     }
                 }
@@ -157,7 +163,7 @@
             },
             resetInput() {
                 this.search = "";
-            }
+            },
         }
     };
 </script>
@@ -205,5 +211,9 @@
         position: absolute;
         min-width: auto;
         margin-left: 34px;
+    }
+
+    .v-list__tile {
+        padding: 0;
     }
 </style>
