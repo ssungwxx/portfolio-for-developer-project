@@ -20,7 +20,7 @@ export default {
         post_title: { type: String },
         post_content: { type: String },
         post_date: { type: String },
-        post_user_id: {type: String}
+        user_id: {type: String}
     },
     components: {
         DetailPost,
