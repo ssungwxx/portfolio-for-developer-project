@@ -58,7 +58,8 @@ export default new Router({
           path: "/delegate",
           name: "delegate",
           component: Delegate
-        },{
+        },
+        {
           path: "/WebLog",
           name: "weblog",
           component: WebLog

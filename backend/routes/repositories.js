@@ -12,6 +12,13 @@ router.get("/", (req, res) => {
         .then(data => res.json(data));
 });
 
+// Count All Repositories
+router.get("/count", (req, res) => {
+    knex("repositories")
+        .count("repo_no as cnt")
+        .then(data => res.json(data));
+});
+
 // Get One's repositories
 router.get("/:user_id", (req, res) => {
     knex("repositories")
@@ -54,7 +61,7 @@ router.post("/repos", (req, res) => {
             "/projects",
         {
             headers: {
-                "Private-Token": req.body.token
+                "Private-Token": req.body.user_gitToken
             }
         },
         (err, response, body) => {
@@ -65,7 +72,9 @@ router.post("/repos", (req, res) => {
                     result[idx] = {
                         user_id: req.body.user_id,
                         repo_title: data[idx].name,
+                        repo_id: data[idx].id,
                         repo_add: data[idx].web_url,
+                        repo_id: data[idx].id,
                         repo_recentDate:
                             data[idx].last_activity_at.slice(0, 10) +
                             " " +
@@ -75,12 +84,19 @@ router.post("/repos", (req, res) => {
                             " " +
                             data[idx].created_at.slice(11, 19)
                     };
-                }
 
-                // 기존 repositories 삭제
-                knex("repositories")
-                    .delete()
-                    .where("user_id", result.user_id);
+                    // 동일 repositories 삭제
+                    /*
+                    knex("repositories")
+                        .delete()
+                        .where({
+                            user_id: result[idx].user_id,
+                            user_gitId: result[idx].repo_id,
+                            repo_title: result[idx].repo_title
+                        })
+                        .then();
+                        */
+                }
 
                 // 새로운 repositories 등록
                 knex("repositories")
@@ -102,4 +118,5 @@ router.post("/repos", (req, res) => {
         }
     );
 });
+
 module.exports = router;
