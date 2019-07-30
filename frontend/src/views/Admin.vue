@@ -10,6 +10,9 @@ export default {
     beforeMount() {
         this.insertLog();
     },
+    mounted(){
+        this.insertLog();
+    },
     components: {
     },
     data() {
@@ -34,7 +37,7 @@ export default {
                       },
                       {
                         title : 'Log',
-                        href: '',
+                        href: '../WebLog',
                       }
 
                   ]
@@ -45,7 +48,7 @@ export default {
                   child: [
                       {
                           href: '../Delegate',
-                          title: 'Delegate Admin',
+                          title: 'Delegate',
                       }
                   ]
               }
@@ -56,6 +59,9 @@ export default {
     methods: {
         async insertLog() {
             this.insertLog = await RestService.insertLog("Admin");
+        },
+        async insertLog() {
+            this.insertLog = await RestService.insertLog("Delegate");
         }
     }
 }

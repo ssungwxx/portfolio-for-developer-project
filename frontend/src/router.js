@@ -8,6 +8,7 @@ import DetailPortfolio from "./views/DetailPortfolio.vue";
 import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
+import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import graph from "./components/graph.vue"
 
@@ -63,6 +64,10 @@ export default new Router({
           path: "/delegate",
           name: "delegate",
           component: Delegate
+        },{
+          path: "/WebLog",
+          name: "weblog",
+          component: WebLog
         }
     ]
 });
