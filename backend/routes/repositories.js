@@ -66,6 +66,7 @@ router.post("/repos", (req, res) => {
                         user_id: req.body.user_id,
                         repo_title: data[idx].name,
                         repo_add: data[idx].web_url,
+                        repo_id: data[idx].id,
                         repo_recentDate:
                             data[idx].last_activity_at.slice(0, 10) +
                             " " +
