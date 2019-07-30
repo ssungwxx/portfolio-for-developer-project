@@ -6,6 +6,7 @@ import "vuetify/dist/vuetify.min.css";
 import VueSimplemde from "vue-simplemde";
 import "simplemde/dist/simplemde.min.css";
 import "font-awesome/css/font-awesome.min.css";
+import Chat from "vue-beautiful-chat";
 
 import App from "./App.vue";
 import router from "./router";
@@ -19,6 +20,8 @@ Vue.use(Bars);
 
 Vue.use(axios);
 
+Vue.use(Chat);
+
 // date 관련
 Vue.use(require("vue-moment"));
 
@@ -28,10 +31,9 @@ import VueResource from "vue-resource";
 Vue.use(VueResource);
 
 //관리자 페이지를 위한 side bar
-import VueSidebarMenu from 'vue-sidebar-menu'
-import 'vue-sidebar-menu/dist/vue-sidebar-menu.css'
-Vue.use(VueSidebarMenu)
-
+import VueSidebarMenu from "vue-sidebar-menu";
+import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
+Vue.use(VueSidebarMenu);
 
 Vue.use(Vuetify, {
     iconfont: "fa",
