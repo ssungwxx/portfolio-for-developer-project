@@ -63,10 +63,16 @@ export default new Router({
           path: "/WebLog",
           name: "weblog",
           component: WebLog
-        },{
+        },
+        {
           path: "/Charts",
           name: "charts",
           component: Charts
+        },
+        {
+            path: "/users/:id",
+            name: "UserPage",
+            component: UserPage
         }
     ]
 });
