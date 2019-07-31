@@ -15,7 +15,7 @@
             <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
                 <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
             </v-btn>
-            <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" :user_id="user_id" href="/writepost" dark>
+            <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" :href="'/' + user_id + writepost" dark>
                 <v-icon size="25" class="mr-2">fa-edit</v-icon>Write
             </v-btn>
         </div>
@@ -35,7 +35,8 @@ export default {
     },
     data() {
         return {
-            posts: []
+            posts: [],
+            writepost: "/writepost"
         };
     },
     components: {

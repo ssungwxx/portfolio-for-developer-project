@@ -1,10 +1,13 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field v-model="title" :counter="10" :rules="titleRules" label="제목" required></v-text-field>
-        <v-text-field v-model="content" :rules="contentRules" label="내용" required></v-text-field>
-
-        <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
-        <v-btn color="error" class="mr-4" @click="reset">초기화</v-btn>
+        <div>
+            <v-text-field v-model="title" :counter="10" :rules="titleRules" label="제목" required></v-text-field>
+            <v-text-field v-model="content" :rules="contentRules" label="내용" required></v-text-field>
+        </div>
+        <div>
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
+            <v-btn color="error" class="mr-4" @click="reset">내용 초기화</v-btn>
+        </div>
     </v-form>
 </template>
 
@@ -13,11 +16,9 @@ import RestService from "@/services/RestService"
 
 export default {
     name: "WritePost",
-    props: {
-        user_id: {type: String}
-    },
     data() {
         return {
+            user_id: this.$route.params.id,
             valid: true,
             title: "",
             titleRules: [
@@ -35,21 +36,17 @@ export default {
         validate () {
             if (this.$refs.form.validate()) {
                 const data = {
-                    user_id: this.user_id,
-                    post_title: this.title,
-                    post_content: this.content,
-                    post_date: new Date(),
-                    post_cnt: 0,
+
                 };
                 this.postpost(data);
             }
         },
         reset () {
-            this.$refs.form.reset()
+            this.$refs.form.reset();
         },
         async postpost(data) {
             await RestService.insertPost(data);
-        }
+        },
     },
 }
 </script>
