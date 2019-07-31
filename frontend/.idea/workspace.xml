@@ -4,11 +4,12 @@
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Post.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Post.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/RestService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/WritePost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WritePost.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/RepoPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RepoPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,7 +91,7 @@
       <workItem from="1564014971882" duration="14834000" />
       <workItem from="1564099835123" duration="14589000" />
       <workItem from="1564130309557" duration="471000" />
-      <workItem from="1564360942070" duration="51744000" />
+      <workItem from="1564360942070" duration="54002000" />
     </task>
     <servers />
   </component>
