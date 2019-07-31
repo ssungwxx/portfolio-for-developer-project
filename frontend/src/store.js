@@ -26,11 +26,19 @@ export default new Vuex.Store({
       LOGOUT (state) {
         state.user_name = null;
         state.user_grade = null;
+        state.isAuth = false;
       }
     },
     actions: {
       async login ({commit}, {user_id, user_pw}) {
-        //
+        var result = await RestService.loginUser({user_id, user_pw});
+        if(result.status == 200) {
+          commit('LOGIN', {result.user_name, result.user_grade});
+          commit('IS_AUTH', {true});
+        }
+      },
+      logout({commit}) {
+        commit('LOGOUT');
       }
     }
 });

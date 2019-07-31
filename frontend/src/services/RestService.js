@@ -92,7 +92,7 @@ export default {
     loginUser(data) {
         return axios
             .post("http://70.12.246.138:3000/users/login", data)
-            .then(response => (this.token = response.data));
+            .then(response => (this.result = response.data));
     },
     getSearchUsers(data) {
         return axios

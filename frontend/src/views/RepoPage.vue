@@ -6,7 +6,7 @@
         <v-container>
             <v-layout>
                 <v-flex>
-                    <RepoList :limits="4" :load-more="false" :user_id="user_id"></RepoList>
+                    <RepoList :limits="4" :loadMore="false" :user_id="user_id"></RepoList>
                 </v-flex>
             </v-layout>
         </v-container>
