@@ -28,6 +28,7 @@
     "uniq": "^1.0.1",
     "unsplash-js": "^5.0.0",
     "vue": "^2.6.10",
+    "vue-analytics": "^5.17.0",
     "vue-axios": "^2.1.4",
     "vue-beautiful-chat": "^2.2.2",
     "vue-carousel": "^0.18.0",

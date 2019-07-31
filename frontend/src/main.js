@@ -15,6 +15,9 @@ import "./registerServiceWorker";
 //그래프 관련
 import Bars from "vuebars";
 
+// Google Analytics
+import VueAnalytics from "vue-analytics";
+
 Vue.use(Bars);
 
 Vue.use(axios);
@@ -31,7 +34,6 @@ Vue.use(VueResource);
 import VueSidebarMenu from "vue-sidebar-menu";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(VueSidebarMenu);
-
 
 Vue.use(Vuetify, {
     iconfont: "fa",
@@ -54,6 +56,11 @@ Vue.use(VueResizeText);
 // 배경화면 캐러셀
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
+
+Vue.use(VueAnalytics, {
+    id: "UA-144893029-1",
+    router
+});
 
 new Vue({
     router,

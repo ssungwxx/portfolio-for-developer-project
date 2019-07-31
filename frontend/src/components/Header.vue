@@ -18,14 +18,16 @@
                 </div>
                 <v-card v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-<!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
+                        <!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
                         <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
                             <div style="display: flex;">
                                 <v-icon>people</v-icon>
-                                <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}</v-list-tile-title>
+                                <v-list-tile-title
+                                    style="margin-left: 1vw; color: white;"
+                                >{{ user }}</v-list-tile-title>
                             </div>
                         </v-btn>
-<!--                        </router-link>-->
+                        <!--                        </router-link>-->
                     </v-list-tile>
                 </v-card>
             </div>
@@ -63,14 +65,14 @@
 
             <div class="icons">
                 <v-tooltip bottom>
-                    <Login slot="activator"/>
+                    <Login slot="activator" />
                     <span>로그인</span>
                 </v-tooltip>
             </div>
 
             <div class="icons">
                 <v-tooltip bottom>
-                    <Register slot="activator"/>
+                    <Register slot="activator" />
                     <span>회원가입</span>
                 </v-tooltip>
             </div>
@@ -79,141 +81,145 @@
 </template>
 
 <script>
-    import Login from "../components/Login";
-    import Register from "../components/Register";
-    import RestService from "../services/RestService";
-    import UserPage from "../views/UserPage"
+import Login from "../components/Login";
+import Register from "../components/Register";
+import RestService from "../services/RestService";
+import UserPage from "../views/UserPage";
 
-    export default {
-        name: "Header",
-        data: () => ({
-            title: document.title,
-            port: "/Portfolio",
-            posts: "/Post",
-            login: "/Login",
-            items: [
-                {
-                    title: "perm_identity",
-                    go: "/Login"
-                },
-                {
-                    title: "description",
-                    go: "/Post"
-                },
-                {
-                    title: "markunread_mailbox",
-                    go: "/Portfolio"
-                }
-            ],
-            search: "검색할 아이디를 입력해주세요.",
-            users: [],
-        }),
-        components: {
-            Login,
-            Register,
-            UserPage
-        },
-        watch: {
-            search: function () {
-                if (this.search !== "") {
-                    this.getUsers();
-                }
+export default {
+    name: "Header",
+    data: () => ({
+        title: document.title,
+        port: "/Portfolio",
+        posts: "/Post",
+        login: "/Login",
+        items: [
+            {
+                title: "perm_identity",
+                go: "/Login"
             },
-        },
-        methods: {
-            favorite() {
-                var bookmarkURL = window.location.href;
-                var bookmarkTitle = document.title;
-                var triggerDefault = false;
-                if (window.sidebar && window.sidebar.addPanel) {
-                    window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
-                } else if (
-                    (window.sidebar &&
-                        navigator.userAgent.toLowerCase().indexOf("firefox") >
-                        -1) ||
-                    (window.opera && window.print)
-                ) {
-                    var $this = $(this);
-                    $this.attr("href", bookmarkURL);
-                    $this.attr("title", bookmarkTitle);
-                    $this.attr("rel", "sidebar");
-                    $this.off(e);
-                    triggerDefault = true;
-                } else if (window.external && "AddFavorite" in window.external) {
-                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
-                } else {
-                    alert(
-                        (navigator.userAgent.toLowerCase().indexOf("mac") != -1
-                            ? "Cmd"
-                            : "Ctrl") +
-                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
-                    );
-                }
-                return triggerDefault;
+            {
+                title: "description",
+                go: "/Post"
             },
-            async getUsers() {
-                const users = await RestService.getUsers();
-                const userGroup = [];
-                for (let i = 0; i < users.length && this.users.length < 5; i++) {
-                    if (this.search === users[i].user_id.slice(0, this.search.length) && users[i].user_grade !== 10) {
-                        userGroup.push(users[i].user_id)
-                    }
-                }
-                this.users = userGroup;
-            },
-            resetInput() {
-                this.search = "";
-            },
+            {
+                title: "markunread_mailbox",
+                go: "/Portfolio"
+            }
+        ],
+        search: "검색할 아이디를 입력해주세요.",
+        users: []
+    }),
+    components: {
+        Login,
+        Register,
+        UserPage
+    },
+    watch: {
+        search: function() {
+            if (this.search !== "") {
+                this.getUsers();
+            }
         }
-    };
+    },
+    methods: {
+        favorite() {
+            var bookmarkURL = window.location.href;
+            var bookmarkTitle = document.title;
+            var triggerDefault = false;
+            if (window.sidebar && window.sidebar.addPanel) {
+                window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
+            } else if (
+                (window.sidebar &&
+                    navigator.userAgent.toLowerCase().indexOf("firefox") >
+                        -1) ||
+                (window.opera && window.print)
+            ) {
+                var $this = $(this);
+                $this.attr("href", bookmarkURL);
+                $this.attr("title", bookmarkTitle);
+                $this.attr("rel", "sidebar");
+                $this.off(e);
+                triggerDefault = true;
+            } else if (window.external && "AddFavorite" in window.external) {
+                window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+            } else {
+                alert(
+                    (navigator.userAgent.toLowerCase().indexOf("mac") != -1
+                        ? "Cmd"
+                        : "Ctrl") +
+                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
+                );
+            }
+            return triggerDefault;
+        },
+        async getUsers() {
+            const users = await RestService.getUsers();
+            const userGroup = [];
+            for (let i = 0; i < users.length && this.users.length < 5; i++) {
+                if (
+                    this.search ===
+                        users[i].user_id.slice(0, this.search.length) &&
+                    users[i].user_grade !== 10
+                ) {
+                    userGroup.push(users[i].user_id);
+                }
+            }
+            this.users = userGroup;
+        },
+        resetInput() {
+            this.search = "";
+        }
+    }
+};
 </script>
 
 <style>
-    .theme--light.v-list {
-        background: #ffc0cb;
-        color: white;
-        font-weight: bold;
-    }
+.theme--light.v-list {
+    background: #ffc0cb;
+    color: white;
+    font-weight: bold;
+}
 
-    @media screen and (max-width: 599px) {
-        .icons {
-            display: none;
-        }
+@media screen and (max-width: 599px) {
+    .icons {
+        display: none;
     }
+}
 
-    .Header {
-        z-index: 2;
-        position: absolute;
-        background-color: yellow;
-    }
+.Header {
+    z-index: 2;
+    position: absolute;
+    background-color: yellow;
+}
 
-    #search {
-        background: white;
-        width: 30vw;
-        min-width: 25vw;
-        color: black;
-        padding: 5px;
-        border: solid yellow 2px;
-        -ms-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-    }
+#search {
+    background: white;
+    width: 30vw;
+    min-width: 25vw;
+    color: black;
+    padding: 5px;
+    border: solid yellow 2px;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+}
 
-    .v-input__slot {
-        margin-bottom: 0px;
-    }
+.v-input__slot {
+    margin-bottom: 0px;
+}
 
-    .v-input {
-        width: 30vw;
-        min-width: 25vw;
-    }
+.v-input {
+    width: 30vw;
+    min-width: 25vw;
+}
 
-    .v-card {
-        position: absolute;
-        min-width: auto;
-        margin-left: 34px;
-    }
+.v-card {
+    position: absolute;
+    min-width: auto;
+    margin-left: 34px;
+}
 
-    .v-list__tile {
-        padding: 0;
-    }
+.v-list__tile {
+    padding: 0;
+}
 </style>
