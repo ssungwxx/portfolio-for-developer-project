@@ -3,7 +3,6 @@
         <div class="des">
             <h1>설명</h1>
             <v-btn>눌러</v-btn>
-            <chat></chat>
         </div>
     </div>
 </template>
@@ -11,7 +10,6 @@
 <script>
 import GitLab from "../services/GitLabRepoService";
 import RestService from "../services/RestService";
-import chat from "../components/chat";
 
 export default {
     name: "mainpage",

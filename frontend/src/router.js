@@ -25,25 +25,25 @@ export default new Router({
             component: MainPage
         },
         {
-            path: "/post",
-            name: "post",
+            path: "/:id/posts",
+            name: "Posts",
             component: PostPage
         },
-        {
-            path: "/portfolio",
-            name: "portfolio",
-            component: PortfolioPage
-        },
-        {
-            path: "/detailportfolio/:id",
-            name: "detailportfolio",
-            component: DetailPortfolio
-        },
-        {
-            path: "/portfoliowrite",
-            name: "portfoliowrite",
-            component: PortfolioWrite
-        },
+        // {
+        //     path: "/portfolio",
+        //     name: "portfolio",
+        //     component: PortfolioPage
+        // },
+        // {
+        //     path: "/detailportfolio/:id",
+        //     name: "detailportfolio",
+        //     component: DetailPortfolio
+        // },
+        // {
+        //     path: "/portfoliowrite",
+        //     name: "portfoliowrite",
+        //     component: PortfolioWrite
+        // },
         {
             path: "/detailpost/:id",
             name: "detailpost",
