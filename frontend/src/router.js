@@ -11,7 +11,10 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
-import Charts from "./views/Charts.vue";
+import RepoPage from "./views/RepoPage.vue";
+import WritePost from "./views/WritePost.vue";
+
+
 
 Vue.use(Router);
 
@@ -25,25 +28,25 @@ export default new Router({
             component: MainPage
         },
         {
-            path: "/post",
-            name: "post",
+            path: "/:id/posts",
+            name: "Posts",
             component: PostPage
         },
-        {
-            path: "/portfolio",
-            name: "portfolio",
-            component: PortfolioPage
-        },
-        {
-            path: "/detailportfolio/:id",
-            name: "detailportfolio",
-            component: DetailPortfolio
-        },
-        {
-            path: "/portfoliowrite",
-            name: "portfoliowrite",
-            component: PortfolioWrite
-        },
+        // {
+        //     path: "/portfolio",
+        //     name: "portfolio",
+        //     component: PortfolioPage
+        // },
+        // {
+        //     path: "/detailportfolio/:id",
+        //     name: "detailportfolio",
+        //     component: DetailPortfolio
+        // },
+        // {
+        //     path: "/portfoliowrite",
+        //     name: "portfoliowrite",
+        //     component: PortfolioWrite
+        // },
         {
             path: "/detailpost/:id",
             name: "detailpost",
@@ -63,10 +66,16 @@ export default new Router({
           path: "/WebLog",
           name: "weblog",
           component: WebLog
-        },{
-          path: "/Charts",
-          name: "charts",
-          component: Charts
+        },
+        {
+            path: "/:id/repos",
+            name: "Repositories",
+            component: RepoPage
+        },
+        {
+            path: "/:id/writepost",
+            name: "WritePost",
+            component: WritePost
         }
     ]
 });
