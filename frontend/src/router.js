@@ -28,25 +28,25 @@ export default new Router({
             component: MainPage
         },
         {
-            path: "/post",
-            name: "post",
+            path: "/:id/posts",
+            name: "Posts",
             component: PostPage
         },
-        {
-            path: "/portfolio",
-            name: "portfolio",
-            component: PortfolioPage
-        },
-        {
-            path: "/detailportfolio/:id",
-            name: "detailportfolio",
-            component: DetailPortfolio
-        },
-        {
-            path: "/portfoliowrite",
-            name: "portfoliowrite",
-            component: PortfolioWrite
-        },
+        // {
+        //     path: "/portfolio",
+        //     name: "portfolio",
+        //     component: PortfolioPage
+        // },
+        // {
+        //     path: "/detailportfolio/:id",
+        //     name: "detailportfolio",
+        //     component: DetailPortfolio
+        // },
+        // {
+        //     path: "/portfoliowrite",
+        //     name: "portfoliowrite",
+        //     component: PortfolioWrite
+        // },
         {
             path: "/detailpost/:id",
             name: "detailpost",
@@ -73,14 +73,14 @@ export default new Router({
             component: Charts
         },
         {
+            path: "/:id/repos",
+            name: "Repositories",
+            component: RepoPage
+        },
+        {
             path: "/:id/writepost",
             name: "WritePost",
             component: WritePost
-        },
-        {
-            path: "/users/:id",
-            name: "UserPage",
-            component: UserPage
         }
     ]
 });

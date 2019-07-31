@@ -29,8 +29,8 @@ export default {
     },
     insertPost(data) {
         return axios
-            .put("http://70.12.246.138:3000/posts", data)
-            .then(response => (this.posts = response.data));
+            .post("http://70.12.246.138:3000/posts", data)
+            .then(response => console.log(response));
     },
     // Repository 관련 함수
     getRepositories() {

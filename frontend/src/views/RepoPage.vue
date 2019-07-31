@@ -38,7 +38,7 @@ export default {
 
     },
     beforeMount() {
-        // this.insertLog();
+        this.insertLog();
     },
 }
 </script>

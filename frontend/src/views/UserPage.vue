@@ -19,6 +19,7 @@
         </v-flex>
     </v-layout>
 </template>
+
 <script>
 import RestService from "../services/RestService";
 import RepoList from "../components/RepoList";
@@ -32,7 +33,8 @@ export default {
     },
     data() {
         return {
-            repos: "/Repos",
+            repos: "/repos",
+            posts: "/posts",
             user_id: this.$route.params.id,
         }
     },
@@ -43,6 +45,7 @@ export default {
     }
 }
 </script>
+
 <style>
 .body {
     margin-top: 50px;
