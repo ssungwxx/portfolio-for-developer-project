@@ -1,7 +1,7 @@
 <template>
     <div>
         <ImgBanner imgSrc="https://ifh.cc/g/rNlxw.jpg">
-            <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
+            <div style="line-height:1.2em;font-size:1.2em;" slot="text">Posts</div>
         </ImgBanner>
         <v-container>
             <v-layout>
@@ -36,6 +36,7 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("PostPage");
         }
+
     }
 };
 </script>
