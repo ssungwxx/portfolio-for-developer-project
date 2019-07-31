@@ -1,18 +1,13 @@
 <template>
-
-
-    <v-layout mt-5 wrap>
+    <div>
+      <div class="side">
       <sidebar-menu :menu="menu" class="menubar"/>
-      <div class="post">
-        <h1>POST COUNT</h1>
-      <h2>{{post_cnt[0].cnt}}</h2>
       </div>
-      <br>
-      <div class="repo">
-        <h1>REPO COUNT</h1>
-      <h2>{{repo_cnt[0].cnt}}</h2>
+      <div class="info">
+         <h1>POST COUNT</h1> <h2>{{post_cnt[0].cnt}}</h2>
+         <h1>REPO COUNT</h1> <h2>{{repo_cnt[0].cnt}}</h2>
       </div>
-    </v-layout>
+    </div>
 </template>
 
 
@@ -84,7 +79,10 @@ export default {
 </script>
 
 <style>
-<style>
+.side{
+  float: left;
+  height:auto;
+}
 .post{
   width : 40%;
   text-align: center;
