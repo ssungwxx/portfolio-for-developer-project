@@ -1,7 +1,7 @@
 <template>
     <div class="Header">
         <v-toolbar dark color="#ffc0cb" fixed>
-            <div style="display: flex;" v-if="this.$store.state.user">
+            <div style="display: flex;">
                 <v-tooltip bottom>
                     <v-btn slot="activator" icon href="/">
                         <v-icon>home</v-icon>
@@ -9,12 +9,12 @@
                     <span>홈으로 이동</span>
                 </v-tooltip>
 
-                <v-toolbar-title style="align-self: center" class="white--text">{{ title }}</v-toolbar-title>
+<!--                <v-toolbar-title style="align-self: center" class="white&#45;&#45;text">{{ title }}</v-toolbar-title>-->
             </div>
-            <div v-else>
-                <div style="display: flex; ">
-                    <v-icon style="margin-right: 10px;">search</v-icon>
+            <div>
+                <div style="display: flex; margin-left: 10px;">
                     <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+                    <v-icon style="margin-left: 10px;">search</v-icon>
                 </div>
                 <v-card v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
@@ -32,47 +32,49 @@
 
             <v-spacer></v-spacer>
 
-            <div class="icons" v-if="this.$store.state.user">
+            <div class="icons" v-if="this.$store.state.user_name">
                 <router-link to style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon v-on:click="favorite()">
                             <v-icon color="white" id="bookMark">star</v-icon>
                         </v-btn>
-                        <span>북마크</span>
+                        <span>Bookmark</span>
                     </v-tooltip>
                 </router-link>
 
-                <router-link :to="port" style="text-decoration: none;">
+                <router-link :to="'/' + this.$store.state.user_name + repos" style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon>
                             <v-icon color="white">markunread_mailbox</v-icon>
                         </v-btn>
-                        <span>포트폴리오</span>
+                        <span>Repository</span>
                     </v-tooltip>
                 </router-link>
 
-                <router-link :to="posts" style="text-decoration: none;">
+                <router-link :to="'/' + this.$store.state.user_name + posts" style="text-decoration: none;">
                     <v-tooltip bottom>
-                        <v-btn slot="activator" icon href="./Post">
+                        <v-btn slot="activator" icon>
                             <v-icon color="white">description</v-icon>
                         </v-btn>
-                        <span>포스트</span>
+                        <span>Post</span>
                     </v-tooltip>
                 </router-link>
             </div>
 
+            <div class="LogReg" v-else>
             <div class="icons">
                 <v-tooltip bottom>
                     <Login slot="activator"/>
-                    <span>로그인</span>
+                    <span>Login</span>
                 </v-tooltip>
             </div>
 
             <div class="icons">
                 <v-tooltip bottom>
                     <Register slot="activator"/>
-                    <span>회원가입</span>
+                    <span>Register</span>
                 </v-tooltip>
+            </div>
             </div>
         </v-toolbar>
     </div>
@@ -88,23 +90,24 @@
         name: "Header",
         data: () => ({
             title: document.title,
-            port: "/Portfolio",
-            posts: "/Post",
+            // port: "/Portfolio",
+            posts: "/posts",
+            repos: "/repos",
             login: "/Login",
-            items: [
-                {
-                    title: "perm_identity",
-                    go: "/Login"
-                },
-                {
-                    title: "description",
-                    go: "/Post"
-                },
-                {
-                    title: "markunread_mailbox",
-                    go: "/Portfolio"
-                }
-            ],
+            // items: [
+            //     {
+            //         title: "perm_identity",
+            //         go: "/Login"
+            //     },
+            //     {
+            //         title: "description",
+            //         go: "/Post"
+            //     },
+            //     {
+            //         title: "markunread_mailbox",
+            //         go: "/Portfolio"
+            //     }
+            // ],
             search: "검색할 아이디를 입력해주세요.",
             users: [],
         }),
@@ -210,10 +213,14 @@
     .v-card {
         position: absolute;
         min-width: auto;
-        margin-left: 34px;
+        margin-left: 10px;
     }
 
     .v-list__tile {
         padding: 0;
+    }
+
+    .LogReg {
+        display: flex;
     }
 </style>

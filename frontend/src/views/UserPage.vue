@@ -1,5 +1,5 @@
 <template>
-    <v-layout>
+    <v-layout class="body">
         <v-flex xs12>
             <h1>{{ user_id }}</h1>
 
@@ -23,11 +23,13 @@
 <script>
 import RestService from "../services/RestService";
 import RepoList from "../components/RepoList";
+import PostList from "../components/PostList"
 
 export default {
     name: "UserPage",
     components: {
-        RepoList
+        RepoList,
+        PostList
     },
     data() {
         return {
@@ -45,5 +47,7 @@ export default {
 </script>
 
 <style>
-
+.body {
+    margin-top: 50px;
+}
 </style>
