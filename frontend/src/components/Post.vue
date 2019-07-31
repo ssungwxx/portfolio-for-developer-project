@@ -32,6 +32,7 @@ export default {
     },
 };
 </script>
+
 <style>
 .color-666 {
     color: #666;
