@@ -11,6 +11,8 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
+import RepoPage from "./views/RepoPage.vue";
+import WritePost from "./views/WritePost.vue";
 import Charts from "./views/Charts.vue";
 
 Vue.use(Router);
@@ -25,25 +27,25 @@ export default new Router({
             component: MainPage
         },
         {
-            path: "/post",
-            name: "post",
+            path: "/:id/posts",
+            name: "Posts",
             component: PostPage
         },
-        {
-            path: "/portfolio",
-            name: "portfolio",
-            component: PortfolioPage
-        },
-        {
-            path: "/detailportfolio/:id",
-            name: "detailportfolio",
-            component: DetailPortfolio
-        },
-        {
-            path: "/portfoliowrite",
-            name: "portfoliowrite",
-            component: PortfolioWrite
-        },
+        // {
+        //     path: "/portfolio",
+        //     name: "portfolio",
+        //     component: PortfolioPage
+        // },
+        // {
+        //     path: "/detailportfolio/:id",
+        //     name: "detailportfolio",
+        //     component: DetailPortfolio
+        // },
+        // {
+        //     path: "/portfoliowrite",
+        //     name: "portfoliowrite",
+        //     component: PortfolioWrite
+        // },
         {
             path: "/detailpost/:id",
             name: "detailpost",
@@ -73,6 +75,16 @@ export default new Router({
             path: "/users/:id",
             name: "UserPage",
             component: UserPage
+        },
+        {
+            path: "/:id/repos",
+            name: "Repositories",
+            component: RepoPage
+        },
+        {
+            path: "/writepost",
+            name: "WritePost",
+            component: WritePost
         }
     ]
 });

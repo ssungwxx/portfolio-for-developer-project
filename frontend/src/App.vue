@@ -5,7 +5,7 @@
             <Sidebar />
         </v-content>
 
-        <v-content>
+        <v-content class="pagebody">
             <router-view />
             <TopButton />
             <!--            <TranslateButton/>-->
@@ -62,5 +62,9 @@ export default {
 }
 .v-content.footerwrap > .v-content__wrap {
     margin-top: auto;
+}
+
+.pagebody {
+    margin-top: 60px;
 }
 </style>
