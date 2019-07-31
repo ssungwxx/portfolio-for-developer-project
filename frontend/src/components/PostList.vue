@@ -16,7 +16,7 @@
             <v-divider></v-divider>
         </v-flex>
 
-        <div class="plus" v-if="loadMore">
+        <div class="plus" v-if="!loadMore">
             <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
                 <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
             </v-btn>

@@ -15,7 +15,7 @@
             <!-- Post -->
             <v-layout>
                 <v-flex xs12>
-                    <PostList :limits="6" :load-more="true"></PostList>
+                    <PostList :limits="6" :loadMore="false" :user_id="user_id"></PostList>
                 </v-flex>
             </v-layout>
         </v-container>
