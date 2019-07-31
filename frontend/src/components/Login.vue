@@ -109,6 +109,8 @@ export default {
     async Login() {
       if (this.$refs.form.validate()) {
         // Call Login
+        let loginResult = await this.login({uid: this.uid, password: this.password});
+        console.log(loginResult);
       }
     },
     // async defaultLogin() {
