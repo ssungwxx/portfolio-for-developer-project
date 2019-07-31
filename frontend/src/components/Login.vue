@@ -25,8 +25,8 @@
                                 <v-text-field
                                     v-model="id"
                                     :rules="idRules"
-                                    label="Email"
-                                    :counter="70"
+                                    label="ID"
+                                    :counter="20"
                                     required
                                 ></v-text-field>
                                 <v-text-field
@@ -80,11 +80,11 @@ export default {
             valid: true,
             dialog: false,
             idRules: [
-                v => !!v || "E-mail is required",
-                v => /.+@.+\..+/.test(v) || "E-mail must be valid",
+                v => !!v || "ID is required",
+                //v => /.+@.+\..+/.test(v) || "E-mail must be valid",
                 v =>
-                    (v && v.length <= 70) ||
-                    "Email must be less than 70 characters"
+                    (v && v.length <= 20) ||
+                    "ID must be less than 20 characters"
             ],
             pwRules: [
                 v => !!v || "Password is required",

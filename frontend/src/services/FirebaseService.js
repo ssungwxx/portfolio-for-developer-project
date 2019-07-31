@@ -85,7 +85,25 @@ export default {
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
+                console.log(accessToken);
                 let user = result.user;
+                console.log(user);
+                return result;
+            })
+            .catch(function(error) {
+                console.error("[Facebook Login Error]", error);
+            });
+    },
+    loginWithEmail() {
+        let provider = new firebase.auth.EmailAuthProvider();
+        return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function(result) {
+                let accessToken = result.credential.accessToken;
+                console.log(accessToken);
+                let user = result.user;
+                console.log(user);
                 return result;
             })
             .catch(function(error) {
