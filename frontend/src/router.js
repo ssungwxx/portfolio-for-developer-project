@@ -11,7 +11,7 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
-import Charts from "./views/Charts.vue";
+// import Charts from "./views/Charts.vue";
 import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
 
@@ -67,11 +67,11 @@ export default new Router({
             name: "weblog",
             component: WebLog
         },
-        {
-            path: "/Charts",
-            name: "charts",
-            component: Charts
-        },
+        // {
+        //     path: "/Charts",
+        //     name: "charts",
+        //     component: Charts
+        // },
         {
             path: "/:id/repos",
             name: "Repositories",
