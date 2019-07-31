@@ -106,6 +106,7 @@ export default {
     async insertLog() {
       this.insertLog = await RestService.insertLog("LoginPage");
     },
+    ...mapActions(['login']),
     async Login() {
       if (this.$refs.form.validate()) {
         // Call Login
