@@ -47,13 +47,18 @@ export default {
     },
     methods: {
         async getPosts() {
-            this.posts = await RestService.getUserPosts(this.user_id);
+            const posts = await RestService.getPosts();
             // for (let idx = 0; idx < this.posts.length; idx++) {
             //     this.posts[idx].post_date =
             //         this.posts[idx].post_date.slice(0, 10) +
             //         " " +
             //         this.posts[idx].post_date.slice(11, 19);
             // }
+            for (const post of posts) {
+                if (post.user_id === this.user_id) {
+                    this.posts.push(post)
+                }
+            }
             console.log(this.posts)
         },
         loadMorePosts() {
