@@ -1,6 +1,29 @@
 import Api from "../services/Api";
 
 export default {
+    async getMessage(user_add, project_id, token) {
+        const BASE_URL = user_add + "/api/v4";
+        const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
+        const message = {};
+
+        for (let i = 1; Object.keys(message).length < 10; ++i) {
+            let events = await Api(BASE_URL, token).get(eventsURL + String(i))
+            if (events.data.length === 0) {
+                break
+            }
+            for (event of events.data) {
+                if (Object.keys(message).length == 10) {
+                    break
+                }
+                if (event.action_name == "pushed to") {
+                    const created_at = this.calendar(event.created_at);
+                    const commit = event.push_data.commit_title;
+                    message[created_at] = commit;
+                }
+            }
+        }
+        return message
+    },
     async getPushed(user_add, project_id, token) {
         const BASE_URL = user_add + "/api/v4";
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;

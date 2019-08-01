@@ -43,6 +43,7 @@
                 gradient: ["#1feaea", "#ffd200", "#f72047"],
                 lineCap: "round",
                 data: {},
+                message: {},
                 url: "",
                 token: "",
                 git: false,
@@ -52,11 +53,18 @@
             async drawGraph() {
                 await this.getUrl();
                 await this.getGraphInfo();
+                await this.getMessage();
+                console.log(this.message)
             },
             async getGraphInfo() {
                 this.data = await Git.getPushed(this.url, this.repo_id, this.token);
                 if (Object.keys(this.data).length !== 1) {
                     this.git = true;
+                }
+            },
+            async getMessage() {
+                if (this.git === true) {
+                    this.message = await Git.getMessage(this.url, this.repo_id, this.token);
                 }
             },
             async getUrl() {
