@@ -1,13 +1,15 @@
 <template>
-    <div>
-      <div class="side">
+  <div>
+    <div class="side">
       <sidebar-menu :menu="menu" class="menubar"/>
-      </div>
-      <div class="info">
-         <h1>POST COUNT</h1> <h2>{{post_cnt[0].cnt}}</h2>
-         <h1>REPO COUNT</h1> <h2>{{repo_cnt[0].cnt}}</h2>
-      </div>
     </div>
+     <div class="countinfo">
+       <h1>POST COUNT</h1>
+       <h2>{{post_cnt[0].cnt}}</h2>
+       <h1>REPO COUNT</h1>
+       <h2>{{repo_cnt[0].cnt}}</h2>
+      </div>
+  </div>
 </template>
 
 
@@ -66,32 +68,17 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("Admin");
         },
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("Delegate");
-        },
         async count(){
           this.post_cnt = await RestService.countRepositories();
           this.repo_cnt = await RestService.countPost();
-
         }
     }
 }
 </script>
 
 <style>
-.side{
-  float: left;
-  height:auto;
-}
-.post{
-  width : 40%;
-  text-align: center;
-  margin-left: 10%;
-}
-
-.repo{
-  width : 40%;
-  text-align: center;
-  margin-left: 10%;
-}
+.side{  float: left;  height:auto;}
+.post{  width : 40%;  text-align: center;  margin-left: 10%;}
+.repo{  width : 40%;  text-align: center;  margin-left: 10%;}
+.countinfo{ padding-top: 10%;}
 </style>
