@@ -47,7 +47,7 @@ export default {
     },
     methods: {
         async getPosts() {
-            this.posts = await RestService.getPost(this.user_id);
+            this.posts = await RestService.getUserPosts(this.user_id);
             // for (let idx = 0; idx < this.posts.length; idx++) {
             //     this.posts[idx].post_date =
             //         this.posts[idx].post_date.slice(0, 10) +
