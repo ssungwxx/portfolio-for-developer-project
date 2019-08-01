@@ -1,5 +1,13 @@
 <template>
-    <sidebar-menu :menu="menu" class="menubar"/>
+    <div>
+      <div class="side">
+      <sidebar-menu :menu="menu" class="menubar"/>
+      </div>
+      <div class="info">
+         <h1>POST COUNT</h1> <h2>{{post_cnt[0].cnt}}</h2>
+         <h1>REPO COUNT</h1> <h2>{{repo_cnt[0].cnt}}</h2>
+      </div>
+    </div>
 </template>
 
 
@@ -9,9 +17,10 @@ export default {
     name: "Admin",
     beforeMount() {
         this.insertLog();
+        this.count();
     },
     mounted(){
-        this.insertLog();
+
     },
     components: {
     },
@@ -23,15 +32,9 @@ export default {
                   title: 'Admin Page',
                 },
               {
-                  title: 'Charts',
+                  title: 'Log',
                   icon: 'fa fa-bar-chart',
                   child: [
-                      {
-                          title : 'Portfolio/Post',
-                          href: '../Charts',
-
-                      },
-
                       {
                         title : 'Log',
                         href: '../WebLog',
@@ -50,6 +53,12 @@ export default {
                   ]
               }
           ],
+          post_cnt:[{
+            cnt : ""
+          }],
+          repo_cnt:[{
+            cnt : ""
+          }],
             home: "/"
         };
     },
@@ -59,7 +68,30 @@ export default {
         },
         async insertLog() {
             this.insertLog = await RestService.insertLog("Delegate");
+        },
+        async count(){
+          this.post_cnt = await RestService.countRepositories();
+          this.repo_cnt = await RestService.countPost();
+
         }
     }
 }
 </script>
+
+<style>
+.side{
+  float: left;
+  height:auto;
+}
+.post{
+  width : 40%;
+  text-align: center;
+  margin-left: 10%;
+}
+
+.repo{
+  width : 40%;
+  text-align: center;
+  margin-left: 10%;
+}
+</style>

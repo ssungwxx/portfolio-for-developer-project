@@ -40,6 +40,14 @@ router.get("/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
+//
+router.get("/user/:id", (req, res) => {
+    knex("posts")
+        .select("*")
+        .where("user_id", req.params.id)
+        .then(data => res.json(data));
+});
+
 // Add new post
 router.post("/", (req, res) => {
     knex("posts")

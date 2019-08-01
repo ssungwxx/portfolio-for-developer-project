@@ -1,17 +1,21 @@
 import Vue from "vue";
 import Router from "vue-router";
-import HomePage from "./views/HomePage.vue";
-import PostPage from "./views/PostPage.vue";
-import PortfolioPage from "./views/PortfolioPage.vue";
-import PortfolioWrite from "./views/PortfolioWrite.vue";
-import DetailPortfolio from "./views/DetailPortfolio.vue";
-import DetailPost from "./views/DetailPost.vue";
 import Admin from "./views/Admin.vue";
 import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
-import Charts from "./views/Charts.vue";
+import PostPage from "./views/PostPage.vue";
+import PostDetail from "./views/PostDetail.vue";
+import WritePost from "./views/WritePost.vue";
+import RepoPage from "./views/RepoPage.vue";
+import RepoDetail from "./views/RepoDetail.vue";
+// import HomePage from "./views/HomePage.vue";
+// import Charts from "./views/Charts.vue";
+// import PortfolioPage from "./views/PortfolioPage.vue";
+// import PortfolioWrite from "./views/PortfolioWrite.vue";
+// import DetailPortfolio from "./views/DetailPortfolio.vue";
+
 
 Vue.use(Router);
 
@@ -21,33 +25,38 @@ export default new Router({
     routes: [
         {
             path: "/",
-            name: "mainpage",
+            name: "MainPage",
             component: MainPage
         },
         {
-            path: "/post",
-            name: "post",
+            path: "/:id/posts",
+            name: "Posts",
             component: PostPage
         },
         {
-            path: "/portfolio",
-            name: "portfolio",
-            component: PortfolioPage
+            path: "/:id/posts/:post_id",
+            name: "PostDetail",
+            component: PostDetail
         },
         {
-            path: "/detailportfolio/:id",
-            name: "detailportfolio",
-            component: DetailPortfolio
+            path: "/:id/writepost",
+            name: "WritePost",
+            component: WritePost
         },
         {
-            path: "/portfoliowrite",
-            name: "portfoliowrite",
-            component: PortfolioWrite
+            path: "/:id/repos",
+            name: "Repositories",
+            component: RepoPage
         },
         {
-            path: "/detailpost/:id",
-            name: "detailpost",
-            component: DetailPost
+            path: "/:id/repos/:repo_id",
+            name: "RepoDetail",
+            component: RepoDetail
+        },
+        {
+            path: "/users/:id",
+            name: "UserPage",
+            component: UserPage
         },
         {
             path: "/admin",
@@ -55,24 +64,34 @@ export default new Router({
             component: Admin
         },
         {
-          path: "/delegate",
-          name: "delegate",
-          component: Delegate
+            path: "/delegate",
+            name: "delegate",
+            component: Delegate
         },
         {
-          path: "/WebLog",
-          name: "weblog",
-          component: WebLog
+            path: "/WebLog",
+            name: "weblog",
+            component: WebLog
         },
-        {
-          path: "/Charts",
-          name: "charts",
-          component: Charts
-        },
-        {
-            path: "/users/:id",
-            name: "UserPage",
-            component: UserPage
-        }
+        // {
+        //     path: "/Charts",
+        //     name: "charts",
+        //     component: Charts
+        // },
+        // {
+        //     path: "/portfolio",
+        //     name: "portfolio",
+        //     component: PortfolioPage
+        // },
+        // {
+        //     path: "/detailportfolio/:id",
+        //     name: "detailportfolio",
+        //     component: DetailPortfolio
+        // },
+        // {
+        //     path: "/portfoliowrite",
+        //     name: "portfoliowrite",
+        //     component: PortfolioWrite
+        // },
     ]
 });

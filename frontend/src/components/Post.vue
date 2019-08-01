@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import  DetailPost from "../views/DetailPost"
+import PostDetail from "../views/PostDetail"
 
 export default {
     name: "Post",
@@ -23,15 +23,16 @@ export default {
         user_id: {type: String}
     },
     components: {
-        DetailPost,
+        PostDetail,
     },
     data() {
         return {
-            detaillink: "/detailpost/" + this.post_no,
+            detaillink: "/" + this.user_id + "/" + this.post_no,
         };
     },
 };
 </script>
+
 <style>
 .color-666 {
     color: #666;

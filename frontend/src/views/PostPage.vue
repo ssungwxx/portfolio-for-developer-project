@@ -1,12 +1,12 @@
 <template>
     <div>
         <ImgBanner imgSrc="https://ifh.cc/g/rNlxw.jpg">
-            <div style="line-height:1.2em;font-size:1.2em;" slot="text">Post</div>
+            <div style="line-height:1.2em;font-size:1.2em;" slot="text">Posts</div>
         </ImgBanner>
         <v-container>
             <v-layout>
                 <v-flex xs12>
-                    <PostList :limits="6" :load-more="true" :user_id="user_id"></PostList>
+                    <PostList :limits="6" :loadMore="false" :user_id="user_id"></PostList>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -36,6 +36,7 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("PostPage");
         }
+
     }
 };
 </script>

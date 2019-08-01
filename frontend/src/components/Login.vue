@@ -106,9 +106,12 @@ export default {
     async insertLog() {
       this.insertLog = await RestService.insertLog("LoginPage");
     },
+    // ...mapActions(['login'])
     async Login() {
       if (this.$refs.form.validate()) {
         // Call Login
+        let loginResult = await this.login({uid: this.uid, password: this.password});
+        console.log(loginResult);
       }
     },
     // async defaultLogin() {

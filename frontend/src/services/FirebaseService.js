@@ -7,13 +7,13 @@ const PORTFOLIOS = "portfolios";
 
 // Setup Firebase
 const config = {
-  projectId: "webmobile-f08a4",
-     authDomain: "webmobile-f08a4.firebaseapp.com",
-     apiKey: "AIzaSyCYZ31KO8mTVKstx0wODkNVQ_FLSDA_USk",
-     databaseURL: "https://webmobile-f08a4.firebaseio.com",
-     storageBucket: "webmobile-f08a4.appspot.com",
-     messagingSenderId: "771916903533",
-     appId: "1:771916903533:web:7c49487dac48829b"
+    apiKey: "AIzaSyC48D8A57sXBcTMYbdYnigwMLj_X4HouaM",
+    authDomain: "ssafy-49605.firebaseapp.com",
+    databaseURL: "https://ssafy-49605.firebaseio.com",
+    projectId: "ssafy-49605",
+    storageBucket: "ssafy-49605.appspot.com",
+    messagingSenderId: "824421407150",
+    appId: "1:824421407150:web:c16f3997c6febade"
 };
 
 firebase.initializeApp(config);
@@ -69,9 +69,9 @@ export default {
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
-    console.log(accessToken);
+                console.log(accessToken);
                 let user = result.user;
-    console.log(user);
+                console.log(user);
                 return result;
             })
             .catch(function(error) {
@@ -79,13 +79,35 @@ export default {
             });
     },
     loginWithFacebook() {
-        let provider = new firebase.auth.FacebookAuthProvider()
-        return firebase.auth().signInWithPopup(provider).then(function(result) {
-            let accessToken = result.credential.accessToken;
-            let user = result.user;
-            return result
-        }).catch(function(error) {
-            console.error('[Facebook Login Error]', error)
-        });
+        let provider = new firebase.auth.FacebookAuthProvider();
+        return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function(result) {
+                let accessToken = result.credential.accessToken;
+                console.log(accessToken);
+                let user = result.user;
+                console.log(user);
+                return result;
+            })
+            .catch(function(error) {
+                console.error("[Facebook Login Error]", error);
+            });
     },
+    loginWithEmail() {
+        let provider = new firebase.auth.EmailAuthProvider();
+        return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function(result) {
+                let accessToken = result.credential.accessToken;
+                console.log(accessToken);
+                let user = result.user;
+                console.log(user);
+                return result;
+            })
+            .catch(function(error) {
+                console.error("[Facebook Login Error]", error);
+            });
+    }
 };

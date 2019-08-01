@@ -11,11 +11,11 @@
             <v-divider></v-divider>
         </v-flex>
 
-        <div class="plus" v-if="loadMore">
+        <div class="plus" v-if="!loadMore">
             <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
                 <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
             </v-btn>
-            <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" href="/PortfolioWrite" dark>
+            <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" :href="'/' + user_id + writepost" dark>
                 <v-icon size="25" class="mr-2">fa-edit</v-icon>Write
             </v-btn>
         </div>
@@ -35,7 +35,8 @@ export default {
     },
     data() {
         return {
-            posts: []
+            posts: [],
+            writepost: "/writepost"
         };
     },
     components: {
@@ -46,13 +47,14 @@ export default {
     },
     methods: {
         async getPosts() {
-            this.posts = await RestService.getPost(this.user_id);
-            for (let idx = 0; idx < this.posts.length; idx++) {
-                this.posts[idx].post_date =
-                    this.posts[idx].post_date.slice(0, 10) +
-                    " " +
-                    this.posts[idx].post_date.slice(11, 19);
-            }
+            this.posts = await RestService.getUserPosts(this.user_id);
+            // for (let idx = 0; idx < this.posts.length; idx++) {
+            //     this.posts[idx].post_date =
+            //         this.posts[idx].post_date.slice(0, 10) +
+            //         " " +
+            //         this.posts[idx].post_date.slice(11, 19);
+            // }
+            console.log(this.posts)
         },
         loadMorePosts() {
             this.limits += 6;

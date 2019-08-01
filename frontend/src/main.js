@@ -12,6 +12,9 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
+// Google Analytics
+import VueAnalytics from "vue-analytics";
+
 //그래프 관련
 import Bars from "vuebars";
 
@@ -53,6 +56,14 @@ Vue.use(VueResizeText);
 // 배경화면 캐러셀
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
+
+Vue.use(VueAnalytics, {
+    id: "UA-144893029-1",
+    router,
+    autoTracking: {
+        pageviewOnLoad: false
+    }
+});
 
 new Vue({
     router,
