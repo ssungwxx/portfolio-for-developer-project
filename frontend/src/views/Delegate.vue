@@ -82,6 +82,7 @@ export default {
   font-size: 16px;
 }
 
+
 table {
       width: 100%;
     }
