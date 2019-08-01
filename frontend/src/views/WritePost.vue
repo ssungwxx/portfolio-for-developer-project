@@ -36,7 +36,9 @@ export default {
         validate () {
             if (this.$refs.form.validate()) {
                 const data = {
-
+                    user_id: this.user_id,
+                    post_title: this.title,
+                    post_content: this.content
                 };
                 this.postpost(data);
             }
