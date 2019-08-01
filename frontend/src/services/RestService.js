@@ -12,6 +12,11 @@ export default {
             .get("http://70.12.246.138:3000/posts/" + id)
             .then(response => (this.posts = response.data));
     },
+    getUserPosts(id) {
+        return axios
+            .get("http://70.12.246.138:3000/posts/user/" + id)
+            .then(response => (this.posts = response.data));
+    },
     updatePost(id, data) {
         return axios
             .put("http://70.12.246.138:3000/posts/" + id, data)
@@ -30,7 +35,7 @@ export default {
     insertPost(data) {
         return axios
             .post("http://70.12.246.138:3000/posts", data)
-            .then(response => console.log(response));
+            .then(response => (this.posts = response.data));
     },
     // Repository 관련 함수
     getRepositories() {

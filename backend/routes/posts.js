@@ -25,11 +25,26 @@ router.get("/count/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
+router.get("/user/:id", (req, res) => {
+    knex("posts")
+        .select("*")
+        .where("user_id", req.params.id)
+        .then(data => res.json(data));
+});
+
 // Get one detailed post
 router.get("/:id", (req, res) => {
     knex("posts")
         .select("*")
         .where("post_no", req.params.id)
+        .then(data => res.json(data));
+});
+
+//
+router.get("/user/:id", (req, res) => {
+    knex("posts")
+        .select("*")
+        .where("user_id", req.params.id)
         .then(data => res.json(data));
 });
 

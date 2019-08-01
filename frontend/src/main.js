@@ -12,11 +12,11 @@ import router from "./router";
 import store from "./store";
 import "./registerServiceWorker";
 
-//그래프 관련
-import Bars from "vuebars";
-
 // Google Analytics
 import VueAnalytics from "vue-analytics";
+
+//그래프 관련
+import Bars from "vuebars";
 
 Vue.use(Bars);
 
