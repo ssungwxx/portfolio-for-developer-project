@@ -1,28 +1,35 @@
 <template>
-    <v-layout mt-5 wrap>
+    <v-layout my-5>
+      <table>
+      <thead>
+        <tr>
+          <th class="title">ID</th><th class="title">NICKNAME</th><th class="title">GRADE NUM</th><th class="title">VISITOR</th><th class="title">MEMBER</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr  v-for="i in users" v-if="i.user_grade!==10">
+          <td class="userdata">{{i.user_id}}</td><td class="userdata">{{i.user_name}}</td>
+          <td class="userdata">{{i.user_grade}}</td>
+          <td class="userdata">
+            <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===0" @change="updateUser(i.user_id)">
+              <option value="0" selected>방문자</option>
+              <option value="5">팀원</option>
+            </select>
+          </td>
+          <td class="userdata">
+            <select class="customselect2" id="TestSelect" name="SelectValue" v-if="i.user_grade===5" @change="updateUser(i.user_id)">
+              <option value="0">방문자</option>
+              <option value="5" selected>팀원</option>
+            </select>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-        <v-flex v-for="i in users" v-if="i.user_grade!==10">
-            {{i.user_id}}
-            <br />
-            {{i.user_name}}
-            <br />
-            {{i.user_grade}}
-            <br />
-
-              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===0" @change="updateUser(i.user_id)">
-                <option value="0" selected>방문자</option>
-                <option value="5">팀원</option>
-              </select>
-
-              <select class="customselect" id="TestSelect" name="SelectValue" v-if="i.user_grade===5" @change="updateUser(i.user_id)">
-                <option value="0">방문자</option>
-                <option value="5" selected>팀원</option>
-              </select>
-
-        </v-flex>
     </v-layout>
 </template>
 <script>
+
 
 
 import RestService from "@/services/RestService";
@@ -64,13 +71,32 @@ export default {
 };
 </script>
 <style>
+.title{
+  width : 20%;
+  text-align: center;
+}
+.userdata{
+  width:20%;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 16px;
+}
+
+table {
+      width: 100%;
+    }
 
 .customselect{
   position: relative;
   font-family: Arial;
-   background-color: DodgerBlue;
+  color : green;
 }
 
+.customselect2{
+  position: relative;
+  font-family: Arial;
+  color : blue;
+}
 .customselect-selected::after{
   position: absolute;
   content: "";
@@ -93,7 +119,7 @@ export default {
 /* Style items (options): */
 .customselect-items {
   position: absolute;
-  background-color: DodgerBlue;
+  background-color: none;
   top: 100%;
   left: 0;
   right: 0;

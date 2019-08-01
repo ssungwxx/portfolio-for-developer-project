@@ -5,8 +5,7 @@ import Delegate from "./views/Delegate.vue";
 import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
-import PostPage from "./views/PostPage.vue";
-import PostDetail from "./views/PostDetail.vue";
+import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
 import RepoPage from "./views/RepoPage.vue";
 import RepoDetail from "./views/RepoDetail.vue";
@@ -23,6 +22,7 @@ export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
+    
         {
             path: "/",
             name: "MainPage",
@@ -73,25 +73,16 @@ export default new Router({
             name: "weblog",
             component: WebLog
         },
-        // {
-        //     path: "/Charts",
-        //     name: "charts",
-        //     component: Charts
-        // },
-        // {
-        //     path: "/portfolio",
-        //     name: "portfolio",
-        //     component: PortfolioPage
-        // },
-        // {
-        //     path: "/detailportfolio/:id",
-        //     name: "detailportfolio",
-        //     component: DetailPortfolio
-        // },
-        // {
-        //     path: "/portfoliowrite",
-        //     name: "portfoliowrite",
-        //     component: PortfolioWrite
-        // },
+
+        {
+            path: "/:id/repos",
+            name: "Repositories",
+            component: RepoPage
+        },
+        {
+            path: "/:id/writepost",
+            name: "WritePost",
+            component: WritePost
+        }
     ]
 });
