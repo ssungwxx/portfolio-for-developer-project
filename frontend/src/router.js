@@ -7,10 +7,9 @@ import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
 import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
-import RepoPage from "./views/RepoPage.vue";
 import RepoDetail from "./views/RepoDetail.vue";
+
 // import HomePage from "./views/HomePage.vue";
-// import Charts from "./views/Charts.vue";
 // import PortfolioPage from "./views/PortfolioPage.vue";
 // import PortfolioWrite from "./views/PortfolioWrite.vue";
 // import DetailPortfolio from "./views/DetailPortfolio.vue";
@@ -22,13 +21,13 @@ export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
-    
+
         {
             path: "/",
             name: "MainPage",
             component: MainPage
         },
-        {
+        /*{
             path: "/:id/posts",
             name: "Posts",
             component: PostPage
@@ -42,7 +41,7 @@ export default new Router({
             path: "/:id/writepost",
             name: "WritePost",
             component: WritePost
-        },
+        },*/
         {
             path: "/:id/repos",
             name: "Repositories",
@@ -74,11 +73,6 @@ export default new Router({
             component: WebLog
         },
 
-        {
-            path: "/:id/repos",
-            name: "Repositories",
-            component: RepoPage
-        },
         {
             path: "/:id/writepost",
             name: "WritePost",
