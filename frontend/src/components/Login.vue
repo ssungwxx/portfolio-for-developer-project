@@ -54,6 +54,7 @@ import {
   VFBLogin as VFacebookLogin
 } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
+import {mapActions} from 'vuex'
 
 export default {
   data() {
@@ -66,7 +67,7 @@ export default {
       ],
       pwRules: [
         v => !!v || 'Password is required',
-        v => (v && v.length >= 8) || 'Password must be at least 8 characters'
+        v => (v && v.length >= 4) || 'Password must be at least 8 characters'
       ],
       show: false,
       id: "",
@@ -108,9 +109,10 @@ export default {
     },
     // ...mapActions(['login'])
     async Login() {
+      console.log(this.$refs.form.validate());
       if (this.$refs.form.validate()) {
         // Call Login
-        let loginResult = await this.login({uid: this.uid, password: this.password});
+        let loginResult = await this.login({user_id: this.id, user_pw: this.password});
         console.log(loginResult);
       }
     },
