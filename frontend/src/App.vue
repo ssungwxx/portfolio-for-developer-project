@@ -16,7 +16,6 @@
         </v-content>
     </v-app>
 </template>
-
 <script>
 import store from "./store";
 import Footer from "./components/Footer";
