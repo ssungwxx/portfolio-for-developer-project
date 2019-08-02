@@ -4,12 +4,12 @@
             <table class="table">
                 <tr>
                     <th>
-                        <span class="table-head">{{ post[0].post_title }}</span>
-                        <span class="table-date">{{ post[0].post_date.slice(0, 10) + " " + post[0].post_date.slice(12, 16) }}</span>
+                        <span class="table-head">{{ post.post_title }}</span>
+                        <span class="table-date">{{ post.post_date }}</span>
                     </th>
                 </tr>
                 <tr>
-                    <div class="table-content">{{ post[0].post_content }}</div>
+                    <div class="table-content">{{ post.post_content }}</div>
                 </tr>
             </table>
         </div>
@@ -31,9 +31,12 @@
 
     export default {
         name: "PostDetail",
+        props: {
+            post_title: {type: String}
+        },
         data() {
             return {
-                post_no: this.$route.params.post_id,
+                post_no: this.$route.params.post_id - 1,
                 user_id: this.$route.params.id,
                 posts: "",
                 status: "비회원",
@@ -49,15 +52,17 @@
         methods: {
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_no);
+                const date = this.post.post_date;
+                this.post.post_date = date.slice(0, 10) + " " + date.slice(12, 16);
                 this.posts = "/users/" + this.user_id + "/posts/"
                 },
-                async insertLog() {
-                    this.insertLog = await RestService.insertLog("DetailPost");
-                },
-                loginCheck() {
-                    if (this.$store.state.isAuth) {
+            async insertLog() {
+                this.insertLog = await RestService.insertLog("DetailPost");
+            },
+            loginCheck() {
+                if (this.$store.state.isAuth) {
 
-                    }
+                }
             }
         }
     };

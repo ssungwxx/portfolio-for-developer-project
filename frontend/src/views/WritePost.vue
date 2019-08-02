@@ -2,8 +2,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
         <div class="writediv">
             <v-text-field v-model="title" :rules="titleRules" label="제목" required></v-text-field>
-            <v-textarea v-model="content" :rules="contentRules" label="내용" required height="200px"></v-textarea>
-<!--            v-input v-text-field v-input&#45;&#45;is-label-active v-input&#45;&#45;is-dirty v-input&#45;&#45;is-focused theme&#45;&#45;light primary&#45;&#45;text-->
+            <v-textarea v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
         </div>
         <div class="btns">
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate" :href="postlist">쓰기</v-btn>
