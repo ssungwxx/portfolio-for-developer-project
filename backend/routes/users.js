@@ -87,9 +87,7 @@ router.post("/login", (req, res) => {
             if (data[0].user_pw == key.toString("base64")) {
               res.json({
                 status: 200,
-                msg: "success",
-                user_grade: data[0].user_grade,
-                user_name: data[0].user_name
+                msg: "success"
               });
             } else {
               res.json({
