@@ -2,7 +2,7 @@
     <v-layout row wrap mw-700>
         <v-flex v-for="i in posts.length > limits ? limits : posts.length" :class="'md' + 12 / column" xs12 px-3>
             <Post
-                :post_no="posts[i - 1].post_no"
+                :post_no="i"
                 :post_date="posts[i - 1].post_date.slice(0, 10) + ' ' + posts[i - 1].post_date.slice(12, 16)"
                 :post_title="posts[i - 1].post_title"
                 :post_content="posts[i - 1].post_content"

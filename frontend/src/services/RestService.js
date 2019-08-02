@@ -14,8 +14,8 @@ export default {
     },
     getPostDetail(user, id) {
         return axios
-            .get(`http://70.12.246.138:3000/posts/${user}?post_no=${id}`)
-            .then(response => (this.posts = response.data));
+            .get(`http://70.12.246.138:3000/posts/${user}`)
+            .then(response => (this.posts = response.data[id]));
     },
     updatePost(id, data) {
         return axios
