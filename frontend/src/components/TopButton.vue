@@ -48,7 +48,7 @@ export default {
     .top-button {
         position: fixed;
         bottom: 5%;
-        left: 96%;
+        right: 96%;
         margin: 0;
         padding: 0;
         z-index: 2;
