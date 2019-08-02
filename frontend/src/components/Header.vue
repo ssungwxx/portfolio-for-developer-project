@@ -223,7 +223,7 @@ export default {
 }
 
 .v-card {
-    position: absolute;
+    /* position: absolute; */
     min-width: auto;
     margin-left: 10px;
 }
