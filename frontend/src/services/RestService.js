@@ -90,9 +90,12 @@ export default {
             .then(response => (this.portfolios = response.data));
     },
     loginUser(data) {
+      console.log(data);
         return axios
             .post("http://70.12.246.138:3000/users/login", data)
-            .then(response => (this.result = response.data));
+            .then(response => {
+              return response.data;
+            });
     },
     getSearchUsers(data) {
         return axios

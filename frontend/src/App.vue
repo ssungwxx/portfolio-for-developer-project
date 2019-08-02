@@ -17,7 +17,7 @@
     </v-app>
 </template>
 <script>
-import store from "./store";
+import {store} from "./vuex/store";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
