@@ -50,7 +50,6 @@ import RestService from "@/services/RestService"
         },
         mounted() {
             this.getRepos();
-            console.log(this.loadMore)
         }
     }
 </script>

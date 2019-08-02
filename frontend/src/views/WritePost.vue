@@ -1,11 +1,12 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation>
-        <div>
-            <v-text-field v-model="title" :counter="10" :rules="titleRules" label="제목" required></v-text-field>
-            <v-text-field v-model="content" :rules="contentRules" label="내용" required></v-text-field>
+        <div class="writediv">
+            <v-text-field v-model="title" :rules="titleRules" label="제목" required></v-text-field>
+            <v-textarea v-model="content" :rules="contentRules" label="내용" required height="200px"></v-textarea>
+<!--            v-input v-text-field v-input&#45;&#45;is-label-active v-input&#45;&#45;is-dirty v-input&#45;&#45;is-focused theme&#45;&#45;light primary&#45;&#45;text-->
         </div>
-        <div>
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
+        <div class="btns">
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate" :href="postlist">쓰기</v-btn>
             <v-btn color="error" class="mr-4" @click="reset">내용 초기화</v-btn>
         </div>
     </v-form>
@@ -30,7 +31,12 @@ export default {
                 v => !!v || 'Content is required',
                 // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
+            postlist: ""
         }
+    },
+    mounted() {
+        console.log(this.user_id)
+        this.postlist = "/users/" + this.user_id + "/posts"
     },
     methods: {
         validate () {
@@ -54,5 +60,12 @@ export default {
 </script>
 
 <style>
-
+.writediv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btns {
+    margin-top: 50px;
+}
 </style>

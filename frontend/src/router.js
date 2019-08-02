@@ -7,8 +7,9 @@ import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
 import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
+import PostPage from "./views/PostPage.vue";
+import PostDetail from "./views/PostDetail.vue";
 import RepoDetail from "./views/RepoDetail.vue";
-
 // import HomePage from "./views/HomePage.vue";
 // import PortfolioPage from "./views/PortfolioPage.vue";
 // import PortfolioWrite from "./views/PortfolioWrite.vue";
@@ -27,28 +28,28 @@ export default new Router({
             name: "MainPage",
             component: MainPage
         },
-        /*{
-            path: "/:id/posts",
+        {
+            path: "/users/:id/posts",
             name: "Posts",
             component: PostPage
         },
         {
-            path: "/:id/posts/:post_id",
+            path: "/users/:id/posts/:post_id",
             name: "PostDetail",
             component: PostDetail
         },
         {
-            path: "/:id/writepost",
+            path: "/users/:id/writepost",
             name: "WritePost",
             component: WritePost
-        },*/
+        },
         {
-            path: "/:id/repos",
+            path: "/users/:id/repos",
             name: "Repositories",
             component: RepoPage
         },
         {
-            path: "/:id/repos/:repo_id",
+            path: "/users/:id/repos/:repo_id",
             name: "RepoDetail",
             component: RepoDetail
         },
@@ -72,11 +73,5 @@ export default new Router({
             name: "weblog",
             component: WebLog
         },
-
-        {
-            path: "/:id/writepost",
-            name: "WritePost",
-            component: WritePost
-        }
     ]
 });
