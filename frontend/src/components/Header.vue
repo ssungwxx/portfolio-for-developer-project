@@ -16,7 +16,7 @@
                     <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
                     <v-icon style="margin-left: 10px;">search</v-icon>
                 </div>
-                <v-card v-if="search !== ''">
+                <v-card class="card" v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
                         <!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
                         <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
@@ -98,24 +98,9 @@ export default {
     name: "Header",
     data: () => ({
         title: document.title,
-        // port: "/Portfolio",
         posts: "/posts",
         repos: "/repos",
         login: "/Login",
-        // items: [
-        //     {
-        //         title: "perm_identity",
-        //         go: "/Login"
-        //     },
-        //     {
-        //         title: "description",
-        //         go: "/Post"
-        //     },
-        //     {
-        //         title: "markunread_mailbox",
-        //         go: "/Portfolio"
-        //     }
-        // ],
         search: "검색할 아이디를 입력해주세요.",
         users: []
     }),
@@ -220,6 +205,10 @@ export default {
 .v-input {
     width: 30vw;
     min-width: 25vw;
+}
+
+.card {
+    position: absolute;
 }
 
 .v-card {
