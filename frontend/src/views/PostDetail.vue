@@ -28,6 +28,7 @@
 </template>
 <script>
     import RestService from "@/services/RestService";
+    import Git from "@/services/GitLabRepoService";
 
     export default {
         name: "PostDetail",
@@ -53,7 +54,7 @@
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_no);
                 const date = this.post.post_date;
-                this.post.post_date = date.slice(0, 10) + " " + date.slice(12, 16);
+                this.post.post_date = Git.calendar_time(this.post.post_date);
                 this.posts = "/users/" + this.user_id + "/posts/"
                 },
             async insertLog() {
