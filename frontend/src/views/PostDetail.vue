@@ -9,7 +9,7 @@
                     </th>
                 </tr>
                 <tr>
-                    <div class="table-content">{{ post.post_content }}</div>
+                    <p class="table-content" v-html="post.post_content"></p>
                 </tr>
             </table>
         </div>
@@ -55,8 +55,16 @@
                 this.post = await RestService.getPostDetail(this.user_id, this.post_no);
                 const date = this.post.post_date;
                 this.post.post_date = Git.calendar_time(this.post.post_date);
-                this.posts = "/users/" + this.user_id + "/posts/"
-                },
+                this.posts = "/users/" + this.user_id + "/posts/";
+                let newContent = "";
+                for (const char of this.post.post_content) {
+                    newContent += char;
+                    if (char === "\n") {
+                        newContent += "</br>";
+                    }
+                }
+                this.post.post_content = newContent;
+            },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
             },
