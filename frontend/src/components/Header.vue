@@ -16,7 +16,7 @@
                     <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
                     <v-icon style="margin-left: 10px;">search</v-icon>
                 </div>
-                <v-card v-if="search !== ''">
+                <v-card class="card" v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
                         <!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
                         <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
@@ -205,6 +205,10 @@ export default {
 .v-input {
     width: 30vw;
     min-width: 25vw;
+}
+
+.card {
+    position: absolute;
 }
 
 .v-card {
