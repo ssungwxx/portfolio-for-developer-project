@@ -84,4 +84,39 @@ export default {
         }
         return String(month) + "-" + String(day)
     },
+    calendar_time(created_at) {
+        let year = Number(created_at.slice(0, 4));
+        let month = Number(created_at.slice(5, 7));
+        let day = Number(created_at.slice(8, 10));
+        let hour = Number(created_at.slice(11, 13)) + 9;
+        let min = Number(created_at.slice(14, 16))
+
+        if (hour >= 24) {
+            hour -= 24;
+            day += 1;
+            if (month in [1, 3, 5, 7, 8, 10, 12]) {
+                if (day > 31) {
+                    day -= 31;
+                    month += 1;
+                }
+            } else {
+                if (month === 2) {
+                    if (day > 28) {
+                        day -= 28;
+                        month += 1;
+                    }
+                } else {
+                    if (day > 30) {
+                        day -= 30;
+                        month += 1;
+                    }
+                }
+            }
+            if (month > 12) {
+                month -= 12;
+                year += 1;
+            }
+        }
+        return String(year) + "-" + String(month) + "-" + String(day) + " " + String(hour) + ":" + String(min)
+    },
 };
