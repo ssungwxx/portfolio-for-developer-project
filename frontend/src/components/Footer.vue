@@ -9,7 +9,7 @@
 
         <div class="ftweather font">
            &copy;
-           2019.07.19
+           2019.08.02
            <a
            href="https://lab.ssafy.com/2HyungJu/webmobile-sub2"
            target="_blank" class="font">GitLab
