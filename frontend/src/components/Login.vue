@@ -54,7 +54,9 @@ import {
   VFBLogin as VFacebookLogin
 } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
-import {mapActions} from 'vuex'
+import {
+  mapActions
+} from 'vuex'
 
 export default {
   data() {

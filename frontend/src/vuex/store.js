@@ -14,16 +14,18 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    login (state, isAuth) {
-        state.isAuth = isAuth;
+    login(state, isAuth) {
+      state.isAuth = isAuth;
     }
   },
   actions: {
-    async loginCheck ({commit}, data) {
+    async loginCheck({
+      commit
+    }, data) {
       console.log(data);
       var result = await RestService.loginUser(data);
       console.log(result);
-      if(result.status == 200) {
+      if (result.status == 200) {
         commit('login', true);
       }
     }
