@@ -98,24 +98,9 @@ export default {
     name: "Header",
     data: () => ({
         title: document.title,
-        // port: "/Portfolio",
         posts: "/posts",
         repos: "/repos",
         login: "/Login",
-        // items: [
-        //     {
-        //         title: "perm_identity",
-        //         go: "/Login"
-        //     },
-        //     {
-        //         title: "description",
-        //         go: "/Post"
-        //     },
-        //     {
-        //         title: "markunread_mailbox",
-        //         go: "/Portfolio"
-        //     }
-        // ],
         search: "검색할 아이디를 입력해주세요.",
         users: []
     }),
