@@ -55,6 +55,16 @@ export default {
             for (const post of this.posts) {
                 post.post_date = await Git.calendar_time(post.post_date);
             }
+            for (const post of this.posts) {
+                let newContent = "";
+                for (const char of post.post_content) {
+                    newContent += char;
+                    if (char === "\n") {
+                        newContent += "</br>";
+                    }
+                }
+                post.post_content = newContent;
+            }
         },
         loadMorePosts() {
             this.loadlimits += 6;

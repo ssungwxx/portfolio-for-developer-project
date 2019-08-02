@@ -4,7 +4,7 @@
             <v-flex row>
                 <div class="caption target">{{post_date}}</div>
                 <h2 class="color-332 target">{{post_title}}</h2>
-                <p class="mb-1 color-666 target">{{post_content}}</p>
+                <p class="mb-1 color-666 target" v-html="post_content"></p>
             </v-flex>
         </v-layout>
     </router-link>
