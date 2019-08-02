@@ -9,7 +9,9 @@ import "font-awesome/css/font-awesome.min.css";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import {
+  store
+} from "./vuex/store";
 import "./registerServiceWorker";
 
 // Google Analytics
@@ -36,13 +38,13 @@ import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(VueSidebarMenu);
 
 Vue.use(Vuetify, {
-    iconfont: "fa",
-    theme: {
-        primary: "#3f51b5",
-        secondary: "#b0bec5",
-        accent: "#8c9eff",
-        error: "#b71c1c"
-    }
+  iconfont: "fa",
+  theme: {
+    primary: "#3f51b5",
+    secondary: "#b0bec5",
+    accent: "#8c9eff",
+    error: "#b71c1c"
+  }
 });
 
 Vue.use(VueSimplemde);
@@ -58,15 +60,15 @@ import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
 
 Vue.use(VueAnalytics, {
-    id: "UA-144893029-1",
-    router,
-    autoTracking: {
-        pageviewOnLoad: false
-    }
+  id: "UA-144893029-1",
+  router,
+  autoTracking: {
+    pageviewOnLoad: false
+  }
 });
 
 new Vue({
-    router,
-    store,
-    render: h => h(App)
+  router,
+  store,
+  render: h => h(App)
 }).$mount("#app");

@@ -16,8 +16,8 @@
         <v-container grid-list-md>
           <v-layout column wrap>
             <v-form ref="form" v-model="valid" lazy-validation>
-              <v-text-field v-model="id" :rules="idRules" label="ID" :counter="20" required></v-text-field>
-              <v-text-field v-model="password" :append-icon="show ? 'visibility' : 'visibility_off'" :rules="pwRules" :type="show ? 'text' : 'password'" label="Password*" hint="Password must be at least 8 characters." counter
+              <v-text-field v-model="data.user_id" :rules="idRules" label="ID" :counter="20" required></v-text-field>
+              <v-text-field v-model="data.user_pw" :append-icon="show ? 'visibility' : 'visibility_off'" :rules="pwRules" :type="show ? 'text' : 'password'" label="Password*" hint="Password must be at least 8 characters." counter
                 @click:append="show = !show" required></v-text-field>
             </v-form>
           </v-layout>
@@ -41,7 +41,7 @@
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="blue darken-1" flat @click="Login">Login</v-btn>
-        <v-btn color="green darken-1" flat @click>Forgot password?</v-btn>
+        <v-btn color="green darken-1" flat @click="">Forgot password?</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -54,7 +54,9 @@ import {
   VFBLogin as VFacebookLogin
 } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
-import {mapActions} from 'vuex'
+import {
+  mapActions
+} from 'vuex'
 
 export default {
   data() {
@@ -70,12 +72,11 @@ export default {
         v => (v && v.length >= 4) || 'Password must be at least 8 characters'
       ],
       show: false,
-      id: "",
-      password: "",
-      token: {
-        token: "",
-        refresh: ""
-      }
+      data: {
+        user_id: '',
+        user_pw: ''
+      },
+      result: ''
     };
   },
   beforeMount() {
@@ -107,13 +108,15 @@ export default {
     async insertLog() {
       this.insertLog = await RestService.insertLog("LoginPage");
     },
-    // ...mapActions(['login'])
+    ...mapActions(['loginCheck']),
     async Login() {
-      console.log(this.$refs.form.validate());
+      console.log(this.$store.getters.getIsAuth);
       if (this.$refs.form.validate()) {
         // Call Login
-        let loginResult = await this.login({user_id: this.id, user_pw: this.password});
-        console.log(loginResult);
+        console.log(this.data);
+        await this.loginCheck(this.data);
+        this.result = this.$store.getters.getIsAuth;
+        console.log(this.result);
       }
     },
     // async defaultLogin() {

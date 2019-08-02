@@ -1,23 +1,25 @@
 <template>
-    <v-app>
-        <v-content>
-            <Header />
-            <Sidebar />
-        </v-content>
+<v-app>
+  <v-content>
+    <Header />
+    <Sidebar />
+  </v-content>
 
-        <v-content class="pagebody">
-            <router-view />
-            <TopButton />
-            <!--            <TranslateButton/>-->
-        </v-content>
+  <v-content class="pagebody">
+    <router-view />
+    <TopButton />
+    <!--            <TranslateButton/>-->
+  </v-content>
 
-        <v-content class="footerwrap">
-            <Footer />
-        </v-content>
-    </v-app>
+  <v-content class="footerwrap">
+    <Footer />
+  </v-content>
+</v-app>
 </template>
 <script>
-import store from "./store";
+import {
+  store
+} from "./vuex/store";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
@@ -26,48 +28,50 @@ import TranslateButton from "./components/TranslateButton";
 import SidebarMenu from "vue-sidebar-menu";
 
 export default {
-    name: "App",
-    components: {
-        store,
-        Footer,
-        Header,
-        Sidebar,
-        TopButton,
-        TranslateButton,
-        SidebarMenu
-    },
-    data() {
-        return {};
-    },
-    mounted() {
-        const userAgent = navigator.userAgent;
-        if (
-            userAgent.indexOf("Chrome") === -1 ||
-            userAgent.indexOf("Edge") !== -1
-        ) {
-            alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
-        }
+  name: "App",
+  components: {
+    store,
+    Footer,
+    Header,
+    Sidebar,
+    TopButton,
+    TranslateButton,
+    SidebarMenu
+  },
+  data() {
+    return {};
+  },
+  mounted() {
+    const userAgent = navigator.userAgent;
+    if (
+      userAgent.indexOf("Chrome") === -1 ||
+      userAgent.indexOf("Edge") !== -1
+    ) {
+      alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
     }
+  }
 };
 </script>
 
 <style>
 #app {
-    font-family: "Avenir", Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-align: center;
-    color: #2c3e50;
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
 }
-.v-content.footerwrap > .v-content__wrap {
-    margin-top: auto;
+
+.v-content.footerwrap>.v-content__wrap {
+  margin-top: auto;
 }
 
 .pagebody {
-    margin-top: 60px;
+  margin-top: 60px;
 }
+
 #sntch_button {
-    right: 50px !important;
-    bottom: 5% !important;
+  right: 50px !important;
+  bottom: 5% !important;
 }
 </style>
