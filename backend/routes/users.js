@@ -183,6 +183,7 @@ router.get("/search/:id", (req, res) => {
 // Get One User Information
 router.get("/:id", (req, res) => {
     knex("users")
+        .select("*")
         .where("user_id", req.params.id)
         .then(data => res.json(data));
 });
