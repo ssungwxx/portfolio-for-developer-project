@@ -66,7 +66,7 @@ router.post("/", (req, res) => {
 //Login
 router.post("/login", (req, res) => {
     knex("users")
-        .select("user_salt", "user_pw", "user_grade", "user_name")
+        .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
         .then(data => {
             if (data[0] == null) {
@@ -87,9 +87,7 @@ router.post("/login", (req, res) => {
                         if (data[0].user_pw == key.toString("base64")) {
                             res.json({
                                 status: 200,
-                                msg: "success",
-                                user_grade: data[0].user_grade,
-                                user_name: data[0].user_name
+                                msg: "success"
                             });
                         } else {
                             res.json({
