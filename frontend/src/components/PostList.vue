@@ -1,9 +1,9 @@
 <template>
     <v-layout row wrap mw-700>
-        <v-flex v-for="i in posts.length > limits ? limits : posts.length" :class="'md' + 12 / column" xs12 px-3>
+        <v-flex v-for="i in posts.length > loadlimits ? loadlimits : posts.length" :class="'md' + 12 / column" xs12 px-3>
             <Post
                 :post_no="i"
-                :post_date="posts[i - 1].post_date.slice(0, 10) + ' ' + posts[i - 1].post_date.slice(12, 16)"
+                :post_date="posts[i - 1].post_date"
                 :post_title="posts[i - 1].post_title"
                 :post_content="posts[i - 1].post_content"
                 :user_id="user_id"
@@ -26,6 +26,7 @@
 <script>
 import Post from "@/components/Post";
 import RestService from "@/services/RestService";
+import Git from "@/services/GitLabRepoService";
 
 export default {
     name: "PostList",
@@ -38,7 +39,8 @@ export default {
     data() {
         return {
             posts: [],
-            writepost: "/users/" + this.user_id + "/writepost"
+            writepost: "/users/" + this.user_id + "/writepost",
+            loadlimits: this.limits,
         };
     },
     components: {
@@ -50,9 +52,12 @@ export default {
     methods: {
         async getPosts() {
             this.posts = await RestService.getPost(this.user_id);
+            for (const post of this.posts) {
+                post.post_date = await Git.calendar_time(post.post_date);
+            }
         },
         loadMorePosts() {
-            this.limits += 6;
+            this.loadlimits += 6;
         }
     }
 };
@@ -62,6 +67,7 @@ export default {
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 40px;
 }
 
 .mw-700 {
