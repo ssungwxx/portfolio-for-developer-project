@@ -54,7 +54,6 @@
                 await this.getUrl();
                 await this.getGraphInfo();
                 await this.getMessage();
-                console.log(this.message)
             },
             async getGraphInfo() {
                 this.data = await Git.getPushed(this.url, this.repo_id, this.token);

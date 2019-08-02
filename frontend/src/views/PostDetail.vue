@@ -3,19 +3,13 @@
         <div class="table-div">
             <table class="table">
                 <tr>
-                    <td class="table-left" style="text-align:center">{{ post[0].post_title }}</td>
+                    <th>
+                        <span class="table-head">{{ post[0].post_title }}</span>
+                        <span class="table-date">{{ post[0].post_date.slice(0, 10) + " " + post[0].post_date.slice(12, 16) }}</span>
+                    </th>
                 </tr>
                 <tr>
-                    <td>
-                        <a class="time">{{ post[0].post_date }}
-                        </a>
-                    </td>
-                </tr>
-                <tr>
-                    <div class="tablecontent"></div>
-                </tr>
-                <tr>
-                    <div class="tablecontent">{{post[0]. post_content}}</div>
+                    <div class="table-content">{{ post[0].post_content }}</div>
                 </tr>
             </table>
         </div>
@@ -24,7 +18,8 @@
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn color="info" dark>
-                        <v-icon size="25" class="mr-2">home</v-icon>목록으로
+                        <v-icon size="25" class="mr-2">home</v-icon>
+                        목록으로
                     </v-btn>
                 </router-link>
             </v-flex>
@@ -32,78 +27,59 @@
     </v-container>
 </template>
 <script>
-    import Post from "@/components/Post";
     import RestService from "@/services/RestService";
 
     export default {
-        name: "DetailPortfolios",
-        props: {},
+        name: "PostDetail",
         data() {
             return {
-                post: [
-                    {
-                        post_no: "",
-                        user_id: "",
-                        post_title: "",
-                        post_content: "",
-                        post_date: ""
-                    }
-                ],
-                id: this.$route.params.id,
-                posts: "/post",
+                post_no: this.$route.params.post_id,
+                user_id: this.$route.params.id,
+                posts: "",
                 status: "비회원",
+                post: []
             };
         },
         beforeMount() {
             this.insertLog();
         },
-        components: {
-            Post,
-        },
         mounted() {
             this.getPost();
-            console.log(this.$store.state)
         },
         methods: {
             async getPost() {
-                this.post = await RestService.getPost(this.id);
-                this.post[0].post_date =
-                    this.post[0].post_date.slice(0, 10) +
-                    " " +
-                    this.post[0].post_date.slice(11, 19);
-            },
+                this.post = await RestService.getPostDetail(this.user_id, this.post_no);
+                this.posts = "/users/" + this.user_id + "/posts/"
+                },
+                async insertLog() {
+                    this.insertLog = await RestService.insertLog("DetailPost");
+                },
+                loginCheck() {
+                    if (this.$store.state.isAuth) {
 
-            async insertLog() {
-                this.insertLog = await RestService.insertLog("DetailPortfolio");
-            },
-
-            loginCheck() {
-                if (this.$store.state.user !== "") {
-                    this.status = this.$store.state.user;
-                }
+                    }
             }
         }
     };
 </script>
 <style>
 
-    .time{
+    .time {
         font-size: 1.2vw;
         margin-left: 80%;
         font-color: black;
     }
+
     .mw-700 {
         max-width: 700px;
         margin: auto;
     }
 
-    .tablecontent{
-        width:auto;
-        height:auto;
+    .table-content {
+        width: auto;
+        height: auto;
         text-align: left;
-        margin-top: 5%;
-        margin-left: 20%;
-        font-size: 20px;
+        font-size: 2.5vw;
     }
 
     .headline {
@@ -120,32 +96,43 @@
         height: 3.6em;
     }
 
-    .table-left {
-        width: 30%;
-        font-size: 2vw;
-    }
-
-    .table-right {
-        font-size: 1.8vw;
-    }
-
     .table-div {
         display: flex;
         margin-top: 64px;
     }
 
-    @media screen and (min-width: 0px) {
-        .table {
-            flex-basis: 80%;
-            max-width: 80%;
-            margin-left: auto;
-            margin-right: auto;
+    .table-head {
+        font-size: 3.5vw;
+    }
+
+    @media screen and (max-width: 600px) {
+        .table-head {
+            font-size: 20px;
         }
 
-        .table-img {
-            flex-basis: 100%;
-            max-width: 100%;
-            margin-bottom: 20px;
+        .table-content {
+            width: auto;
+            height: auto;
+            text-align: left;
+            font-size: 14px;
         }
+
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .table {
+        flex-basis: 80%;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+        }
+
+    .table-date {
+        font-size: 1vw;
+        margin-left: 10px;
+        color: gray;
     }
 </style>

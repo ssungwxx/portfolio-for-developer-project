@@ -4,14 +4,14 @@
             <h1>{{ user_id }}</h1>
 
             <h2 class="headline my-5 text-xs-center">
-                <router-link :to="'/' + user_id + posts" style="text-decoration:none">
+                <router-link :to="'/users/' + user_id + posts" style="text-decoration:none">
                     <v-btn color="#DDDDFF">Posts</v-btn>
                 </router-link>
             </h2>
             <PostList :limits="4" :load-more="true" :user_id="user_id"></PostList>
 
             <h2 class="headline my-5 text-xs-center">
-                <router-link :to="'/' + user_id + repos" style="text-decoration:none">
+                <router-link :to="'/users/' + user_id + repos" style="text-decoration:none">
                     <v-btn color="#DDDDFF">Repositories</v-btn>
                 </router-link>
             </h2>

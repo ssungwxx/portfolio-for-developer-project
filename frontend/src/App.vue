@@ -66,4 +66,8 @@ export default {
 .pagebody {
     margin-top: 60px;
 }
+#sntch_button {
+    right: 50px !important;
+    bottom: 5% !important;
+}
 </style>
