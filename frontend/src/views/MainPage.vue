@@ -1,8 +1,15 @@
 <template>
     <div>
         <div class="des">
-            <h1>설명</h1>
-            <v-btn>눌러</v-btn>
+            <ImgBanner imgSrc="https://picsum.photos/id/9/1280/520">
+                <div style="line-height:1.2em;font-size:1.2em;" slot="text">개인의 포트폴리오 페이지를 만들어 드려요</div>
+            </ImgBanner>
+            <div>
+                <v-btn @click="logincheck">쳌!</v-btn>
+            </div>
+
+            <img src="../../public/img/posts.png" alt="posts sample">
+            <img src="../../public/img/repos.png" alt="repos sample">
         </div>
     </div>
 </template>
@@ -10,13 +17,21 @@
 <script>
 import GitLab from "../services/GitLabRepoService";
 import RestService from "../services/RestService";
+import ImgBanner from "@/components/ImgBanner";
 
 export default {
     name: "mainpage",
+    components: {
+        ImgBanner,
+    },
     data() {
         return {};
     },
-    methods: {}
+    methods: {
+        logincheck() {
+            console.log(this.$store.state.isAuth)
+        }
+    }
 };
 </script>
 
@@ -25,5 +40,10 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
+}
+
+.des > img {
+    width: 70%;
+    border: 1px solid gray;
 }
 </style>

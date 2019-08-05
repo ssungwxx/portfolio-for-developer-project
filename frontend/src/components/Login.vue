@@ -23,14 +23,14 @@
                         <v-layout column wrap>
                             <v-form ref="form" v-model="valid" lazy-validation>
                                 <v-text-field
-                                    v-model="id"
+                                    v-model="data.user_id"
                                     :rules="idRules"
-                                    label="Email"
-                                    :counter="70"
+                                    label="ID"
+                                    :counter="20"
                                     required
                                 ></v-text-field>
                                 <v-text-field
-                                    v-model="password"
+                                    v-model="data.user_pw"
                                     :append-icon="show ? 'visibility' : 'visibility_off'"
                                     :rules="pwRules"
                                     :type="show ? 'text' : 'password'"
@@ -73,6 +73,8 @@
 import FirebaseService from "@/services/FirebaseService";
 import { VFBLogin as VFacebookLogin } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
+import JWTService from "@/services/JWTService";
+import { mapActions } from "vuex";
 
 export default {
     data() {
@@ -80,24 +82,21 @@ export default {
             valid: true,
             dialog: false,
             idRules: [
-                v => !!v || "E-mail is required",
-                v => /.+@.+\..+/.test(v) || "E-mail must be valid",
+                v => !!v || "ID is required",
                 v =>
-                    (v && v.length <= 70) ||
-                    "Email must be less than 70 characters"
+                    (v && v.length <= 20) ||
+                    "ID must be less than 20 characters"
             ],
             pwRules: [
                 v => !!v || "Password is required",
                 v =>
-                    (v && v.length >= 8) ||
+                    (v && v.length >= 4) ||
                     "Password must be at least 8 characters"
             ],
             show: false,
-            id: "",
-            password: "",
-            token: {
-                token: "",
-                refresh: ""
+            data: {
+                user_id: "",
+                user_pw: ""
             }
         };
     },
@@ -130,11 +129,41 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("LoginPage");
         },
+        ...mapActions(["loginCheck"]),
         async Login() {
             if (this.$refs.form.validate()) {
-                // Call Login
+                await this.loginCheck(this.data);
+                if (this.$store.getters.getMsg == "wrong id") {
+                    alert("존재하지 않는 ID입니다.");
+                } else if (this.$store.getters.getMsg == "wrong password") {
+                    alert("비밀번호가 올바르지 않습니다.");
+                }
+                if (this.$store.getters.getIsAuth) {
+                    alert("로그인 되었습니다!");
+                    this.dialog = false;
+                }
             }
         },
+        // async defaultLogin() {
+        //   this.check = await RestService.getUser(this.id);
+        //   if (this.check[0].cnt == 0) {
+        //     alert("ID가 존재하지 않습니다.");
+        //   } else {
+        //     this.token = await RestService.loginUser(
+        //       this.id,
+        //       this.password
+        //     );
+        //     if (this.token.token == null) {
+        //       alert("비밀번호를 확인해주세요.");
+        //     } else {
+        //       alert("로그인 성공!");
+        //       this.$store.state.accessToken = this.token.token;
+        //       this.$store.state.user = this.id;
+        //       this.$store.state.grade = this.token.grade;
+        //       this.dialog = false;
+        //       this.clear_user();
+        //     }
+        //   }
         reset() {
             this.$refs.form.reset();
         }

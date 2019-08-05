@@ -12,8 +12,8 @@
                     :user_id="user_id">
                 </Repo>
             </v-flex>
-            <div class="plus" v-if="loadMore">
-                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark Wclick="loadMoreRepos">
+            <div class="plus" v-if="!loadMore">
+                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos">
                     <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
                 </v-btn>
             </div>
@@ -50,6 +50,11 @@ import RestService from "@/services/RestService"
         },
         mounted() {
             this.getRepos();
+        },
+        watch: {
+            $route: function() {
+                this.getRepos();
+            }
         }
     }
 </script>

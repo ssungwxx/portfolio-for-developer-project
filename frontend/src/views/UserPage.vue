@@ -1,17 +1,17 @@
 <template>
-    <v-layout>
+    <v-layout class="body">
         <v-flex xs12>
             <h1>{{ user_id }}</h1>
 
             <h2 class="headline my-5 text-xs-center">
-                <router-link :to="'/' + user_id + posts" style="text-decoration:none">
+                <router-link :to="posts" style="text-decoration:none">
                     <v-btn color="#DDDDFF">Posts</v-btn>
                 </router-link>
             </h2>
-            <PostList :limits="4" :load-more="true" :user_id="user_id"></PostList>
+            <PostList :limits="6" :load-more="true" :user_id="user_id"></PostList>
 
             <h2 class="headline my-5 text-xs-center">
-                <router-link :to="'/' + user_id + repos" style="text-decoration:none">
+                <router-link :to="repos" style="text-decoration:none">
                     <v-btn color="#DDDDFF">Repositories</v-btn>
                 </router-link>
             </h2>
@@ -23,27 +23,40 @@
 <script>
 import RestService from "../services/RestService";
 import RepoList from "../components/RepoList";
+import PostList from "../components/PostList"
 
 export default {
     name: "UserPage",
     components: {
-        RepoList
+        RepoList,
+        PostList
     },
     data() {
         return {
-            repos: "/repos",
-            posts: "/posts",
             user_id: this.$route.params.id,
+            repos: `/users/${this.user_id}/repos`,
+            posts: `users/${this.user_id}/posts`,
         }
     },
     methods: {
+        setUser() {
+            this.user_id = this.$route.params.id;
+            this.repos = `/users/${this.user_id}/repos`;
+            this.posts = `users/${this.user_id}/posts`;
+        }
     },
-    mounted() {
-
+    watch: {
+        $route: function() {
+            this.setUser();
+        }
+    },
+    created() {
+        this.user_id = this.$route.params.id;
+        this.repos = `/users/${this.user_id}/repos`;
+        this.posts = `/users/${this.user_id}/posts`;
     }
 }
 </script>
 
 <style>
-
 </style>

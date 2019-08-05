@@ -1,7 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-
+import "firebase/messaging";
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
 
@@ -18,6 +18,26 @@ const config = {
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
+
+//firebase FCM push notification 사용
+const messaging = firebase.messaging();
+messaging.requestPermission()
+.then(function(){
+  console.log('Have Permission');
+  return messaging.getToken();
+  //토큰 생성
+})
+.then(function(token){
+  console.log(token);
+})
+.catch(function(err){
+  console.log('Error Occured.');
+})
+
+messaging.onMessage(function(payload){
+  console.log('onMessage: ', payload);
+  //페이지가 열려 있을 때면 push 알림이 아닌 console로
+});
 
 export default {
     getPosts() {
@@ -85,7 +105,25 @@ export default {
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
+                console.log(accessToken);
                 let user = result.user;
+                console.log(user);
+                return result;
+            })
+            .catch(function(error) {
+                console.error("[Facebook Login Error]", error);
+            });
+    },
+    loginWithEmail() {
+        let provider = new firebase.auth.EmailAuthProvider();
+        return firebase
+            .auth()
+            .signInWithPopup(provider)
+            .then(function(result) {
+                let accessToken = result.credential.accessToken;
+                console.log(accessToken);
+                let user = result.user;
+                console.log(user);
                 return result;
             })
             .catch(function(error) {

@@ -12,6 +12,11 @@ export default {
             .get("http://70.12.246.138:3000/posts/" + id)
             .then(response => (this.posts = response.data));
     },
+    getPostDetail(user, id) {
+        return axios
+            .get(`http://70.12.246.138:3000/posts/${user}`)
+            .then(response => (this.posts = response.data[id]));
+    },
     updatePost(id, data) {
         return axios
             .put("http://70.12.246.138:3000/posts/" + id, data)
@@ -30,7 +35,7 @@ export default {
     insertPost(data) {
         return axios
             .post("http://70.12.246.138:3000/posts", data)
-            .then(response => console.log(response));
+            .then(response => (this.posts = response.data));
     },
     // Repository 관련 함수
     getRepositories() {
@@ -92,7 +97,9 @@ export default {
     loginUser(data) {
         return axios
             .post("http://70.12.246.138:3000/users/login", data)
-            .then(response => (this.token = response.data));
+            .then(res => {
+                return res.data;
+            });
     },
     getSearchUsers(data) {
         return axios
@@ -109,11 +116,10 @@ export default {
     insertLog(path) {
         return axios.post("http://70.12.246.138:3000/logs/" + path);
     },
-
-    getLog(){
-      return axios
-        .get("http://70.12.246.138:3000/logs")
-        .then(response=> (this.Logs = response.data));
+    getLog() {
+        return axios
+            .get("http://70.12.246.138:3000/logs")
+            .then(response => (this.Logs = response.data));
     },
 
     //Post Comment관련 함수
@@ -147,5 +153,29 @@ export default {
     },
     updateRepoComment(data) {
         return axios.put("http://70.12.246.138:3000/rcom", data);
+    },
+    //push notification
+    pushNotification(body,title,list){
+      return axios
+                .post('https://fcm.googleapis.com/fcm/send', {
+                    "notification" : {
+                        "body": body,
+                        "title" : title,
+                    },
+                    "to" : list
+                    }, {
+                        headers : {
+                            "Content-Type": 'application/json',
+                            "Authorization": 'key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL'
+                        }
+                    }
+                )
+                .then(response => {
+                    console.log(response)
+                    resolve(response)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
     }
 };

@@ -9,11 +9,19 @@ import "font-awesome/css/font-awesome.min.css";
 
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import { store } from "./vuex/store";
 import "./registerServiceWorker";
+
+// Google Analytics
+import VueAnalytics from "vue-analytics";
 
 //그래프 관련
 import Bars from "vuebars";
+
+// Session
+import VueSessionStorage from "vue-sessionstorage";
+
+Vue.use(VueSessionStorage);
 
 Vue.use(Bars);
 
@@ -31,7 +39,6 @@ Vue.use(VueResource);
 import VueSidebarMenu from "vue-sidebar-menu";
 import "vue-sidebar-menu/dist/vue-sidebar-menu.css";
 Vue.use(VueSidebarMenu);
-
 
 Vue.use(Vuetify, {
     iconfont: "fa",
@@ -54,6 +61,14 @@ Vue.use(VueResizeText);
 // 배경화면 캐러셀
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
+
+Vue.use(VueAnalytics, {
+    id: "UA-144893029-1",
+    router,
+    autoTracking: {
+        pageviewOnLoad: false
+    }
+});
 
 new Vue({
     router,

@@ -3,15 +3,15 @@
         <v-layout py-4 h-100>
             <v-flex row>
                 <div class="caption target">{{post_date}}</div>
-                <h2 class="color-332 headline font-weight-light target">{{post_title}}</h2>
-                <p class="mb-1 color-666 font-weight-light subheading target">{{post_content}}</p>
+                <h2 class="color-332 target">{{post_title}}</h2>
+                <p class="mb-1 color-666 target" v-html="post_content"></p>
             </v-flex>
         </v-layout>
     </router-link>
 </template>
 
 <script>
-import  DetailPost from "../views/DetailPost"
+import PostDetail from "../views/PostDetail"
 
 export default {
     name: "Post",
@@ -23,13 +23,16 @@ export default {
         user_id: {type: String}
     },
     components: {
-        DetailPost,
+        PostDetail,
     },
     data() {
         return {
-            detaillink: "/detailpost/" + this.post_no,
+            detaillink: "/users/" + this.user_id + "/posts/" + this.post_no,
         };
     },
+    mounted() {
+        console.log()
+    }
 };
 </script>
 
@@ -39,9 +42,18 @@ export default {
 }
 .color-332 {
     color: #333;
-    height: 95px;
+    height: 50px;
 }
 .h-100 {
     height: 100%;
+}
+h2 {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+p {
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 </style>

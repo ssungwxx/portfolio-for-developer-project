@@ -13,7 +13,7 @@ var logs = require("./routes/webLog");
 var enPage = require("./routes/enPage");
 var test = require("./routes/crawlingPosts");
 var webLog = require("./routes/webLog");
-var chat = require("./routes//chat");
+var fcmToken = require("./routes/fcm_tokens");
 
 var bodyParser = require("body-parser");
 
@@ -64,7 +64,7 @@ app.use("/rcom", repository_comments);
 app.use("/pcom", post_comments);
 app.use("/test", test);
 app.use("/logs", webLog);
-app.use("/chat", chat);
+app.use("/fcm", fcmToken);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

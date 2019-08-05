@@ -65,6 +65,27 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
+    // 실험용 토큰 (Access Token)
+    let token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.secret,
+        {
+            expiresIn: "5m"
+        }
+    );
+
+    let refresh_token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.refresh,
+        {
+            expiresIn: "1d"
+        }
+    );
+
     knex("users")
         .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
@@ -82,13 +103,19 @@ router.post("/login", (req, res) => {
                     64,
                     "sha512",
                     (err, key) => {
-                        console.log(key.toString("base64"));
-                        console.log(data[0].user_pw);
                         if (data[0].user_pw == key.toString("base64")) {
                             res.json({
                                 status: 200,
-                                msg: "success"
+                                msg: "success",
+                                token: token
                             });
+
+                            knex("user_login_tokens")
+                                .insert({
+                                    user_id: req.body.user_id,
+                                    tk_refresh: refresh_token
+                                })
+                                .then();
                         } else {
                             res.json({
                                 status: 400,
@@ -181,16 +208,58 @@ router.get("/search/:id", (req, res) => {
 // Get One User Information
 router.get("/:id", (req, res) => {
     knex("users")
+        .select("*")
         .where("user_id", req.params.id)
         .then(data => res.json(data));
 });
 
-// Update User
-router.put("/:id", (req, res) => {
-    knex("users")
-        .where("user_id", req.params.id)
-        .update(req.body)
-        .then(data => res.json(data));
+// Update Password
+router.put("/", (req, res) => {
+    let token = jwt.verify(req.headers.jwt, secretObj.secret);
+
+    if (token.exp < Date.now()) {
+        crypto.randomBytes(64, (err, buf) => {
+            crypto.pbkdf2(
+                req.body.user_pw,
+                buf.toString("base64"),
+                157913, // hash 함수 반복횟수
+                64,
+                "sha512",
+                (err, key) => {
+                    User.user_pw = key.toString("base64");
+                    User.user_salt = buf.toString("base64");
+
+                    if (User.user_pw) {
+                        knex("users")
+                            .where("user_id", token.user_id)
+                            .update(User)
+                            .then(data =>
+                                res.json({
+                                    status: 200,
+                                    msg: "success"
+                                })
+                            )
+                            .catch(err =>
+                                res.json({
+                                    status: 400,
+                                    msg: "error"
+                                })
+                            );
+                    } else {
+                        res.json({
+                            status: 400,
+                            msg: "no data"
+                        });
+                    }
+                }
+            );
+        });
+    } else {
+        res.json({
+            status: 400,
+            msg: "expired token"
+        });
+    }
 });
 
 // Delete User

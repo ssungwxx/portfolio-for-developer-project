@@ -1,18 +1,15 @@
 <template>
-
-
-    <v-layout mt-5 wrap>
+  <div>
+    <div class="side">
       <sidebar-menu :menu="menu" class="menubar"/>
-      <div class="post">
-        <h1>POST COUNT</h1>
-      <h2>{{post_cnt[0].cnt}}</h2>
+    </div>
+     <div class="countinfo">
+       <h1>POST COUNT</h1>
+       <h2>{{post_cnt[0].cnt}}</h2>
+       <h1>REPO COUNT</h1>
+       <h2>{{repo_cnt[0].cnt}}</h2>
       </div>
-      <br>
-      <div class="repo">
-        <h1>REPO COUNT</h1>
-      <h2>{{repo_cnt[0].cnt}}</h2>
-      </div>
-    </v-layout>
+  </div>
 </template>
 
 
@@ -71,29 +68,17 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("Admin");
         },
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("Delegate");
-        },
         async count(){
           this.post_cnt = await RestService.countRepositories();
           this.repo_cnt = await RestService.countPost();
-
         }
     }
 }
 </script>
 
 <style>
-<style>
-.post{
-  width : 40%;
-  text-align: center;
-  margin-left: 10%;
-}
-
-.repo{
-  width : 40%;
-  text-align: center;
-  margin-left: 10%;
-}
+.side{  float: left;  height:auto;}
+.post{  width : 40%;  text-align: center;  margin-left: 10%;}
+.repo{  width : 40%;  text-align: center;  margin-left: 10%;}
+.countinfo{ padding-top: 10%;}
 </style>
