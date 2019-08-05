@@ -65,7 +65,7 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
-    // 실험용 토큰 (Access Token)
+    // 사용자 세션 저장용 토큰
     let token = jwt.sign(
         {
             user_id: req.body.user_id
@@ -75,7 +75,7 @@ router.post("/login", (req, res) => {
             expiresIn: "5m"
         }
     );
-
+    // 서버 DB저장용 토큰
     let refresh_token = jwt.sign(
         {
             user_id: req.body.user_id
@@ -128,66 +128,6 @@ router.post("/login", (req, res) => {
         });
 });
 
-// Login Authenticate by pwa
-/*
-router.post("/login", (req, res) => {
-    let token = jwt.sign(
-        {
-            user_id: req.body.user_id
-        },
-        secretObj.secret,
-        {
-            expiresIn: "5m"
-        }
-    );
-
-    let refresh_token = jwt.sign(
-        {
-            token: req.body.user_id
-        },
-        secretObj.secret,
-        {
-            expiresIn: "1d"
-        }
-    );
-
-    knex("users")
-        .select("*")
-        .where("user_id", req.body.user_id)
-        .then(data => {
-            if (req.body.user_pw == data[0].user_pw) {
-                // user cookie 설정
-                res.cookie("user", token, {
-                    expires: new Date(Date.now() + 900000),
-                    httpOnly: true
-                });
-                // user refresh cookir 설정
-                res.cookie("refresh_user", refresh_token, {
-                    expires: new Date(Date.now() + 86400000),
-                    httpOnly: true
-                });
-                // 로그인시 사용자마다 토큰 기록
-                knex("user_logs")
-                    .insert({
-                        user_token: token
-                    })
-                    .then();
-                res.json({
-                    token: token,
-                    refresh: refresh_token,
-                    grade: data[0].user_grade
-                });
-            } else {
-                res.json({
-                    token: null,
-                    refresh: null,
-                    grade: null
-                });
-            }
-        });
-});
-*/
-
 // Get All Users Info
 router.get("/", (req, res) => {
     knex("users")
@@ -216,6 +156,17 @@ router.get("/:id", (req, res) => {
 // Update Password
 router.put("/", (req, res) => {
     let token = jwt.verify(req.headers.jwt, secretObj.secret);
+    let refresh_token;
+    const getRefreshToken = async () => {
+        let result = await knex("user_login_tokens")
+            .select("tk_refresh")
+            .where("user_id", token.user_id)
+            .orderBy("tk_no", "desc")
+            .limit("1");
+        return (refresh_token = result);
+    };
+
+    console.log(refresh_token);
 
     if (token.exp < Date.now()) {
         crypto.randomBytes(64, (err, buf) => {
