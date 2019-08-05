@@ -15,7 +15,7 @@ router.get("/:post_no", (req, res) => {
     knex("posts_comment")
         .select("*")
         .where("post_no", req.params.post_no)
-        .orderBy("")
+        .orderBy("pcom_date", "desc")
         .then(data => res.json(data));
 });
 

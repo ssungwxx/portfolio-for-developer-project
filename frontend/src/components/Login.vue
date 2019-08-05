@@ -73,7 +73,6 @@
 import FirebaseService from "@/services/FirebaseService";
 import { VFBLogin as VFacebookLogin } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
-import JWTService from "@/services/JWTService";
 import { mapActions } from "vuex";
 
 export default {
@@ -182,14 +181,14 @@ export default {
 }
 
 .modalface {
-    padding-left: 10%;
-    padding-right: 11%;
+    /* padding-left: 10%; */
+    /* padding-right: 11%; */
     width: 100%;
 }
 
 .form {
-    padding-left: 10px;
-    padding-right: 10px;
+    /* padding-left: 10px; */
+    /* padding-right: 10px; */
 }
 
 @media screen and (max-width: 599px) {
