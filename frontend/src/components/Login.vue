@@ -61,7 +61,7 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="blue darken-1" flat @click="Login_check">Login</v-btn>
+                    <v-btn color="blue darken-1" flat @click="Login">Login</v-btn>
                     <v-btn color="green darken-1" flat @click>Forgot password?</v-btn>
                 </v-card-actions>
             </v-card>
@@ -97,8 +97,7 @@ export default {
             data: {
                 user_id: "",
                 user_pw: ""
-            },
-            result: ""
+            }
         };
     },
     beforeMount() {
@@ -132,29 +131,12 @@ export default {
         },
         ...mapActions(["loginCheck"]),
         async Login() {
-            console.log(this.$store.getters.getIsAuth);
             if (this.$refs.form.validate()) {
-                // Call Login
-                //console.log(this.data);
                 await this.loginCheck(this.data);
-                this.result = this.$store.getters.getIsAuth;
-                //console.log(this.result);
-            }
-        },
-        async Login_check() {
-            let result = await RestService.loginUser({
-                user_id: this.data.user_id,
-                user_pw: this.data.user_pw
-            });
-
-            if (result.status == 200) {
-                this.dialog = false;
-                alert("로그인 성공");
-                //this.$session.start();
-                this.$session.set("jwt", result.token);
-                console.log(JWTService.decode(this.$session.get("jwt")));
-            } else {
-                alert("ID 와 PW 를 확인해주세요");
+                alert(this.$store.getters.getMsg);
+                if(this.$store.getters.getIsAuth) {
+                  this.dialog = false;
+                }
             }
         },
         // async defaultLogin() {

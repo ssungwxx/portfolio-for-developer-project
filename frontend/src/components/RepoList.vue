@@ -50,6 +50,11 @@ import RestService from "@/services/RestService"
         },
         mounted() {
             this.getRepos();
+        },
+        watch: {
+            $route: function() {
+                this.getRepos();
+            }
         }
     }
 </script>
