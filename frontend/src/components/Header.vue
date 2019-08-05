@@ -2,14 +2,14 @@
     <div class="Header">
         <v-toolbar dark color="#ffc0cb" fixed>
             <div style="display: flex;">
-                <v-tooltip bottom>
-                    <v-btn slot="activator" icon href="/">
-                        <v-icon>home</v-icon>
-                    </v-btn>
-                    <span>홈으로 이동</span>
-                </v-tooltip>
-
-                <!--                <v-toolbar-title style="align-self: center" class="white&#45;&#45;text">{{ title }}</v-toolbar-title>-->
+                <router-link :to="'/'" style="text-decoration: none;">
+                    <v-tooltip bottom>
+                            <v-btn slot="activator" icon>
+                                <v-icon>home</v-icon>
+                            </v-btn>
+                        <span>홈으로 이동</span>
+                    </v-tooltip>
+                </router-link>
             </div>
             <div>
                 <div style="display: flex; margin-left: 10px;">
@@ -18,16 +18,14 @@
                 </div>
                 <v-card class="card" v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-                        <!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
-                        <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
-                            <div style="display: flex;">
+                        <router-link :to="'/users/' + user" style="text-decoration: none">
+                            <div style="display: flex; margin: 0 15px;">
                                 <v-icon>people</v-icon>
                                 <v-list-tile-title
                                     style="margin-left: 1vw; color: white;"
                                 >{{ user }}</v-list-tile-title>
                             </div>
-                        </v-btn>
-                        <!--                        </router-link>-->
+                        </router-link>
                     </v-list-tile>
                 </v-card>
             </div>
@@ -114,6 +112,9 @@ export default {
             if (this.search !== "") {
                 this.getUsers();
             }
+        },
+        $route: function() {
+            this.search = "";
         }
     },
     methods: {
@@ -183,8 +184,8 @@ export default {
 
 .Header {
     z-index: 2;
-    position: absolute;
     background-color: yellow;
+    height: 64px;
 }
 
 #search {
@@ -212,7 +213,6 @@ export default {
 }
 
 .v-card {
-    /* position: absolute; */
     min-width: auto;
     margin-left: 10px;
 }
