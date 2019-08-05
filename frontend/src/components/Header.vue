@@ -4,9 +4,9 @@
             <div style="display: flex;">
                 <router-link :to="'/'" style="text-decoration: none;">
                     <v-tooltip bottom>
-                            <v-btn slot="activator" icon>
-                                <v-icon>home</v-icon>
-                            </v-btn>
+                        <v-btn slot="activator" icon>
+                            <v-icon>home</v-icon>
+                        </v-btn>
                         <span>홈으로 이동</span>
                     </v-tooltip>
                 </router-link>
@@ -22,8 +22,9 @@
                             <div style="display: flex; margin: 0 15px;">
                                 <v-icon>people</v-icon>
                                 <v-list-tile-title
-                                    style="margin-left: 1vw; color: white;"
-                                >{{ user }}</v-list-tile-title>
+                                        style="margin-left: 1vw; color: white;"
+                                >{{ user }}
+                                </v-list-tile-title>
                             </div>
                         </router-link>
                     </v-list-tile>
@@ -65,19 +66,26 @@
                         <span>Post</span>
                     </v-tooltip>
                 </router-link>
+
+                <v-tooltip bottom>
+                    <v-btn slot="activator" icon @click="Logout">
+                        <v-icon color="white">exit_to_app</v-icon>
+                    </v-btn>
+                    <span>Logout</span>
+                </v-tooltip>
             </div>
 
             <div class="LogReg" v-else>
                 <div class="icons">
                     <v-tooltip bottom>
-                        <Login slot="activator" />
+                        <Login slot="activator"/>
                         <span>Login</span>
                     </v-tooltip>
                 </div>
 
                 <div class="icons">
                     <v-tooltip bottom>
-                        <Register slot="activator" />
+                        <Register slot="activator"/>
                         <span>Register</span>
                     </v-tooltip>
                 </div>
@@ -87,86 +95,91 @@
 </template>
 
 <script>
-import Login from "../components/Login";
-import Register from "../components/Register";
-import RestService from "../services/RestService";
-import UserPage from "../views/UserPage";
+    import Login from "../components/Login";
+    import Register from "../components/Register";
+    import RestService from "../services/RestService";
+    import UserPage from "../views/UserPage";
+    import {mapActions} from "vuex";
 
-export default {
-    name: "Header",
-    data: () => ({
-        title: document.title,
-        posts: "/posts",
-        repos: "/repos",
-        login: "/Login",
-        search: "검색할 아이디를 입력해주세요.",
-        users: []
-    }),
-    components: {
-        Login,
-        Register,
-        UserPage
-    },
-    watch: {
-        search: function() {
-            if (this.search !== "") {
-                this.getUsers();
-            }
+    export default {
+        name: "Header",
+        data: () => ({
+            title: document.title,
+            posts: "/posts",
+            repos: "/repos",
+            login: "/Login",
+            search: "검색할 아이디를 입력해주세요.",
+            users: []
+        }),
+        components: {
+            Login,
+            Register,
+            UserPage
         },
-        $route: function() {
-            this.search = "";
-        }
-    },
-    methods: {
-        favorite() {
-            var bookmarkURL = window.location.href;
-            var bookmarkTitle = document.title;
-            var triggerDefault = false;
-            if (window.sidebar && window.sidebar.addPanel) {
-                window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
-            } else if (
-                (window.sidebar &&
-                    navigator.userAgent.toLowerCase().indexOf("firefox") >
-                        -1) ||
-                (window.opera && window.print)
-            ) {
-                var $this = $(this);
-                $this.attr("href", bookmarkURL);
-                $this.attr("title", bookmarkTitle);
-                $this.attr("rel", "sidebar");
-                $this.off(e);
-                triggerDefault = true;
-            } else if (window.external && "AddFavorite" in window.external) {
-                window.external.AddFavorite(bookmarkURL, bookmarkTitle);
-            } else {
-                alert(
-                    (navigator.userAgent.toLowerCase().indexOf("mac") != -1
-                        ? "Cmd"
-                        : "Ctrl") +
-                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
-                );
-            }
-            return triggerDefault;
-        },
-        async getUsers() {
-            const users = await RestService.getUsers();
-            const userGroup = [];
-            for (let i = 0; i < users.length && this.users.length < 5; i++) {
-                if (
-                    this.search ===
-                        users[i].user_id.slice(0, this.search.length) &&
-                    users[i].user_grade !== 10
-                ) {
-                    userGroup.push(users[i].user_id);
+        watch: {
+            search: function () {
+                if (this.search !== "") {
+                    this.getUsers();
                 }
+            },
+            $route: function () {
+                this.search = "";
             }
-            this.users = userGroup;
         },
-        resetInput() {
-            this.search = "";
+        methods: {
+            favorite() {
+                var bookmarkURL = window.location.href;
+                var bookmarkTitle = document.title;
+                var triggerDefault = false;
+                if (window.sidebar && window.sidebar.addPanel) {
+                    window.sidebar.addPanel(bookmarkTitle, bookmarkURL, "");
+                } else if (
+                    (window.sidebar &&
+                        navigator.userAgent.toLowerCase().indexOf("firefox") >
+                        -1) ||
+                    (window.opera && window.print)
+                ) {
+                    var $this = $(this);
+                    $this.attr("href", bookmarkURL);
+                    $this.attr("title", bookmarkTitle);
+                    $this.attr("rel", "sidebar");
+                    $this.off(e);
+                    triggerDefault = true;
+                } else if (window.external && "AddFavorite" in window.external) {
+                    window.external.AddFavorite(bookmarkURL, bookmarkTitle);
+                } else {
+                    alert(
+                        (navigator.userAgent.toLowerCase().indexOf("mac") != -1 ?
+                            "Cmd" :
+                            "Ctrl") +
+                        "+D 키를 눌러 즐겨찾기에 등록하실 수 있습니다."
+                    );
+                }
+                return triggerDefault;
+            },
+            async getUsers() {
+                const users = await RestService.getUsers();
+                const userGroup = [];
+                for (let i = 0; i < users.length && this.users.length < 5; i++) {
+                    if (
+                        this.search ===
+                        users[i].user_id.slice(0, this.search.length) &&
+                        users[i].user_grade !== 10
+                    ) {
+                        userGroup.push(users[i].user_id);
+                    }
+                }
+                this.users = userGroup;
+            },
+            resetInput() {
+                this.search = "";
+            },
+            ...mapActions(['logout']),
+            Logout() {
+                this.logout();
+            }
         }
-    }
-};
+    };
 </script>
 
 <style>
