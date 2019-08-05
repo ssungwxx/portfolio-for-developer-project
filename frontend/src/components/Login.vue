@@ -61,11 +61,7 @@
 
                 <v-card-actions>
                     <v-spacer></v-spacer>
-<<<<<<< HEAD
-                    <v-btn color="blue darken-1" flat @click="Login_check">Login</v-btn>
-=======
                     <v-btn color="blue darken-1" flat @click="Login">Login</v-btn>
->>>>>>> Login
                     <v-btn color="green darken-1" flat @click>Forgot password?</v-btn>
                 </v-card-actions>
             </v-card>
