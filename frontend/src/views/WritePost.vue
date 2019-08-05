@@ -23,12 +23,10 @@ export default {
             title: "",
             titleRules: [
                 v => !!v || 'Title is required',
-                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
             content: "",
             contentRules: [
                 v => !!v || 'Content is required',
-                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
             postlist: ""
         }
