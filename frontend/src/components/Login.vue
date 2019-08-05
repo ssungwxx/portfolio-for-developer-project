@@ -73,6 +73,7 @@
 import FirebaseService from "@/services/FirebaseService";
 import { VFBLogin as VFacebookLogin } from "vue-facebook-login-component";
 import RestService from "@/services/RestService";
+import JWTService from "@/services/JWTService";
 import { mapActions } from "vuex";
 
 export default {
@@ -149,7 +150,9 @@ export default {
             if (result.status == 200) {
                 this.dialog = false;
                 alert("로그인 성공");
+                //this.$session.start();
                 this.$session.set("jwt", result.token);
+                console.log(JWTService.decode(this.$session.get("jwt")));
             } else {
                 alert("ID 와 PW 를 확인해주세요");
             }

@@ -22,6 +22,7 @@
         "express-generator": "^4.16.1",
         "firebase": "^5.9.3",
         "http2": "^3.3.7",
+        "jsonwebtoken": "^8.5.1",
         "register-service-worker": "^1.6.2",
         "sass-loader": "^7.1.0",
         "services": "0.0.3",
