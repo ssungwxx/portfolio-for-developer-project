@@ -107,9 +107,15 @@ router.post("/login", (req, res) => {
                             res.json({
                                 status: 200,
                                 msg: "success",
-                                token: token,
-                                refresh_token: refresh_token
+                                token: token
                             });
+
+                            knex("user_login_tokens")
+                                .insert({
+                                    user_id: req.body.user_id,
+                                    tk_refresh: refresh_token
+                                })
+                                .then();
                         } else {
                             res.json({
                                 status: 400,
