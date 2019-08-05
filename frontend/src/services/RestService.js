@@ -127,14 +127,10 @@ export default {
         return axios.get("http://70.12.246.138:3000/pcom");
     },
     getOnePostComments(post_no) {
-        return axios
-            .get("http://70.12.246.138:3000/pcom/" + post_no)
-            .then(response => (this.comments = response.data));
+        return axios.get("http://70.12.246.138:3000/pcom/" + post_no);
     },
     insertPostComment(data) {
-        return axios
-            .post("http://70.12.246.138:3000/pcom", data)
-            .then(response => (this.comments = response.data));
+        return axios.post("http://70.12.246.138:3000/pcom", data);
     },
     deletePostComment(pcom_no) {
         return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);

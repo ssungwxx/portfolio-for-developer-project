@@ -94,7 +94,8 @@
                 this.post.post_content = newContent;
             },
             async getComments() {
-                this.comments = await RestService.getOnePostComments(this.post_no);
+                console.log(this.post_no + 1);
+                this.comments = await RestService.getOnePostComments(this.post_no + 1);
                 console.log(this.comments)
             },
             async insertLog() {

@@ -33,7 +33,7 @@ export default {
             const data = {
                 post_no: 6,
                 user_id: "jiseon",
-                post_content: "들어가",
+                pcom_comment: "들어가",
             };
             await RestService.insertPostComment(data);
         }
