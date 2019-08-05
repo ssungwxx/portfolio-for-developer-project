@@ -1,53 +1,61 @@
 import Vue from "vue"
 import Vuex from "vuex"
 import RestService from "@/services/RestService"
+import JWTService from "@/services/JWTService"
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
     isAuth: false,
-    user_id: null,
-    err_msg: null
+    isLogin: sessionStorage.getItem('isLogin'),
+    user_id: JWTService.decode(sessionStorage.getItem('jwt')).user_id,
+    msg: null
   },
   getters: {
     getIsAuth: state => {
       return state.isAuth;
     },
+    getIsLogin: state => {
+      return state.isLogin;
+    },
     getUser_id: state => {
       return state.user_id;
     },
-    getErr_msg: state => {
-      return state.err_msg;
+    getMsg: state => {
+      return state.msg;
     }
   },
   mutations: {
-    login(state, data) {
+    login(state) {
       state.isAuth = true;
-      state.user_id = data.user_id;
-      state.err_msg = null;
+      state.isLogin = sessionStorage.getItem('isLogin');
+      state.user_id = JWTService.decode(sessionStorage.getItem('jwt')).user_id;
+      state.msg = 'Success';
     },
     logout(state) {
       state.isAuth = false;
+      state.isLogin = false;
       state.user_id = null;
-      state.err_msg = null;
+      state.msg = null;
     },
-    setErr_msg(state, msg) {
-      state.err_msg = msg;
+    setMsg(state, msg) {
+      state.msg = msg;
     }
   },
   actions: {
-    async loginCheck({
-      commit
-    }, data) {
-      console.log(data);
-      var result = await RestService.loginUser(data);
-      console.log(result);
+    async loginCheck({commit}, data) {
+      let result = await RestService.loginUser(data);
       if (result.status == 200) {
-        commit('login', data);
+        JWTService.setLogin(result);
+        commit('login');
       } else {
-        commit('setErr_msg', result.msg);
+        commit('setMsg', result.msg);
       }
+    },
+    logout({commit}) {
+      sessionStorage.clear();
+      commit('logout');
     }
   }
 });
