@@ -152,7 +152,7 @@ export default {
                 alert("로그인 성공");
                 //this.$session.start();
                 this.$session.set("jwt", result.token);
-                console.log(JWTService.decode(this.$session.get("jwt")));
+                //console.log(JWTService.decode(this.$session.get("jwt")));
             } else {
                 alert("ID 와 PW 를 확인해주세요");
             }

@@ -72,7 +72,7 @@ router.post("/login", (req, res) => {
         },
         secretObj.secret,
         {
-            expiresIn: "10s"
+            expiresIn: "5m"
         }
     );
 
