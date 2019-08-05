@@ -33,10 +33,9 @@ export default {
             const data = {
                 post_no: 6,
                 user_id: "jiseon",
-                pcom_content: "들어가",
+                post_content: "들어가",
             };
-            const res = await RestService.insertPostComment(data);
-            console.log(res)
+            await RestService.insertPostComment(data);
         }
     }
 };
