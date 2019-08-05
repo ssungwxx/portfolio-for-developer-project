@@ -3,13 +3,23 @@
         <div class="table-div">
             <table class="table">
                 <tr>
-                    <th>
-                        <span class="table-head">{{ post.post_title }}</span>
-                        <span class="table-date">{{ post.post_date }}</span>
+                    <th class="row-title">
+                        <div>
+                            <p aria-disabled="true" class="table-title">제목</p>
+                        </div>
+                        <div>
+                            <span class="table-head">{{ post.post_title }}</span>
+                            <span class="table-date">{{ post.post_date }}</span>
+                        </div>
                     </th>
                 </tr>
                 <tr>
-                    <p class="table-content" v-html="post.post_content"></p>
+                    <div class="row-content">
+                        <p aria-disabled="true" class="table-title">내용</p>
+                    </div>
+                    <div>
+                        <p class="table-content" v-html="post.post_content"></p>
+                    </div>
                 </tr>
             </table>
         </div>
@@ -23,6 +33,14 @@
                     </v-btn>
                 </router-link>
             </v-flex>
+        </div>
+
+        <div class="post-reply">
+            <table v-for>
+                <tr>
+                    <td></td>
+                </tr>
+            </table>
         </div>
     </v-container>
 </template>
@@ -41,7 +59,8 @@
                 user_id: this.$route.params.id,
                 posts: "",
                 status: "비회원",
-                post: []
+                post: [],
+                loginchk: false,
             };
         },
         beforeMount() {
@@ -49,7 +68,14 @@
         },
         mounted() {
             this.getPost();
-            this.loginCheck();
+
+        },
+        created() {
+            if (this.$store.state.isAuth) {
+                this.loginchk = true;
+            } else {
+                this.loginchk = false;
+            }
         },
         methods: {
             async getPost() {
@@ -69,13 +95,6 @@
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
             },
-            loginCheck() {
-                if (this.$store.state.isAuth) {
-                    console.log("야야야야")
-                } else {
-                    console.log("와와와와")
-                }
-            }
         }
     };
 </script>
@@ -122,6 +141,14 @@
         font-size: 3.5vw;
     }
 
+    .row-content {
+        margin-top: 20px;
+    }
+
+    .row-title {
+        border-bottom: 1px gray solid;
+    }
+
     @media screen and (max-width: 600px) {
         .table-head {
             font-size: 20px;
@@ -133,7 +160,14 @@
             text-align: left;
             font-size: 14px;
         }
+    }
 
+    .table-title {
+        margin: 0;
+        color: gray;
+        display: flex;
+        justify-content: flex-end;
+        user-select: none;
     }
 
     th {
@@ -145,7 +179,7 @@
         max-width: 80%;
         margin-left: auto;
         margin-right: auto;
-        }
+    }
 
     .table-date {
         font-size: 1vw;
