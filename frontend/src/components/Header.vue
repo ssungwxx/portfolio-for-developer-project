@@ -13,7 +13,7 @@
             </div>
             <div>
                 <div style="display: flex; margin-left: 10px;">
-                    <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+                    <v-text-field class="vinput" id="search" v-model="search" @click="resetInput"></v-text-field>
                     <v-icon style="margin-left: 10px;">search</v-icon>
                 </div>
                 <v-card class="card" v-if="search !== ''">
@@ -170,58 +170,56 @@ export default {
 </script>
 
 <style>
-.theme--light.v-list {
-    background: #ffc0cb;
-    color: white;
-    font-weight: bold;
-}
-
-@media screen and (max-width: 599px) {
-    .icons {
-        display: none;
+    .theme--light.v-list {
+        background: #ffc0cb;
+        color: white;
+        font-weight: bold;
     }
-}
 
-.Header {
-    z-index: 2;
-    background-color: yellow;
-    height: 64px;
-}
+    @media screen and (max-width: 599px) {
+        .icons {
+            display: none;
+        }
+    }
 
-#search {
-    background: white;
-    width: 30vw;
-    min-width: 25vw;
-    color: black;
-    padding: 5px;
-    border: solid yellow 2px;
-    -ms-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-}
+    .Header {
+        z-index: 2;
+        background-color: yellow;
+        height: 64px;
+    }
 
-.v-input__slot {
-    margin-bottom: 0px;
-}
+    #search {
+        background: white;
+        width: 30vw;
+        min-width: 25vw;
+        color: black;
+        padding: 5px;
+        border: solid yellow 2px;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
 
-.v-input {
-    width: 30vw;
-    min-width: 25vw;
-}
+    .v-input__slot {
+        margin-bottom: 0px;
+    }
 
-.card {
-    position: absolute;
-}
+    .vinput {
+        width: 30vw;
+        min-width: 25vw;
+    }
 
-.v-card {
-    min-width: auto;
-    margin-left: 10px;
-}
+    .card {
+        position: absolute;
+        min-width: auto;
+        margin-left: 10px;
+    }
 
-.v-list__tile {
-    padding: 0;
-}
+    .v-list__tile {
+        padding: 0;
+    }
 
-.LogReg {
-    display: flex;
-}
+    .LogReg {
+        display: flex;
+    }
+
 </style>

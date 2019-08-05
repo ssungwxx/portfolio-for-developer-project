@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/WritePost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WritePost.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -94,7 +87,7 @@
       <workItem from="1564130309557" duration="471000" />
       <workItem from="1564360942070" duration="54002000" />
       <workItem from="1564616018371" duration="30171000" />
-      <workItem from="1564964115129" duration="12248000" />
+      <workItem from="1564964115129" duration="20618000" />
     </task>
     <servers />
   </component>
