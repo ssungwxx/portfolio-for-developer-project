@@ -65,6 +65,17 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
+    // 실험용 토큰 (Access Token)
+    let token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.secret,
+        {
+            expiresIn: "5m"
+        }
+    );
+
     knex("users")
         .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
@@ -87,7 +98,8 @@ router.post("/login", (req, res) => {
                         if (data[0].user_pw == key.toString("base64")) {
                             res.json({
                                 status: 200,
-                                msg: "success"
+                                msg: "success",
+                                token: token
                             });
                         } else {
                             res.json({
