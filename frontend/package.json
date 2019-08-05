@@ -38,6 +38,7 @@
         "vue-resize-text": "^0.1.0",
         "vue-resource": "^1.5.1",
         "vue-router": "^3.0.1",
+        "vue-sessionstorage": "^1.0.0",
         "vue-sidebar-menu": "^3.12.2",
         "vue-simplemde": "^0.5.2",
         "vuebars": "^0.1.3",
