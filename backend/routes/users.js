@@ -214,43 +214,52 @@ router.get("/:id", (req, res) => {
 });
 
 // Update Password
-router.put("/:id", (req, res) => {
-    crypto.randomBytes(64, (err, buf) => {
-        crypto.pbkdf2(
-            req.body.user_pw,
-            buf.toString("base64"),
-            157913, // hash 함수 반복횟수
-            64,
-            "sha512",
-            (err, key) => {
-                User.user_pw = key.toString("base64");
-                User.user_salt = buf.toString("base64");
+router.put("/", (req, res) => {
+    let token = jwt.verify(req.headers.jwt, secretObj.secret);
 
-                if (User.user_pw) {
-                    knex("users")
-                        .where("user_id", req.params.id)
-                        .update(User)
-                        .then(data =>
-                            res.json({
-                                status: 200,
-                                msg: "success"
-                            })
-                        )
-                        .catch(err =>
-                            res.json({
-                                status: 400,
-                                msg: "error"
-                            })
-                        );
-                } else {
-                    res.json({
-                        status: 400,
-                        msg: "no data"
-                    });
+    if (token.exp < Date.now()) {
+        crypto.randomBytes(64, (err, buf) => {
+            crypto.pbkdf2(
+                req.body.user_pw,
+                buf.toString("base64"),
+                157913, // hash 함수 반복횟수
+                64,
+                "sha512",
+                (err, key) => {
+                    User.user_pw = key.toString("base64");
+                    User.user_salt = buf.toString("base64");
+
+                    if (User.user_pw) {
+                        knex("users")
+                            .where("user_id", token.user_id)
+                            .update(User)
+                            .then(data =>
+                                res.json({
+                                    status: 200,
+                                    msg: "success"
+                                })
+                            )
+                            .catch(err =>
+                                res.json({
+                                    status: 400,
+                                    msg: "error"
+                                })
+                            );
+                    } else {
+                        res.json({
+                            status: 400,
+                            msg: "no data"
+                        });
+                    }
                 }
-            }
-        );
-    });
+            );
+        });
+    } else {
+        res.json({
+            status: 400,
+            msg: "expired token"
+        });
+    }
 });
 
 // Delete User

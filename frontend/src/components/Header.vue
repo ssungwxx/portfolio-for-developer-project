@@ -1,27 +1,33 @@
 <template>
-<div class="Header">
-  <v-toolbar dark color="#ffc0cb" fixed>
-    <div style="display: flex;">
-      <router-link :to="'/'" style="text-decoration: none;">
-        <v-tooltip bottom>
-          <v-btn slot="activator" icon>
-            <v-icon>home</v-icon>
-          </v-btn>
-          <span>홈으로 이동</span>
-        </v-tooltip>
-      </router-link>
-    </div>
-    <div>
-      <div style="display: flex; margin-left: 10px;">
-        <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
-        <v-icon style="margin-left: 10px;">search</v-icon>
-      </div>
-      <v-card class="card" v-if="search !== ''">
-        <v-list-tile v-for="(user, i) in users" :key="i">
-          <router-link :to="'/users/' + user" style="text-decoration: none">
-            <div style="display: flex; margin: 0 15px;">
-              <v-icon>people</v-icon>
-              <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}</v-list-tile-title>
+    <div class="Header">
+        <v-toolbar dark color="#ffc0cb" fixed>
+            <div style="display: flex;">
+                <router-link :to="'/'" style="text-decoration: none;">
+                    <v-tooltip bottom>
+                            <v-btn slot="activator" icon>
+                                <v-icon>home</v-icon>
+                            </v-btn>
+                        <span>홈으로 이동</span>
+                    </v-tooltip>
+                </router-link>
+            </div>
+            <div>
+                <div style="display: flex; margin-left: 10px;">
+                    <v-text-field class="vinput" id="search" v-model="search" @click="resetInput"></v-text-field>
+                    <v-icon style="margin-left: 10px;">search</v-icon>
+                </div>
+                <v-card class="card" v-if="search !== ''">
+                    <v-list-tile v-for="(user, i) in users" :key="i">
+                        <router-link :to="'/users/' + user" style="text-decoration: none">
+                            <div style="display: flex; margin: 0 15px;">
+                                <v-icon>people</v-icon>
+                                <v-list-tile-title
+                                    style="margin-left: 1vw; color: white;"
+                                >{{ user }}</v-list-tile-title>
+                            </div>
+                        </router-link>
+                    </v-list-tile>
+                </v-card>
             </div>
           </router-link>
         </v-list-tile>
@@ -174,58 +180,56 @@ export default {
 </script>
 
 <style>
-.theme--light.v-list {
-  background: #ffc0cb;
-  color: white;
-  font-weight: bold;
-}
+    .theme--light.v-list {
+        background: #ffc0cb;
+        color: white;
+        font-weight: bold;
+    }
 
-@media screen and (max-width: 599px) {
-  .icons {
-    display: none;
-  }
-}
+    @media screen and (max-width: 599px) {
+        .icons {
+            display: none;
+        }
+    }
 
-.Header {
-  z-index: 2;
-  background-color: yellow;
-  height: 64px;
-}
+    .Header {
+        z-index: 2;
+        background-color: yellow;
+        height: 64px;
+    }
 
-#search {
-  background: white;
-  width: 30vw;
-  min-width: 25vw;
-  color: black;
-  padding: 5px;
-  border: solid yellow 2px;
-  -ms-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-}
+    #search {
+        background: white;
+        width: 30vw;
+        min-width: 25vw;
+        color: black;
+        padding: 5px;
+        border: solid yellow 2px;
+        -ms-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+    }
 
-.v-input__slot {
-  margin-bottom: 0px;
-}
+    .v-input__slot {
+        margin-bottom: 0px;
+    }
 
-.v-input {
-  /* width: 30vw; */
-  /* min-width: 25vw; */
-}
+    .vinput {
+        width: 30vw;
+        min-width: 25vw;
+    }
 
-.card {
-  position: absolute;
-}
+    .card {
+        position: absolute;
+        min-width: auto;
+        margin-left: 10px;
+    }
 
-.v-card {
-  min-width: auto;
-  /* margin-left: 10px; */
-}
+    .v-list__tile {
+        padding: 0;
+    }
 
-.v-list__tile {
-  padding: 0;
-}
+    .LogReg {
+        display: flex;
+    }
 
-.LogReg {
-  display: flex;
-}
 </style>
