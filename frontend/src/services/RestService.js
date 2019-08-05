@@ -153,5 +153,29 @@ export default {
     },
     updateRepoComment(data) {
         return axios.put("http://70.12.246.138:3000/rcom", data);
+    },
+    //push notification
+    pushNotification(body,title,list){
+      return axios
+                .post('https://fcm.googleapis.com/fcm/send', {
+                    "notification" : {
+                        "body": body,
+                        "title" : title,
+                    },
+                    "to" : list
+                    }, {
+                        headers : {
+                            "Content-Type": 'application/json',
+                            "Authorization": 'key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL'
+                        }
+                    }
+                )
+                .then(response => {
+                    console.log(response)
+                    resolve(response)
+                })
+                .catch(err => {
+                    console.log(err)
+                })
     }
 };
