@@ -101,12 +101,7 @@ export default {
             data: {
                 user_id: "",
                 user_pw: ""
-<<<<<<< HEAD
-            },
-            result: ""
-=======
             }
->>>>>>> Login
         };
     },
     beforeMount() {
