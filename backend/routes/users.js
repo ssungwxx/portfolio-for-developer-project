@@ -65,6 +65,27 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
+    // 실험용 토큰 (Access Token)
+    let token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.secret,
+        {
+            expiresIn: "5m"
+        }
+    );
+
+    let refresh_token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.refresh,
+        {
+            expiresIn: "1d"
+        }
+    );
+
     knex("users")
         .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
@@ -82,13 +103,19 @@ router.post("/login", (req, res) => {
                     64,
                     "sha512",
                     (err, key) => {
-                        console.log(key.toString("base64"));
-                        console.log(data[0].user_pw);
                         if (data[0].user_pw == key.toString("base64")) {
                             res.json({
                                 status: 200,
-                                msg: "success"
+                                msg: "success",
+                                token: token
                             });
+
+                            knex("user_login_tokens")
+                                .insert({
+                                    user_id: req.body.user_id,
+                                    tk_refresh: refresh_token
+                                })
+                                .then();
                         } else {
                             res.json({
                                 status: 400,
