@@ -41,6 +41,7 @@ export default {
             posts: [],
             writepost: "/users/" + this.user_id + "/writepost",
             loadlimits: this.limits,
+            loginchk: false,
         };
     },
     components: {

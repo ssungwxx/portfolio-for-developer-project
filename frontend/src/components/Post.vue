@@ -30,6 +30,9 @@ export default {
             detaillink: "/users/" + this.user_id + "/posts/" + this.post_no,
         };
     },
+    mounted() {
+        console.log()
+    }
 };
 </script>
 

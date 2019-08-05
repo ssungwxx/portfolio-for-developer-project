@@ -116,7 +116,6 @@ export default {
     insertLog(path) {
         return axios.post("http://70.12.246.138:3000/logs/" + path);
     },
-
     getLog() {
         return axios
             .get("http://70.12.246.138:3000/logs")
