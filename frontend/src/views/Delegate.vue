@@ -49,6 +49,7 @@ export default {
     mounted() {
         this.getUsers();
         this.insertLog();
+        this.pushNotification('Delegate','Test','f6kq2MBZqyE:APA91bELzwYxmAQJepKXSRB9r3RTjxFMMh1-j9qHnye4FxBoiv_Bq03tyUnPCwqs9ysEohUmOMb2rN1uPmcJ_JHSCktlG3VFSmTbdrqyBeJiPfe-_2zSM51fjP9WkqL2AlgA0KbtMJVj');
     },
     methods: {
         async getUsers() {
@@ -66,6 +67,10 @@ export default {
           yourTestSelect="";
           selectedValue="";
           location.reload();
+        },
+        pushNotification(body,title,list){
+          const temp = RestService.pushNotification(body,title,list)
+
         }
     }
 };
