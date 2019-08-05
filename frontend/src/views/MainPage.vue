@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="des">
-            <ImgBanner imgSrc="https://picsum.photos/1280/520">
+            <ImgBanner imgSrc="https://picsum.photos/id/9/1280/520">
                 <div style="line-height:1.2em;font-size:1.2em;" slot="text">개인의 포트폴리오 페이지를 만들어 드려요</div>
             </ImgBanner>
             <div>
