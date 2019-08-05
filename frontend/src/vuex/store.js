@@ -40,7 +40,6 @@ export const store = new Vuex.Store({
     async loginCheck({
       commit
     }, data) {
-      console.log(data);
       var result = await RestService.loginUser(data);
       console.log(result);
       if (result.status == 200) {

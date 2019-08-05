@@ -49,6 +49,7 @@
         },
         mounted() {
             this.getPost();
+            this.loginCheck();
         },
         methods: {
             async getPost() {
@@ -70,7 +71,9 @@
             },
             loginCheck() {
                 if (this.$store.state.isAuth) {
-
+                    console.log("야야야야")
+                } else {
+                    console.log("와와와와")
                 }
             }
         }

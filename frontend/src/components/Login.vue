@@ -110,13 +110,10 @@ export default {
     },
     ...mapActions(['loginCheck']),
     async Login() {
-      console.log(this.$store.getters.getIsAuth);
       if (this.$refs.form.validate()) {
         // Call Login
-        console.log(this.data);
         await this.loginCheck(this.data);
         this.result = this.$store.getters.getIsAuth;
-        console.log(this.result);
       }
     },
     // async defaultLogin() {
