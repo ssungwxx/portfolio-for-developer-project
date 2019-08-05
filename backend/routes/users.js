@@ -76,6 +76,16 @@ router.post("/login", (req, res) => {
         }
     );
 
+    let refresh_token = jwt.sign(
+        {
+            user_id: req.body.user_id
+        },
+        secretObj.refresh,
+        {
+            expiresIn: "1d"
+        }
+    );
+
     knex("users")
         .select("user_salt", "user_pw")
         .where("user_id", req.body.user_id)
@@ -93,13 +103,12 @@ router.post("/login", (req, res) => {
                     64,
                     "sha512",
                     (err, key) => {
-                        console.log(key.toString("base64"));
-                        console.log(data[0].user_pw);
                         if (data[0].user_pw == key.toString("base64")) {
                             res.json({
                                 status: 200,
                                 msg: "success",
-                                token: token
+                                token: token,
+                                refresh_token: refresh_token
                             });
                         } else {
                             res.json({
