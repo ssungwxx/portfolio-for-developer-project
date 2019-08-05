@@ -32,7 +32,7 @@
 
             <v-spacer></v-spacer>
 
-            <div class="icons" v-if="this.$store.state.user_name">
+            <div class="icons" v-if="this.$store.getters.getIsLogin">
                 <router-link to style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon v-on:click="favorite()">
@@ -43,7 +43,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.state.user_name + repos"
+                    :to="'/' + this.$store.getters.getUser_id + repos"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>
@@ -55,7 +55,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.state.user_name + posts"
+                    :to="'/' + this.$store.getters.getUser_id + posts"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>
