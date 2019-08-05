@@ -31,7 +31,6 @@ export const store = new Vuex.Store({
       state.isAuth = true;
       state.isLogin = sessionStorage.getItem('isLogin');
       state.user_id = JWTService.decode(sessionStorage.getItem('jwt')).user_id;
-      state.msg = 'Success';
     },
     logout(state) {
       state.isAuth = false;
@@ -46,11 +45,10 @@ export const store = new Vuex.Store({
   actions: {
     async loginCheck({commit}, data) {
       let result = await RestService.loginUser(data);
+      commit('setMsg', result.msg);
       if (result.status == 200) {
         JWTService.setLogin(result);
         commit('login');
-      } else {
-        commit('setMsg', result.msg);
       }
     },
     logout({commit}) {
