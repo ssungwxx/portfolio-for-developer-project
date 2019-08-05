@@ -13,7 +13,7 @@
     </div>
     <div>
       <div style="display: flex; margin-left: 10px;">
-        <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+        <v-text-field class="vinput" id="search" v-model="search" @click="resetInput"></v-text-field>
         <v-icon style="margin-left: 10px;">search</v-icon>
       </div>
       <v-card class="card" v-if="search !== ''">
@@ -27,61 +27,64 @@
         </v-list-tile>
       </v-card>
     </div>
+    </router-link>
+    </v-list-tile>
+    </v-card>
 
-    <v-spacer></v-spacer>
+<v-spacer></v-spacer>
 
-    <div class="icons" v-if="this.$store.getters.getIsLogin">
-      <router-link to style="text-decoration: none;">
-        <v-tooltip bottom>
-          <v-btn slot="activator" icon v-on:click="favorite()">
-            <v-icon color="white" id="bookMark">star</v-icon>
-          </v-btn>
-          <span>Bookmark</span>
-        </v-tooltip>
-      </router-link>
+<div class="icons" v-if="this.$store.getters.getIsLogin">
+  <router-link to style="text-decoration: none;">
+    <v-tooltip bottom>
+      <v-btn slot="activator" icon v-on:click="favorite()">
+        <v-icon color="white" id="bookMark">star</v-icon>
+      </v-btn>
+      <span>Bookmark</span>
+    </v-tooltip>
+  </router-link>
 
-      <router-link :to="'/' + this.$store.getters.getUser_id + repos" style="text-decoration: none;">
-        <v-tooltip bottom>
-          <v-btn slot="activator" icon>
-            <v-icon color="white">markunread_mailbox</v-icon>
-          </v-btn>
-          <span>Repository</span>
-        </v-tooltip>
-      </router-link>
+  <router-link :to="'/' + this.$store.getters.getUser_id + repos" style="text-decoration: none;">
+    <v-tooltip bottom>
+      <v-btn slot="activator" icon>
+        <v-icon color="white">markunread_mailbox</v-icon>
+      </v-btn>
+      <span>Repository</span>
+    </v-tooltip>
+  </router-link>
 
-      <router-link :to="'/' + this.$store.getters.getUser_id + posts" style="text-decoration: none;">
-        <v-tooltip bottom>
-          <v-btn slot="activator" icon>
-            <v-icon color="white">description</v-icon>
-          </v-btn>
-          <span>Post</span>
-        </v-tooltip>
-      </router-link>
+  <router-link :to="'/' + this.$store.getters.getUser_id + posts" style="text-decoration: none;">
+    <v-tooltip bottom>
+      <v-btn slot="activator" icon>
+        <v-icon color="white">description</v-icon>
+      </v-btn>
+      <span>Post</span>
+    </v-tooltip>
+  </router-link>
 
-      <v-tooltip bottom>
-        <v-btn slot="activator" icon @click="Logout">
-          <v-icon color="white">exit_to_app</v-icon>
-        </v-btn>
-        <span>Logout</span>
-      </v-tooltip>
-    </div>
+  <v-tooltip bottom>
+    <v-btn slot="activator" icon @click="Logout">
+      <v-icon color="white">exit_to_app</v-icon>
+    </v-btn>
+    <span>Logout</span>
+  </v-tooltip>
+</div>
 
-    <div class="LogReg" v-else>
-      <div class="icons">
-        <v-tooltip bottom>
-          <Login slot="activator" />
-          <span>Login</span>
-        </v-tooltip>
-      </div>
+<div class="LogReg" v-else>
+  <div class="icons">
+    <v-tooltip bottom>
+      <Login slot="activator" />
+      <span>Login</span>
+    </v-tooltip>
+  </div>
 
-      <div class="icons">
-        <v-tooltip bottom>
-          <Register slot="activator" />
-          <span>Register</span>
-        </v-tooltip>
-      </div>
-    </div>
-  </v-toolbar>
+  <div class="icons">
+    <v-tooltip bottom>
+      <Register slot="activator" />
+      <span>Register</span>
+    </v-tooltip>
+  </div>
+</div>
+</v-toolbar>
 </div>
 </template>
 
@@ -209,18 +212,15 @@ export default {
   margin-bottom: 0px;
 }
 
-.v-input {
-  /* width: 30vw; */
-  /* min-width: 25vw; */
+.vinput {
+  width: 30vw;
+  min-width: 25vw;
 }
 
 .card {
   position: absolute;
-}
-
-.v-card {
   min-width: auto;
-  /* margin-left: 10px; */
+  margin-left: 10px;
 }
 
 .v-list__tile {
