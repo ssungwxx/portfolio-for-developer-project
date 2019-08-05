@@ -65,7 +65,7 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
-    // 실험용 토큰 (Access Token)
+    // 사용자 세션 저장용 토큰
     let token = jwt.sign(
         {
             user_id: req.body.user_id
@@ -75,7 +75,7 @@ router.post("/login", (req, res) => {
             expiresIn: "5m"
         }
     );
-
+    // 서버 DB저장용 토큰
     let refresh_token = jwt.sign(
         {
             user_id: req.body.user_id
@@ -156,6 +156,17 @@ router.get("/:id", (req, res) => {
 // Update Password
 router.put("/", (req, res) => {
     let token = jwt.verify(req.headers.jwt, secretObj.secret);
+    let refresh_token;
+    const getRefreshToken = async () => {
+        let result = await knex("user_login_tokens")
+            .select("tk_refresh")
+            .where("user_id", token.user_id)
+            .orderBy("tk_no", "desc")
+            .limit("1");
+        return (refresh_token = result);
+    };
+
+    console.log(refresh_token);
 
     if (token.exp < Date.now()) {
         crypto.randomBytes(64, (err, buf) => {
