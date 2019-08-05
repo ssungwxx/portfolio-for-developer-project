@@ -186,12 +186,44 @@ router.get("/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
-// Update User
+// Update Password
 router.put("/:id", (req, res) => {
-    knex("users")
-        .where("user_id", req.params.id)
-        .update(req.body)
-        .then(data => res.json(data));
+    crypto.randomBytes(64, (err, buf) => {
+        crypto.pbkdf2(
+            req.body.user_pw,
+            buf.toString("base64"),
+            157913, // hash 함수 반복횟수
+            64,
+            "sha512",
+            (err, key) => {
+                User.user_pw = key.toString("base64");
+                User.user_salt = buf.toString("base64");
+
+                if (User.user_pw) {
+                    knex("users")
+                        .where("user_id", req.params.id)
+                        .update(User)
+                        .then(data =>
+                            res.json({
+                                status: 200,
+                                msg: "success"
+                            })
+                        )
+                        .catch(err =>
+                            res.json({
+                                status: 400,
+                                msg: "error"
+                            })
+                        );
+                } else {
+                    res.json({
+                        status: 400,
+                        msg: "no data"
+                    });
+                }
+            }
+        );
+    });
 });
 
 // Delete User
