@@ -5,7 +5,7 @@
                 <div style="line-height:1.2em;font-size:1.2em;" slot="text">개인의 포트폴리오 페이지를 만들어 드려요</div>
             </ImgBanner>
             <div>
-                <v-btn @click="logincheck">쳌!</v-btn>
+                <v-btn @click="chk">쳌!</v-btn>
             </div>
 
             <img src="../../public/img/posts.png" alt="posts sample">
@@ -28,8 +28,15 @@ export default {
         return {};
     },
     methods: {
-        logincheck() {
-            console.log(this.$store.state.isAuth)
+        async chk() {
+            // console.log(this.$store.state.isAuth)
+            const data = {
+                post_no: 6,
+                user_id: "jiseon",
+                pcom_content: "들어가",
+            };
+            const res = await RestService.insertPostComment(data);
+            console.log(res)
         }
     }
 };

@@ -60,6 +60,7 @@
                 posts: "",
                 status: "비회원",
                 post: [],
+                comments: [],
                 loginchk: false,
             };
         },
@@ -68,7 +69,7 @@
         },
         mounted() {
             this.getPost();
-
+            this.getComments();
         },
         created() {
             if (this.$store.state.isAuth) {
@@ -91,6 +92,10 @@
                     }
                 }
                 this.post.post_content = newContent;
+            },
+            async getComments() {
+                this.comments = await RestService.getOnePostComments(this.post_no);
+                console.log(this.comments)
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
