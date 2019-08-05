@@ -5,7 +5,7 @@
             <v-textarea v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
         </div>
         <div class="btns">
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate" :href="postlist">쓰기</v-btn>
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
             <v-btn color="error" class="mr-4" @click="reset">내용 초기화</v-btn>
         </div>
     </v-form>
@@ -23,19 +23,16 @@ export default {
             title: "",
             titleRules: [
                 v => !!v || 'Title is required',
-                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
             content: "",
             contentRules: [
                 v => !!v || 'Content is required',
-                // v => (v && v.length <= 10) || 'Name must be less than 10 characters',
             ],
             postlist: ""
         }
     },
-    mounted() {
-        console.log(this.user_id)
-        this.postlist = "/users/" + this.user_id + "/posts"
+    created() {
+        this.postlist = `/users/${this.user_id}/posts`
     },
     methods: {
         validate () {
@@ -46,6 +43,7 @@ export default {
                     post_content: this.content
                 };
                 this.postpost(data);
+                this.$router.push("Posts")
             }
         },
         reset () {

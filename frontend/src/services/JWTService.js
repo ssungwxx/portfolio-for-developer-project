@@ -1,3 +1,5 @@
+import RestService from '@/services/RestService'
+
 // JWT
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
@@ -10,5 +12,9 @@ export default {
         } catch (err) {
             return -1;
         }
+    },
+    setLogin(result) {
+      sessionStorage.setItem('jwt', result.token);
+      sessionStorage.setItem('isLogin', true);
     }
 };
