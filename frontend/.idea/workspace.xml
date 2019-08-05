@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/RepoPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RepoPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/UserPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/UserPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +28,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ss2_prj\webmobile-final\frontend\src\components" />
       <recent name="F:\work\SSAFY\ssafy_ss2\webmobile-sub2\frontend\src\components" />
     </key>
   </component>
@@ -92,6 +86,8 @@
       <workItem from="1564099835123" duration="14589000" />
       <workItem from="1564130309557" duration="471000" />
       <workItem from="1564360942070" duration="54002000" />
+      <workItem from="1564616018371" duration="30171000" />
+      <workItem from="1564964115129" duration="20618000" />
     </task>
     <servers />
   </component>
@@ -131,7 +127,6 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/views/HomePage.vue</url>
           <line>18</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

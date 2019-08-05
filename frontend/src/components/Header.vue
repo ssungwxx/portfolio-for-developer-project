@@ -9,23 +9,24 @@
                     <span>홈으로 이동</span>
                 </v-tooltip>
 
-<!--                <v-toolbar-title style="align-self: center" class="white&#45;&#45;text">{{ title }}</v-toolbar-title>-->
+                <!--                <v-toolbar-title style="align-self: center" class="white&#45;&#45;text">{{ title }}</v-toolbar-title>-->
             </div>
             <div>
                 <div style="display: flex; margin-left: 10px;">
-                    <v-text-field id="search" v-model="search" @click="resetInput"></v-text-field>
+                    <v-text-field class="vinput" id="search" v-model="search" @click="resetInput"></v-text-field>
                     <v-icon style="margin-left: 10px;">search</v-icon>
                 </div>
                 <v-card v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-<!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
+                        <!--                        <router-link :to="'/users/' + user" :user="user" style="text-decoration: none">-->
                         <v-btn :href="'/users/' + user" style="width: 100%; height: 100%;">
                             <div style="display: flex;">
                                 <v-icon>people</v-icon>
-                                <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}</v-list-tile-title>
+                                <v-list-tile-title style="margin-left: 1vw; color: white;">{{ user }}
+                                </v-list-tile-title>
                             </div>
                         </v-btn>
-<!--                        </router-link>-->
+                        <!--                        </router-link>-->
                     </v-list-tile>
                 </v-card>
             </div>
@@ -62,19 +63,19 @@
             </div>
 
             <div class="LogReg" v-else>
-            <div class="icons">
-                <v-tooltip bottom>
-                    <Login slot="activator"/>
-                    <span>Login</span>
-                </v-tooltip>
-            </div>
+                <div class="icons">
+                    <v-tooltip bottom>
+                        <Login slot="activator"/>
+                        <span>Login</span>
+                    </v-tooltip>
+                </div>
 
-            <div class="icons">
-                <v-tooltip bottom>
-                    <Register slot="activator"/>
-                    <span>Register</span>
-                </v-tooltip>
-            </div>
+                <div class="icons">
+                    <v-tooltip bottom>
+                        <Register slot="activator"/>
+                        <span>Register</span>
+                    </v-tooltip>
+                </div>
             </div>
         </v-toolbar>
     </div>
@@ -186,8 +187,8 @@
 
     .Header {
         z-index: 2;
-        position: absolute;
         background-color: yellow;
+        height: 64px;
     }
 
     #search {
@@ -205,12 +206,12 @@
         margin-bottom: 0px;
     }
 
-    .v-input {
+    .vinput {
         width: 30vw;
         min-width: 25vw;
     }
 
-    .v-card {
+    .card {
         position: absolute;
         min-width: auto;
         margin-left: 10px;
