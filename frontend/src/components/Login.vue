@@ -133,14 +133,14 @@ export default {
         async Login() {
             if (this.$refs.form.validate()) {
                 await this.loginCheck(this.data);
-                if(this.$store.getters.getMsg == 'wrong id') {
-                  alert('존재하지 않는 ID입니다.');
-                } else if(this.$store.getters.getMsg == 'wrong password') {
-                  alert('비밀번호가 올바르지 않습니다.');
+                if (this.$store.getters.getMsg == "wrong id") {
+                    alert("존재하지 않는 ID입니다.");
+                } else if (this.$store.getters.getMsg == "wrong password") {
+                    alert("비밀번호가 올바르지 않습니다.");
                 }
-                if(this.$store.getters.getIsAuth) {
-                  alert('로그인 되었습니다!');
-                  this.dialog = false;
+                if (this.$store.getters.getIsAuth) {
+                    alert("로그인 되었습니다!");
+                    this.dialog = false;
                 }
             }
         },
