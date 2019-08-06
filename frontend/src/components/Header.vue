@@ -44,7 +44,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.getters.getUser_id + repos"
+                    :to="`/users/${this.$store.getters.getUser_id}/repos`"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>
@@ -56,7 +56,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.getters.getUser_id + posts"
+                    :to="`/users/${this.$store.getters.getUser_id}/posts`"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>

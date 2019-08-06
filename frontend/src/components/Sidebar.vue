@@ -11,12 +11,28 @@
             </div>
 
             <v-list class="menuButton" style="overflow: hidden;" v-if="this.$store.getters.getIsLogin">
-                <v-list-tile v-for="(item, i) in items" :key="i" :to="item.url" >
+                <v-list-tile :to="`/users/${this.$store.getters.getUser_id}/posts`" >
                     <v-list-tile-action>
-                        <v-icon style="margin-right: auto; margin-left: 17px;">{{ item.icon }}</v-icon>
+                        <v-icon style="margin-right: auto; margin-left: 17px;">description</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title class="vtitle">{{ item.title }}</v-list-tile-title>
+                        <v-list-tile-title class="vtitle">Posts</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile :to="`/users/${this.$store.getters.getUser_id}/repos`" >
+                    <v-list-tile-action>
+                        <v-icon style="margin-right: auto; margin-left: 17px;">assignment_ind</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title class="vtitle">Repositories</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile @click="Logout">
+                    <v-list-tile-action>
+                        <v-icon style="margin-right: auto; margin-left: 17px;">exit_to_app</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title class="vtitle">Logout</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -46,6 +62,7 @@
 
     import Login from "./Login";
     import Register from "./Register";
+    import {mapActions} from "vuex";
 
     export default {
 
@@ -57,8 +74,8 @@
         data: () => ({
             title: document.title,
             items: [
-                {title: 'Post', icon: 'description', url: '/post'},
-                {title: 'Portfolio', icon: 'assignment_ind', url: './portfolio'},
+                {title: 'Post', icon: 'description', url: `/users/${this.$store.getters.getUser_id}/posts`},
+                {title: 'Repository', icon: 'assignment_ind', url: `/users/${this.$store.getters.getUser_id}/repos`},
             ]
         }),
         props: {
@@ -95,6 +112,10 @@
                     );
                 }
                 return triggerDefault;
+            },
+            ...mapActions(['logout']),
+            Logout() {
+                this.logout();
             }
         },
     }
