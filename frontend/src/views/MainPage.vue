@@ -7,9 +7,13 @@
             <div>
                 <v-btn @click="chk">쳌!</v-btn>
             </div>
-
-            <img src="../../public/img/posts.png" alt="posts sample">
-            <img src="../../public/img/repos.png" alt="repos sample">
+            <div class="service">
+                <p>11stagram 서비스 소개</p>
+            </div>
+            <img src="../../public/img/001(T).png" alt="mainImg1">
+            <img src="../../public/img/002(T).png" alt="mainImg2">
+            <img src="../../public/img/003(T).png" alt="mainImg3">
+            <img src="../../public/img/004(T).png" alt="mainImg4">
         </div>
     </div>
 </template>
@@ -46,10 +50,21 @@ export default {
     margin-left: auto;
     margin-right: auto;
     margin-top: 0;
+    font-family: Consolas;
 }
 
 .des > img {
     width: 70%;
     border: 1px solid gray;
+}
+
+.service {
+    margin-bottom: 30px;
+}
+
+.service > p {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-size: 3vw;
 }
 </style>

@@ -198,6 +198,7 @@
     .Header {
         z-index: 2;
         background-color: yellow;
+        position: absolute;
         height: 64px;
     }
 
