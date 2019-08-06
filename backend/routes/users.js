@@ -326,8 +326,7 @@ router.delete("/:id", (req, res) => {
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success",
-                        jwt: new_token
+                        msg: "success"
                     })
                 );
         } catch {
