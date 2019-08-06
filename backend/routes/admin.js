@@ -215,7 +215,7 @@ router.post("/post_comment", (req, res) => {
 });
 
 // Update One Post's comment
-router.put("/post_comment/pcom_no", (req, res) => {
+router.put("/post_comment/:pcom_no", (req, res) => {
     knex("posts_comment")
         .update(req.body)
         .where("pcom_no", req.params.pcom_no)
@@ -223,7 +223,7 @@ router.put("/post_comment/pcom_no", (req, res) => {
 });
 
 // Delete One Post's comment
-router.delete("/post_comment/all/post_no", (req, res) => {
+router.delete("/post_comment/all/:post_no", (req, res) => {
     knex("posts_comment")
         .delete()
         .where("post_no", req.params.post_no)
@@ -231,7 +231,7 @@ router.delete("/post_comment/all/post_no", (req, res) => {
 });
 
 // Delete One Post's comments
-router.delete("/post_comment/pcom_no", (req, res) => {
+router.delete("/post_comment/:pcom_no", (req, res) => {
     knex("posts_comment")
         .delete("*")
         .where("pcom_no", req.params.pcom_no)
