@@ -177,5 +177,15 @@ export default {
                 .catch(err => {
                     console.log(err)
                 })
+    },
+
+    //insert Token(Push Notification)
+    insertToken(token){
+      return axios.post("http://70.12.246.138:3000/fcm",{
+        "fcm_token" : token
+      });
+    },
+    async getTokenlist(){
+      return await axios.get("http://70.12.246.138:3000/fcm");
     }
 };
