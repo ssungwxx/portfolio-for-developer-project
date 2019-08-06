@@ -113,7 +113,5 @@ export default {
     height: 3.6em;
 }
 
-.pagebody {
-    margin-top: 0 !important;
-}
+
 </style>

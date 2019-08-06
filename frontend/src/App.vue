@@ -5,7 +5,7 @@
             <Sidebar/>
         </v-content>
 
-        <v-content class="pagebody">
+        <v-content>
             <router-view/>
             <TopButton/>
         </v-content>
@@ -63,10 +63,6 @@
 
     .v-content.footerwrap > .v-content__wrap {
         margin-top: auto;
-    }
-
-    .pagebody {
-        margin-top: 60px;
     }
 
     #sntch_button {
