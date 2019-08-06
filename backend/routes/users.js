@@ -153,7 +153,7 @@ router.get("/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
-// Update Password
+// Update User
 router.put("/", (req, res) => {
     let token = jwt.verify(req.headers.jwt, secretObj.secret);
     let refresh_token;
@@ -177,8 +177,17 @@ router.put("/", (req, res) => {
                 64,
                 "sha512",
                 (err, key) => {
+                    User.user_id = req.body.user_id;
                     User.user_pw = key.toString("base64");
                     User.user_salt = buf.toString("base64");
+                    User.user_name = req.body.user_name;
+                    User.user_grade = req.body.user_grade;
+                    User.user_gitId = req.body.user_gitId;
+                    User.user_gitAdd = req.body.user_gitAdd;
+                    User.user_gitToken = req.body.user_gitToken;
+                    User.user_email = req.body.user_email;
+                    User.user_aboutMe = req.body.user_aboutMe;
+                    User.user_profile = req.body.user_profile;
 
                     if (User.user_pw) {
                         knex("users")
