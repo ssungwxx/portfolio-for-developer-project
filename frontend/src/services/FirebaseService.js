@@ -34,8 +34,13 @@ messaging.requestPermission()
   console.log('Error Occured.');
 })
 
+navigator.serviceWorker.register('firebase-messaging-sw.js');
 messaging.onMessage(function(payload){
   console.log('onMessage: ', payload);
+  console.log(payload.notification.body);
+  navigator.serviceWorker.ready.then(function(registration){
+    registration.showNotification(payload.notification.title,JSON.parse(payload.notification.body));
+  })
   //페이지가 열려 있을 때면 push 알림이 아닌 console로
 });
 
