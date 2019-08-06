@@ -98,6 +98,13 @@ router.get("/posts", (req, res) => {
         .then(data => res.json(data));
 });
 
+// Get Post count
+router.get("/posts/count", (req, res) => {
+    knex("posts")
+        .count("post_no as cnt")
+        .then(data => res.json(data));
+});
+
 // Get One's Post
 router.get("/posts/user/:id", (req, res) => {
     knex("posts")
@@ -228,6 +235,21 @@ router.delete("/post_comment/pcom_no", (req, res) => {
     knex("posts_comment")
         .delete("*")
         .where("pcom_no", req.params.pcom_no)
+        .then(data => res.json(data));
+});
+
+/*WebLog*/
+// Get All Web Logs
+router.get("/web_log", (req, res) => {
+    knex("web_logs")
+        .select("*")
+        .then(data => res.json(data));
+});
+
+// Get Web Logs Count
+router.get("/web_log/count", (req, res) => {
+    knex("web_logs")
+        .count("wlog_no as cnt")
         .then(data => res.json(data));
 });
 
