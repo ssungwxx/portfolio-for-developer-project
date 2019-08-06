@@ -14,6 +14,16 @@ var User = require("../models/User");
 // crypto
 var crypto = require("crypto");
 
+// DB RefreshToken 가져오기
+async function getRefreshToken(user_id) {
+    return await knex("user_login_tokens")
+        .select("tk_refresh")
+        .where("user_id", user_id)
+        .orderBy("tk_no", "desc")
+        .limit("1")
+        .then(data => (result = data[0].tk_refresh));
+}
+
 // crypto register
 router.post("/", (req, res) => {
     if (!req.body.user_pw) {
@@ -190,13 +200,55 @@ router.put("/", (req, res) => {
                 }
             );
             token = jwt.verify(new_token, secretObj.secret);
-            update_user();
+            crypto.randomBytes(64, (err, buf) => {
+                crypto.pbkdf2(
+                    req.body.user_pw,
+                    buf.toString("base64"),
+                    157913, // hash 함수 반복횟수
+                    64,
+                    "sha512",
+                    (err, key) => {
+                        User.user_id = req.body.user_id;
+                        User.user_pw = key.toString("base64");
+                        User.user_salt = buf.toString("base64");
+                        User.user_name = req.body.user_name;
+                        User.user_grade = req.body.user_grade;
+                        User.user_gitId = req.body.user_gitId;
+                        User.user_gitAdd = req.body.user_gitAdd;
+                        User.user_gitToken = req.body.user_gitToken;
+                        User.user_email = req.body.user_email;
+                        User.user_aboutMe = req.body.user_aboutMe;
+                        User.user_profile = req.body.user_profile;
+
+                        if (User.user_pw) {
+                            knex("users")
+                                .where("user_id", token.user_id)
+                                .update(User)
+                                .then(data =>
+                                    res.json({
+                                        status: 200,
+                                        msg: "success/new_token",
+                                        jwt: new_token
+                                    })
+                                )
+                                .catch(err =>
+                                    res.json({
+                                        status: 400,
+                                        msg: "error"
+                                    })
+                                );
+                        }
+                    }
+                );
+            });
         } catch {
             token.exp = refresh.exp;
         }
     }
 
-    function update_user() {
+    if (token.exp == -1) {
+        refresh();
+    } else if (token.exp < Date.now) {
         crypto.randomBytes(64, (err, buf) => {
             crypto.pbkdf2(
                 req.body.user_pw,
@@ -224,8 +276,7 @@ router.put("/", (req, res) => {
                             .then(data =>
                                 res.json({
                                     status: 200,
-                                    msg: "success/new_token",
-                                    jwt: new_token
+                                    msg: "success"
                                 })
                             )
                             .catch(err =>
@@ -234,16 +285,15 @@ router.put("/", (req, res) => {
                                     msg: "error"
                                 })
                             );
+                    } else {
+                        res.json({
+                            status: 400,
+                            msg: "no data"
+                        });
                     }
                 }
             );
         });
-    }
-
-    if (token.exp == -1) {
-        refresh();
-    } else if (token.exp < Date.now) {
-        update_user();
     } else {
         res.json({
             status: 400,
@@ -254,10 +304,74 @@ router.put("/", (req, res) => {
 
 // Delete User
 router.delete("/:id", (req, res) => {
-    knex("users")
-        .where("user_id", req.params.id)
-        .delete(req.body)
-        .then(data => res.json(data));
+    // Token Refresh 함수
+    async function refresh() {
+        const result = await getRefreshToken(token.user_id);
+        try {
+            refresh_token = jwt.verify(result, secretObj.refresh);
+            const new_token = jwt.sign(
+                {
+                    user_id: req.params.user_id
+                },
+                secretObj.secret,
+                {
+                    expiresIn: "5m"
+                }
+            );
+            token = jwt.verify(new_token, secretObj.secret);
+
+            knex("users")
+                .where("user_id", req.params.id)
+                .delete()
+                .then(data =>
+                    res.json({
+                        status: 200,
+                        msg: "success",
+                        jwt: new_token
+                    })
+                );
+        } catch {
+            token.exp = refresh.exp;
+        }
+    }
+
+    // 헤더에 jwt가 넘어오지 않을 때
+    if (!req.headers.jwt) {
+        res.json({
+            status: 400,
+            msg: "no jwt in session"
+        });
+        return;
+    }
+
+    // Token 검증
+    try {
+        token = jwt.verify(req.headers.jwt, secretObj.secret);
+    } catch {
+        token = {
+            user_id: req.params.user_id,
+            exp: -1
+        };
+    }
+
+    if ((token.exp = -1)) {
+        refresh();
+    } else if (token.exp < Date.now) {
+        knex("users")
+            .where("user_id", req.params.id)
+            .delete()
+            .then(data =>
+                res.json({
+                    status: 200,
+                    msg: "success"
+                })
+            );
+    } else {
+        res.json({
+            status: 400,
+            msg: "error"
+        });
+    }
 });
 
 module.exports = router;
