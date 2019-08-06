@@ -300,21 +300,4 @@ router.delete("/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
-router.get("/test/:id", (req, res) => {
-    async function test() {
-        const result = await getRefreshToken("ykk2006");
-        res.json(result);
-    }
-    test();
-});
-
-async function getRefreshToken(user_id) {
-    return await knex("user_login_tokens")
-        .select("tk_refresh")
-        .where("user_id", user_id)
-        .orderBy("tk_no", "desc")
-        .limit("1")
-        .then(data => (result = data[0].tk_refresh));
-}
-
 module.exports = router;
