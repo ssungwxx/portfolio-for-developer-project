@@ -44,7 +44,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.getters.getUser_id + repos"
+                    :to="`/users/${this.$store.getters.getUser_id}/repos`"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>
@@ -56,7 +56,7 @@
                 </router-link>
 
                 <router-link
-                    :to="'/' + this.$store.getters.getUser_id + posts"
+                    :to="`/users/${this.$store.getters.getUser_id}/posts`"
                     style="text-decoration: none;"
                 >
                     <v-tooltip bottom>
@@ -98,7 +98,6 @@
     import Login from "../components/Login";
     import Register from "../components/Register";
     import RestService from "../services/RestService";
-    import UserPage from "../views/UserPage";
     import {mapActions} from "vuex";
 
     export default {
@@ -114,7 +113,6 @@
         components: {
             Login,
             Register,
-            UserPage
         },
         watch: {
             search: function () {
@@ -198,6 +196,7 @@
     .Header {
         z-index: 2;
         background-color: yellow;
+        position: absolute;
         height: 64px;
     }
 

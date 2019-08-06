@@ -14,6 +14,7 @@ var enPage = require("./routes/enPage");
 var test = require("./routes/crawlingPosts");
 var webLog = require("./routes/webLog");
 var fcmToken = require("./routes/fcm_tokens");
+var admin = require("./routes/admin");
 
 var bodyParser = require("body-parser");
 
@@ -55,6 +56,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // users REST API
+app.use("/admin", admin);
 app.use("/users", users);
 app.use("/repositories", repositories);
 app.use("/posts", posts);

@@ -49,7 +49,9 @@ export default {
     mounted() {
         this.getUsers();
         this.insertLog();
-        this.pushNotification('Delegate','Test','f6kq2MBZqyE:APA91bELzwYxmAQJepKXSRB9r3RTjxFMMh1-j9qHnye4FxBoiv_Bq03tyUnPCwqs9ysEohUmOMb2rN1uPmcJ_JHSCktlG3VFSmTbdrqyBeJiPfe-_2zSM51fjP9WkqL2AlgA0KbtMJVj');
+        this.pushNotification();
+        console.log("insert")
+        this.insertToken();
     },
     methods: {
         async getUsers() {
@@ -68,9 +70,14 @@ export default {
           selectedValue="";
           location.reload();
         },
-        pushNotification(body,title,list){
-          const temp = RestService.pushNotification(body,title,list)
-
+        async pushNotification(){
+          var list = ['c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS']
+          var body = 'Test'
+          var title = '된장찌개'
+          const temp = RestService.pushNotification({body:body},title,list);
+        },
+        insertToken(){
+          RestService.insertToken('c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS');
         }
     }
 };

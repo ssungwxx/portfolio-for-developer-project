@@ -143,26 +143,6 @@ export default {
                 }
             }
         },
-        // async defaultLogin() {
-        //   this.check = await RestService.getUser(this.id);
-        //   if (this.check[0].cnt == 0) {
-        //     alert("ID가 존재하지 않습니다.");
-        //   } else {
-        //     this.token = await RestService.loginUser(
-        //       this.id,
-        //       this.password
-        //     );
-        //     if (this.token.token == null) {
-        //       alert("비밀번호를 확인해주세요.");
-        //     } else {
-        //       alert("로그인 성공!");
-        //       this.$store.state.accessToken = this.token.token;
-        //       this.$store.state.user = this.id;
-        //       this.$store.state.grade = this.token.grade;
-        //       this.dialog = false;
-        //       this.clear_user();
-        //     }
-        //   }
         reset() {
             this.$refs.form.reset();
         }
@@ -181,14 +161,7 @@ export default {
 }
 
 .modalface {
-    /* padding-left: 10%; */
-    /* padding-right: 11%; */
     width: 100%;
-}
-
-.form {
-    /* padding-left: 10px; */
-    /* padding-right: 10px; */
 }
 
 @media screen and (max-width: 599px) {
