@@ -129,11 +129,6 @@ export default {
             .get("http://70.12.247.68:3000/users/search" + data)
             .then(response => (this.users = response.data));
     },
-    async getRefreshToekn(user_id) {
-        return await axios
-            .get("http://70.12.246.138:3000/jwt/" + user_id)
-            .then(res => res.data[0].user_refresh_token);
-    },
     // 번역 관련 함수
     translateText(data) {
         return axios
@@ -210,7 +205,6 @@ export default {
                 console.log(err);
             });
     },
-
     //insert Token(Push Notification)
     insertToken(token) {
         console.log("insert token");
@@ -220,5 +214,21 @@ export default {
     },
     async getTokenlist() {
         return await axios.get("http://70.12.246.138:3000/fcm");
+    },
+    // JWT Token 관리
+    async getRefreshToken(user_id) {
+        return await axios
+            .get("http://70.12.246.138:3000/jwt/" + user_id)
+            .then(res => res.data[0].user_refresh_token);
+    },
+    async getNewAccessToken(user_id) {
+        return await axios
+            .post("http://70.12.246.138:3000/jwt/" + user_id)
+            .then(res => res.data);
+    },
+    async deleteRefreshToken(user_id) {
+        return await axios
+            .put("http://70.12.246.138:3000/jwt/" + user_id)
+            .then(res => res.data);
     }
 };
