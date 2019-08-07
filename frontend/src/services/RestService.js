@@ -230,5 +230,10 @@ export default {
         return await axios
             .put("http://70.12.246.138:3000/jwt/" + user_id)
             .then(res => res.data);
+    },
+    async checkAccessToken(user_id, data) {
+        return await axios
+            .post("http://70.12.246.138:3000/jwt/check/" + user_id, data)
+            .then(res => res.data);
     }
 };
