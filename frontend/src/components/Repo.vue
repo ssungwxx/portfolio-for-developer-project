@@ -1,26 +1,48 @@
 <template>
-    <v-card class="ma-3 vcard" :href="repo_add">
-        <v-card-title primary-title>
-            <div>
-                <p class="flex repotitle">{{ repo_title }}</p>
-                <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
-            </div>
-        </v-card-title>
-        <div class="py-3">
-            <v-layout row wrap>
-                <v-flex>
-                    <v-sheet style="height: 100%" v-if="git" class="v-sheet--offset mx-auto" color="grey lighten-5" elevation="12"
-                             max-width="calc(100% - 32px)" height="60%">
-                        <v-sparkline :labels="Object.keys(data).reverse()" :value="Object.values(data).reverse()" :smooth="radius || false"
-                                     :stroke-linecap="lineCap" :gradient="gradient" color="grey"
-                                     line-width="2" padding="16" auto-draw class="zoom">
-                        </v-sparkline>
-                    </v-sheet>
-                    <p v-else style="height: 100%">Push 기록이 없습니다.</p>
-                </v-flex>
-            </v-layout>
-        </div>
-    </v-card>
+    <v-expansion-panel>
+        <v-expansion-panel-content>
+            <v-card slot="header" class="ma-3 repocard"> <!-- :href="repo_add" -->
+                <v-card-title primary-title>
+                    <div class="repodiv">
+                        <p class="flex repotitle">{{ repo_title }}</p>
+                        <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
+                    </div>
+                </v-card-title>
+                <div class="py-3 repodiv">
+                    <v-layout row wrap>
+                        <v-flex>
+                            <v-sheet style="height: 100%" v-if="git" class="v-sheet--offset mx-auto"
+                                     color="grey lighten-5"
+                                     elevation="12"
+                                     max-width="calc(100% - 32px)" height="60%">
+                                <v-sparkline :labels="Object.keys(data).reverse()"
+                                             :value="Object.values(data).reverse()"
+                                             :smooth="radius || false"
+                                             :stroke-linecap="lineCap" :gradient="gradient" color="grey"
+                                             line-width="2" padding="16" auto-draw class="zoom">
+                                </v-sparkline>
+                            </v-sheet>
+                            <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
+                        </v-flex>
+                    </v-layout>
+                </div>
+            </v-card>
+            <v-card class="pushed">
+                <div style="margin-right: 30px; width: 80px; color: gray">
+                    <p>commit Messages</p>
+                </div>
+                <div style="overflow: hidden; width: 100%">
+                    <div v-if="git">
+                        <div style="display: flex; border-bottom: 1px gray solid; margin-bottom: 10px" v-for="i in Object.keys(message[0]).length" :key="i">
+                            <p style="min-width: 30px; overflow: hidden; text-overflow: ellipsis">{{ message[0][i - 1] }}</p>
+                            <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ message[1][i - 1] }}</p>
+                        </div>
+                    </div>
+                    <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
+                </div>
+            </v-card>
+        </v-expansion-panel-content>
+    </v-expansion-panel>
 </template>
 
 <script>
@@ -30,12 +52,12 @@
     export default {
         name: "Repo",
         props: {
-            repo_title : {type: String},
-            repo_add : {type: String},
-            repo_created : {type: String},
-            repo_recent : {type: String},
-            repo_id : {type: Number},
-            user_id : {type: String}
+            repo_title: {type: String},
+            repo_add: {type: String},
+            repo_created: {type: String},
+            repo_recent: {type: String},
+            repo_id: {type: Number},
+            user_id: {type: String}
         },
         data() {
             return {
@@ -43,28 +65,31 @@
                 gradient: ["#1feaea", "#ffd200", "#f72047"],
                 lineCap: "round",
                 data: {},
-                message: {},
+                message: [[], []],
                 url: "",
                 token: "",
                 git: false,
+                len: 0
             }
         },
         methods: {
             async drawGraph() {
                 await this.getUrl();
-                await this.getGraphInfo();
                 await this.getMessage();
+                await this.getGraphInfo();
             },
             async getGraphInfo() {
                 this.data = await Git.getPushed(this.url, this.repo_id, this.token);
-                if (Object.keys(this.data).length !== 1) {
+                this.len = Object.keys(this.data).length - 1;
+                if (!(this.len === 0 && Object.values(this.data)[0] === 0)) {
                     this.git = true;
+                    this.len += 1;
                 }
             },
             async getMessage() {
-                if (this.git === true) {
-                    this.message = await Git.getMessage(this.url, this.repo_id, this.token);
-                }
+                const mess = await Git.getMessage(this.url, this.repo_id, this.token);
+                this.message[0] = Object.keys(mess);
+                this.message[1] = Object.values(mess);
             },
             async getUrl() {
                 const user = await RestService.getUser(this.user_id);
@@ -72,7 +97,7 @@
                 this.token = user[0].user_gitToken;
             }
         },
-        mounted() {
+        created() {
             this.drawGraph();
         }
     }
@@ -80,6 +105,12 @@
 </script>
 
 <style>
+    .pushed {
+        display: flex;
+        padding: 0 15px;
+        overflow: hidden;
+    }
+
     .headline_truncate {
         display: -webkit-box;
         -webkit-line-clamp: 1;
@@ -97,9 +128,11 @@
     p {
         height: auto;
         line-height: 1.2;
+        overflow: hidden;
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
         align-self: center;
+        margin-bottom: 0;
     }
 
     .repotitle {
@@ -119,16 +152,28 @@
         text-align: left;
     }
 
-    a.v-card {
-        position: relative;
-    }
-    
     .zoom {
         width: 100%;
         height: 100%;
     }
-    
-    .vcard {
+
+    .repocard {
         padding: 5px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .repodiv {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .v-expansion-panel__header__icon {
+        display: none;
+    }
+
+    .v-expansion-panel__header {
+        padding: 0;
     }
 </style>

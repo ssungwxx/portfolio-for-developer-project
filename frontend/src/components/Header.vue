@@ -98,7 +98,6 @@
     import Login from "../components/Login";
     import Register from "../components/Register";
     import RestService from "../services/RestService";
-    import UserPage from "../views/UserPage";
     import {mapActions} from "vuex";
 
     export default {
@@ -114,7 +113,6 @@
         components: {
             Login,
             Register,
-            UserPage
         },
         watch: {
             search: function () {
