@@ -73,10 +73,6 @@
         },
         data: () => ({
             title: document.title,
-            items: [
-                {title: 'Post', icon: 'description', url: `/users/${this.$store.getters.getUser_id}/posts`},
-                {title: 'Repository', icon: 'assignment_ind', url: `/users/${this.$store.getters.getUser_id}/repos`},
-            ]
         }),
         props: {
             imgSrc: {type: String},

@@ -1,7 +1,7 @@
 <template>
     <v-container>
-        <v-layout mt-5 wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl8 lg8 md8 sm8 hidden-xs-only>
+        <v-layout wrap>
+            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl8 lg8 md8 sm8 xs8>
                 <Repo
                     class="ma-3"
                     :repo_title="repos[i - 1].repo_title"
