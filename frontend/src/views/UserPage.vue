@@ -1,7 +1,7 @@
 <template>
     <v-layout class="body">
         <v-flex xs12>
-            <h1>{{ user_id }}</h1>
+            <h1 style="margin-top: 60px;">{{ user_id }}</h1>
 
             <h2 class="headline my-5 text-xs-center">
                 <router-link :to="posts" style="text-decoration:none">

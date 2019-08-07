@@ -9,11 +9,6 @@ import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
 import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
-import RepoDetail from "./views/RepoDetail.vue";
-// import HomePage from "./views/HomePage.vue";
-// import PortfolioPage from "./views/PortfolioPage.vue";
-// import PortfolioWrite from "./views/PortfolioWrite.vue";
-// import DetailPortfolio from "./views/DetailPortfolio.vue";
 
 
 Vue.use(Router);
@@ -47,11 +42,6 @@ export default new Router({
             path: "/users/:id/repos",
             name: "Repositories",
             component: RepoPage
-        },
-        {
-            path: "/users/:id/repos/:repo_id",
-            name: "RepoDetail",
-            component: RepoDetail
         },
         {
             path: "/users/:id",
