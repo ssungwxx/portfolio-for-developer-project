@@ -1,5 +1,5 @@
 <template>
-    <v-form ref="form" v-model="valid" lazy-validation>
+    <v-form ref="form" v-model="valid" lazy-validation class="writetop">
         <div class="writediv">
             <v-text-field  class="write-post" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
             <v-textarea class="write-post" v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
@@ -57,6 +57,14 @@ export default {
 </script>
 
 <style>
+.v-text-field__slot > textarea {
+    height: 500px;
+}
+
+.writetop {
+    margin-top: 60px;
+}
+
 .writediv {
     display: flex;
     flex-direction: column;

@@ -25,7 +25,6 @@
         </div>
 
         <div>
-<!--            this.$store.getters.getIsLogin-->
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn color="info" dark>
@@ -39,10 +38,26 @@
             </v-flex>
         </div>
 
-        <div class="post-reply">
-            <table v-for>
+        <div class="post-reply" v-if="comments">
+            <table>
                 <tr>
-                    <td></td>
+                    <th class="post-user-id">User ID</th>
+                    <th>Comment</th>
+                    <th class="post-date">Date</th>
+                    <th></th>
+                </tr>
+                <tr v-for="comment of comments">
+                    <td class="post-user-id">{{ comment.user_id }}</td>
+                    <td class="post-comment">{{ comment.pcom_comment }}</td>
+                    <td class="post-date">{{ comment.pcom_date }}</td>
+                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
+                        <v-btn class="post-detail-button" icon @click="" >
+                            <v-icon>create</v-icon>
+                        </v-btn>
+                        <v-btn class="post-detail-button" icon @click="">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -62,7 +77,6 @@
                 status: "비회원",
                 post: [],
                 comments: [],
-                loginchk: false,
             };
         },
         beforeMount() {
@@ -70,6 +84,7 @@
         },
         mounted() {
             this.getPost();
+            console.log(this.$store.getters.getUser_id)
         },
         created() {
 
@@ -93,6 +108,9 @@
             async getComments() {
                 const comments = await RestService.getOnePostComments(this.post.post_no);
                 this.comments = comments.data;
+                for (let i = 0; i < this.comments.length; ++i) {
+                    this.comments[i].pcom_date = Git.calendar_time(this.comments[i].pcom_date);
+                }
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
@@ -108,6 +126,56 @@
     };
 </script>
 <style>
+    .post-detail-buttons {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+    }
+
+    .post-detail-button {
+        margin: 0;
+    }
+    
+    .post-reply > table {
+        border: 3px gray double;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .post-date {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .post-user-id {
+        width: 10%;
+    }
+
+    .post-reply > table > tr > th {
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px gray solid;
+        padding: 3px;
+    }
+
+    .post-reply > table > tr > td {
+        line-height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px gray solid;
+        padding: 3px;
+    }
+
+    .post-comment {
+        text-align: left;
+    }
 
     .time {
         font-size: 1.2vw;
