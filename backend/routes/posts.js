@@ -59,13 +59,13 @@ router.post("/", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
-                .delete()
+            knex("posts")
+                .insert(req.body)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
@@ -129,13 +129,14 @@ router.delete("/:no", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
-                .delete()
+            knex("posts")
+                .delete(req.body)
+                .where("post_no", req.params.no)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
@@ -200,13 +201,14 @@ router.put("/:no", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
-                .delete()
+            knex("posts")
+                .update(req.body)
+                .where("post_no", req.params.no)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
