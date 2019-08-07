@@ -18,13 +18,15 @@ export default {
             .then(response => (this.posts = response.data[id]));
     },
     updatePost(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
-    deletePost(id) {
+    deletePost(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
-            .delete("http://70.12.246.138:3000/posts/" + id)
+            .delete("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
     countPost() {
@@ -33,6 +35,7 @@ export default {
             .then(response => (this.posts = response.data));
     },
     insertPost(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/posts", data)
             .then(response => (this.posts = response.data));

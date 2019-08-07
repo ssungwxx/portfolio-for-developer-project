@@ -25,12 +25,17 @@
         </div>
 
         <div>
+<!--            this.$store.getters.getIsLogin-->
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn color="info" dark>
                         <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
+                <v-btn color="red" dark @click="deletepost" v-if="this.$store.getters.getUser_id === user_id">
+                    <v-icon size="25" class="mr-2">delete</v-icon>
+                    삭제
+                </v-btn>
             </v-flex>
         </div>
 
@@ -49,12 +54,9 @@
 
     export default {
         name: "PostDetail",
-        props: {
-            post_title: {type: String}
-        },
         data() {
             return {
-                post_no: this.$route.params.post_id - 1,
+                post_index: this.$route.params.post_id,
                 user_id: this.$route.params.id,
                 posts: "",
                 status: "비회원",
@@ -68,19 +70,13 @@
         },
         mounted() {
             this.getPost();
-            this.getComments();
         },
         created() {
-            // console.log(this.$session)
-            // if (this.$store.state.isAuth) {
-            //     this.loginchk = true;
-            // } else {
-            //     this.loginchk = false;
-            // }
+
         },
         methods: {
             async getPost() {
-                this.post = await RestService.getPostDetail(this.user_id, this.post_no);
+                this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
                 this.post.post_date = Git.calendar_time(this.post.post_date);
                 this.posts = "/users/" + this.user_id + "/posts/";
@@ -92,14 +88,22 @@
                     }
                 }
                 this.post.post_content = newContent;
+                this.getComments();
             },
             async getComments() {
-                this.comments = await RestService.getOnePostComments(this.post_no + 1);
-                console.log(this.comments.data)
+                const comments = await RestService.getOnePostComments(this.post.post_no);
+                this.comments = comments.data;
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
             },
+            async deletepost() {
+                const data = {
+                    user_id: this.user_id
+                };
+                await RestService.deletePost(this.post.post_no, data);
+                this.$router.push("../posts");
+            }
         }
     };
 </script>
