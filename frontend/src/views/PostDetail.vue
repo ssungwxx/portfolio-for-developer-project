@@ -46,15 +46,16 @@
                     <th class="post-date">Date</th>
                     <th></th>
                 </tr>
-                <tr v-for="comment of comments">
+                <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment">{{ comment.pcom_comment }}</td>
+                    <td class="post-comment" :id="i">{{ comment.pcom_comment }}</td>
+<!--                    <td class="post-comment" :id="i" v-if=""><input :value="comment.pcom_comment" /></td>-->
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
-                        <v-btn class="post-detail-button" icon @click="" >
+                        <v-btn class="post-detail-button" icon @click="editreply(i)">
                             <v-icon>create</v-icon>
                         </v-btn>
-                        <v-btn class="post-detail-button" icon @click="">
+                        <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </td>
@@ -74,7 +75,6 @@
                 post_index: this.$route.params.post_id,
                 user_id: this.$route.params.id,
                 posts: "",
-                status: "비회원",
                 post: [],
                 comments: [],
             };
@@ -121,6 +121,12 @@
                 };
                 await RestService.deletePost(this.post.post_no, data);
                 this.$router.push("../posts");
+            },
+            async deletereply(id) {
+                await RestService.deletePostComment(id);
+            },
+            editreply(id) {
+
             }
         }
     };

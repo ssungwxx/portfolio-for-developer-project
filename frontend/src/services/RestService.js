@@ -153,12 +153,15 @@ export default {
         return axios.get("http://70.12.246.138:3000/pcom/" + post_no);
     },
     insertPostComment(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post("http://70.12.246.138:3000/pcom", data);
     },
     deletePostComment(pcom_no) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
     },
     updatePostComment(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put("http://70.12.246.138:3000/pcom", data);
     },
     //Repository comment관련 함수
@@ -169,12 +172,15 @@ export default {
         return axios.get("http://70.12.246.138:3000/rcom/" + repo_no);
     },
     insertRepoComment(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post("http://70.12.246.138:3000/rom", data);
     },
     deleteRepoComment(rcom_no) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete("http://70.12.246.138:3000/rcom" + rcom_no);
     },
     updateRepoComment(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put("http://70.12.246.138:3000/rcom", data);
     },
     //push notification
