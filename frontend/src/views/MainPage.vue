@@ -10,10 +10,10 @@
             <div class="service">
                 <p>11stagram 서비스 소개</p>
             </div>
-            <img src="../../public/img/001(T).png" alt="mainImg1">
-            <img src="../../public/img/002(T).png" alt="mainImg2">
-            <img src="../../public/img/003(T).png" alt="mainImg3">
-            <img src="../../public/img/004(T).png" alt="mainImg4">
+            <img src="../../public/img/001(T).png" alt="mainImg1" />
+            <img src="../../public/img/002(T).png" alt="mainImg2" />
+            <img src="../../public/img/003(T).png" alt="mainImg3" />
+            <img src="../../public/img/004(T).png" alt="mainImg4" />
         </div>
     </div>
 </template>
@@ -26,7 +26,7 @@ import ImgBanner from "@/components/ImgBanner";
 export default {
     name: "mainpage",
     components: {
-        ImgBanner,
+        ImgBanner
     },
     data() {
         return {};
@@ -37,7 +37,7 @@ export default {
             const data = {
                 post_no: 6,
                 user_id: "jiseon",
-                pcom_comment: "들어가",
+                pcom_comment: "들어가"
             };
             await RestService.insertPostComment(data);
         }

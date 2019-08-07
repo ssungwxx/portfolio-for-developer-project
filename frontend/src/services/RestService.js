@@ -128,10 +128,8 @@ export default {
     },
     async getRefreshToekn(user_id) {
         return await axios
-            .get("http://70.12.247.68:3000/jwt/" + user_id)
-            .then(res => {
-                return res.data;
-            });
+            .get("http://70.12.246.138:3000/users/jwt/" + user_id)
+            .then(res => res.data[0].user_refresh_token);
     },
     // 번역 관련 함수
     translateText(data) {
