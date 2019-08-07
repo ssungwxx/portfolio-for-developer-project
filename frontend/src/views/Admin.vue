@@ -1,8 +1,8 @@
 <template>
     <div>
-<!--        <div class="side">-->
-<!--            <sidebar-menu :menu="menu" class="menubar"/>-->
-<!--        </div>-->
+        <div class="side">
+            <sidebar-menu :menu="menu" class="menubar"/>
+        </div>
         <div class="countinfo">
             <table>
                 <tr>
@@ -15,10 +15,10 @@
                     <td>{{ user[1] }}</td>
                     <td>{{ user[2] }}</td>
                 </tr>
-                <tr>
-                    <td>total</td>
-                    <td>{{ post_cnt[0].cnt }}</td>
-                    <td>{{ repo_cnt[0].cnt }}</td>
+                <tr class="total">
+                    <td>Total</td>
+                    <td>{{ post_cnt[0].cnt }}개</td>
+                    <td>{{ repo_cnt[0].cnt }}개</td>
                 </tr>
             </table>
         </div>
@@ -120,7 +120,21 @@
     .countinfo {
         padding-top: 10%;
         margin-left: 10%;
+        margin-right: 5%
     }
 
+    table {
+        width: 100%;
+        border: 1px solid #444444;
+    }
+    th, td {
+        border: 1px solid #444444;
+        padding: 10px
+    }
 
+    .total {
+        font-weight: bold;
+        font-size: 15px;
+    }
+    
 </style>
