@@ -37,13 +37,14 @@ router.delete("/:rcom_no", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
+            knex("repositories_comment")
                 .delete()
+                .where("repo_no", req.params.repo_no)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
@@ -108,13 +109,13 @@ router.post("/", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
-                .delete()
+            knex("repositories_comment")
+                .insert(req.body)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
@@ -178,13 +179,13 @@ router.put("/:rcom_no", (req, res) => {
             );
             token = jwt.verify(new_token, secretObj.secret);
 
-            knex("users")
-                .where("user_id", req.body.id)
-                .delete()
+            knex("repositories_comment")
+                .insert(req.body)
                 .then(data =>
                     res.json({
                         status: 200,
-                        msg: "success"
+                        msg: "success",
+                        jwt: new_token
                     })
                 );
         } catch {
