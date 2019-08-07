@@ -5,17 +5,17 @@
                 <tr>
                     <th class="row-title">
                         <div>
-                            <p aria-disabled="true" class="table-title">제목</p>
+                            <p class="table-title">제목</p>
                         </div>
                         <div>
                             <span class="table-head">{{ post.post_title }}</span>
-                            <span class="table-date">{{ post.post_date }}</span>
+                            <span class="table-date blockdrag">{{ post.post_date }}</span>
                         </div>
                     </th>
                 </tr>
                 <tr>
                     <div class="row-content">
-                        <p aria-disabled="true" class="table-title">내용</p>
+                        <p class="table-title blockdrag">내용</p>
                     </div>
                     <div>
                         <p class="table-content" v-html="post.post_content"></p>
@@ -72,11 +72,12 @@
             this.getComments();
         },
         created() {
-            if (this.$store.state.isAuth) {
-                this.loginchk = true;
-            } else {
-                this.loginchk = false;
-            }
+            // console.log(this.$session)
+            // if (this.$store.state.isAuth) {
+            //     this.loginchk = true;
+            // } else {
+            //     this.loginchk = false;
+            // }
         },
         methods: {
             async getPost() {
@@ -94,9 +95,8 @@
                 this.post.post_content = newContent;
             },
             async getComments() {
-                console.log(this.post_no + 1);
                 this.comments = await RestService.getOnePostComments(this.post_no + 1);
-                console.log(this.comments)
+                console.log(this.comments.data)
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
@@ -173,7 +173,6 @@
         color: gray;
         display: flex;
         justify-content: flex-end;
-        user-select: none;
     }
 
     th {

@@ -74,4 +74,11 @@
         height: 64px;
         max-height: 64px;
     }
+
+    .blockdrag {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 </style>

@@ -36,7 +36,9 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("PostPage");
         }
-
+    },
+    mounted() {
+        // console.log(this.$session)
     }
 };
 </script>
