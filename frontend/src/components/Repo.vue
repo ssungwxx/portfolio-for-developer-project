@@ -7,6 +7,9 @@
                         <p class="flex repotitle">{{ repo_title }}</p>
                         <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
                     </div>
+                    <v-btn icon :href="repo_add" target="_blank">
+                        <v-icon large class="material-icons">pageview</v-icon>
+                    </v-btn>
                 </v-card-title>
                 <div class="py-3 repodiv">
                     <v-layout row wrap>
@@ -105,7 +108,7 @@
 </script>
 
 <style>
-    
+
     .pushed {
         display: flex;
         padding: 0 15px;
