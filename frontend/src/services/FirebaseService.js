@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 import "firebase/messaging";
+import RestService from "@/services/RestService";
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
 
@@ -28,7 +29,9 @@ messaging.requestPermission()
   //토큰 생성
 })
 .then(function(token){
-  console.log(token);
+  const pushtoken = token;
+  RestService.insertToken(pushtoken);
+  console.log(pushtoken);
 })
 .catch(function(err){
   console.log('Error Occured.');

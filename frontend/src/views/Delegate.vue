@@ -1,4 +1,5 @@
 <template>
+
     <v-layout my-5>
       <table>
       <thead>
@@ -50,7 +51,6 @@ export default {
         this.getUsers();
         this.insertLog();
         this.pushNotification();
-        console.log("insert")
         this.insertToken();
     },
     methods: {

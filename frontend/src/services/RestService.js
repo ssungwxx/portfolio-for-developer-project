@@ -181,6 +181,7 @@ export default {
 
     //insert Token(Push Notification)
     insertToken(token){
+      console.log("insert token");
       return axios.post("http://70.12.246.138:3000/fcm",{
         "fcm_token" : token
       });
