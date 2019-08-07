@@ -23,11 +23,11 @@ export default {
             .put("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
-    deletePost(id, headers) {
+    deletePost(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
-            .delete("http://70.12.246.138:3000/posts/" + id)
-            .then(response => console.log(response.data));
+            .delete("http://70.12.246.138:3000/posts/" + id, data)
+            .then(response => (this.posts = response.data));
     },
     countPost() {
         return axios
@@ -38,7 +38,7 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/posts", data)
-            .then(response => console.log(response.data));
+            .then(response => (this.posts = response.data));
     },
     // Repository 관련 함수
     getRepositories() {

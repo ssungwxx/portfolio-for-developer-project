@@ -50,7 +50,7 @@ export default {
             this.$refs.form.reset();
         },
         async postpost(data) {
-            await RestService.insertPost(data);
+            const post = await RestService.insertPost(data);
         },
     },
 }

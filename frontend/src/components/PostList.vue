@@ -2,7 +2,8 @@
     <v-layout row wrap mw-700>
         <v-flex v-for="i in posts.length > loadlimits ? loadlimits : posts.length" :class="'md' + 12 / column" xs12 px-3>
             <Post
-                :post_no="i"
+                :post_index="i"
+                :post_no="posts[i - 1].post_no"
                 :post_date="posts[i - 1].post_date"
                 :post_title="posts[i - 1].post_title"
                 :post_content="posts[i - 1].post_content"
@@ -16,7 +17,7 @@
                 <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
             </v-btn>
             <div style="display: flex; justify-content: center;">
-                <router-link :to="writepost" style="text-decoration: none; margin-right: 20px" v-if="loginchk">
+                <router-link :to="writepost" style="text-decoration: none; margin-right: 20px" v-if="this.$store.getters.getUser_id === user_id">
                     <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                         <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
                     </v-btn>
@@ -48,7 +49,6 @@ export default {
             posts: [],
             writepost: `/users/${this.user_id}/writepost`,
             loadlimits: this.limits,
-            loginchk: false,
             userpage: `/users/${this.user_id}`
         };
     },
@@ -78,26 +78,15 @@ export default {
         loadMorePosts() {
             this.loadlimits += 6;
         },
-        logincheck() {
-            if (sessionStorage.isLogin) {
-                this.loginchk = true;
-            }
-        }
     },
     created() {
         this.getPosts();
-        this.logincheck();
     },
     watch: {
         $route: function() {
             this.posts = [];
             this.getPosts();
         },
-        $store: function() {
-            if (sessionStorage.isLogin) {
-                this.loginchk = true;
-            }
-        }
     }
 };
 </script>

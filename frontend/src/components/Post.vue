@@ -1,9 +1,9 @@
 <template>
-    <router-link :to="detaillink" style="text-decoration:none">
+    <router-link :to="detaillink" :post_index="post_index" style="text-decoration:none">
         <v-layout py-4 h-100>
             <v-flex row>
-                <div class="caption target">{{post_date}}</div>
-                <h2 class="color-332 target">{{post_title}}</h2>
+                <div class="caption target">{{ post_date }}</div>
+                <h2 class="color-332 target">{{ post_title }}</h2>
                 <p class="mb-1 color-666 target" v-html="post_content"></p>
             </v-flex>
         </v-layout>
@@ -16,6 +16,7 @@ import PostDetail from "../views/PostDetail"
 export default {
     name: "Post",
     props: {
+        post_index: {type: Number},
         post_no: {type: Number},
         post_title: { type: String },
         post_content: { type: String },
@@ -27,10 +28,11 @@ export default {
     },
     data() {
         return {
-            detaillink: "/users/" + this.user_id + "/posts/" + this.post_no,
+            detaillink: "/users/" + this.user_id + "/posts/" + this.post_index,
         };
     },
     mounted() {
+
     }
 };
 </script>
