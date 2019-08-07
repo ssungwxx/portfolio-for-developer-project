@@ -76,20 +76,23 @@ export default {
     },
     getCount() {
         const counts = [];
-        axios.get("http://70.12.246.138:3000/users")
-            .then(function(response) {
-                for (let i = 0; i < response.data.length; ++i) {
-                    const count = [];
-                    const user = response.data[i];
-                    count.push(user.user_id);
-                    const posts = axios.get("http://70.12.246.138:3000/posts/" + user.user_id)
-                        .then(response => count.push(response.data.length));
-                    const repos = axios.get("http://70.12.246.138:3000/repositories/" + user.user_id)
-                        .then(response => count.push(response.data.length));
-                    counts.push(count);
-                }
-            });
-        return counts
+        axios.get("http://70.12.246.138:3000/users").then(function(response) {
+            for (let i = 0; i < response.data.length; ++i) {
+                const count = [];
+                const user = response.data[i];
+                count.push(user.user_id);
+                const posts = axios
+                    .get("http://70.12.246.138:3000/posts/" + user.user_id)
+                    .then(response => count.push(response.data.length));
+                const repos = axios
+                    .get(
+                        "http://70.12.246.138:3000/repositories/" + user.user_id
+                    )
+                    .then(response => count.push(response.data.length));
+                counts.push(count);
+            }
+        });
+        return counts;
     },
     getUser(id) {
         return axios
@@ -122,6 +125,13 @@ export default {
         return axios
             .get("http://70.12.247.68:3000/users/search" + data)
             .then(response => (this.users = response.data));
+    },
+    async getRefreshToekn(user_id) {
+        return await axios
+            .get("http://70.12.247.68:3000/jwt/" + user_id)
+            .then(res => {
+                return res.data;
+            });
     },
     // 번역 관련 함수
     translateText(data) {
@@ -173,37 +183,41 @@ export default {
     },
     //push notification
     pushNotification(body, title, list) {
-      return axios
-                .post('https://fcm.googleapis.com/fcm/send', {
-                    "notification" : {
-                        "body": body,
-                        "title" : title,
+        return axios
+            .post(
+                "https://fcm.googleapis.com/fcm/send",
+                {
+                    notification: {
+                        body: body,
+                        title: title
                     },
-                    "registration_ids" : list
-                    }, {
-                        headers : {
-                            "Content-Type": 'application/json',
-                            "Authorization": 'key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL'
-                        }
+                    registration_ids: list
+                },
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization:
+                            "key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL"
                     }
-                )
-                .then(response => {
-                    console.log(response)
-                    resolve(response)
-                })
-                .catch(err => {
-                    console.log(err)
-                })
+                }
+            )
+            .then(response => {
+                console.log(response);
+                resolve(response);
+            })
+            .catch(err => {
+                console.log(err);
+            });
     },
 
     //insert Token(Push Notification)
-    insertToken(token){
-      console.log("insert token");
-      return axios.post("http://70.12.246.138:3000/fcm",{
-        "fcm_token" : token
-      });
+    insertToken(token) {
+        console.log("insert token");
+        return axios.post("http://70.12.246.138:3000/fcm", {
+            fcm_token: token
+        });
     },
-    async getTokenlist(){
-      return await axios.get("http://70.12.246.138:3000/fcm");
+    async getTokenlist() {
+        return await axios.get("http://70.12.246.138:3000/fcm");
     }
 };

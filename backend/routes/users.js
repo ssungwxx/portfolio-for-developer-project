@@ -24,6 +24,14 @@ async function getRefreshToken(user_id) {
         .then(data => (result = data[0].tk_refresh));
 }
 
+// get user's refresh token
+router.get("/jwt/:user_id", (req, res) => {
+    knex("users")
+        .select("user_refresh_token")
+        .where("user_id", req.params.user_id)
+        .then(data => res.json(data));
+});
+
 // crypto register
 router.post("/", (req, res) => {
     if (!req.body.user_pw) {
@@ -120,11 +128,11 @@ router.post("/login", (req, res) => {
                                 token: token
                             });
 
-                            knex("user_login_tokens")
-                                .insert({
-                                    user_id: req.body.user_id,
-                                    tk_refresh: refresh_token
+                            knex("users")
+                                .update({
+                                    user_refresh_token: refresh_token
                                 })
+                                .where("user_id", req.body.user_id)
                                 .then();
                         } else {
                             res.json({
