@@ -72,12 +72,7 @@
             this.getComments();
         },
         created() {
-            // console.log(this.$session)
-            // if (this.$store.state.isAuth) {
-            //     this.loginchk = true;
-            // } else {
-            //     this.loginchk = false;
-            // }
+
         },
         methods: {
             async getPost() {
@@ -95,8 +90,8 @@
                 this.post.post_content = newContent;
             },
             async getComments() {
-                this.comments = await RestService.getOnePostComments(this.post_no + 1);
-                console.log(this.comments.data)
+                const comments = await RestService.getOnePostComments(this.post_no + 1);
+                this.comments = comments.data;
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");

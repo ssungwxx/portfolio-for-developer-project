@@ -18,14 +18,16 @@ export default {
             .then(response => (this.posts = response.data[id]));
     },
     updatePost(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
-    deletePost(id) {
+    deletePost(id, headers) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete("http://70.12.246.138:3000/posts/" + id)
-            .then(response => (this.posts = response.data));
+            .then(response => console.log(response.data));
     },
     countPost() {
         return axios
@@ -33,9 +35,10 @@ export default {
             .then(response => (this.posts = response.data));
     },
     insertPost(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/posts", data)
-            .then(response => (this.posts = response.data));
+            .then(response => console.log(response.data));
     },
     // Repository 관련 함수
     getRepositories() {
