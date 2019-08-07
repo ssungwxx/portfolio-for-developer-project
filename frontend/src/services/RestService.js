@@ -219,7 +219,7 @@ export default {
     async getRefreshToken(user_id) {
         return await axios
             .get("http://70.12.246.138:3000/jwt/" + user_id)
-            .then(res => res.data[0].user_refresh_token);
+            .then(res => res.data);
     },
     async getNewAccessToken(user_id) {
         return await axios
