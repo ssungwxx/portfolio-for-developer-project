@@ -1,84 +1,126 @@
 <template>
-  <div>
-    <div class="side">
-      <sidebar-menu :menu="menu" class="menubar"/>
+    <div>
+<!--        <div class="side">-->
+<!--            <sidebar-menu :menu="menu" class="menubar"/>-->
+<!--        </div>-->
+        <div class="countinfo">
+            <table>
+                <tr>
+                    <th style="text-align: center;">User_ID</th>
+                    <th style="text-align: center;">Posts</th>
+                    <th style="text-align: center;">Repositories</th>
+                </tr>
+                <tr v-for="user of users">
+                    <td>{{ user[0] }}</td>
+                    <td>{{ user[1] }}</td>
+                    <td>{{ user[2] }}</td>
+                </tr>
+                <tr>
+                    <td>total</td>
+                    <td>{{ post_cnt[0].cnt }}</td>
+                    <td>{{ repo_cnt[0].cnt }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-     <div class="countinfo">
-       <h1>POST COUNT</h1>
-       <h2>{{post_cnt[0].cnt}}</h2>
-       <h1>REPO COUNT</h1>
-       <h2>{{repo_cnt[0].cnt}}</h2>
-      </div>
-  </div>
 </template>
 
 
 <script>
-import RestService from "@/services/RestService";
-export default {
-    name: "Admin",
-    beforeMount() {
-        this.insertLog();
-        this.count();
-    },
-    mounted(){
+    import RestService from "@/services/RestService";
 
-    },
-    components: {
-    },
-    data() {
-        return {
-          menu: [
-              {
-                  header: true,
-                  title: 'Admin Page',
-                },
-              {
-                  title: 'Log',
-                  icon: 'fa fa-bar-chart',
-                  child: [
-                      {
-                        title : 'Log',
-                        href: '../WebLog',
-                      }
-
-                  ]
-              },
-              {
-                  title: 'Delegate',
-                  icon: 'fa fa-hand-o-right',
-                  child: [
-                      {
-                          href: '../Delegate',
-                          title: 'Delegate',
-                      }
-                  ]
-              }
-          ],
-          post_cnt:[{
-            cnt : ""
-          }],
-          repo_cnt:[{
-            cnt : ""
-          }],
-            home: "/"
-        };
-    },
-    methods: {
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("Admin");
+    export default {
+        name: "Admin",
+        beforeMount() {
+            this.count();
+            this.insertLog();
         },
-        async count(){
-          this.post_cnt = await RestService.countRepositories();
-          this.repo_cnt = await RestService.countPost();
+        created() {
+            this.allcnt();
+        },
+        components: {},
+        data() {
+            return {
+                users: [],
+                userPosts: [],
+                userRepos: [],
+                menu: [
+                    {
+                        header: true,
+                        title: 'Admin Page',
+                    },
+                    {
+                        title: 'Log',
+                        icon: 'fa fa-bar-chart',
+                        child: [
+                            {
+                                title: 'Log',
+                                href: '../WebLog',
+                            }
+
+                        ]
+                    },
+                    {
+                        title: 'Delegate',
+                        icon: 'fa fa-hand-o-right',
+                        child: [
+                            {
+                                href: '../Delegate',
+                                title: 'Delegate',
+                            }
+                        ]
+                    }
+                ],
+                post_cnt: [{
+                    cnt: ""
+                }],
+                repo_cnt: [{
+                    cnt: ""
+                }],
+            };
+        },
+        methods: {
+            async insertLog() {
+                this.insertLog = await RestService.insertLog("Admin");
+            },
+            async count() {
+                this.post_cnt = await RestService.countRepositories();
+                this.repo_cnt = await RestService.countPost();
+            },
+            async allcnt() {
+                this.users = await RestService.getCount()
+                // this.users = await RestService.getUsers();
+                // for (let i = 0; i < this.users.length; ++i) {
+                //     this.userPosts[i] = await RestService.getPostsCnt(this.users[i].user_id);
+                //     this.userRepos[i] = await RestService.getReposCnt(this.users[i].user_id);
+                // }
+            },
         }
     }
-}
 </script>
 
 <style>
-.side{  float: left;  height:auto;}
-.post{  width : 40%;  text-align: center;  margin-left: 10%;}
-.repo{  width : 40%;  text-align: center;  margin-left: 10%;}
-.countinfo{ padding-top: 10%;}
+    .side {
+        float: left;
+        height: auto;
+    }
+
+    .post {
+        width: 40%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+    .repo {
+        width: 40%;
+        text-align: center;
+        margin-left: 10%;
+    }
+
+    .countinfo {
+        padding-top: 10%;
+        margin-left: 10%;
+    }
+
+
 </style>
