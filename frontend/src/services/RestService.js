@@ -74,6 +74,23 @@ export default {
             .get("http://70.12.246.138:3000/users")
             .then(response => (this.users = response.data));
     },
+    getCount() {
+        const counts = [];
+        axios.get("http://70.12.246.138:3000/users")
+            .then(function(response) {
+                for (let i = 0; i < response.data.length; ++i) {
+                    const count = [];
+                    const user = response.data[i];
+                    count.push(user.user_id);
+                    const posts = axios.get("http://70.12.246.138:3000/posts/" + user.user_id)
+                        .then(response => count.push(response.data.length));
+                    const repos = axios.get("http://70.12.246.138:3000/repositories/" + user.user_id)
+                        .then(response => count.push(response.data.length));
+                    counts.push(count);
+                }
+            });
+        return counts
+    },
     getUser(id) {
         return axios
             .get("http://70.12.246.138:3000/users/" + id)
