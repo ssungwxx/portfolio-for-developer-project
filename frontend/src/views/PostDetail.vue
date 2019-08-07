@@ -28,8 +28,7 @@
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
                     <v-btn color="info" dark>
-                        <v-icon size="25" class="mr-2">home</v-icon>
-                        목록으로
+                        <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
             </v-flex>

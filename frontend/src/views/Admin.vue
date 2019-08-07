@@ -89,11 +89,6 @@
             },
             async allcnt() {
                 this.users = await RestService.getCount()
-                // this.users = await RestService.getUsers();
-                // for (let i = 0; i < this.users.length; ++i) {
-                //     this.userPosts[i] = await RestService.getPostsCnt(this.users[i].user_id);
-                //     this.userRepos[i] = await RestService.getReposCnt(this.users[i].user_id);
-                // }
             },
         }
     }
@@ -123,18 +118,24 @@
         margin-right: 5%
     }
 
-    table {
+    .countinfo > table {
         width: 100%;
         border: 1px solid #444444;
     }
-    th, td {
+    .countinfo > table > tr > th {
         border: 1px solid #444444;
         padding: 10px
     }
+
+    .countinfo > table > tr > td {
+        border: 1px solid #444444;
+        padding: 10px
+    }
+
 
     .total {
         font-weight: bold;
         font-size: 15px;
     }
-    
+
 </style>
