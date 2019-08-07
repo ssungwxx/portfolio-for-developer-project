@@ -46,4 +46,27 @@ router.put("/:user_id", (req, res) => {
         );
 });
 
+// check access token expired
+router.post("/check/:user_id", (req, res) => {
+    try {
+        let token = jwt.verify(req.body.jwt, secretObj.secret);
+        if (req.params.user_id == token.user_id) {
+            res.json({
+                status: 200,
+                msg: "success"
+            });
+        } else {
+            res.json({
+                status: 400,
+                msg: "unmatched userId"
+            });
+        }
+    } catch {
+        res.json({
+            status: 400,
+            msg: "expired token"
+        });
+    }
+});
+
 module.exports = router;
