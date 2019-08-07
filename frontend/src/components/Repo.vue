@@ -28,7 +28,7 @@
                 </div>
             </v-card>
             <v-card class="pushed">
-                <div style="margin-right: 30px; width: 80px; color: gray">
+                <div class="blockdrag" style="margin-right: 30px; width: 80px; color: gray">
                     <p>commit Messages</p>
                 </div>
                 <div style="overflow: hidden; width: 100%">
@@ -105,6 +105,7 @@
 </script>
 
 <style>
+    
     .pushed {
         display: flex;
         padding: 0 15px;

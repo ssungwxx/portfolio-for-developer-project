@@ -5,7 +5,7 @@
             <Sidebar/>
         </v-content>
 
-        <v-content class="pagebody">
+        <v-content>
             <router-view/>
             <TopButton/>
         </v-content>
@@ -65,10 +65,6 @@
         margin-top: auto;
     }
 
-    .pagebody {
-        margin-top: 60px;
-    }
-
     #sntch_button {
         right: 50px !important;
         bottom: 5% !important;
@@ -77,5 +73,12 @@
     .v-header {
         height: 64px;
         max-height: 64px;
+    }
+
+    .blockdrag {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 </style>
