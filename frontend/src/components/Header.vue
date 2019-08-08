@@ -67,6 +67,18 @@
                     </v-tooltip>
                 </router-link>
 
+                <router-link
+                        :to="`/users/${this.$store.getters.getUser_id}/userinfo`"
+                        style="text-decoration: none;"
+                >
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon>
+                            <v-icon color="white">settings</v-icon>
+                        </v-btn>
+                        <span>Settings</span>
+                    </v-tooltip>
+                </router-link>
+
                 <v-tooltip bottom>
                     <v-btn slot="activator" icon @click="Logout">
                         <v-icon color="white">exit_to_app</v-icon>

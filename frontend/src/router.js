@@ -9,6 +9,8 @@ import RepoPage from "./views/RepoPage.vue";
 import WritePost from "./views/WritePost.vue";
 import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
+import UserInfo from "./views/UserInfo";
+import AddRepos from "./views/AddRepos";
 
 
 Vue.use(Router);
@@ -62,6 +64,16 @@ export default new Router({
             path: "/WebLog",
             name: "weblog",
             component: WebLog
+        },
+        // {
+        //   path: "/users/:id/userinfo",
+        //   name: "userinfo",
+        //   component: UserInfo
+        // },
+        {
+            path: "/users/:id/addrepo",
+            name: "Addrepo",
+            component: AddRepos
         },
     ]
 });
