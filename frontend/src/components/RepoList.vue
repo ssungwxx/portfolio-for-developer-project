@@ -16,7 +16,22 @@
                 <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos">
                     <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
                 </v-btn>
+
+                <div style="display: flex; justify-content: center;">
+                    <router-link :to="writepost" style="text-decoration: none;">
+                        <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
+                            <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
+                        </v-btn>
+                    </router-link>
+                    <router-link :to="userpage" style="text-decoration: none; margin-left: 20px">
+                        <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
+                            <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
+                        </v-btn>
+                    </router-link>
+                </div>
             </div>
+
+
         </v-layout>
     </v-container>
 </template>

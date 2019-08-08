@@ -27,7 +27,7 @@
         <div>
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
-                    <v-btn color="info" dark>
+                    <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                         <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
