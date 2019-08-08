@@ -10,14 +10,12 @@ import WritePost from "./views/WritePost.vue";
 import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
 
-
 Vue.use(Router);
 
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
-
         {
             path: "/",
             name: "MainPage",
@@ -62,6 +60,6 @@ export default new Router({
             path: "/WebLog",
             name: "weblog",
             component: WebLog
-        },
+        }
     ]
 });
