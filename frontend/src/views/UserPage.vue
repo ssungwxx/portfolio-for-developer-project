@@ -35,14 +35,14 @@ export default {
         return {
             user_id: this.$route.params.id,
             repos: `/users/${this.user_id}/repos`,
-            posts: `users/${this.user_id}/posts`,
+            posts: `/users/${this.user_id}/posts`,
         }
     },
     methods: {
         setUser() {
             this.user_id = this.$route.params.id;
             this.repos = `/users/${this.user_id}/repos`;
-            this.posts = `users/${this.user_id}/posts`;
+            this.posts = `/users/${this.user_id}/posts`;
         }
     },
     watch: {
