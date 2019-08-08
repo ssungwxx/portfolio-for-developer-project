@@ -203,7 +203,7 @@ export default {
         "fcm_token" : token
       });
     },
-    async getTokenlist(){
-      return await axios.get("http://70.12.246.138:3000/fcm");
+    getTokenlist(){
+      return axios.get("http://70.12.246.138:3000/fcm");
     }
 };

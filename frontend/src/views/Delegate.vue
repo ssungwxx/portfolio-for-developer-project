@@ -32,7 +32,6 @@
 <script>
 
 
-
 import RestService from "@/services/RestService";
 export default {
     name: "Delegate",
@@ -44,6 +43,7 @@ export default {
     data() {
         return {
             users: []
+
         };
     },
     components: {},
@@ -51,7 +51,6 @@ export default {
         this.getUsers();
         this.insertLog();
         this.pushNotification();
-        this.insertToken();
     },
     methods: {
         async getUsers() {
@@ -71,13 +70,17 @@ export default {
           location.reload();
         },
         async pushNotification(){
-          var list = ['c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS']
+          var list = [];
+          //list = await this.getTokenlist();
+          list = ['c-3SDGd98Rk:APA91bEupMp1PVGLf4mWAz6O_SQWKdk-oUyYQg…wEfMNHn06d2u4LSyw_oXKpeyx_urOC3_x71BAOaReADaIBBt1'
+        ];
+          console.log(list.data);
           var body = 'Test'
           var title = '된장찌개'
           const temp = RestService.pushNotification({body:body},title,list);
         },
-        insertToken(){
-          RestService.insertToken('c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS');
+        getTokenlist(){
+          return RestService.getTokenlist();
         }
     }
 };
