@@ -50,7 +50,6 @@ export default {
     mounted() {
         this.getUsers();
         this.insertLog();
-        this.pushNotification();
     },
     methods: {
         async getUsers() {
@@ -69,19 +68,6 @@ export default {
           selectedValue="";
           location.reload();
         },
-        async pushNotification(){
-          var list = await this.getTokenlist();
-          let test =[];
-            for (var i = 0; i < list.data.length; i++) {
-              test[i] = list.data[i].fcm_token
-            }
-          var body = 'Test'
-          var title = '된장찌개'
-          const temp = RestService.pushNotification({body:body},title,test);
-        },
-        getTokenlist(){
-          return RestService.getTokenlist();
-        }
     }
 };
 </script>
