@@ -20,7 +20,7 @@
                 <div style="display: flex; justify-content: center;">
                     <router-link :to="Addrepos" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
-                            <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
+                            <v-icon size="25" class="mr-2">fa-edit</v-icon>추가하기
                         </v-btn>
                     </router-link>
                     <router-link :to="userpage" style="text-decoration: none; margin-left: 20px">
@@ -39,10 +39,12 @@
 <script>
 import Repo from "./Repo"
 import RestService from "@/services/RestService"
+import Git from "@/services/GitLabRepoService";
 
     export default {
         name: "RepoList",
         props: {
+            column: { type: Number, default: 3 },
             limits: { type: Number, default: 4 },
             loadMore: { type: Boolean, default: false },
             user_id: {type: String}
@@ -53,8 +55,9 @@ import RestService from "@/services/RestService"
         data() {
             return {
                 repos: [],
-                userpage:'/users/${this.user_id}',
-                Addrepos: '/users/${this.user_id}/addrepo'
+                userpage:`/users/${this.user_id}`,
+                Addrepos: `/users/${this.user_id}/addrepo`,
+                loadlimots: this.limits,
             }
         },
         methods: {
