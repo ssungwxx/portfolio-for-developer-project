@@ -85,7 +85,7 @@
         },
         data() {
             return {
-                post_no: this.$route.params.post_id,
+                post_index: this.$route.params.post_id,
                 user_id: this.$route.params.id,
                 posts: "",
                 post: [],
@@ -106,7 +106,7 @@
         },
         methods: {
             async getPost() {
-                this.post = await RestService.getPost(this.post_no);
+                this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
                 this.post.post_date = Git.calendar_time(this.post.post_date);
                 this.posts = "/users/" + this.user_id + "/posts/";
@@ -167,14 +167,24 @@
                 }
             },
             async postreply() {
-                console.log(this.post_no)
-                // const data = {
-                //     user_id: this.$store.getters.getUser_id,
-                //     posts_comment: document.getElementsByClassName("write-reply").value,
-                //     post_no: this.post_no
-                // };
-                // await RestService.insertPostComment(data);
-                // this.getComments();
+                const data = {
+                    user_id: this.$store.getters.getUser_id,
+                    pcom_comment: this.reply,
+                    post_no: this.post.post_no,
+                };
+                await RestService.insertPostComment(data);
+                this.reply = "";
+                this.getComments();
+
+
+                // a.classList.remove("error--text");
+                // b.classList.remove("error--text");
+                // c.classList.remove("error--text");
+            },
+            select() {
+                const a = document.querySelector(".v-input.write-reply.v-text-field.v-input--has-state.theme--light.error--text");
+                const b = document.querySelector(".v-label.theme--light.error--text");
+                const c = document.querySelector(".v-messages.theme--light.error--text");
             }
         }
     };

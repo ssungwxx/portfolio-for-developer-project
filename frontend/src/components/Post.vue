@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            detaillink: "/users/" + this.user_id + "/posts/" + this.post_no,
+            detaillink: "/users/" + this.user_id + "/posts/" + this.post_index,
         };
     },
     mounted() {
