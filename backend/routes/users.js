@@ -73,26 +73,34 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
-    // 사용자 세션 저장용 토큰
-    let token = jwt.sign(
-        {
-            user_id: req.body.user_id
-        },
-        secretObj.secret,
-        {
-            expiresIn: "60m"
-        }
-    );
-    // 서버 DB저장용 토큰
-    let refresh_token = jwt.sign(
-        {
-            user_id: req.body.user_id
-        },
-        secretObj.refresh,
-        {
-            expiresIn: "1d"
-        }
-    );
+    let token;
+    let refresh_token;
+    async function getGrade() {
+        const user_grade = await getUserGrade(req.body.user_id);
+        // 사용자 세션 저장용 토큰
+        token = await jwt.sign(
+            {
+                user_id: req.body.user_id,
+                user_grade: user_grade
+            },
+            secretObj.secret,
+            {
+                expiresIn: "60m"
+            }
+        );
+        // 서버 DB저장용 토큰
+        refresh_token = await jwt.sign(
+            {
+                user_id: req.body.user_id,
+                user_grade: user_grade
+            },
+            secretObj.refresh,
+            {
+                expiresIn: "1d"
+            }
+        );
+    }
+    getGrade();
 
     knex("users")
         .select("user_salt", "user_pw")
