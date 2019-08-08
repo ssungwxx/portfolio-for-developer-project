@@ -38,6 +38,8 @@
             </v-flex>
         </div>
 
+        <v-text-field  class="write-reply" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
+
         <div class="post-reply" v-if="comments">
             <table>
                 <tr>
@@ -48,17 +50,18 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="i">{{ comment.pcom_comment }}</td>
-<!--                    <td class="post-comment" :id="i" v-if=""><input :value="comment.pcom_comment" /></td>-->
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment }}</td>
+                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
-                        <v-btn class="post-detail-button" icon @click="editreply(i)">
+                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon @click="editreply(i, comment.pcom_no)">
                             <v-icon>create</v-icon>
                         </v-btn>
                         <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </td>
+                    <td class="post-detail-buttons" v-else></td>
                 </tr>
             </table>
         </div>
@@ -77,6 +80,7 @@
                 posts: "",
                 post: [],
                 comments: [],
+                editable: false,
             };
         },
         beforeMount() {
@@ -85,9 +89,6 @@
         mounted() {
             this.getPost();
             console.log(this.$store.getters.getUser_id)
-        },
-        created() {
-
         },
         methods: {
             async getPost() {
@@ -124,9 +125,32 @@
             },
             async deletereply(id) {
                 await RestService.deletePostComment(id);
+                this.getComments();
             },
-            editreply(id) {
-
+            async edit(id, no) {
+                const comment = document.querySelector(`#edit${id} > input`).value;
+                const data = {
+                    pcom_comment: comment
+                };
+                await RestService.updatePostComment(no, data);
+                this.getComments();
+            },
+            editreply(id, no) {
+                const btn = document.getElementById('btn' + id);
+                if (btn.attributes.style.value === "color: black;") {
+                    const origin = document.getElementById('comment' + id);
+                    const edit = document.getElementById('edit' + id);
+                    origin.attributes.style.value = "display: none";
+                    edit.attributes.style.value = "display: table-cell;";
+                    btn.attributes.style.value = "color: red;"
+                } else {
+                    this.edit(id, no)
+                    const origin = document.getElementById('comment' + id);
+                    const edit = document.getElementById('edit' + id);
+                    edit.attributes.style.value = "display: none";
+                    origin.attributes.style.value = "display: table-cell;";
+                    btn.attributes.style.value = "color: black;";
+                }
             }
         }
     };
@@ -143,9 +167,9 @@
     .post-detail-button {
         margin: 0;
     }
-    
+
     .post-reply > table {
-        border: 3px gray double;
+        border: 3px rgba(0, 0, 0, 0.5) double;
         overflow: hidden;
         border-collapse: collapse;
     }
@@ -166,7 +190,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        border: 1px gray solid;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
         padding: 3px;
     }
 
@@ -175,7 +199,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        border: 1px gray solid;
+        border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
         padding: 3px;
     }
 

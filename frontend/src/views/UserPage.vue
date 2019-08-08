@@ -1,7 +1,7 @@
 <template>
     <v-layout class="body">
         <v-flex xs12>
-            <h1 style="margin-top: 60px;">{{ user_id }}</h1>
+            <h1 style="margin-top: 60px;">{{ user_id }}'s Portfolio Page </h1>
 
             <h2 class="headline my-5 text-xs-center">
                 <router-link :to="posts" style="text-decoration:none">
@@ -35,14 +35,14 @@ export default {
         return {
             user_id: this.$route.params.id,
             repos: `/users/${this.user_id}/repos`,
-            posts: `users/${this.user_id}/posts`,
+            posts: `/users/${this.user_id}/posts`,
         }
     },
     methods: {
         setUser() {
             this.user_id = this.$route.params.id;
             this.repos = `/users/${this.user_id}/repos`;
-            this.posts = `users/${this.user_id}/posts`;
+            this.posts = `/users/${this.user_id}/posts`;
         }
     },
     watch: {
@@ -59,4 +59,7 @@ export default {
 </script>
 
 <style>
+    h1 {
+        font-family: Consolas;
+    }
 </style>
