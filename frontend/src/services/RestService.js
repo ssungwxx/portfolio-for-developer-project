@@ -1,4 +1,5 @@
 import axios from "axios";
+import AxiosService from "@/services/AxiosService"
 
 export default {
     // Post 관련 함수
@@ -23,7 +24,8 @@ export default {
             .put("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
-    deletePost(id, data) {
+    async deletePost(id, data) {
+      await AxiosService.checkAuthorization();
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete("http://70.12.246.138:3000/posts/" + id, data)
@@ -34,7 +36,8 @@ export default {
             .get("http://70.12.246.138:3000/posts/count")
             .then(response => (this.posts = response.data));
     },
-    insertPost(data) {
+    async insertPost(data) {
+      await AxiosService.checkAuthorization();
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/posts", data)
