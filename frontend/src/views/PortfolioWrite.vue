@@ -1,5 +1,5 @@
 <template>
-    <v-container class="title-div">
+    <v-container class="writetop">
         <div>
             <p class="port-title">Write New Portfolio</p>
         </div>
@@ -130,7 +130,7 @@ export default {
     font-size: 5vw;
 }
 
-.title-div {
+.writetop {
     margin-top: 50px;
 }
 

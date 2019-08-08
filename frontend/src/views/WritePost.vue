@@ -1,8 +1,8 @@
 <template>
-    <v-form ref="form" v-model="valid" lazy-validation>
+    <v-form ref="form" v-model="valid" lazy-validation class="writetop">
         <div class="writediv">
-            <v-text-field v-model="title" :rules="titleRules" label="제목" required></v-text-field>
-            <v-textarea v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
+            <v-text-field  class="write-post" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
+            <v-textarea class="write-post" v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
         </div>
         <div class="btns">
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
@@ -32,7 +32,7 @@ export default {
         }
     },
     created() {
-        this.postlist = `/users/${this.user_id}/posts`
+        this.postlist = `/users/${this.user_id}/posts`;
     },
     methods: {
         validate () {
@@ -40,28 +40,41 @@ export default {
                 const data = {
                     user_id: this.user_id,
                     post_title: this.title,
-                    post_content: this.content
+                    post_content: this.content,
                 };
                 this.postpost(data);
-                this.$router.push("Posts")
+                this.$router.push("Posts");
             }
         },
-        reset () {
+        async reset () {
             this.$refs.form.reset();
         },
         async postpost(data) {
-            await RestService.insertPost(data);
+            const post = await RestService.insertPost(data);
         },
     },
 }
 </script>
 
 <style>
+.v-text-field__slot > textarea {
+    height: 500px;
+}
+
+.writetop {
+    margin-top: 60px;
+}
+
 .writediv {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
+
+.write-post {
+    width: 70%;
+}
+
 .btns {
     margin-top: 50px;
 }
