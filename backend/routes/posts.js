@@ -2,6 +2,20 @@ var express = require("express");
 var router = express.Router();
 const knex = require("knex")(require("../knexfile"));
 
+// JWT
+var jwt = require("jsonwebtoken");
+var secretObj = require("../config/jwt");
+
+// DB RefreshToken 가져오기
+async function getRefreshToken(user_id) {
+    return await knex("user_login_tokens")
+        .select("tk_refresh")
+        .where("user_id", user_id)
+        .orderBy("tk_no", "desc")
+        .limit("1")
+        .then(data => (result = data[0].tk_refresh));
+}
+
 // Get all posts sorted by datetime
 router.get("/", (req, res) => {
     knex("posts")
@@ -130,7 +144,7 @@ router.delete("/:no", (req, res) => {
             token = jwt.verify(new_token, secretObj.secret);
 
             knex("posts")
-                .delete(req.body)
+                .delete()
                 .where("post_no", req.params.no)
                 .then(data =>
                     res.json({
@@ -167,7 +181,7 @@ router.delete("/:no", (req, res) => {
         refresh();
     } else if (token.exp < Date.now) {
         knex("posts")
-            .delete(req.body)
+            .delete()
             .where("post_no", req.params.no)
             .then(data =>
                 res.json({

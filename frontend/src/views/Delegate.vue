@@ -1,4 +1,5 @@
 <template>
+
     <v-layout my-5>
       <table>
       <thead>
@@ -31,7 +32,6 @@
 <script>
 
 
-
 import RestService from "@/services/RestService";
 export default {
     name: "Delegate",
@@ -43,15 +43,13 @@ export default {
     data() {
         return {
             users: []
+
         };
     },
     components: {},
     mounted() {
         this.getUsers();
         this.insertLog();
-        this.pushNotification();
-        console.log("insert")
-        this.insertToken();
     },
     methods: {
         async getUsers() {
@@ -70,15 +68,6 @@ export default {
           selectedValue="";
           location.reload();
         },
-        async pushNotification(){
-          var list = ['c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS']
-          var body = 'Test'
-          var title = '된장찌개'
-          const temp = RestService.pushNotification({body:body},title,list);
-        },
-        insertToken(){
-          RestService.insertToken('c3-f9gCazFo:APA91bFyaJwuYO_ieBxqLnwaMw2EwAlZv8Qfva7imBlpphqoj3bGo4kl5guHlaNnZRpx0cTgEM_9Q7vl_zov19TRSkHUGktPQWKADCJgXUKY_MejaJBWiPcgIjWtjofsIHzvEj3MHsXS');
-        }
     }
 };
 </script>

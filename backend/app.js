@@ -15,6 +15,7 @@ var test = require("./routes/crawlingPosts");
 var webLog = require("./routes/webLog");
 var fcmToken = require("./routes/fcm_tokens");
 var admin = require("./routes/admin");
+var jwt = require("./routes/jwt");
 
 var bodyParser = require("body-parser");
 
@@ -67,6 +68,7 @@ app.use("/pcom", post_comments);
 app.use("/test", test);
 app.use("/logs", webLog);
 app.use("/fcm", fcmToken);
+app.use("/jwt", jwt);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

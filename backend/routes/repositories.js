@@ -4,6 +4,30 @@ const knex = require("knex")(require("../knexfile"));
 
 var request = require("request");
 
+// JWT
+var jwt = require("jsonwebtoken");
+var secretObj = require("../config/jwt");
+
+// DB RefreshToken 가져오기
+async function getRefreshToken(user_id) {
+    return await knex("user_login_tokens")
+        .select("tk_refresh")
+        .where("user_id", user_id)
+        .orderBy("tk_no", "desc")
+        .limit("1")
+        .then(data => (result = data[0].tk_refresh));
+}
+
+// DB RefreshToken 가져오기
+async function getRefreshToken(user_id) {
+    return await knex("user_login_tokens")
+        .select("tk_refresh")
+        .where("user_id", user_id)
+        .orderBy("tk_no", "desc")
+        .limit("1")
+        .then(data => (result = data[0].tk_refresh));
+}
+
 // Get All Repositories
 router.get("/", (req, res) => {
     knex("repositories")

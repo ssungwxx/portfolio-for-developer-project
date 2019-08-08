@@ -102,6 +102,11 @@
         },
         created() {
             this.drawGraph();
+        },
+        watch: {
+            $route: function() {
+                this.drawGraph();
+            }
         }
     }
 
