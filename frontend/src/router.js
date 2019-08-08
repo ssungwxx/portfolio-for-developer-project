@@ -65,11 +65,11 @@ export default new Router({
             name: "weblog",
             component: WebLog
         },
-        // {
-        //   path: "/users/:id/userinfo",
-        //   name: "userinfo",
-        //   component: UserInfo
-        // },
+        {
+          path: "/users/:id/userinfo",
+          name: "userinfo",
+          component: UserInfo
+        },
         {
             path: "/users/:id/addrepo",
             name: "Addrepo",
