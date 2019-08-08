@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="detaillink" :post_index="post_index" style="text-decoration:none">
+    <router-link :to="detaillink" :post_no="post_no" style="text-decoration:none">
         <v-layout py-4 h-100>
             <v-flex row>
                 <div class="caption target">{{ post_date }}</div>
@@ -28,7 +28,7 @@ export default {
     },
     data() {
         return {
-            detaillink: "/users/" + this.user_id + "/posts/" + this.post_index,
+            detaillink: "/users/" + this.user_id + "/posts/" + this.post_no,
         };
     },
     mounted() {
