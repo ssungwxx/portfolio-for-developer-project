@@ -27,18 +27,38 @@
         <div>
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
-                    <v-btn color="info" dark>
-                        <v-icon size="25" class="mr-2">home</v-icon>
-                        목록으로
+                    <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
+                        <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
+                <v-btn color="red" dark @click="deletepost" v-if="this.$store.getters.getUser_id === user_id">
+                    <v-icon size="25" class="mr-2">delete</v-icon>
+                    삭제
+                </v-btn>
             </v-flex>
         </div>
 
-        <div class="post-reply">
-            <table v-for>
+        <div class="post-reply" v-if="comments">
+            <table>
                 <tr>
-                    <td></td>
+                    <th class="post-user-id">User ID</th>
+                    <th>Comment</th>
+                    <th class="post-date">Date</th>
+                    <th></th>
+                </tr>
+                <tr v-for="(comment, i) of comments" :key="i">
+                    <td class="post-user-id">{{ comment.user_id }}</td>
+                    <td class="post-comment" :id="i">{{ comment.pcom_comment }}</td>
+<!--                    <td class="post-comment" :id="i" v-if=""><input :value="comment.pcom_comment" /></td>-->
+                    <td class="post-date">{{ comment.pcom_date }}</td>
+                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
+                        <v-btn class="post-detail-button" icon @click="editreply(i)">
+                            <v-icon>create</v-icon>
+                        </v-btn>
+                        <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -50,18 +70,13 @@
 
     export default {
         name: "PostDetail",
-        props: {
-            post_title: {type: String}
-        },
         data() {
             return {
-                post_no: this.$route.params.post_id - 1,
+                post_index: this.$route.params.post_id,
                 user_id: this.$route.params.id,
                 posts: "",
-                status: "비회원",
                 post: [],
                 comments: [],
-                loginchk: false,
             };
         },
         beforeMount() {
@@ -69,19 +84,14 @@
         },
         mounted() {
             this.getPost();
-            this.getComments();
+            console.log(this.$store.getters.getUser_id)
         },
         created() {
-            // console.log(this.$session)
-            // if (this.$store.state.isAuth) {
-            //     this.loginchk = true;
-            // } else {
-            //     this.loginchk = false;
-            // }
+
         },
         methods: {
             async getPost() {
-                this.post = await RestService.getPostDetail(this.user_id, this.post_no);
+                this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
                 this.post.post_date = Git.calendar_time(this.post.post_date);
                 this.posts = "/users/" + this.user_id + "/posts/";
@@ -93,18 +103,85 @@
                     }
                 }
                 this.post.post_content = newContent;
+                this.getComments();
             },
             async getComments() {
-                this.comments = await RestService.getOnePostComments(this.post_no + 1);
-                console.log(this.comments.data)
+                const comments = await RestService.getOnePostComments(this.post.post_no);
+                this.comments = comments.data;
+                for (let i = 0; i < this.comments.length; ++i) {
+                    this.comments[i].pcom_date = Git.calendar_time(this.comments[i].pcom_date);
+                }
             },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("DetailPost");
             },
+            async deletepost() {
+                const data = {
+                    user_id: this.user_id
+                };
+                await RestService.deletePost(this.post.post_no, data);
+                this.$router.push("../posts");
+            },
+            async deletereply(id) {
+                await RestService.deletePostComment(id);
+            },
+            editreply(id) {
+
+            }
         }
     };
 </script>
 <style>
+    .post-detail-buttons {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+
+    }
+
+    .post-detail-button {
+        margin: 0;
+    }
+    
+    .post-reply > table {
+        border: 3px gray double;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
+
+    .post-date {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .post-user-id {
+        width: 10%;
+    }
+
+    .post-reply > table > tr > th {
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px gray solid;
+        padding: 3px;
+    }
+
+    .post-reply > table > tr > td {
+        line-height: 36px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border: 1px gray solid;
+        padding: 3px;
+    }
+
+    .post-comment {
+        text-align: left;
+    }
 
     .time {
         font-size: 1.2vw;

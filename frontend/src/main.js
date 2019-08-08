@@ -62,6 +62,7 @@ Vue.use(VueResizeText);
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
 
+
 Vue.use(VueAnalytics, {
     id: "UA-144893029-1",
     router,
