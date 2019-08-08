@@ -62,7 +62,6 @@ export default {
             }
           var body = '게시물이 등록되었습니다.'
           var title = 'PostPage'
-          console.log(test)
           const temp = RestService.pushNotification({body:body},title,test);
         },
         getTokenlist(){
