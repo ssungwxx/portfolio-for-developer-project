@@ -18,7 +18,7 @@
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
-                    <router-link :to="writepost" style="text-decoration: none;">
+                    <router-link :to="Addrepos" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                             <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
                         </v-btn>
@@ -53,6 +53,8 @@ import RestService from "@/services/RestService"
         data() {
             return {
                 repos: [],
+                userpage:'/users/${this.user_id}',
+                Addrepos: '/users/${this.user_id}/addrepo'
             }
         },
         methods: {
