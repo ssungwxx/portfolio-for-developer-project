@@ -12,14 +12,12 @@ import PostDetail from "./views/PostDetail.vue";
 import UserInfo from "./views/UserInfo";
 import AddRepos from "./views/AddRepos";
 
-
 Vue.use(Router);
 
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
-
         {
             path: "/",
             name: "MainPage",
@@ -74,6 +72,6 @@ export default new Router({
             path: "/users/:id/addrepo",
             name: "Addrepo",
             component: AddRepos
-        },
+        }
     ]
 });
