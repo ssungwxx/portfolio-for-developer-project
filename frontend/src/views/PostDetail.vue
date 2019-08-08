@@ -37,9 +37,12 @@
                 </v-btn>
             </v-flex>
         </div>
-
-        <v-text-field  class="write-reply" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
-
+        <div style="display: flex">
+            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
+            <v-btn icon @click="postreply">
+                <v-icon>brush</v-icon>
+            </v-btn>
+        </div>
         <div class="post-reply" v-if="comments">
             <table>
                 <tr>
@@ -50,11 +53,15 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment }}</td>
-                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment
+                        }}
+                    </td>
+                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input
+                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
-                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon @click="editreply(i, comment.pcom_no)">
+                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
+                               @click="editreply(i, comment.pcom_no)">
                             <v-icon>create</v-icon>
                         </v-btn>
                         <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
@@ -73,14 +80,21 @@
 
     export default {
         name: "PostDetail",
+        props: {
+            post_no: {type: Number}
+        },
         data() {
             return {
-                post_index: this.$route.params.post_id,
+                post_no: this.$route.params.post_id,
                 user_id: this.$route.params.id,
                 posts: "",
                 post: [],
                 comments: [],
                 editable: false,
+                reply: "",
+                commentRules: [
+                    v => !!v || 'comment is required',
+                ],
             };
         },
         beforeMount() {
@@ -92,7 +106,7 @@
         },
         methods: {
             async getPost() {
-                this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
+                this.post = await RestService.getPost(this.post_no);
                 const date = this.post.post_date;
                 this.post.post_date = Git.calendar_time(this.post.post_date);
                 this.posts = "/users/" + this.user_id + "/posts/";
@@ -151,6 +165,16 @@
                     origin.attributes.style.value = "display: table-cell;";
                     btn.attributes.style.value = "color: black;";
                 }
+            },
+            async postreply() {
+                console.log(this.post_no)
+                // const data = {
+                //     user_id: this.$store.getters.getUser_id,
+                //     posts_comment: document.getElementsByClassName("write-reply").value,
+                //     post_no: this.post_no
+                // };
+                // await RestService.insertPostComment(data);
+                // this.getComments();
             }
         }
     };
