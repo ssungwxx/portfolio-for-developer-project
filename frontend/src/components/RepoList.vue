@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl8 lg8 md8 sm8 xs8>
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xl8 lg8 md8 sm8 xs8>
                 <Repo
                     class="ma-3"
                     :repo_title="repos[i - 1].repo_title"
@@ -57,7 +57,7 @@ import Git from "@/services/GitLabRepoService";
                 repos: [],
                 userpage:`/users/${this.user_id}`,
                 Addrepos: `/users/${this.user_id}/addrepo`,
-                loadlimots: this.limits,
+                loadlimits: this.limits,
             }
         },
         methods: {
@@ -65,7 +65,7 @@ import Git from "@/services/GitLabRepoService";
                 this.repos = await RestService.getRepository(this.user_id);
             },
             loadMoreRepos() {
-                this.limits += 2;
+                this.loadlimits += 2;
             }
         },
         mounted() {
