@@ -160,9 +160,9 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
     },
-    updatePostComment(data) {
+    updatePostComment(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.put("http://70.12.246.138:3000/pcom", data);
+        return axios.put("http://70.12.246.138:3000/pcom/" + id, data);
     },
     //Repository comment관련 함수
     getAllRepoComments() {

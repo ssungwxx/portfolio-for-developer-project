@@ -18,7 +18,7 @@
                 </div>
                 <v-card class="card" v-if="search !== ''">
                     <v-list-tile v-for="(user, i) in users" :key="i">
-                        <router-link :to="'/users/' + user" style="text-decoration: none">
+                        <router-link :to="`/users/${user}`" style="text-decoration: none">
                             <div style="display: flex; margin: 0 15px;">
                                 <v-icon>people</v-icon>
                                 <v-list-tile-title
