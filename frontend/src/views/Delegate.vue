@@ -70,14 +70,14 @@ export default {
           location.reload();
         },
         async pushNotification(){
-          var list = [];
-          //list = await this.getTokenlist();
-          list = ['c-3SDGd98Rk:APA91bEupMp1PVGLf4mWAz6O_SQWKdk-oUyYQg…wEfMNHn06d2u4LSyw_oXKpeyx_urOC3_x71BAOaReADaIBBt1'
-        ];
-          console.log(list.data);
+          var list = await this.getTokenlist();
+          let test =[];
+            for (var i = 0; i < list.data.length; i++) {
+              test[i] = list.data[i].fcm_token
+            }
           var body = 'Test'
           var title = '된장찌개'
-          const temp = RestService.pushNotification({body:body},title,list);
+          const temp = RestService.pushNotification({body:body},title,test);
         },
         getTokenlist(){
           return RestService.getTokenlist();

@@ -44,7 +44,6 @@ messaging.onMessage(function(payload){
   navigator.serviceWorker.ready.then(function(registration){
     registration.showNotification(payload.notification.title,JSON.parse(payload.notification.body));
   })
-  //페이지가 열려 있을 때면 push 알림이 아닌 console로
 });
 
 export default {
