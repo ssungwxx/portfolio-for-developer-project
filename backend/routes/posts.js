@@ -144,7 +144,7 @@ router.delete("/:no", (req, res) => {
             token = jwt.verify(new_token, secretObj.secret);
 
             knex("posts")
-                .delete(req.body)
+                .delete()
                 .where("post_no", req.params.no)
                 .then(data =>
                     res.json({
@@ -181,7 +181,7 @@ router.delete("/:no", (req, res) => {
         refresh();
     } else if (token.exp < Date.now) {
         knex("posts")
-            .delete(req.body)
+            .delete()
             .where("post_no", req.params.no)
             .then(data =>
                 res.json({

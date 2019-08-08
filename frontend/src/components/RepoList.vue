@@ -53,6 +53,7 @@ import RestService from "@/services/RestService"
         },
         watch: {
             $route: function() {
+                this.repos = [];
                 this.getRepos();
             }
         }
