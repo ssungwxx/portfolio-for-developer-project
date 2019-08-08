@@ -154,7 +154,8 @@ export default {
     },
     insertPostComment(data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.post("http://70.12.246.138:3000/pcom", data);
+        return axios.post("http://70.12.246.138:3000/pcom", data)
+            .then(res => console.log(res));
     },
     deletePostComment(pcom_no) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
