@@ -6,6 +6,14 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
+// Get User's grade
+async function getUserGrade(user_id) {
+    return await knex("users")
+        .select("user_grade")
+        .where("user_id", user_id)
+        .then(data => (result = data[0].user_grade));
+}
+
 // get user's refresh token
 router.get("/:user_id", (req, res) => {
     knex("users")
@@ -23,7 +31,8 @@ router.post("/:user_id", (req, res) => {
     // 사용자 세션 저장용 토큰
     let token = jwt.sign(
         {
-            user_id: req.body.user_id
+            user_id: req.body.user_id,
+            user_id: req.body.user_grade
         },
         secretObj.secret,
         {
