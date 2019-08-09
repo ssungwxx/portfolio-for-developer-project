@@ -6,13 +6,57 @@ const knex = require("knex")(require("../knexfile"));
 var jwt = require("jsonwebtoken");
 var secretObj = require("../config/jwt");
 
-// Get User's grade
-async function getUserGrade(user_id) {
-    return await knex("users")
-        .select("user_grade")
-        .where("user_id", user_id)
-        .then(data => (result = data[0].user_grade));
-}
+// Get User's id
+router.get("/user/id", (req, res) => {
+    // 헤더에 jwt가 넘어오지 않을 때
+    if (!req.headers.jwt) {
+        res.json({
+            status: 400,
+            msg: "no jwt in session"
+        });
+        return;
+    }
+
+    let token;
+    // 헤더에있는 토큰 검증
+    try {
+        token = jwt.verify(req.headers.jwt, secretObj.secret);
+    } catch {
+        res.json({
+            status: 400,
+            msg: "expired token"
+        });
+        return;
+    }
+
+    res.json(token.user_id);
+});
+
+// Get User's id
+router.get("/user/grade", (req, res) => {
+    // 헤더에 jwt가 넘어오지 않을 때
+    if (!req.headers.jwt) {
+        res.json({
+            status: 400,
+            msg: "no jwt in session"
+        });
+        return;
+    }
+
+    let token;
+    // 헤더에있는 토큰 검증
+    try {
+        token = jwt.verify(req.headers.jwt, secretObj.secret);
+    } catch {
+        res.json({
+            status: 400,
+            msg: "expired token"
+        });
+        return;
+    }
+
+    res.json(token.user_grade);
+});
 
 // get user's refresh token
 router.get("/:user_id", (req, res) => {

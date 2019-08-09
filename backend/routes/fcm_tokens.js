@@ -12,8 +12,20 @@ router.get("/", (req, res) => {
 // Insert One fcm token
 router.post("/", (req, res) => {
     knex("fcm_tokens")
-        .insert(req.body)
-        .then(data => res.json(data));
+        .count("fcm_token as cnt")
+        .where("fcm_token", req.body.fcm_token)
+        .then(data => {
+            if (data[0].cnt == 0) {
+                knex("fcm_tokens")
+                    .insert(req.body)
+                    .then(data => res.json(data));
+            } else {
+                res.json({
+                    status: 400,
+                    msg: "already existed"
+                });
+            }
+        });
 });
 
 module.exports = router;

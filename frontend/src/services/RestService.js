@@ -1,5 +1,5 @@
 import axios from "axios";
-import AxiosService from "@/services/AxiosService"
+import AxiosService from "@/services/AxiosService";
 
 export default {
     // Post 관련 함수
@@ -163,7 +163,8 @@ export default {
     },
     insertPostComment(data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.post("http://70.12.246.138:3000/pcom", data)
+        return axios
+            .post("http://70.12.246.138:3000/pcom", data)
             .then(res => console.log(res));
     },
     deletePostComment(pcom_no) {
@@ -250,6 +251,18 @@ export default {
     async checkAccessToken(user_id, data) {
         return await axios
             .post("http://70.12.246.138:3000/jwt/check/" + user_id, data)
+            .then(res => res.data);
+    },
+    async getUserIdByJWT() {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return await axios
+            .post("http://70.12.246.138:3000/jwt/user/id")
+            .then(res => res.data);
+    },
+    async getUserGradeByJWT() {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return await axios
+            .post("http://70.12.246.138:3000/jwt/user/grade")
             .then(res => res.data);
     }
 };
