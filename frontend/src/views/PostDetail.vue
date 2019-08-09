@@ -31,13 +31,17 @@
                         <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
-                <v-btn color="red" dark @click="deletepost" v-if="this.$store.getters.getUser_id === user_id">
+                <v-btn color="red" dark @click="deletepost" v-if="getId == post.user_id">
                     <v-icon size="25" class="mr-2">delete</v-icon>
                     삭제
                 </v-btn>
             </v-flex>
         </div>
+<<<<<<< Updated upstream
         <div style="display: flex">
+=======
+        <div style="display: flex" v-if="getIsLogin">
+>>>>>>> Stashed changes
             <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
@@ -59,7 +63,11 @@
                     <td class="post-comment" :id="'edit' + i" style="display: none;"><input
                             style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
+<<<<<<< Updated upstream
                     <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
+=======
+                    <td class="post-detail-buttons" v-if="getIsLogin && getId == comment.user_id">
+>>>>>>> Stashed changes
                         <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
                                @click="editreply(i, comment.pcom_no)">
                             <v-icon>create</v-icon>
@@ -77,6 +85,7 @@
 <script>
     import RestService from "@/services/RestService";
     import Git from "@/services/GitLabRepoService";
+    import {mapActions} from "vuex";
 
     export default {
         name: "PostDetail",
@@ -97,14 +106,31 @@
                 ],
             };
         },
+        mounted() {
+          this.setuserInfo();
+        },
+        computed: {
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
+        },
         beforeMount() {
             this.insertLog();
         },
         created() {
             this.getPost();
-            console.log(this.$store.getters.getUser_id)
             },
         methods: {
+          ...mapActions(['setLogin']),
+          setuserInfo() {
+            this.setLogin();
+          },
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
@@ -129,7 +155,7 @@
             },
             async insertLog() {
                 const data = {
-                    user_id: this.$store.getters.getUser_id,
+                    user_id: this.$store.getters.getId,
                 }
                 this.insertLog = await RestService.insertLog("DetailPost", data);
             },
@@ -140,9 +166,11 @@
                 await RestService.deletePost(this.post.post_no, data);
                 this.$router.push("../posts");
             },
-            async deletereply(id) {
-                await RestService.deletePostComment(id);
-                this.getComments();
+            async deletereply(reply) {
+                if (this.$store.getters.getId === reply.user_id) {
+                    await RestService.deletePostComment(reply.pcom_no);
+                    this.getComments();
+                }
             },
             async edit(id, no) {
                 const comment = document.querySelector(`#edit${id} > input`).value;
@@ -152,14 +180,38 @@
                 await RestService.updatePostComment(no, data);
                 this.getComments();
             },
-            editreply(id, no) {
-                const btn = document.getElementById('btn' + id);
-                if (btn.attributes.style.value === "color: black;") {
-                    const origin = document.getElementById('comment' + id);
-                    const edit = document.getElementById('edit' + id);
-                    origin.attributes.style.value = "display: none";
-                    edit.attributes.style.value = "display: table-cell;";
-                    btn.attributes.style.value = "color: red;"
+            editreply(id, reply) {
+                if (this.$store.getters.getUser_id === reply.user_id) {
+                    const btn = document.getElementById('btn' + id);
+                    if (btn.attributes.style.value === "color: black;") {
+                        const origin = document.getElementById('comment' + id);
+                        const edit = document.getElementById('edit' + id);
+                        origin.attributes.style.value = "display: none";
+                        edit.attributes.style.value = "display: table-cell;";
+                        btn.attributes.style.value = "color: red;"
+                    } else {
+                        this.edit(id, reply.pcom_no);
+                        const origin = document.getElementById('comment' + id);
+                        const edit = document.getElementById('edit' + id);
+                        edit.attributes.style.value = "display: none";
+                        origin.attributes.style.value = "display: table-cell;";
+                        btn.attributes.style.value = "color: black;";
+                    }
+                }
+            },
+            async postreply(reply) {
+                if (this.$store.getters.getUser_id) {
+                    if (this.chk) {
+                        const data = {
+                            user_id: this.$store.getters.getId,
+                            pcom_comment: this.reply,
+                            post_no: this.post.post_no,
+                        };
+                        await RestService.insertPostComment(data);
+                        this.reply = "";
+                        this.getComments();
+                        this.chk = true;
+                    }
                 } else {
                     this.edit(id, no)
                     const origin = document.getElementById('comment' + id);
