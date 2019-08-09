@@ -10,7 +10,7 @@ export default {
     },
     getPost(id) {
         return axios
-            .get("http://70.12.246.138:3000/posts/" + id)
+            .get("http://70.12.246.138:3000/posts/user/" + id)
             .then(response => (this.posts = response.data));
     },
     getPostDetail(user, id) {
