@@ -10,8 +10,8 @@
             <div>
             </div>
 
-            <v-list class="menuButton" style="overflow: hidden;" v-if="this.$store.getters.getIsLogin">
-                <v-list-tile :to="`/users/${this.$store.getters.getUser_id}/posts`" >
+            <v-list class="menuButton" style="overflow: hidden;" v-if="this.$session.get('jwt')">
+                <v-list-tile :to="`/users/${this.id}/posts`" >
                     <v-list-tile-action>
                         <v-icon style="margin-right: auto; margin-left: 17px;">description</v-icon>
                     </v-list-tile-action>
@@ -19,7 +19,7 @@
                         <v-list-tile-title class="vtitle">Posts</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile :to="`/users/${this.$store.getters.getUser_id}/repos`" >
+                <v-list-tile :to="`/users/${this.id}/repos`" >
                     <v-list-tile-action>
                         <v-icon style="margin-right: auto; margin-left: 17px;">assignment_ind</v-icon>
                     </v-list-tile-action>
@@ -63,6 +63,7 @@
     import Login from "./Login";
     import Register from "./Register";
     import {mapActions} from "vuex";
+    import RestService from "@/services/RestService";
 
     export default {
 
@@ -73,10 +74,16 @@
         },
         data: () => ({
             title: document.title,
+            id: '',
+            grade: ''
         }),
         props: {
             imgSrc: {type: String},
             text: {type: String}
+        },
+        mounted() {
+          this.getUserInfo();
+
         },
         methods: {
             favorite() {
@@ -112,6 +119,10 @@
             ...mapActions(['logout']),
             Logout() {
                 this.logout();
+            },
+            async getUserInfo() {
+              this.id = await RestService.getUserIdByJWT();
+              this.grade = await RestService.getUserGradeByJWT();
             }
         },
     }
