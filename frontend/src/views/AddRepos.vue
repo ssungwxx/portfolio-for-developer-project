@@ -37,7 +37,7 @@ import FirebaseService from "@/services/FirebaseService";
                 valid: true,
                 inputRules: [
                     v => !!v || 'This field can not be empty',
-                    v => (v && v.length > 1) || 'Name must be more than 1 characters',
+                    v => (v && v.length > 1) || 'Must be more than 1 characters',
                 ],
                 checkboxRules: [
                     v => !!v || 'You must agree to continue!'
