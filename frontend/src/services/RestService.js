@@ -145,8 +145,8 @@ export default {
             .then(response => (this.enText = response.data));
     },
     //Log관련 함수
-    insertLog(path) {
-        return axios.post("http://70.12.246.138:3000/logs/" + path);
+    insertLog(path, data) {
+        return axios.post("http://70.12.246.138:3000/logs/" + path, data);
     },
     getLog() {
         return axios
