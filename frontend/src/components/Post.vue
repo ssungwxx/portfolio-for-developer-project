@@ -12,6 +12,7 @@
 
 <script>
 import PostDetail from "../views/PostDetail"
+import RestService from "../services/RestService";
 
 export default {
     name: "Post",
@@ -33,6 +34,14 @@ export default {
     },
     mounted() {
 
+    },
+    methods: {
+        async insertlog() {
+            const data = {
+                user_id: this.$store.getters.getUser_id,
+            };
+            await RestService.insertLog("Post", data)
+        }
     }
 };
 </script>

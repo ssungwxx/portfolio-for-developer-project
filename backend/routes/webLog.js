@@ -14,7 +14,10 @@ router.get("/", (req, res) => {
 // Insert Log
 router.post("/:path", (req, res) => {
     knex("web_logs")
-        .insert({ wlog_path: req.params.path })
+        .insert({
+            wlog_path: req.params.path,
+            user_id: req.body.user_id,
+        })
         .then(data => res.json(data));
 });
 
