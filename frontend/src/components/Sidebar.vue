@@ -10,7 +10,7 @@
             <div>
             </div>
 
-            <v-list class="menuButton" style="overflow: hidden;" v-if="this.$store.getters.getIsLogin">
+            <v-list class="menuButton" style="overflow: hidden;" v-if="this.$store.getters.getIsAuth">
                 <v-list-tile :to="`/users/${this.$store.getters.getUser_id}/posts`" >
                     <v-list-tile-action>
                         <v-icon style="margin-right: auto; margin-left: 17px;">description</v-icon>
