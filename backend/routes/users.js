@@ -85,7 +85,7 @@ router.post("/login", (req, res) => {
             },
             secretObj.secret,
             {
-                expiresIn: "60m"
+                expiresIn: "5m"
             }
         );
         // 서버 DB저장용 토큰
