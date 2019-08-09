@@ -100,10 +100,10 @@
         beforeMount() {
             this.insertLog();
         },
-        mounted() {
+        created() {
             this.getPost();
             console.log(this.$store.getters.getUser_id)
-        },
+            },
         methods: {
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
@@ -128,7 +128,10 @@
                 }
             },
             async insertLog() {
-                this.insertLog = await RestService.insertLog("DetailPost");
+                const data = {
+                    user_id: this.$store.getters.getUser_id,
+                }
+                this.insertLog = await RestService.insertLog("DetailPost", data);
             },
             async deletepost() {
                 const data = {
