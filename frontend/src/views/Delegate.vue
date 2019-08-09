@@ -56,7 +56,10 @@ export default {
             this.users = await RestService.getUsers();
         },
         async insertLog() {
-            this.insertLog = await RestService.insertLog("Delegate");
+            const data = {
+                user_id: this.$store.getters.getUser_id,
+            };
+            this.insertLog = await RestService.insertLog("Delegate", data);
         },
         updateUser(id){
           var yourTestSelect = document.getElementById("TestSelect");
