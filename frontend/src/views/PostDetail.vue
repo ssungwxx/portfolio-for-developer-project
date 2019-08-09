@@ -27,7 +27,7 @@
         <div>
             <v-flex xs12 text-xs-center round my-5>
                 <router-link :to="posts" style="text-decoration: none;">
-                    <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
+                    <v-btn color="info" dark>
                         <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
@@ -37,7 +37,12 @@
                 </v-btn>
             </v-flex>
         </div>
-
+        <div style="display: flex">
+            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
+            <v-btn icon @click="postreply">
+                <v-icon>brush</v-icon>
+            </v-btn>
+        </div>
         <div class="post-reply" v-if="comments">
             <table>
                 <tr>
@@ -48,17 +53,22 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="i">{{ comment.pcom_comment }}</td>
-<!--                    <td class="post-comment" :id="i" v-if=""><input :value="comment.pcom_comment" /></td>-->
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment
+                        }}
+                    </td>
+                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input
+                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
-                        <v-btn class="post-detail-button" icon @click="editreply(i)">
+                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
+                               @click="editreply(i, comment.pcom_no)">
                             <v-icon>create</v-icon>
                         </v-btn>
                         <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </td>
+                    <td class="post-detail-buttons" v-else></td>
                 </tr>
             </table>
         </div>
@@ -70,6 +80,9 @@
 
     export default {
         name: "PostDetail",
+        props: {
+            post_no: {type: Number}
+        },
         data() {
             return {
                 post_index: this.$route.params.post_id,
@@ -77,6 +90,11 @@
                 posts: "",
                 post: [],
                 comments: [],
+                editable: false,
+                reply: "",
+                commentRules: [
+                    v => !!v || 'comment is required',
+                ],
             };
         },
         beforeMount() {
@@ -85,9 +103,6 @@
         mounted() {
             this.getPost();
             console.log(this.$store.getters.getUser_id)
-        },
-        created() {
-
         },
         methods: {
             async getPost() {
@@ -124,9 +139,52 @@
             },
             async deletereply(id) {
                 await RestService.deletePostComment(id);
+                this.getComments();
             },
-            editreply(id) {
+            async edit(id, no) {
+                const comment = document.querySelector(`#edit${id} > input`).value;
+                const data = {
+                    pcom_comment: comment
+                };
+                await RestService.updatePostComment(no, data);
+                this.getComments();
+            },
+            editreply(id, no) {
+                const btn = document.getElementById('btn' + id);
+                if (btn.attributes.style.value === "color: black;") {
+                    const origin = document.getElementById('comment' + id);
+                    const edit = document.getElementById('edit' + id);
+                    origin.attributes.style.value = "display: none";
+                    edit.attributes.style.value = "display: table-cell;";
+                    btn.attributes.style.value = "color: red;"
+                } else {
+                    this.edit(id, no)
+                    const origin = document.getElementById('comment' + id);
+                    const edit = document.getElementById('edit' + id);
+                    edit.attributes.style.value = "display: none";
+                    origin.attributes.style.value = "display: table-cell;";
+                    btn.attributes.style.value = "color: black;";
+                }
+            },
+            async postreply() {
+                const data = {
+                    user_id: this.$store.getters.getUser_id,
+                    pcom_comment: this.reply,
+                    post_no: this.post.post_no,
+                };
+                await RestService.insertPostComment(data);
+                this.reply = "";
+                this.getComments();
 
+
+                // a.classList.remove("error--text");
+                // b.classList.remove("error--text");
+                // c.classList.remove("error--text");
+            },
+            select() {
+                const a = document.querySelector(".v-input.write-reply.v-text-field.v-input--has-state.theme--light.error--text");
+                const b = document.querySelector(".v-label.theme--light.error--text");
+                const c = document.querySelector(".v-messages.theme--light.error--text");
             }
         }
     };
@@ -143,9 +201,9 @@
     .post-detail-button {
         margin: 0;
     }
-    
+
     .post-reply > table {
-        border: 3px gray double;
+        border: 3px rgba(0, 0, 0, 0.5) double;
         overflow: hidden;
         border-collapse: collapse;
     }
@@ -166,7 +224,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        border: 1px gray solid;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
         padding: 3px;
     }
 
@@ -175,7 +233,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        border: 1px gray solid;
+        border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
         padding: 3px;
     }
 

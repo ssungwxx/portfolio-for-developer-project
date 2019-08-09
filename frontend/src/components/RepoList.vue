@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > limits ? limits : repos.length" xl8 lg8 md8 sm8 xs8>
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xl8 lg8 md8 sm8 xs8>
                 <Repo
                     class="ma-3"
                     :repo_title="repos[i - 1].repo_title"
@@ -18,9 +18,9 @@
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
-                    <router-link :to="writepost" style="text-decoration: none;">
+                    <router-link :to="Addrepos" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
-                            <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
+                            <v-icon size="25" class="mr-2">fa-edit</v-icon>추가하기
                         </v-btn>
                     </router-link>
                     <router-link :to="userpage" style="text-decoration: none; margin-left: 20px">
@@ -39,10 +39,12 @@
 <script>
 import Repo from "./Repo"
 import RestService from "@/services/RestService"
+import Git from "@/services/GitLabRepoService";
 
     export default {
         name: "RepoList",
         props: {
+            column: { type: Number, default: 3 },
             limits: { type: Number, default: 4 },
             loadMore: { type: Boolean, default: false },
             user_id: {type: String}
@@ -53,6 +55,9 @@ import RestService from "@/services/RestService"
         data() {
             return {
                 repos: [],
+                userpage:`/users/${this.user_id}`,
+                Addrepos: `/users/${this.user_id}/addrepo`,
+                loadlimits: this.limits,
             }
         },
         methods: {
@@ -60,7 +65,7 @@ import RestService from "@/services/RestService"
                 this.repos = await RestService.getRepository(this.user_id);
             },
             loadMoreRepos() {
-                this.limits += 2;
+                this.loadlimits += 2;
             }
         },
         mounted() {

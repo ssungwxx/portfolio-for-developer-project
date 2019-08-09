@@ -1,4 +1,5 @@
 import axios from "axios";
+import AxiosService from "@/services/AxiosService"
 
 export default {
     // Post 관련 함수
@@ -23,7 +24,8 @@ export default {
             .put("http://70.12.246.138:3000/posts/" + id, data)
             .then(response => (this.posts = response.data));
     },
-    deletePost(id, data) {
+    async deletePost(id, data) {
+        await AxiosService.checkAuthorization();
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete("http://70.12.246.138:3000/posts/" + id, data)
@@ -34,7 +36,8 @@ export default {
             .get("http://70.12.246.138:3000/posts/count")
             .then(response => (this.posts = response.data));
     },
-    insertPost(data) {
+    async insertPost(data) {
+        await AxiosService.checkAuthorization();
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/posts", data)
@@ -52,16 +55,19 @@ export default {
             .then(response => (this.repos = response.data));
     },
     insertRepository(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/repositories", data)
             .then(response => (this.repos = response.data));
     },
     deleteRepository(id) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete("http://70.12.246.138:3000/repositories/" + id)
             .then(response => (this.repos = response.data));
     },
     updateRepository(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put("http://70.12.246.138:3000/repositories/" + id, data)
             .then(response => (this.repositories = response.data));
@@ -103,16 +109,19 @@ export default {
             .then(response => (this.check = response.data));
     },
     insertUser(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/users", data)
             .then(response => (this.err_stat = response.data));
     },
     updateUser(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put("http://70.12.246.138:3000/users/" + id, data)
             .then(response => (this.user = response.data));
     },
     deleteUser(id) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete("http://70.12.246.138:3000/users/" + id)
             .then(response => (this.portfolios = response.data));
@@ -154,15 +163,16 @@ export default {
     },
     insertPostComment(data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.post("http://70.12.246.138:3000/pcom", data);
+        return axios.post("http://70.12.246.138:3000/pcom", data)
+            .then(res => console.log(res));
     },
     deletePostComment(pcom_no) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
     },
-    updatePostComment(data) {
+    updatePostComment(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.put("http://70.12.246.138:3000/pcom", data);
+        return axios.put("http://70.12.246.138:3000/pcom/" + id, data);
     },
     //Repository comment관련 함수
     getAllRepoComments() {

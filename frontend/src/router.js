@@ -12,14 +12,12 @@ import PostDetail from "./views/PostDetail.vue";
 import UserInfo from "./views/UserInfo";
 import AddRepos from "./views/AddRepos";
 
-
 Vue.use(Router);
 
 export default new Router({
     mode: "history",
     base: process.env.BASE_URL,
     routes: [
-
         {
             path: "/",
             name: "MainPage",
@@ -65,15 +63,15 @@ export default new Router({
             name: "weblog",
             component: WebLog
         },
-        // {
-        //   path: "/users/:id/userinfo",
-        //   name: "userinfo",
-        //   component: UserInfo
-        // },
+        {
+          path: "/users/:id/userinfo",
+          name: "userinfo",
+          component: UserInfo
+        },
         {
             path: "/users/:id/addrepo",
             name: "Addrepo",
             component: AddRepos
-        },
+        }
     ]
 });

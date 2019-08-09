@@ -51,7 +51,7 @@ export default {
             this.$refs.form.reset();
         },
         async postpost(data) {
-            const post = await RestService.insertPost(data);
+            await RestService.insertPost(data);
         },
         async pushNotification(){
           console.log("push")
