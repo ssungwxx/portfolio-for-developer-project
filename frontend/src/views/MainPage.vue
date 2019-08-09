@@ -42,7 +42,7 @@ export default {
             // await RestService.insertPostComment(data);
             const data = {
                 user_id: "ssafy",
-
+                user_pw: "1234"
             };
             await RestService.updateUser(data);
         }
