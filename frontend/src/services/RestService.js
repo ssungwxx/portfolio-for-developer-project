@@ -58,7 +58,7 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post("http://70.12.246.138:3000/repositories", data)
-            .then(response => (this.repos = response.data));
+            .then(response => console.log(response.data));
     },
     deleteRepository(id) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
