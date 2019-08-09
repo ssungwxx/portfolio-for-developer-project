@@ -59,7 +59,7 @@
                     <td class="post-comment" :id="'edit' + i" style="display: none;"><input
                             style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
-                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
+                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id && $store.getters.getUser_id === comment.user_id">
                         <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
                                @click="editreply(i, comment.pcom_no)">
                             <v-icon>create</v-icon>
