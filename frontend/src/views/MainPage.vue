@@ -4,9 +4,6 @@
             <ImgBanner imgSrc="https://picsum.photos/id/9/1280/520">
                 <div style="line-height:1.2em;font-size:1.2em;" slot="text">개인의 포트폴리오 페이지를 만들어 드려요</div>
             </ImgBanner>
-            <div>
-                <v-btn @click="chk">쳌!</v-btn>
-            </div>
             <div class="service">
                 <p>11stagram 서비스 소개</p>
             </div>
@@ -32,20 +29,6 @@ export default {
         return {};
     },
     methods: {
-        async chk() {
-            // console.log(this.$store.state.isAuth)
-            // const data = {
-            //     post_no: 6,
-            //     user_id: "jiseon",
-            //     pcom_comment: "들어가"
-            // };
-            // await RestService.insertPostComment(data);
-            const data = {
-                user_id: "ssafy",
-                user_pw: "1234"
-            };
-            await RestService.updateUser(data);
-        }
     }
 };
 </script>
