@@ -33,7 +33,7 @@ router.get("/count/:id", (req, res) => {
 router.get("/:id", (req, res) => {
     knex("posts")
         .select("*")
-        .where("post_no", req.params.id)
+        .where("user_id", req.params.id)
         .then(data => res.json(data));
 });
 

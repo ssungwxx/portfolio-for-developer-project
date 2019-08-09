@@ -34,12 +34,17 @@ export default {
     methods: {
         async chk() {
             // console.log(this.$store.state.isAuth)
+            // const data = {
+            //     post_no: 6,
+            //     user_id: "jiseon",
+            //     pcom_comment: "들어가"
+            // };
+            // await RestService.insertPostComment(data);
             const data = {
-                post_no: 6,
-                user_id: "jiseon",
-                pcom_comment: "들어가"
+                user_id: "ssafy",
+
             };
-            await RestService.insertPostComment(data);
+            await RestService.updateUser(data);
         }
     }
 };
