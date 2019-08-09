@@ -33,7 +33,7 @@
 
             <v-spacer></v-spacer>
 
-            <div class="icons" v-if="this.$store.getters.getIsLogin">
+            <div class="icons" v-if="this.$store.getters.getIsAuth">
                 <router-link to style="text-decoration: none;">
                     <v-tooltip bottom>
                         <v-btn slot="activator" icon v-on:click="favorite()">

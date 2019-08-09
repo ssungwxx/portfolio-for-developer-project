@@ -96,8 +96,8 @@
             },
             async getUrl() {
                 const user = await RestService.getUser(this.user_id);
-                this.url = user[0].user_gitAdd;
-                this.token = user[0].user_gitToken;
+                this.url = user.user_gitAdd;
+                this.token = user.user_gitToken;
             }
         },
         created() {
