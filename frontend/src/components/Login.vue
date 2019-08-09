@@ -39,6 +39,7 @@
                                     counter
                                     @click:append="show = !show"
                                     required
+                                    @keydown.enter="Login"
                                 ></v-text-field>
                             </v-form>
                         </v-layout>
