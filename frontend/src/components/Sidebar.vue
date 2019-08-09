@@ -10,8 +10,8 @@
             <div>
             </div>
 
-            <v-list class="menuButton" style="overflow: hidden;" v-if="this.$session.get('jwt')">
-                <v-list-tile :to="`/users/${this.id}/posts`" >
+            <v-list class="menuButton" style="overflow: hidden;" v-if="getIsLogin">
+                <v-list-tile :to="`/users/${getId}/posts`" >
                     <v-list-tile-action>
                         <v-icon style="margin-right: auto; margin-left: 17px;">description</v-icon>
                     </v-list-tile-action>
@@ -19,7 +19,7 @@
                         <v-list-tile-title class="vtitle">Posts</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile :to="`/users/${this.id}/repos`" >
+                <v-list-tile :to="`/users/${getId}/repos`" >
                     <v-list-tile-action>
                         <v-icon style="margin-right: auto; margin-left: 17px;">assignment_ind</v-icon>
                     </v-list-tile-action>
@@ -82,10 +82,24 @@
             text: {type: String}
         },
         mounted() {
-          this.getUserInfo();
-
+          this.setLoginInfo();
+        },
+        computed: {
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
         },
         methods: {
+          ...mapActions(['setLogin']),
+          setLoginInfo() {
+            this.setLogin();
+          },
             favorite() {
                 var bookmarkURL = window.location.href;
                 var bookmarkTitle = document.title;
@@ -118,11 +132,9 @@
             },
             ...mapActions(['logout']),
             Logout() {
+              sessionStorage.clear();
                 this.logout();
-            },
-            async getUserInfo() {
-              this.id = await RestService.getUserIdByJWT();
-              this.grade = await RestService.getUserGradeByJWT();
+                this.$router.push('/');
             }
         },
     }

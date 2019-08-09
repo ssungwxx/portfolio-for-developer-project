@@ -192,45 +192,73 @@ router.put("/", (req, res) => {
         return;
     }
 
-    crypto.randomBytes(64, (err, buf) => {
-        crypto.pbkdf2(
-            req.body.user_pw,
-            buf.toString("base64"),
-            157913, // hash 함수 반복횟수
-            64,
-            "sha512",
-            (err, key) => {
-                User.user_pw = key.toString("base64");
-                User.user_salt = buf.toString("base64");
-                User.user_name = req.body.user_name;
-                User.user_grade = req.body.user_grade;
-                User.user_gitId = req.body.user_gitId;
-                User.user_gitAdd = req.body.user_gitAdd;
-                User.user_gitToken = req.body.user_gitToken;
-                User.user_email = req.body.user_email;
-                User.user_aboutMe = req.body.user_aboutMe;
-                User.user_profile = req.body.user_profile;
+    if ((req.body.user_pw = "-1")) {
+        console.log("!!");
+        User.user_name = req.body.user_name;
+        User.user_grade = req.body.user_grade;
+        User.user_gitId = req.body.user_gitId;
+        User.user_gitAdd = req.body.user_gitAdd;
+        User.user_gitToken = req.body.user_gitToken;
+        User.user_email = req.body.user_email;
+        User.user_aboutMe = req.body.user_aboutMe;
+        User.user_profile = req.body.user_profile;
 
-                if (User.user_pw) {
-                    knex("users")
-                        .where("user_id", token.user_id)
-                        .update(User)
-                        .then(data =>
-                            res.json({
-                                status: 200,
-                                msg: "success"
-                            })
-                        )
-                        .catch(err =>
-                            res.json({
-                                status: 400,
-                                msg: err
-                            })
-                        );
+        knex("users")
+            .where("user_id", token.user_id)
+            .update(User)
+            .then(data =>
+                res.json({
+                    status: 200,
+                    msg: "success"
+                })
+            )
+            .catch(err =>
+                res.json({
+                    status: 400,
+                    msg: err
+                })
+            );
+    } else {
+        crypto.randomBytes(64, (err, buf) => {
+            crypto.pbkdf2(
+                req.body.user_pw,
+                buf.toString("base64"),
+                157913, // hash 함수 반복횟수
+                64,
+                "sha512",
+                (err, key) => {
+                    User.user_pw = key.toString("base64");
+                    User.user_salt = buf.toString("base64");
+                    User.user_name = req.body.user_name;
+                    User.user_grade = req.body.user_grade;
+                    User.user_gitId = req.body.user_gitId;
+                    User.user_gitAdd = req.body.user_gitAdd;
+                    User.user_gitToken = req.body.user_gitToken;
+                    User.user_email = req.body.user_email;
+                    User.user_aboutMe = req.body.user_aboutMe;
+                    User.user_profile = req.body.user_profile;
+
+                    if (User.user_pw) {
+                        knex("users")
+                            .where("user_id", token.user_id)
+                            .update(User)
+                            .then(data =>
+                                res.json({
+                                    status: 200,
+                                    msg: "success"
+                                })
+                            )
+                            .catch(err =>
+                                res.json({
+                                    status: 400,
+                                    msg: err
+                                })
+                            );
+                    }
                 }
-            }
-        );
-    });
+            );
+        });
+    }
 });
 
 // Delete User

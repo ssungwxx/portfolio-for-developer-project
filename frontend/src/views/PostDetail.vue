@@ -37,7 +37,7 @@
                 </v-btn>
             </v-flex>
         </div>
-        <div style="display: flex">
+        <div style="display: flex" v-if="this.$store.getters.getUser_id">
             <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
@@ -59,12 +59,12 @@
                     <td class="post-comment" :id="'edit' + i" style="display: none;"><input
                             style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
-                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
+                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id && $store.getters.getUser_id === comment.user_id">
                         <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
-                               @click="editreply(i, comment.pcom_no)">
+                               @click="editreply(i, comment)">
                             <v-icon>create</v-icon>
                         </v-btn>
-                        <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
+                        <v-btn class="post-detail-button" icon @click="deletereply(comment)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </td>
@@ -92,8 +92,9 @@
                 comments: [],
                 editable: false,
                 reply: "",
+                chk: false,
                 commentRules: [
-                    v => !!v || 'comment is required',
+                    v => this.chkreply(v)
                 ],
             };
         },
@@ -140,9 +141,11 @@
                 await RestService.deletePost(this.post.post_no, data);
                 this.$router.push("../posts");
             },
-            async deletereply(id) {
-                await RestService.deletePostComment(id);
-                this.getComments();
+            async deletereply(reply) {
+                if (this.$store.getters.getUser_id === reply.user_id) {
+                    await RestService.deletePostComment(reply.pcom_no);
+                    this.getComments();
+                }
             },
             async edit(id, no) {
                 const comment = document.querySelector(`#edit${id} > input`).value;
@@ -152,42 +155,55 @@
                 await RestService.updatePostComment(no, data);
                 this.getComments();
             },
-            editreply(id, no) {
-                const btn = document.getElementById('btn' + id);
-                if (btn.attributes.style.value === "color: black;") {
-                    const origin = document.getElementById('comment' + id);
-                    const edit = document.getElementById('edit' + id);
-                    origin.attributes.style.value = "display: none";
-                    edit.attributes.style.value = "display: table-cell;";
-                    btn.attributes.style.value = "color: red;"
-                } else {
-                    this.edit(id, no)
-                    const origin = document.getElementById('comment' + id);
-                    const edit = document.getElementById('edit' + id);
-                    edit.attributes.style.value = "display: none";
-                    origin.attributes.style.value = "display: table-cell;";
-                    btn.attributes.style.value = "color: black;";
+            editreply(id, reply) {
+                if (this.$store.getters.getUser_id === reply.user_id) {
+                    const btn = document.getElementById('btn' + id);
+                    if (btn.attributes.style.value === "color: black;") {
+                        const origin = document.getElementById('comment' + id);
+                        const edit = document.getElementById('edit' + id);
+                        origin.attributes.style.value = "display: none";
+                        edit.attributes.style.value = "display: table-cell;";
+                        btn.attributes.style.value = "color: red;"
+                    } else {
+                        this.edit(id, reply.pcom_no);
+                        const origin = document.getElementById('comment' + id);
+                        const edit = document.getElementById('edit' + id);
+                        edit.attributes.style.value = "display: none";
+                        origin.attributes.style.value = "display: table-cell;";
+                        btn.attributes.style.value = "color: black;";
+                    }
                 }
             },
-            async postreply() {
-                const data = {
-                    user_id: this.$store.getters.getUser_id,
-                    pcom_comment: this.reply,
-                    post_no: this.post.post_no,
-                };
-                await RestService.insertPostComment(data);
-                this.reply = "";
-                this.getComments();
-
-
-                // a.classList.remove("error--text");
-                // b.classList.remove("error--text");
-                // c.classList.remove("error--text");
+            async postreply(reply) {
+                if (this.$store.getters.getUser_id) {
+                    if (this.chk) {
+                        const data = {
+                            user_id: this.$store.getters.getUser_id,
+                            pcom_comment: this.reply,
+                            post_no: this.post.post_no,
+                        };
+                        await RestService.insertPostComment(data);
+                        this.reply = "";
+                        this.getComments();
+                        this.chk = true;
+                    }
+                } else {
+                    this.$router.push("./")
+                }
             },
-            select() {
-                const a = document.querySelector(".v-input.write-reply.v-text-field.v-input--has-state.theme--light.error--text");
-                const b = document.querySelector(".v-label.theme--light.error--text");
-                const c = document.querySelector(".v-messages.theme--light.error--text");
+            chkreply(reply) {
+                if (reply) {
+                    this.chk = true;
+                    return true
+                } else {
+                    if (this.chk) {
+                        this.chk = false;
+                        return true
+                    } else {
+                        this.chk = false;
+                        return "comment is required"
+                    }
+                }
             }
         }
     };
