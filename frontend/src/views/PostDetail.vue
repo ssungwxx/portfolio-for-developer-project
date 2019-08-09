@@ -37,7 +37,7 @@
                 </v-btn>
             </v-flex>
         </div>
-        <div style="display: flex">
+        <div style="display: flex" v-if="this.$store.getters.getUser_id">
             <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
@@ -92,8 +92,9 @@
                 comments: [],
                 editable: false,
                 reply: "",
+                chk: false,
                 commentRules: [
-                    v => !!v || 'comment is required',
+                    v => this.chkreply(v)
                 ],
             };
         },
@@ -170,24 +171,38 @@
                 }
             },
             async postreply() {
-                const data = {
-                    user_id: this.$store.getters.getUser_id,
-                    pcom_comment: this.reply,
-                    post_no: this.post.post_no,
-                };
-                await RestService.insertPostComment(data);
-                this.reply = "";
-                this.getComments();
+                if (this.chk) {
 
-
-                // a.classList.remove("error--text");
-                // b.classList.remove("error--text");
-                // c.classList.remove("error--text");
+                    const data = {
+                        user_id: this.$store.getters.getUser_id,
+                        pcom_comment: this.reply,
+                        post_no: this.post.post_no,
+                    };
+                    await RestService.insertPostComment(data);
+                    this.reply = "";
+                    this.getComments();
+                    this.chk = true;
+                }
             },
             select() {
                 const a = document.querySelector(".v-input.write-reply.v-text-field.v-input--has-state.theme--light.error--text");
                 const b = document.querySelector(".v-label.theme--light.error--text");
                 const c = document.querySelector(".v-messages.theme--light.error--text");
+
+            },
+            chkreply(reply) {
+                if (reply) {
+                    this.chk = true;
+                    return true
+                } else {
+                    if (this.chk) {
+                        this.chk = false;
+                        return true
+                    } else {
+                        this.chk = false;
+                        return "comment is required"
+                    }
+                }
             }
         }
     };
