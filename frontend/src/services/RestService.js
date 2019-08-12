@@ -61,11 +61,11 @@ export default {
             .post(DBcon.URL + "/repositories", data)
             .then(response => response.data);
     },
-    deleteRepository(id) {
+    deleteRepository(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
-            .delete(DBcon.URL + "/repositories/" + id)
-            .then(response => (this.repos = response.data));
+            .delete(DBcon.URL + "/repositories/" + id, data)
+            .then(response => console.log(response.data));
     },
     updateRepository(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
