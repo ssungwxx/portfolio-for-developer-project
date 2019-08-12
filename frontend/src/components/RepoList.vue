@@ -18,12 +18,12 @@
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
-                    <router-link :to="Addrepos" style="text-decoration: none;">
+                    <router-link :to="Addrepos" style="text-decoration: none; margin-right: 20px;" v-if="getId == user_id">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                             <v-icon size="25" class="mr-2">fa-edit</v-icon>추가하기
                         </v-btn>
                     </router-link>
-                    <router-link :to="userpage" style="text-decoration: none; margin-left: 20px">
+                    <router-link :to="userpage" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                             <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
                         </v-btn>
@@ -40,6 +40,7 @@
 import Repo from "./Repo"
 import RestService from "@/services/RestService"
 import Git from "@/services/GitLabRepoService";
+import {mapActions} from "vuex";
 
     export default {
         name: "RepoList",
@@ -66,17 +67,33 @@ import Git from "@/services/GitLabRepoService";
             },
             loadMoreRepos() {
                 this.loadlimits += 2;
-            }
+            },
+            ...mapActions(['setLogin']),
+            setLoginInfo() {
+                this.setLogin();
+            },
         },
         mounted() {
             this.getRepos();
+            this.setLoginInfo();
         },
         watch: {
             $route: function() {
                 this.repos = [];
                 this.getRepos();
             }
-        }
+        },
+        computed: {
+            getIsLogin: function() {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function() {
+                return this.$store.getters.getId;
+            },
+            getGrade: function() {
+                return this.$store.getters.getGrade;
+            }
+        },
     }
 </script>
 

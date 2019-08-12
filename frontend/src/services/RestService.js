@@ -26,7 +26,7 @@ export default {
             .then(response => (this.posts = response.data));
     },
     async deletePost(id, data) {
-        await AxiosService.checkAuthorization();
+        await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/posts/" + id, data)
@@ -38,7 +38,7 @@ export default {
             .then(response => (this.posts = response.data));
     },
     async insertPost(data) {
-        await AxiosService.checkAuthorization();
+        await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post(DBcon.URL + "/posts", data)
