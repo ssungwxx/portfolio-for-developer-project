@@ -96,6 +96,7 @@
         methods: {
             async deleterepo(id) {
                 await RestService.deleteRepository(id, {user_id: this.user_id});
+                this.drawGraph();
 
             },
             async drawGraph() {
