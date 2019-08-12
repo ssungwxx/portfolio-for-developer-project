@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Repo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Repo.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/WritePost.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/WritePost.vue" afterDir="false" />
-    </list>
+    <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

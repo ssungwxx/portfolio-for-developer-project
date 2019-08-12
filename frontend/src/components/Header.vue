@@ -131,9 +131,6 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (!this.getIsLogin) {
-        this.$router.push("/")
-      }
     },
   },
   mounted() {
