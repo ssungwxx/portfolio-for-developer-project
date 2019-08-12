@@ -32,6 +32,7 @@
 <script>
 
 
+import AdminRestService from "@/services/AdminRestService";
 import RestService from "@/services/RestService";
 export default {
     name: "Delegate",
@@ -53,11 +54,11 @@ export default {
     },
     methods: {
         async getUsers() {
-            this.users = await RestService.getUsers();
+            this.users = await AdminRestService.getUsers();
         },
         async insertLog() {
             const data = {
-                user_id: this.$store.getters.getUser_id,
+                user_id: this.$store.getters.getId,
             };
             this.insertLog = await RestService.insertLog("Delegate", data);
         },
@@ -66,7 +67,7 @@ export default {
           var selectedValue = {
             "user_grade" : yourTestSelect.options[yourTestSelect.selectedIndex].value
           };
-          RestService.updateUser(id,selectedValue);
+          AdminRestService.updateUser(id,selectedValue);
           yourTestSelect="";
           selectedValue="";
           location.reload();

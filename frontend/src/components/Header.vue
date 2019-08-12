@@ -131,14 +131,10 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (this.getId === Object) {
-        this.$router.push("/")
-      }
     },
   },
   mounted() {
     this.setLoginInfo();
-    console.log(this.$store.getters.getGrade)
   },
   computed: {
     getIsLogin: function() {
@@ -204,7 +200,8 @@ export default {
       this.search = "";
     },
     ...mapActions(['logout']),
-    Logout() {
+    async Logout() {
+      await RestService.deleteRefreshToken(this.getId);
       sessionStorage.clear();
       this.logout();
       this.$router.push('/');

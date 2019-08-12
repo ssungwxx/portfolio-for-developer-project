@@ -54,7 +54,6 @@ export default {
             await RestService.insertPost(data);
         },
         async pushNotification(){
-          console.log("push")
           var list = await this.getTokenlist();
           let test =[];
             for (var i = 0; i < list.data.length; i++) {

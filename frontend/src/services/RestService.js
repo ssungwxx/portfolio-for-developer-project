@@ -19,7 +19,8 @@ export default {
             .get(DBcon.URL + `/posts/user/${user}`)
             .then(response => (this.posts = response.data[id]));
     },
-    updatePost(id, data) {
+    async updatePost(id, data) {
+      await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/posts/" + id, data)
@@ -55,20 +56,23 @@ export default {
             .get(DBcon.URL + "/repositories/" + id)
             .then(response => (this.repos = response.data));
     },
-    insertRepository(data) {
+    async insertRepository(data) {
+      await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post(DBcon.URL + "/repositories", data)
             .then(response => response.data);
     },
-    deleteRepository(id, data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async deleteRepository(id, data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/repositories/" + id, data)
-            .then(response => console.log(response.data));
+            .then(response => (this.repos = response.data));
     },
-    updateRepository(id, data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async updateRepository(id, data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/repositories/" + id, data)
             .then(response => (this.repositories = response.data));
@@ -102,25 +106,28 @@ export default {
         });
         return counts;
     },
-    getUser(id) {
+    async getUser(id) {
+      await AxiosService.checkAuthorization(id);
+      axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .get(DBcon.URL + "/users/" + id)
             .then(response => (this.check = response.data[0]));
     },
     insertUser(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post(DBcon.URL + "/users", data)
             .then(response => (this.err_stat = response.data));
     },
-    updateUser(id, data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async updateUser(id, data) {
+      await AxiosService.checkAuthorization(id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/users", data)
             .then(response => (this.user = response.data));
     },
-    deleteUser(id) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async deleteUser(id) {
+      await AxiosService.checkAuthorization(id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/users/" + id)
             .then(response => (this.portfolios = response.data));
@@ -158,16 +165,19 @@ export default {
     getOnePostComments(post_no) {
         return axios.get(DBcon.URL + "/pcom/" + post_no);
     },
-    insertPostComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async insertPostComment(data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post(DBcon.URL + "/pcom", data).then(res => res);
     },
-    deletePostComment(pcom_no) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async deletePostComment(pcom_no, id) {
+      await AxiosService.checkAuthorization(id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete(DBcon.URL + "/pcom/" + pcom_no);
     },
-    updatePostComment(id, data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async updatePostComment(id, data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put(DBcon.URL + "/pcom/" + id, data);
     },
     //Repository comment관련 함수
@@ -177,16 +187,19 @@ export default {
     getOneRepoCommeents(repo_no) {
         return axios.get(DBcon.URL + "/rcom/" + repo_no);
     },
-    insertRepoComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async insertRepoComment(data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post(DBcon.URL + "/rom", data);
     },
-    deleteRepoComment(rcom_no) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async deleteRepoComment(rcom_no, id) {
+      await AxiosService.checkAuthorization(id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete(DBcon.URL + "/rcom" + rcom_no);
     },
-    updateRepoComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
+    async updateRepoComment(data) {
+      await AxiosService.checkAuthorization(data.user_id);
+              axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put(DBcon.URL + "/rcom", data);
     },
     //push notification

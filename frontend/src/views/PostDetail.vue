@@ -156,7 +156,7 @@
             },
             async deletereply(reply) {
                 if (this.$store.getters.getId === reply.user_id) {
-                    await RestService.deletePostComment(reply.pcom_no);
+                    await RestService.deletePostComment(reply.pcom_no, this.getId);
                     this.getComments();
                 }
             },
@@ -207,6 +207,23 @@
                     edit.attributes.style.value = "display: none";
                     origin.attributes.style.value = "display: table-cell;";
                     btn.attributes.style.value = "color: black;";
+                }
+            },
+            async postreply(reply) {
+                if (this.$store.getters.getId) {
+                    if (this.chk) {
+                        const data = {
+                            user_id: this.$store.getters.getId,
+                            pcom_comment: this.reply,
+                            post_no: this.post.post_no,
+                        };
+                        await RestService.insertPostComment(data);
+                        this.reply = "";
+                        this.getComments();
+                        this.chk = true;
+                    }
+                } else {
+                    this.$router.push("./")
                 }
             },
             chkreply(reply) {

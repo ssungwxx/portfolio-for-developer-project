@@ -1,10 +1,8 @@
-<!-- 삭제 예정 -->
-
 <template>
     <div style="display: flex">
         <v-expansion-panel>
             <v-expansion-panel-content>
-                <v-card slot="header" class="ma-3 repocard">
+                <v-card slot="header" class="repocard">
                     <v-card-title primary-title class="align">
                         <div class="repodiv">
                             <p class="repotitle">{{ repo_title }}</p>
@@ -49,21 +47,6 @@
                 </v-card>
             </v-expansion-panel-content>
         </v-expansion-panel>
-        <div class="buttons">
-            <v-tooltip bottom>
-                <v-btn slot="activator" icon :href="repo_add" target="_blank">
-                    <v-icon large class="material-icons">pageview</v-icon>
-                </v-btn>
-                <span>Gitlab으로 이동</span>
-            </v-tooltip>
-
-            <v-tooltip bottom>
-                <v-btn slot="activator" icon @click="deleterepo(repo_no)" v-if="getId == user_id">
-                    <v-icon large class="material-icons">delete</v-icon>
-                </v-btn>
-                <span>repository 삭제</span>
-            </v-tooltip>
-        </div>
     </div>
 </template>
 
@@ -92,20 +75,22 @@
                 url: "",
                 token: "",
                 git: false,
-                len: 0
+                len: 0,
             }
         },
         computed: {
-            getId: function () {
-                return this.$store.getters.getId;
-            },
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
         },
         methods: {
-            async deleterepo(id) {
-                await RestService.deleteRepository(id, {user_id: this.user_id});
-                this.drawGraph();
 
-            },
             async drawGraph() {
                 await this.getUrl();
                 await this.getMessage();
@@ -143,11 +128,7 @@
 </script>
 
 <style>
-    .buttons {
-        background-color: white;
-        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
-        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
-    }
+
 
     .align {
         display: flex;
@@ -207,10 +188,20 @@
     }
 
     .repocard {
-        padding: 5px;
         width: 100%;
         position: relative;
         overflow: hidden;
+    }
+
+    .grey.lighten-5 {
+        background-color: white !important;
+        box-shadow: 0 2px 2px -4px rgba(0,0,0,.2), 0 7px 6px 2px rgba(0,0,0,.14), 0 5px 6px 4px rgba(0,0,0,.12) !important;
+        -webkit-box-shadow: 0 2px 2px -4px rgba(0,0,0,.2), 0 7px 6px 2px rgba(0,0,0,.14), 0 5px 6px 4px rgba(0,0,0,.12) !important;
+    }
+
+    .v-card {
+        box-shadow : none;
+        -webkit-box-shadow: none;
     }
 
     .repodiv {
@@ -227,7 +218,7 @@
     }
 
     .v-expansion-panel {
-        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
-        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2), 0px 1px 0px 0px rgba(0,0,0,.14), 0px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2), 0px 1px 0px 0px rgba(0,0,0,.14), 0px 1px 0px -1px rgba(0,0,0,.12);
     }
 </style>

@@ -6,7 +6,6 @@ import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
 import RepoPage from "./views/RepoPage.vue";
-import WritePost from "./views/WritePost.vue";
 import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
 import UserInfo from "./views/UserInfo";
@@ -32,11 +31,6 @@ export default new Router({
             path: "/users/:id/posts/:post_id",
             name: "PostDetail",
             component: PostDetail
-        },
-        {
-            path: "/users/:id/writepost",
-            name: "WritePost",
-            component: WritePost
         },
         {
             path: "/users/:id/repos",
