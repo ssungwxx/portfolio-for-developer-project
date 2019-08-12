@@ -1,3 +1,5 @@
+<!-- 삭제 예정 -->
+
 <template>
     <div style="display: flex">
         <v-expansion-panel>
@@ -27,10 +29,23 @@
                             </v-flex>
                         </v-layout>
                     </div>
-                </v-card>
-                <v-card class="pushed">
-                    <div class="blockdrag" style="margin-right: 30px; width: 80px; color: gray">
-                        <p>commit Messages</p>
+<!--                    <v-btn icon :href="repo_add" target="_blank">-->
+<!--                        <v-icon large class="material-icons">pageview</v-icon>-->
+<!--                    </v-btn>-->
+                    <div class="buttons">
+                        <v-tooltip bottom>
+                                <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                                    <v-icon large class="material-icons">pageview</v-icon>
+                                </v-btn>
+                            <span>Gitlab으로 이동</span>
+                        </v-tooltip>
+
+                        <v-tooltip bottom>
+                            <v-btn v-if="getId == user_id" slot="activator" icon @click="deleterepo(repo_id)">
+                                <v-icon large class="material-icons">delete</v-icon>
+                            </v-btn>
+                            <span>repository 삭제</span>
+                        </v-tooltip>
                     </div>
                     <div style="overflow: hidden; width: 100%">
                         <div v-if="git">
@@ -77,6 +92,17 @@
                 git: false,
                 len: 0,
             }
+        },
+        computed: {
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
         },
         methods: {
             async deleterepo(id) {

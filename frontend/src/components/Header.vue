@@ -107,9 +107,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import RestService from "../services/RestService";
-import {
-  mapActions
-} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: "Header",
@@ -133,7 +131,7 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (this.getId.status === Object) {
+      if (!this.getIsLogin) {
         this.$router.push("/")
       }
     },
@@ -205,7 +203,8 @@ export default {
       this.search = "";
     },
     ...mapActions(['logout']),
-    Logout() {
+    async Logout() {
+      await RestService.deleteRefreshToken(this.getId);
       sessionStorage.clear();
       this.logout();
       this.$router.push('/');

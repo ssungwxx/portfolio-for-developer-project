@@ -35,11 +35,22 @@ export default {
     mounted() {
 
     },
+    computed: {
+      getIsLogin: function() {
+        return this.$store.getters.getIsLogin;
+      },
+      getId: function() {
+        return this.$store.getters.getId;
+      },
+      getGrade: function() {
+        return this.$store.getters.getGrade;
+      }
+    },
     methods: {
         async insertlog() {
-            const data = {
-                user_id: this.$store.getters.getUser_id,
-            };
+          const data = {
+              user_id: this.$store.getters.getId,
+          };
             await RestService.insertLog("Post", data)
         }
     }

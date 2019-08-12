@@ -46,13 +46,8 @@ export default {
     },
     created() {
         this.getUserInfo();
-        this.setLoginInfo();
     },
     methods: {
-        ...mapActions(['setLogin']),
-        setLoginInfo() {
-            this.setLogin();
-        },
         async getUserInfo() {
             const user = await RestService.getUser(this.user_id);
             this.user_name = user.user_name;

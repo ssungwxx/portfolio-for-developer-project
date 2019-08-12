@@ -35,7 +35,6 @@
 import Post from "@/components/Post";
 import RestService from "@/services/RestService";
 import Git from "@/services/GitLabRepoService";
-import {mapActions} from "vuex";
 
 export default {
     name: "PostList",

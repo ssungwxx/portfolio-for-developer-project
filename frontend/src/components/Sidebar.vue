@@ -131,7 +131,8 @@
                 return triggerDefault;
             },
             ...mapActions(['logout']),
-            Logout() {
+            async Logout() {
+              await RestService.deleteRefreshToken(this.getId);
               sessionStorage.clear();
                 this.logout();
                 this.$router.push('/');
