@@ -83,6 +83,9 @@ import Git from "@/services/GitLabRepoService";
             loadMoreRepos() {
                 this.loadlimits += 2;
             },
+            async deleterepo(id) {
+                await RestService.deleteRepository(id, {user_id: this.user_id});
+            },
         },
         mounted() {
             this.getRepos();
