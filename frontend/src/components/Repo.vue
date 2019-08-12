@@ -1,30 +1,12 @@
 <template>
-    <div>
-        <div class="buttonsdiv">
-            <div class="buttons">
-                <v-tooltip bottom>
-                    <v-btn slot="activator" icon :href="repo_add" target="_blank">
-                        <v-icon large class="material-icons">pageview</v-icon>
-                    </v-btn>
-                    <span>Gitlab으로 이동</span>
-                </v-tooltip>
-
-                <v-tooltip bottom>
-                    <v-btn slot="activator" icon @click="deleterepo(repo_no)">
-                        <v-icon large class="material-icons">delete</v-icon>
-                    </v-btn>
-                    <span>repository 삭제</span>
-                </v-tooltip>
-            </div>
-        </div>
-
+    <div style="display: flex">
         <v-expansion-panel>
             <v-expansion-panel-content>
                 <v-card slot="header" class="ma-3 repocard">
                     <v-card-title primary-title class="align">
                         <div class="repodiv">
-                            <p class="flex repotitle">{{ repo_title }}</p>
-                            <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
+                            <p class="repotitle">{{ repo_title }}</p>
+                            <p class="grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
                         </div>
                     </v-card-title>
                     <div class="py-3 repodiv">
@@ -65,6 +47,21 @@
                 </v-card>
             </v-expansion-panel-content>
         </v-expansion-panel>
+        <div class="buttons">
+            <v-tooltip bottom>
+                <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                    <v-icon large class="material-icons">pageview</v-icon>
+                </v-btn>
+                <span>Gitlab으로 이동</span>
+            </v-tooltip>
+
+            <v-tooltip bottom>
+                <v-btn slot="activator" icon @click="deleterepo(repo_no)">
+                    <v-icon large class="material-icons">delete</v-icon>
+                </v-btn>
+                <span>repository 삭제</span>
+            </v-tooltip>
+        </div>
     </div>
 </template>
 
@@ -138,15 +135,10 @@
 </script>
 
 <style>
-    .buttonsdiv {
-        height: 100%;
-    }
-
     .buttons {
-        position: absolute;
-        margin-top: 55px;
-        margin-left: 31vw;
-        z-index: 7;
+        background-color: white;
+        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
     }
 
     .align {
@@ -224,5 +216,10 @@
 
     .v-expansion-panel__header {
         padding: 0;
+    }
+
+    .v-expansion-panel {
+        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
     }
 </style>

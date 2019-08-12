@@ -56,9 +56,6 @@ export default {
     components: {
         Post
     },
-    mounted() {
-        this.setLoginInfo();
-    },
     computed: {
       getIsLogin: function() {
         return this.$store.getters.getIsLogin;

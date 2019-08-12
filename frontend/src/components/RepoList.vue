@@ -1,9 +1,9 @@
 <template>
     <v-container>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" >
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xs10>
                 <Repo
-                    class="ma-3"
+                    class="ma-3 repocard"
                     :repo_title="repos[i - 1].repo_title"
                     :repo_add="repos[i - 1].repo_add"
                     :repo_created="repos[i - 1].repo_createdDate"
@@ -99,6 +99,10 @@ import {mapActions} from "vuex";
 </script>
 
 <style>
+    .repocard {
+
+    }
+
     .plus {
         width: 100%;
         display: flex;
