@@ -5,8 +5,8 @@
         </div>
         <v-layout column align-center>
             <v-form ref="form" v-model="valid">
-                <v-text-field v-model="gitId" :counter="100" :rules="inputRules" label="Gitlab Access Token" required></v-text-field>
-                <v-text-field v-model="gitlabApi" :counter="100" :rules="inputRules" label="Gitlab Access Token" required></v-text-field>
+                <v-text-field v-model="gitId" :counter="100" :rules="inputRules" label="Gitlab ID" required></v-text-field>
+                <v-text-field v-model="gitlabApi" :counter="100" :rules="inputRules" label="Gitlab API Address" required></v-text-field>
                 <v-text-field v-model="accessToken" :counter="100" :rules="inputRules" label="Gitlab Access Token" required></v-text-field>
                 <v-text-field disable v-model="gitlabAddress" :counter="100" :rules="inputRules" label="Gitlab Repository Address" required></v-text-field>
                 <v-text-field v-model="projectId" :counter="100" :rules="inputRules" label="Project ID" required></v-text-field>
