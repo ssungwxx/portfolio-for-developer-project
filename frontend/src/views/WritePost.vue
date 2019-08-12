@@ -43,7 +43,7 @@ export default {
                     post_content: this.content,
                 };
                 this.postpost(data);
-                this.pushNotification();
+                //this.pushNotification();
                 this.$router.push("Posts");
             }
         },
@@ -53,6 +53,7 @@ export default {
         async postpost(data) {
             await RestService.insertPost(data);
         },
+        /*
         async pushNotification(){
           var list = await this.getTokenlist();
           let test =[];
@@ -62,7 +63,7 @@ export default {
           var body = '게시물이 등록되었습니다.'
           var title = 'PostPage'
           const temp = RestService.pushNotification({body:body},title,test);
-        },
+        }*/,
         getTokenlist(){
           return RestService.getTokenlist();
         }
