@@ -22,28 +22,32 @@ const firestore = firebase.firestore();
 
 //firebase FCM push notification 사용
 const messaging = firebase.messaging();
-messaging.requestPermission()
-.then(function(){
-  console.log('Have Permission');
-  return messaging.getToken();
-  //토큰 생성
-})
-.then(function(token){
-  const pushtoken = token;
-  RestService.insertToken(pushtoken);
-  console.log(pushtoken);
-})
-.catch(function(err){
-  console.log('Error Occured.');
-})
+messaging
+    .requestPermission()
+    .then(function() {
+        //console.log('Have Permission');
+        return messaging.getToken();
+        //토큰 생성
+    })
+    .then(function(token) {
+        const pushtoken = token;
+        RestService.insertToken(pushtoken);
+        //console.log(pushtoken);
+    })
+    .catch(function(err) {
+        console.log("Error Occured.");
+    });
 
-navigator.serviceWorker.register('firebase-messaging-sw.js');
-messaging.onMessage(function(payload){
-  console.log('onMessage: ', payload);
-  console.log(payload.notification.body);
-  navigator.serviceWorker.ready.then(function(registration){
-    registration.showNotification(payload.notification.title,JSON.parse(payload.notification.body));
-  })
+navigator.serviceWorker.register("firebase-messaging-sw.js");
+messaging.onMessage(function(payload) {
+    //console.log('onMessage: ', payload);
+    //console.log(payload.notification.body);
+    navigator.serviceWorker.ready.then(function(registration) {
+        registration.showNotification(
+            payload.notification.title,
+            JSON.parse(payload.notification.body)
+        );
+    });
 });
 
 export default {
@@ -90,15 +94,15 @@ export default {
     },
     loginWithGoogle() {
         let provider = new firebase.auth.GoogleAuthProvider();
-        console.log(provider);
+        //console.log(provider);
         return firebase
             .auth()
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
-                console.log(accessToken);
+                //console.log(accessToken);
                 let user = result.user;
-                console.log(user);
+                //console.log(user);
                 return result;
             })
             .catch(function(error) {
@@ -112,9 +116,9 @@ export default {
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
-                console.log(accessToken);
+                //console.log(accessToken);
                 let user = result.user;
-                console.log(user);
+                //console.log(user);
                 return result;
             })
             .catch(function(error) {
@@ -128,9 +132,9 @@ export default {
             .signInWithPopup(provider)
             .then(function(result) {
                 let accessToken = result.credential.accessToken;
-                console.log(accessToken);
+                //console.log(accessToken);
                 let user = result.user;
-                console.log(user);
+                //console.log(user);
                 return result;
             })
             .catch(function(error) {
