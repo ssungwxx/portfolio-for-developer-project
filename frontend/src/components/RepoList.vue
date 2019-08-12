@@ -14,14 +14,14 @@
                 </Repo>
                 <div class="buttons">
                     <v-tooltip bottom>
-                        <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                        <v-btn slot="activator" icon :href="repos[i - 1].repo_add" target="_blank">
                             <v-icon large class="material-icons">pageview</v-icon>
                         </v-btn>
                         <span>Gitlab으로 이동</span>
                     </v-tooltip>
 
                     <v-tooltip bottom>
-                        <v-btn slot="activator" icon @click="deleterepo(repo_no)">
+                        <v-btn slot="activator" icon @click="deleterepo(repos[i - 1].repo_no)" v-if="getId == user_id">
                             <v-icon large class="material-icons">delete</v-icon>
                         </v-btn>
                         <span>repository 삭제</span>
