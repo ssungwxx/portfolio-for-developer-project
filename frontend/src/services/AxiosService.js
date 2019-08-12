@@ -1,5 +1,6 @@
 import RestService from "@/services/RestService"
 import axios from "axios"
+import router from "../router"
 
 export default {
   async checkAuthorization(user_id) {
@@ -14,8 +15,10 @@ export default {
         router.push('/');
 
       } else {
+
         let refresh = await RestService.getRefreshToken(user_id);
         let currentTime = Date.now().toString().slice(0, 10);
+
         if (refresh > currentTime) {
 
           let newToken = await RestService.getNewAccessToken(user_id);

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/Repo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Repo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/AddRepos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AddRepos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +209,7 @@
       <workItem from="1564360942070" duration="54002000" />
       <workItem from="1564616018371" duration="30171000" />
       <workItem from="1564964115129" duration="21462000" />
-      <workItem from="1565052485079" duration="77402000" />
+      <workItem from="1565052485079" duration="78728000" />
     </task>
     <servers />
   </component>

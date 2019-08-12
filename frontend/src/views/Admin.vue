@@ -4,7 +4,7 @@
             <sidebar-menu :menu="menu" class="menubar"/>
         </div>
         <div class="countinfo">
-            <table>
+            <table class="table">
                 <tr>
                     <th style="text-align: center;">User_ID</th>
                     <th style="text-align: center;">Posts</th>
@@ -100,6 +100,10 @@
         height: auto;
     }
 
+    .table{
+        width:60%;
+    }
+
     .post {
         width: 40%;
         text-align: center;
@@ -113,7 +117,6 @@
     }
 
     .countinfo {
-        padding-top: 10%;
         margin-left: 10%;
         margin-right: 5%
     }
