@@ -5,11 +5,9 @@
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ImgBanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImgBanner.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PostList.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Repo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Repo.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/RestService.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,7 +94,7 @@
       <workItem from="1564360942070" duration="54002000" />
       <workItem from="1564616018371" duration="30171000" />
       <workItem from="1564964115129" duration="21462000" />
-      <workItem from="1565052485079" duration="88740000" />
+      <workItem from="1565052485079" duration="93023000" />
     </task>
     <servers />
   </component>

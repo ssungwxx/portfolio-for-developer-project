@@ -140,6 +140,7 @@ export default {
   },
   mounted() {
     this.setLoginInfo();
+    console.log(this.$store.getters.getGrade)
   },
   computed: {
     getIsLogin: function() {
