@@ -55,17 +55,15 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{
-                        comment.pcom_comment
-                        }}
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">
+                      {{ comment.pcom_comment}}
                     </td>
-                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input
-                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/>
+                    <td class="post-comment" :id="'edit' + i" style="display: none;">
+                      <input style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/>
                     </td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="getIsLogin && getId == comment.user_id">
-                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
-                               @click="editreply(i, comment)">
+                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon @click="editreply(i, comment)">
                             <v-icon>create</v-icon>
                         </v-btn>
                         <v-btn class="post-detail-button" icon @click="deletereply(comment)">
@@ -103,9 +101,6 @@
                 ],
             };
         },
-        mounted() {
-            this.setuserInfo();
-        },
         computed: {
             getIsLogin: function () {
                 return this.$store.getters.getIsLogin;
@@ -124,10 +119,6 @@
             this.getPost();
         },
         methods: {
-            ...mapActions(['setLogin']),
-            setuserInfo() {
-                this.setLogin();
-            },
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
