@@ -2,155 +2,157 @@ import axios from "axios";
 import AxiosService from "@/services/AxiosService";
 
 export default {
-  // Post 관련 함수
-  getPosts() {
-    return axios
-      .get("http://70.12.246.138:3000/posts")
-      .then(response => (this.posts = response.data));
-  },
-  getPost(id) {
-    return axios
-      .get("http://70.12.246.138:3000/posts/user/" + id)
-      .then(response => (this.posts = response.data));
-  },
-  getPostDetail(user, id) {
-    return axios
-      .get(`http://70.12.246.138:3000/posts/user/${user}`)
-      .then(response => (this.posts = response.data[id]));
-  },
-  updatePost(id, data) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .put("http://70.12.246.138:3000/posts/" + id, data)
-      .then(response => (this.posts = response.data));
-  },
-  async deletePost(id, data) {
-    await AxiosService.checkAuthorization(data.user_id);
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .delete("http://70.12.246.138:3000/posts/" + id, data)
-      .then(response => (this.posts = response.data));
-  },
-  countPost() {
-    return axios
-      .get("http://70.12.246.138:3000/posts/count")
-      .then(response => (this.posts = response.data));
-  },
-  async insertPost(data) {
-    await AxiosService.checkAuthorization(data.user_id);
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .post("http://70.12.246.138:3000/posts", data)
-      .then(response => (this.posts = response.data));
-  },
-  // Repository 관련 함수
-  getRepositories() {
-    return axios
-      .get("http://70.12.246.138:3000/repositories")
-      .then(response => (this.repos = response.data));
-  },
-  getRepository(id) {
-    return axios
-      .get("http://70.12.246.138:3000/repositories/" + id)
-      .then(response => (this.repos = response.data));
-  },
-  insertRepository(data) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .post("http://70.12.246.138:3000/repositories", data)
-      .then(response => (this.repos = response.data));
-  },
-  deleteRepository(id) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .delete("http://70.12.246.138:3000/repositories/" + id)
-      .then(response => (this.repos = response.data));
-  },
-  updateRepository(id, data) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .put("http://70.12.246.138:3000/repositories/" + id, data)
-      .then(response => (this.repositories = response.data));
-  },
-  countRepositories() {
-    return axios
-      .get("http://70.12.246.138:3000/repositories/count")
-      .then(response => (this.repos = response.data));
-  },
-  // User 관련 함수
-  getUsers() {
-    return axios
-      .get("http://70.12.246.138:3000/users")
-      .then(response => (this.users = response.data));
-  },
-  getCount() {
-    const counts = [];
-    axios.get("http://70.12.246.138:3000/users").then(function(response) {
-      for (let i = 0; i < response.data.length; ++i) {
-        const count = [];
-        const user = response.data[i];
-        count.push(user.user_id);
-        const posts = axios
-          .get("http://70.12.246.138:3000/posts/" + user.user_id)
-          .then(response => count.push(response.data.length));
-        const repos = axios
-          .get(
-            "http://70.12.246.138:3000/repositories/" + user.user_id
-          )
-          .then(response => count.push(response.data.length));
-        counts.push(count);
-      }
-    });
-    return counts;
-  },
-  getUser(id) {
-    return axios
-      .get("http://70.12.246.138:3000/users/" + id)
-      .then(response => (this.check = response.data[0]));
-  },
-  insertUser(data) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .post("http://70.12.246.138:3000/users", data)
-      .then(response => (this.err_stat = response.data));
-  },
-  updateUser(id, data) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .put("http://70.12.246.138:3000/users", data)
-      .then(response => (this.user = response.data));
-  },
-  deleteUser(id) {
-    axios.defaults.headers.jwt = sessionStorage.jwt;
-    return axios
-      .delete("http://70.12.246.138:3000/users/" + id)
-      .then(response => (this.portfolios = response.data));
-  },
-  loginUser(data) {
-    return axios
-      .post("http://70.12.246.138:3000/users/login", data)
-      .then(res => (this.data = res.data));
-  },
-  getSearchUsers(data) {
-    return axios
-      .get("http://70.12.247.68:3000/users/search" + data)
-      .then(response => (this.users = response.data));
-  },
-  // 번역 관련 함수
-  translateText(data) {
-    return axios
-      .post("http://70.12.247.68:3000/en", data)
-      .then(response => (this.enText = response.data));
-  },
-  //Log관련 함수
-  insertLog(path, data) {
-    return axios.post("http://70.12.246.138:3000/logs/" + path, data);
-  },
-  getLog() {
-    return axios
-      .get("http://70.12.246.138:3000/logs")
-      .then(response => (this.Logs = response.data));
-  },
+    // Post 관련 함수
+    getPosts() {
+        return axios
+            .get("http://70.12.246.138:3000/posts")
+            .then(response => (this.posts = response.data));
+    },
+    getPost(id) {
+        return axios
+            .get("http://70.12.246.138:3000/posts/user/" + id)
+            .then(response => (this.posts = response.data));
+    },
+    getPostDetail(user, id) {
+        return axios
+            .get(`http://70.12.246.138:3000/posts/user/${user}`)
+            .then(response => (this.posts = response.data[id]));
+    },
+    updatePost(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .put("http://70.12.246.138:3000/posts/" + id, data)
+            .then(response => (this.posts = response.data));
+    },
+    async deletePost(id, data) {
+        await AxiosService.checkAuthorization();
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .delete("http://70.12.246.138:3000/posts/" + id, data)
+            .then(response => (this.posts = response.data));
+    },
+    countPost() {
+        return axios
+            .get("http://70.12.246.138:3000/posts/count")
+            .then(response => (this.posts = response.data));
+    },
+    async insertPost(data) {
+        await AxiosService.checkAuthorization();
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .post("http://70.12.246.138:3000/posts", data)
+            .then(response => (this.posts = response.data));
+    },
+    // Repository 관련 함수
+    getRepositories() {
+        return axios
+            .get("http://70.12.246.138:3000/repositories")
+            .then(response => (this.repos = response.data));
+    },
+    getRepository(id) {
+        return axios
+            .get("http://70.12.246.138:3000/repositories/" + id)
+            .then(response => (this.repos = response.data));
+    },
+    insertRepository(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .post("http://70.12.246.138:3000/repositories", data)
+            .then(response => console.log(response.data));
+    },
+    deleteRepository(id) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .delete("http://70.12.246.138:3000/repositories/" + id)
+            .then(response => (this.repos = response.data));
+    },
+    updateRepository(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .put("http://70.12.246.138:3000/repositories/" + id, data)
+            .then(response => (this.repositories = response.data));
+    },
+    countRepositories() {
+        return axios
+            .get("http://70.12.246.138:3000/repositories/count")
+            .then(response => (this.repos = response.data));
+    },
+    // User 관련 함수
+    getUsers() {
+        return axios
+            .get("http://70.12.246.138:3000/users")
+            .then(response => (this.users = response.data));
+    },
+    getCount() {
+        const counts = [];
+        axios.get("http://70.12.246.138:3000/users").then(function(response) {
+            for (let i = 0; i < response.data.length; ++i) {
+                const count = [];
+                const user = response.data[i];
+                count.push(user.user_id);
+                const posts = axios
+                    .get("http://70.12.246.138:3000/posts/" + user.user_id)
+                    .then(response => count.push(response.data.length));
+                const repos = axios
+                    .get(
+                        "http://70.12.246.138:3000/repositories/" + user.user_id
+                    )
+                    .then(response => count.push(response.data.length));
+                counts.push(count);
+            }
+        });
+        return counts;
+    },
+    getUser(id) {
+        return axios
+            .get("http://70.12.246.138:3000/users/" + id)
+            .then(response => (this.check = response.data[0]));
+    },
+    insertUser(data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .post("http://70.12.246.138:3000/users", data)
+            .then(response => (this.err_stat = response.data));
+    },
+    updateUser(id, data) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .put("http://70.12.246.138:3000/users", data)
+            .then(response => (this.user = response.data));
+    },
+    deleteUser(id) {
+        axios.defaults.headers.jwt = sessionStorage.jwt;
+        return axios
+            .delete("http://70.12.246.138:3000/users/" + id)
+            .then(response => (this.portfolios = response.data));
+    },
+    loginUser(data) {
+        return axios
+            .post("http://70.12.246.138:3000/users/login", data)
+            .then(res => {
+                return res.data;
+            });
+    },
+    getSearchUsers(data) {
+        return axios
+            .get("http://70.12.247.68:3000/users/search" + data)
+            .then(response => (this.users = response.data));
+    },
+    // 번역 관련 함수
+    translateText(data) {
+        return axios
+            .post("http://70.12.247.68:3000/en", data)
+            .then(response => (this.enText = response.data));
+    },
+    //Log관련 함수
+    insertLog(path, data) {
+        return axios.post("http://70.12.246.138:3000/logs/" + path, data);
+    },
+    getLog() {
+        return axios
+            .get("http://70.12.246.138:3000/logs")
+            .then(response => (this.Logs = response.data));
+    },
 
   //Post Comment관련 함수
   getAllPostComments() {

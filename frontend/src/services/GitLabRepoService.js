@@ -1,13 +1,25 @@
 import Api from "../services/Api";
 
 export default {
+    async getDate(user_add, project_id, token) {
+        const BASE_URL = user_add + "/api/v4";
+        const eventsURL = `/projects/${project_id}`;
+
+        const project = await Api(BASE_URL, token).get(eventsURL);
+        const response = {
+            repo_createdDate: this.calendar_time(project.data.created_at) + ":00",
+            repo_recentDate: this.calendar_time(project.data.last_activity_at) + ":00",
+        };
+
+        return response;
+    },
     async getMessage(user_add, project_id, token) {
         const BASE_URL = user_add + "/api/v4";
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
         const message = {};
 
         for (let i = 1; Object.keys(message).length < 10; ++i) {
-            let events = await Api(BASE_URL, token).get(eventsURL + String(i))
+            let events = await Api(BASE_URL, token).get(eventsURL + String(i));
             if (events.data.length === 0) {
                 break
             }
@@ -29,7 +41,7 @@ export default {
         const eventsURL = `/projects/${project_id}/events?per_page=100&page=`;
         const date = {};
         const pushed = [0] * 14;
-        
+
         for (let i = 1; Object.keys(date).length < 14; i++) {
             let events = await Api(BASE_URL, token).get(eventsURL + String(i))
             if (events.data.length === 0) {
