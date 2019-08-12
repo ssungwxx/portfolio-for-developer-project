@@ -58,7 +58,6 @@ export default {
     },
     mounted() {
         this.getPosts();
-        this.setLoginInfo();
     },
     computed: {
       getIsLogin: function() {
@@ -72,10 +71,6 @@ export default {
       }
     },
     methods: {
-      ...mapActions(['setLogin']),
-      setLoginInfo() {
-        this.setLogin();
-      },
         async getPosts() {
             this.posts = await RestService.getPost(this.user_id);
             for (const post of this.posts) {
