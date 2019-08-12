@@ -23,6 +23,7 @@
 <script>
 import RestService from "@/services/RestService";
 import FirebaseService from "@/services/FirebaseService";
+import Git from "@/services/GitLabRepoService";
 
     export default {
         name: "AddRepo",
@@ -56,16 +57,21 @@ import FirebaseService from "@/services/FirebaseService";
         methods: {
             async validate() {
                 if (this.$refs.form.validate()) {
+                    const res = await Git.getDate(this.gitlabApi, this.projectId, this.accessToken);
+
                     const repoData = {
                         user_id: this.user_id,
-                        repo_title: this.project_name,
-                        repo_id: this.project_id,
-                        repo_add: this.gitlab_address
+                        repo_title: this.projectName,
+                        repo_id: this.projectId,
+                        repo_add: this.gitlabAddress,
+                        repo_createdDate: res.repo_createdDate,
+                        repo_recentDate: res.repo_recentDate
                     };
                     await RestService.insertRepository(repoData);
 
                     const userData = {
                         user_id: this.user_id,
+                        user_pw : '-1',
                         user_gitId: this.gitId,
                         user_gitAdd: this.gitlabApi,
                         user_gitToken: this.accessToken,
