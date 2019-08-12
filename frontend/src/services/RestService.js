@@ -18,7 +18,8 @@ export default {
       .get(`http://70.12.246.138:3000/posts/user/${user}`)
       .then(response => (this.posts = response.data[id]));
   },
-  updatePost(id, data) {
+  async updatePost(id, data) {
+    await  AxiosService.checkAuthorization(data.user_id);
     axios.defaults.headers.jwt = sessionStorage.jwt;
     return axios
       .put("http://70.12.246.138:3000/posts/" + id, data)

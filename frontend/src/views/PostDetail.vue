@@ -37,11 +37,8 @@
                 </v-btn>
             </v-flex>
         </div>
-<<<<<<< Updated upstream
-        <div style="display: flex">
-=======
+
         <div style="display: flex" v-if="getIsLogin">
->>>>>>> Stashed changes
             <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
@@ -57,22 +54,18 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment
-                        }}
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">
+                      {{ comment.pcom_comment}}
                     </td>
-                    <td class="post-comment" :id="'edit' + i" style="display: none;"><input
-                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
+                    <td class="post-comment" :id="'edit' + i" style="display: none;">
+                      <input style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/>
+                    </td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
-<<<<<<< Updated upstream
-                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id === comment.user_id">
-=======
                     <td class="post-detail-buttons" v-if="getIsLogin && getId == comment.user_id">
->>>>>>> Stashed changes
-                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
-                               @click="editreply(i, comment.pcom_no)">
+                        <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon @click="editreply(i, comment)">
                             <v-icon>create</v-icon>
                         </v-btn>
-                        <v-btn class="post-detail-button" icon @click="deletereply(comment.pcom_no)">
+                        <v-btn class="post-detail-button" icon @click="deletereply(comment)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                     </td>
@@ -101,13 +94,11 @@
                 comments: [],
                 editable: false,
                 reply: "",
+                chk: false,
                 commentRules: [
-                    v => !!v || 'comment is required',
+                    v => this.chkreply(v)
                 ],
             };
-        },
-        mounted() {
-          this.setuserInfo();
         },
         computed: {
           getIsLogin: function() {
@@ -127,10 +118,6 @@
             this.getPost();
             },
         methods: {
-          ...mapActions(['setLogin']),
-          setuserInfo() {
-            this.setLogin();
-          },
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
@@ -167,7 +154,7 @@
                 this.$router.push("../posts");
             },
             async deletereply(reply) {
-                if (this.$store.getters.getId === reply.user_id) {
+                if (this.$store.getters.getUser_id === reply.user_id) {
                     await RestService.deletePostComment(reply.pcom_no);
                     this.getComments();
                 }
@@ -221,25 +208,36 @@
                     btn.attributes.style.value = "color: black;";
                 }
             },
-            async postreply() {
-                const data = {
-                    user_id: this.$store.getters.getUser_id,
-                    pcom_comment: this.reply,
-                    post_no: this.post.post_no,
-                };
-                await RestService.insertPostComment(data);
-                this.reply = "";
-                this.getComments();
-
-
-                // a.classList.remove("error--text");
-                // b.classList.remove("error--text");
-                // c.classList.remove("error--text");
+            async postreply(reply) {
+                if (this.$store.getters.getUser_id) {
+                    if (this.chk) {
+                        const data = {
+                            user_id: this.$store.getters.getUser_id,
+                            pcom_comment: this.reply,
+                            post_no: this.post.post_no,
+                        };
+                        await RestService.insertPostComment(data);
+                        this.reply = "";
+                        this.getComments();
+                        this.chk = true;
+                    }
+                } else {
+                    this.$router.push("./")
+                }
             },
-            select() {
-                const a = document.querySelector(".v-input.write-reply.v-text-field.v-input--has-state.theme--light.error--text");
-                const b = document.querySelector(".v-label.theme--light.error--text");
-                const c = document.querySelector(".v-messages.theme--light.error--text");
+            chkreply(reply) {
+                if (reply) {
+                    this.chk = true;
+                    return true
+                } else {
+                    if (this.chk) {
+                        this.chk = false;
+                        return true
+                    } else {
+                        this.chk = false;
+                        return "comment is required"
+                    }
+                }
             }
         }
     };
