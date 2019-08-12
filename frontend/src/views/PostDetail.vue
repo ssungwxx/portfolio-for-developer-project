@@ -38,9 +38,9 @@
             </v-flex>
         </div>
 
-        <div style="display: flex">
         <div style="display: flex" v-if="getIsLogin">
-            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
+            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기"
+                          required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
             </v-btn>
@@ -55,11 +55,13 @@
                 </tr>
                 <tr v-for="(comment, i) of comments" :key="i">
                     <td class="post-user-id">{{ comment.user_id }}</td>
-                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{ comment.pcom_comment
+                    <td class="post-comment" :id="'comment' + i" style="display: table-cell;">{{
+                        comment.pcom_comment
                         }}
                     </td>
                     <td class="post-comment" :id="'edit' + i" style="display: none;"><input
-                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
+                            style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/>
+                    </td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
                     <td class="post-detail-buttons" v-if="getIsLogin && getId == comment.user_id">
                         <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
@@ -102,30 +104,30 @@
             };
         },
         mounted() {
-          this.setuserInfo();
+            this.setuserInfo();
         },
         computed: {
-          getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
-          },
-          getId: function() {
-            return this.$store.getters.getId;
-          },
-          getGrade: function() {
-            return this.$store.getters.getGrade;
-          }
+            getIsLogin: function () {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function () {
+                return this.$store.getters.getId;
+            },
+            getGrade: function () {
+                return this.$store.getters.getGrade;
+            }
         },
         beforeMount() {
             this.insertLog();
         },
         created() {
             this.getPost();
-            },
+        },
         methods: {
-          ...mapActions(['setLogin']),
-          setuserInfo() {
-            this.setLogin();
-          },
+            ...mapActions(['setLogin']),
+            setuserInfo() {
+                this.setLogin();
+            },
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
