@@ -154,113 +154,112 @@ export default {
             .then(response => (this.Logs = response.data));
     },
 
-    //Post Comment관련 함수
-    getAllPostComments() {
-        return axios.get("http://70.12.246.138:3000/pcom");
-    },
-    getOnePostComments(post_no) {
-        return axios.get("http://70.12.246.138:3000/pcom/" + post_no);
-    },
-    insertPostComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.post("http://70.12.246.138:3000/pcom", data)
-    },
-    deletePostComment(pcom_no) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
-    },
-    updatePostComment(id, data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.put("http://70.12.246.138:3000/pcom/" + id, data);
-    },
-    //Repository comment관련 함수
-    getAllRepoComments() {
-        return axios.get("http://70.12.246.138:3000/rcom");
-    },
-    getOneRepoCommeents(repo_no) {
-        return axios.get("http://70.12.246.138:3000/rcom/" + repo_no);
-    },
-    insertRepoComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.post("http://70.12.246.138:3000/rom", data);
-    },
-    deleteRepoComment(rcom_no) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.delete("http://70.12.246.138:3000/rcom" + rcom_no);
-    },
-    updateRepoComment(data) {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios.put("http://70.12.246.138:3000/rcom", data);
-    },
-    //push notification
-    pushNotification(body, title, list) {
-        return axios
-            .post(
-                "https://fcm.googleapis.com/fcm/send",
-                {
-                    notification: {
-                        body: body,
-                        title: title
-                    },
-                    registration_ids: list
-                },
-                {
-                    headers: {
-                        "Content-Type": "application/json",
-                        Authorization:
-                            "key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL"
-                    }
-                }
-            )
-            .then(response => {
-                console.log(response);
-                resolve(response);
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    },
-    //insert Token(Push Notification)
-    insertToken(token) {
-        console.log("insert token");
-        return axios.post("http://70.12.246.138:3000/fcm", {
-            fcm_token: token
-        });
-    },
-    async getTokenlist() {
-        return await axios.get("http://70.12.246.138:3000/fcm");
-    },
-    // JWT Token 관리
-    async getRefreshToken(user_id) {
-        return await axios
-            .get("http://70.12.246.138:3000/jwt/" + user_id)
-            .then(res => res.data);
-    },
-    async getNewAccessToken(user_id) {
-        return await axios
-            .post("http://70.12.246.138:3000/jwt/" + user_id)
-            .then(res => res.data);
-    },
-    async deleteRefreshToken(user_id) {
-        return await axios
-            .put("http://70.12.246.138:3000/jwt/" + user_id)
-            .then(res => res.data);
-    },
-    async checkAccessToken(user_id, data) {
-        return await axios
-            .post("http://70.12.246.138:3000/jwt/check/" + user_id, data)
-            .then(res => res.data);
-    },
-    async getUserIdByJWT() {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return await axios
-            .post("http://70.12.246.138:3000/jwt/user/id")
-            .then(res => res.data);
-    },
-    async getUserGradeByJWT() {
-        axios.defaults.headers.jwt = sessionStorage.jwt;
-        return await axios
-            .post("http://70.12.246.138:3000/jwt/user/grade")
-            .then(res => res.data);
-    }
+  //Post Comment관련 함수
+  getAllPostComments() {
+    return axios.get("http://70.12.246.138:3000/pcom");
+  },
+  getOnePostComments(post_no) {
+    return axios.get("http://70.12.246.138:3000/pcom/" + post_no);
+  },
+  insertPostComment(data) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios
+      .post("http://70.12.246.138:3000/pcom", data)
+      .then(res => console.log(res));
+  },
+  deletePostComment(pcom_no) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios.delete("http://70.12.246.138:3000/pcom/" + pcom_no);
+  },
+  updatePostComment(id, data) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios.put("http://70.12.246.138:3000/pcom/" + id, data);
+  },
+  //Repository comment관련 함수
+  getAllRepoComments() {
+    return axios.get("http://70.12.246.138:3000/rcom");
+  },
+  getOneRepoCommeents(repo_no) {
+    return axios.get("http://70.12.246.138:3000/rcom/" + repo_no);
+  },
+  insertRepoComment(data) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios.post("http://70.12.246.138:3000/rom", data);
+  },
+  deleteRepoComment(rcom_no) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios.delete("http://70.12.246.138:3000/rcom" + rcom_no);
+  },
+  updateRepoComment(data) {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return axios.put("http://70.12.246.138:3000/rcom", data);
+  },
+  //push notification
+  pushNotification(body, title, list) {
+    return axios
+      .post(
+        "https://fcm.googleapis.com/fcm/send", {
+          notification: {
+            body: body,
+            title: title
+          },
+          registration_ids: list
+        }, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL"
+          }
+        }
+      )
+      .then(response => {
+        console.log(response);
+        resolve(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  },
+  //insert Token(Push Notification)
+  insertToken(token) {
+    console.log("insert token");
+    return axios.post("http://70.12.246.138:3000/fcm", {
+      fcm_token: token
+    });
+  },
+  async getTokenlist() {
+    return await axios.get("http://70.12.246.138:3000/fcm");
+  },
+  // JWT Token 관리
+  async getRefreshToken(user_id) {
+    return await axios
+      .get("http://70.12.246.138:3000/jwt/" + user_id)
+      .then(res => res.data);
+  },
+  async getNewAccessToken(user_id) {
+    return await axios
+      .post("http://70.12.246.138:3000/jwt/" + user_id)
+      .then(res => res.data);
+  },
+  async deleteRefreshToken(user_id) {
+    return await axios
+      .put("http://70.12.246.138:3000/jwt/" + user_id)
+      .then(res => res.data);
+  },
+  async checkAccessToken(user_id, data) {
+    return await axios
+      .post("http://70.12.246.138:3000/jwt/check/" + user_id, data)
+      .then(res => res.data);
+  },
+  async getUserIdByJWT() {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return await axios
+      .get("http://70.12.246.138:3000/jwt/user/id")
+      .then(res => res.data);
+  },
+  async getUserGradeByJWT() {
+    axios.defaults.headers.jwt = sessionStorage.jwt;
+    return await axios
+      .get("http://70.12.246.138:3000/jwt/user/grade")
+      .then(res => res.data);
+  }
 };

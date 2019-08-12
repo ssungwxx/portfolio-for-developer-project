@@ -17,7 +17,7 @@
                 <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
             </v-btn>
             <div style="display: flex; justify-content: center;">
-                <router-link :to="writepost" style="text-decoration: none; margin-right: 20px" v-if="this.$store.getters.getUser_id === user_id">
+                <router-link :to="writepost" style="text-decoration: none; margin-right: 20px" v-if="getId == user_id">
                     <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                         <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
                     </v-btn>
@@ -35,6 +35,7 @@
 import Post from "@/components/Post";
 import RestService from "@/services/RestService";
 import Git from "@/services/GitLabRepoService";
+import {mapActions} from "vuex";
 
 export default {
     name: "PostList",
@@ -57,8 +58,24 @@ export default {
     },
     mounted() {
         this.getPosts();
+        this.setLoginInfo();
+    },
+    computed: {
+      getIsLogin: function() {
+        return this.$store.getters.getIsLogin;
+      },
+      getId: function() {
+        return this.$store.getters.getId;
+      },
+      getGrade: function() {
+        return this.$store.getters.getGrade;
+      }
     },
     methods: {
+      ...mapActions(['setLogin']),
+      setLoginInfo() {
+        this.setLogin();
+      },
         async getPosts() {
             this.posts = await RestService.getPost(this.user_id);
             for (const post of this.posts) {

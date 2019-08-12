@@ -31,13 +31,15 @@
                         <i class="material-icons">view_list</i>목록으로
                     </v-btn>
                 </router-link>
-                <v-btn color="red" dark @click="deletepost" v-if="this.$store.getters.getUser_id === user_id">
+                <v-btn color="red" dark @click="deletepost" v-if="getId == post.user_id">
                     <v-icon size="25" class="mr-2">delete</v-icon>
                     삭제
                 </v-btn>
             </v-flex>
         </div>
-        <div style="display: flex" v-if="this.$store.getters.getUser_id">
+
+        <div style="display: flex">
+        <div style="display: flex" v-if="getIsLogin">
             <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
@@ -59,7 +61,7 @@
                     <td class="post-comment" :id="'edit' + i" style="display: none;"><input
                             style="background-color: rgba(0, 0, 0, 0.15)" :value="comment.pcom_comment" autofocus/></td>
                     <td class="post-date">{{ comment.pcom_date }}</td>
-                    <td class="post-detail-buttons" v-if="$store.getters.getUser_id && $store.getters.getUser_id === comment.user_id">
+                    <td class="post-detail-buttons" v-if="getIsLogin && getId == comment.user_id">
                         <v-btn :id="'btn' + i" style="color: black;" class="post-detail-button" icon
                                @click="editreply(i, comment)">
                             <v-icon>create</v-icon>
@@ -77,6 +79,7 @@
 <script>
     import RestService from "@/services/RestService";
     import Git from "@/services/GitLabRepoService";
+    import {mapActions} from "vuex";
 
     export default {
         name: "PostDetail",
@@ -98,14 +101,31 @@
                 ],
             };
         },
+        mounted() {
+          this.setuserInfo();
+        },
+        computed: {
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
+        },
         beforeMount() {
             this.insertLog();
         },
         created() {
             this.getPost();
-            console.log(this.$store.getters.getUser_id)
             },
         methods: {
+          ...mapActions(['setLogin']),
+          setuserInfo() {
+            this.setLogin();
+          },
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
                 const date = this.post.post_date;
@@ -130,7 +150,7 @@
             },
             async insertLog() {
                 const data = {
-                    user_id: this.$store.getters.getUser_id,
+                    user_id: this.$store.getters.getId,
                 }
                 this.insertLog = await RestService.insertLog("DetailPost", data);
             },
@@ -172,6 +192,28 @@
                         origin.attributes.style.value = "display: table-cell;";
                         btn.attributes.style.value = "color: black;";
                     }
+                }
+            },
+            async postreply(reply) {
+                if (this.$store.getters.getUser_id) {
+                    if (this.chk) {
+                        const data = {
+                            user_id: this.$store.getters.getId,
+                            pcom_comment: this.reply,
+                            post_no: this.post.post_no,
+                        };
+                        await RestService.insertPostComment(data);
+                        this.reply = "";
+                        this.getComments();
+                        this.chk = true;
+                    }
+                } else {
+                    this.edit(id, no)
+                    const origin = document.getElementById('comment' + id);
+                    const edit = document.getElementById('edit' + id);
+                    edit.attributes.style.value = "display: none";
+                    origin.attributes.style.value = "display: table-cell;";
+                    btn.attributes.style.value = "color: black;";
                 }
             },
             async postreply(reply) {

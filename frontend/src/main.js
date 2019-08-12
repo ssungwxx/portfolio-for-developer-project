@@ -9,8 +9,8 @@ import "font-awesome/css/font-awesome.min.css";
 
 import App from "./App.vue";
 import router from "./router";
-import { store } from "./vuex/store";
 import "./registerServiceWorker";
+import {store} from "./vuex/store";
 
 // Google Analytics
 import VueAnalytics from "vue-analytics";
@@ -72,7 +72,7 @@ Vue.use(VueAnalytics, {
 });
 
 new Vue({
+  store,
     router,
-    store,
     render: h => h(App)
 }).$mount("#app");
