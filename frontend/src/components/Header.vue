@@ -107,9 +107,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import RestService from "../services/RestService";
-import {
-  mapActions
-} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: "Header",
@@ -133,7 +131,7 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (this.getId.status === Object) {
+      if (this.getId === Object) {
         this.$router.push("/")
       }
     },
