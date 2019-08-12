@@ -155,8 +155,8 @@
                 this.$router.push("../posts");
             },
             async deletereply(reply) {
-                if (this.$store.getters.getUser_id === reply.user_id) {
-                    await RestService.deletePostComment(reply.pcom_no);
+                if (this.$store.getters.getId === reply.user_id) {
+                    await RestService.deletePostComment(reply.pcom_no, this.getId);
                     this.getComments();
                 }
             },
@@ -169,7 +169,7 @@
                 this.getComments();
             },
             editreply(id, reply) {
-                if (this.$store.getters.getUser_id === reply.user_id) {
+                if (this.$store.getters.getId === reply.user_id) {
                     const btn = document.getElementById('btn' + id);
                     if (btn.attributes.style.value === "color: black;") {
                         const origin = document.getElementById('comment' + id);
@@ -188,7 +188,7 @@
                 }
             },
             async postreply(reply) {
-                if (this.$store.getters.getUser_id) {
+                if (this.$store.getters.getId) {
                     if (this.chk) {
                         const data = {
                             user_id: this.$store.getters.getId,
@@ -210,10 +210,10 @@
                 }
             },
             async postreply(reply) {
-                if (this.$store.getters.getUser_id) {
+                if (this.$store.getters.getId) {
                     if (this.chk) {
                         const data = {
-                            user_id: this.$store.getters.getUser_id,
+                            user_id: this.$store.getters.getId,
                             pcom_comment: this.reply,
                             post_no: this.post.post_no,
                         };

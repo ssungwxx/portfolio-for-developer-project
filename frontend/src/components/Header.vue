@@ -30,7 +30,7 @@
     </div>
 
     <v-spacer></v-spacer>
-    <div class="icons" v-if="getId.status === undefined">
+    <div class="icons" v-if="getIsLogin">
       <router-link to style="text-decoration: none;" v-if="getGrade != 10">
         <v-tooltip bottom>
           <v-btn slot="activator" icon v-on:click="favorite()">
@@ -133,7 +133,7 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (this.getId.status === 400) {
+      if (!this.getIsLogin) {
         this.$router.push("/")
       }
     },
@@ -205,7 +205,8 @@ export default {
       this.search = "";
     },
     ...mapActions(['logout']),
-    Logout() {
+    async Logout() {
+      await RestService.deleteRefreshToken(this.getId);
       sessionStorage.clear();
       this.logout();
       this.$router.push('/');

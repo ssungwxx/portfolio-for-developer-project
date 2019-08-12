@@ -19,7 +19,7 @@
                         </v-tooltip>
 
                         <v-tooltip bottom>
-                            <v-btn slot="activator" icon @click="deleterepo(repo_id)">
+                            <v-btn v-if="getId == user_id" slot="activator" icon @click="deleterepo(repo_id)">
                                 <v-icon large class="material-icons">delete</v-icon>
                             </v-btn>
                             <span>repository 삭제</span>
@@ -91,6 +91,17 @@
                 git: false,
                 len: 0
             }
+        },
+        computed: {
+          getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+          },
+          getId: function() {
+            return this.$store.getters.getId;
+          },
+          getGrade: function() {
+            return this.$store.getters.getGrade;
+          }
         },
         methods: {
             async deleterepo(id) {

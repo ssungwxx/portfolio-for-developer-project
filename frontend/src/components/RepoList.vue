@@ -40,7 +40,6 @@
 import Repo from "./Repo"
 import RestService from "@/services/RestService"
 import Git from "@/services/GitLabRepoService";
-import {mapActions} from "vuex";
 
     export default {
         name: "RepoList",
@@ -68,14 +67,9 @@ import {mapActions} from "vuex";
             loadMoreRepos() {
                 this.loadlimits += 2;
             },
-            ...mapActions(['setLogin']),
-            setLoginInfo() {
-                this.setLogin();
-            },
         },
         mounted() {
             this.getRepos();
-            this.setLoginInfo();
         },
         watch: {
             $route: function() {
