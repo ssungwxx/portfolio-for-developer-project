@@ -2,14 +2,31 @@
     <v-expansion-panel>
         <v-expansion-panel-content>
             <v-card slot="header" class="ma-3 repocard"> <!-- :href="repo_add" -->
-                <v-card-title primary-title>
+                <v-card-title primary-title class="align">
                     <div class="repodiv">
                         <p class="flex repotitle">{{ repo_title }}</p>
                         <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
                     </div>
-                    <v-btn icon :href="repo_add" target="_blank">
-                        <v-icon large class="material-icons">pageview</v-icon>
-                    </v-btn>
+<!--                    <v-btn icon :href="repo_add" target="_blank">-->
+<!--                        <v-icon large class="material-icons">pageview</v-icon>-->
+<!--                    </v-btn>-->
+                    <div class="buttons">
+                        <v-tooltip bottom>
+                                <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                                    <v-icon large class="material-icons">pageview</v-icon>
+                                </v-btn>
+                            <span>Gitlab으로 이동</span>
+                        </v-tooltip>
+
+                        <v-tooltip bottom>
+                            <v-btn slot="activator" icon @click="deleterepo(repo_id)">
+                                <v-icon large class="material-icons">delete</v-icon>
+                            </v-btn>
+                            <span>repository 삭제</span>
+                        </v-tooltip>
+                    </div>
+
+
                 </v-card-title>
                 <div class="py-3 repodiv">
                     <v-layout row wrap>
@@ -76,6 +93,10 @@
             }
         },
         methods: {
+            async deleterepo(id) {
+                await RestService.deleteRepository(id);
+                // this.$router.push("../repos");
+            },
             async drawGraph() {
                 await this.getUrl();
                 await this.getMessage();
@@ -113,7 +134,13 @@
 </script>
 
 <style>
-
+    .buttons {
+        position: relative;
+    }
+    .align {
+        display: flex;
+        justify-content: space-between;
+    }
     .pushed {
         display: flex;
         padding: 0 15px;

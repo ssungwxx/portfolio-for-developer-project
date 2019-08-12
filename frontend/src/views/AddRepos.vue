@@ -68,6 +68,7 @@ import Git from "@/services/GitLabRepoService";
                         repo_recentDate: res.repo_recentDate
                     };
                     await RestService.insertRepository(repoData);
+                    this.$router.push("./repos");
 
                     const userData = {
                         user_id: this.user_id,
