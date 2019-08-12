@@ -18,7 +18,7 @@
             <v-form ref="form" v-model="valid" lazy-validation>
               <v-text-field v-model="data.user_id" :rules="idRules" label="ID" :counter="20" required></v-text-field>
               <v-text-field v-model="data.user_pw" :append-icon="show ? 'visibility' : 'visibility_off'" :rules="pwRules" :type="show ? 'text' : 'password'" label="Password*" hint="Password must be at least 8 characters." counter
-                @click:append="show = !show" required></v-text-field>
+                @click:append="show = !show" @keydown.enter="Login" required></v-text-field>
             </v-form>
           </v-layout>
         </v-container>
