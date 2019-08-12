@@ -59,7 +59,7 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post(DBcon.URL + "/repositories", data)
-            .then(response => console.log(response.data));
+            .then(response => response.data);
     },
     deleteRepository(id) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
@@ -160,9 +160,7 @@ export default {
     },
     insertPostComment(data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return axios
-            .post(DBcon.URL + "/pcom", data)
-            .then(res => console.log(res));
+        return axios.post(DBcon.URL + "/pcom", data).then(res => res);
     },
     deletePostComment(pcom_no) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
@@ -212,7 +210,6 @@ export default {
                 }
             )
             .then(response => {
-                console.log(response);
                 resolve(response);
             })
             .catch(err => {
@@ -221,7 +218,6 @@ export default {
     },
     //insert Token(Push Notification)
     insertToken(token) {
-        console.log("insert token");
         return axios.post(DBcon.URL + "/fcm", {
             fcm_token: token
         });
