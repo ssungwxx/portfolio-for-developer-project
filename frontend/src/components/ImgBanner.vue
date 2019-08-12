@@ -28,4 +28,5 @@ export default {
 .text-shadow {
     text-shadow: 0 0 15px rgb(255, 255, 255);
 }
+
 </style>

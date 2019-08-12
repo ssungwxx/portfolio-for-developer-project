@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xl8 lg8 md8 sm8 xs8>
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" >
                 <Repo
                     class="ma-3"
                     :repo_title="repos[i - 1].repo_title"
@@ -9,6 +9,7 @@
                     :repo_created="repos[i - 1].repo_createdDate"
                     :repo_recent="repos[i - 1].repo_recentDate"
                     :repo_id="repos[i - 1].repo_id"
+                    :repo_no="repos[i - 1].repo_no"
                     :user_id="user_id">
                 </Repo>
             </v-flex>
