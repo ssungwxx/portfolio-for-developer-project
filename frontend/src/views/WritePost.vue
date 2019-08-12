@@ -1,8 +1,20 @@
 <template>
     <v-form ref="form" v-model="valid" lazy-validation class="writetop">
         <div class="writediv">
-            <v-text-field  class="write-post" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
-            <v-textarea class="write-post" v-model="content" :rules="contentRules" label="내용" required ></v-textarea>
+            <v-text-field
+                class="write-post"
+                v-model="title"
+                :rules="titleRules"
+                label="제목"
+                required
+            ></v-text-field>
+            <v-textarea
+                class="write-post"
+                v-model="content"
+                :rules="contentRules"
+                label="내용"
+                required
+            ></v-textarea>
         </div>
         <div class="btns">
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
@@ -12,7 +24,7 @@
 </template>
 
 <script>
-import RestService from "@/services/RestService"
+import RestService from "@/services/RestService";
 
 export default {
     name: "WritePost",
@@ -21,38 +33,34 @@ export default {
             user_id: this.$route.params.id,
             valid: true,
             title: "",
-            titleRules: [
-                v => !!v || 'Title is required',
-            ],
+            titleRules: [v => !!v || "Title is required"],
             content: "",
-            contentRules: [
-                v => !!v || 'Content is required',
-            ],
+            contentRules: [v => !!v || "Content is required"],
             postlist: ""
-        }
+        };
     },
     created() {
         this.postlist = `/users/${this.user_id}/posts`;
     },
     methods: {
-        validate () {
+        validate() {
             if (this.$refs.form.validate()) {
                 const data = {
                     user_id: this.user_id,
                     post_title: this.title,
-                    post_content: this.content,
+                    post_content: this.content
                 };
                 this.postpost(data);
                 //this.pushNotification();
                 this.$router.push("Posts");
             }
         },
-        async reset () {
+        async reset() {
             this.$refs.form.reset();
         },
         async postpost(data) {
             await RestService.insertPost(data);
-        },
+        }
         /*
         async pushNotification(){
           var list = await this.getTokenlist();
@@ -63,12 +71,14 @@ export default {
           var body = '게시물이 등록되었습니다.'
           var title = 'PostPage'
           const temp = RestService.pushNotification({body:body},title,test);
-        }*/,
+        }*/
+        /*
         getTokenlist(){
           return RestService.getTokenlist();
         }
-    },
-}
+        */
+    }
+};
 </script>
 
 <style>

@@ -20,7 +20,7 @@ export default {
             .then(response => (this.posts = response.data[id]));
     },
     async updatePost(id, data) {
-      await AxiosService.checkAuthorization(data.user_id);
+        await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/posts/" + id, data)
@@ -57,22 +57,22 @@ export default {
             .then(response => (this.repos = response.data));
     },
     async insertRepository(data) {
-      await AxiosService.checkAuthorization(data.user_id);
+        await AxiosService.checkAuthorization(data.user_id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .post(DBcon.URL + "/repositories", data)
             .then(response => response.data);
     },
     async deleteRepository(id, data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/repositories/" + id, data)
             .then(response => (this.repos = response.data));
     },
     async updateRepository(id, data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/repositories/" + id, data)
             .then(response => (this.repositories = response.data));
@@ -107,8 +107,8 @@ export default {
         return counts;
     },
     async getUser(id) {
-      await AxiosService.checkAuthorization(id);
-      axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .get(DBcon.URL + "/users/" + id)
             .then(response => (this.check = response.data[0]));
@@ -119,15 +119,15 @@ export default {
             .then(response => (this.err_stat = response.data));
     },
     async updateUser(id, data) {
-      await AxiosService.checkAuthorization(id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/users", data)
             .then(response => (this.user = response.data));
     },
     async deleteUser(id) {
-      await AxiosService.checkAuthorization(id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/users/" + id)
             .then(response => (this.portfolios = response.data));
@@ -166,18 +166,18 @@ export default {
         return axios.get(DBcon.URL + "/pcom/" + post_no);
     },
     async insertPostComment(data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post(DBcon.URL + "/pcom", data).then(res => res);
     },
     async deletePostComment(pcom_no, id) {
-      await AxiosService.checkAuthorization(id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete(DBcon.URL + "/pcom/" + pcom_no);
     },
     async updatePostComment(id, data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put(DBcon.URL + "/pcom/" + id, data);
     },
     //Repository comment관련 함수
@@ -188,21 +188,22 @@ export default {
         return axios.get(DBcon.URL + "/rcom/" + repo_no);
     },
     async insertRepoComment(data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.post(DBcon.URL + "/rom", data);
     },
     async deleteRepoComment(rcom_no, id) {
-      await AxiosService.checkAuthorization(id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.delete(DBcon.URL + "/rcom" + rcom_no);
     },
     async updateRepoComment(data) {
-      await AxiosService.checkAuthorization(data.user_id);
-              axios.defaults.headers.jwt = sessionStorage.jwt;
+        await AxiosService.checkAuthorization(data.user_id);
+        axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios.put(DBcon.URL + "/rcom", data);
     },
     //push notification
+    /*
     pushNotification(body, title, list) {
         return axios
             .post(
@@ -229,15 +230,20 @@ export default {
                 console.log(err);
             });
     },
+    */
+    /*
     //insert Token(Push Notification)
     insertToken(token) {
         return axios.post(DBcon.URL + "/fcm", {
             fcm_token: token
         });
     },
+    */
+    /*
     async getTokenlist() {
         return await axios.get(DBcon.URL + "/fcm");
     },
+    */
     // JWT Token 관리
     async getRefreshToken(user_id) {
         return await axios
