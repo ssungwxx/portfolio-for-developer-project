@@ -5,7 +5,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/views/UserInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/UserInfo.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
