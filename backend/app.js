@@ -20,7 +20,7 @@ var jwt = require("./routes/jwt");
 var bodyParser = require("body-parser");
 
 var cors = require("cors");
-
+var serverless = require("serverless-http");
 var app = express();
 
 // cors 부분 허용
