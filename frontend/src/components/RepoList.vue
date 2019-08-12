@@ -1,9 +1,9 @@
 <template>
     <v-container>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xs10>
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xs10 style="display: flex">
                 <Repo
-                    class="ma-3 repocard"
+                    class="repos"
                     :repo_title="repos[i - 1].repo_title"
                     :repo_add="repos[i - 1].repo_add"
                     :repo_created="repos[i - 1].repo_createdDate"
@@ -12,6 +12,21 @@
                     :repo_no="repos[i - 1].repo_no"
                     :user_id="user_id">
                 </Repo>
+                <div class="buttons">
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                            <v-icon large class="material-icons">pageview</v-icon>
+                        </v-btn>
+                        <span>Gitlab으로 이동</span>
+                    </v-tooltip>
+
+                    <v-tooltip bottom>
+                        <v-btn slot="activator" icon @click="deleterepo(repo_no)">
+                            <v-icon large class="material-icons">delete</v-icon>
+                        </v-btn>
+                        <span>repository 삭제</span>
+                    </v-tooltip>
+                </div>
             </v-flex>
             <div class="plus" v-if="!loadMore">
                 <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos">
@@ -72,12 +87,6 @@ import Git from "@/services/GitLabRepoService";
         mounted() {
             this.getRepos();
         },
-        watch: {
-            $route: function() {
-                this.repos = [];
-                this.getRepos();
-            }
-        },
         computed: {
             getIsLogin: function() {
                 return this.$store.getters.getIsLogin;
@@ -93,8 +102,17 @@ import Git from "@/services/GitLabRepoService";
 </script>
 
 <style>
-    .repocard {
+    .repos {
+        width: 100%;
+        position: relative;
+    }
 
+    .buttons {
+        padding-top: 25px;
+        margin-left: -1px;
+        background-color: white;
+        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
     }
 
     .plus {

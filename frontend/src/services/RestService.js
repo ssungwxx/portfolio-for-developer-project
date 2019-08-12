@@ -68,7 +68,7 @@ export default {
               axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/repositories/" + id, data)
-            .then(response => console.log(response.data));
+            .then(response => (this.repos = response.data));
     },
     async updateRepository(id, data) {
       await AxiosService.checkAuthorization(data.user_id);
