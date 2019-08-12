@@ -1,3 +1,5 @@
+<!--삭제 예정-->
+
 <template>
     <v-layout column px-4>
         <v-flex v-for="i in 5" v-if="members[i-1]!==undefined">

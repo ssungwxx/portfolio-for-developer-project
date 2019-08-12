@@ -30,7 +30,7 @@
     </div>
 
     <v-spacer></v-spacer>
-    <div class="icons" v-if="getId.status === undefined">
+    <div class="icons" v-if="getIsLogin">
       <router-link to style="text-decoration: none;" v-if="getGrade != 10">
         <v-tooltip bottom>
           <v-btn slot="activator" icon v-on:click="favorite()">
@@ -107,9 +107,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import RestService from "../services/RestService";
-import {
-  mapActions
-} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: "Header",
@@ -133,13 +131,14 @@ export default {
     },
     $route: function() {
       this.search = "";
-      if (this.getId.status === 400) {
+      if (this.getId === Object) {
         this.$router.push("/")
       }
     },
   },
   mounted() {
     this.setLoginInfo();
+    console.log(this.$store.getters.getGrade)
   },
   computed: {
     getIsLogin: function() {
