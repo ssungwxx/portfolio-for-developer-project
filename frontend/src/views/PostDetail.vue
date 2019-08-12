@@ -39,7 +39,8 @@
         </div>
 
         <div style="display: flex" v-if="getIsLogin">
-            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
+            <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기"
+                          required></v-text-field>
             <v-btn icon @click="postreply">
                 <v-icon>brush</v-icon>
             </v-btn>
@@ -101,22 +102,22 @@
             };
         },
         computed: {
-          getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
-          },
-          getId: function() {
-            return this.$store.getters.getId;
-          },
-          getGrade: function() {
-            return this.$store.getters.getGrade;
-          }
+            getIsLogin: function () {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function () {
+                return this.$store.getters.getId;
+            },
+            getGrade: function () {
+                return this.$store.getters.getGrade;
+            }
         },
         beforeMount() {
             this.insertLog();
         },
         created() {
             this.getPost();
-            },
+        },
         methods: {
             async getPost() {
                 this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);

@@ -2,8 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Login.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/PostPage.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
