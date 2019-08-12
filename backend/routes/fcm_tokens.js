@@ -18,7 +18,8 @@ router.post("/", (req, res) => {
             if (data[0].cnt == 0) {
                 knex("fcm_tokens")
                     .insert(req.body)
-                    .then(data => res.json(data));
+                    .then(data => res.json(data))
+                    .catch();
             } else {
                 res.json({
                     status: 400,

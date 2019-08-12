@@ -1,26 +1,21 @@
 import RestService from "@/services/RestService"
-import JWTService from "@/services/JWTService"
 import axios from "axios"
 
 export default {
-  async checkAuthorization() {
-    const user_id = JWTService.decode(sessionStorage.getItem('jwt')).user_id;
+  async checkAuthorization(user_id) {
     let result = await RestService.checkAccessToken(user_id, {
-      "jwt" : sessionStorage.getItem('jwt')
+      "jwt": sessionStorage.getItem('jwt')
     });
-    console.log(result);
     if (result.status == 400) {
       if (result.msg == 'unmatched userId') {
 
         alert('경고: 잘못된 접근입니다. 재로그인 하십시오.');
         sessionStorage.clear();
-        this.$router.push('/');
+        router.push('/');
 
       } else {
-
         let refresh = await RestService.getRefreshToken(user_id);
-        let currentTime = new Date();
-
+        let currentTime = Date.now().toString().slice(0, 10);
         if (refresh > currentTime) {
 
           let newToken = await RestService.getNewAccessToken(user_id);
@@ -30,7 +25,7 @@ export default {
 
           alert('연결이 끊어졌습니다. 다시 로그인 해주세요.');
           sessionStorage.clear();
-          this.$router.push('/');
+          router.push('/');
 
         }
       }
