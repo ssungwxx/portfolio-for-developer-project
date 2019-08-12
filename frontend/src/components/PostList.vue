@@ -22,8 +22,8 @@
                         <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
                     </v-btn>
                 </router-link>
-                <router-link :to="userpage" style="text-decoration: none;">
-                    <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
+                <router-link :to="userpage" style="text-decoration: none; ">
+                    <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" dark>
                         <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
                     </v-btn>
                 </router-link>
