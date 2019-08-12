@@ -107,9 +107,7 @@
 import Login from "../components/Login";
 import Register from "../components/Register";
 import RestService from "../services/RestService";
-import {
-  mapActions
-} from "vuex";
+import {mapActions} from "vuex";
 
 export default {
   name: "Header",
@@ -140,6 +138,7 @@ export default {
   },
   mounted() {
     this.setLoginInfo();
+    console.log(this.$store.getters.getGrade)
   },
   computed: {
     getIsLogin: function() {

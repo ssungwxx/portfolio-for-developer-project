@@ -1,11 +1,33 @@
+<!-- 삭제 예정 -->
+
 <template>
-    <v-expansion-panel>
-        <v-expansion-panel-content>
-            <v-card slot="header" class="ma-3 repocard"> <!-- :href="repo_add" -->
-                <v-card-title primary-title class="align">
-                    <div class="repodiv">
-                        <p class="flex repotitle">{{ repo_title }}</p>
-                        <p class="flex grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
+    <div style="display: flex">
+        <v-expansion-panel>
+            <v-expansion-panel-content>
+                <v-card slot="header" class="ma-3 repocard">
+                    <v-card-title primary-title class="align">
+                        <div class="repodiv">
+                            <p class="repotitle">{{ repo_title }}</p>
+                            <p class="grey--text">recent push: {{ repo_recent.slice(0, 10) }}</p>
+                        </div>
+                    </v-card-title>
+                    <div class="py-3 repodiv">
+                        <v-layout row wrap>
+                            <v-flex>
+                                <v-sheet style="height: 100%" v-if="git" class="v-sheet--offset mx-auto"
+                                         color="grey lighten-5"
+                                         elevation="12"
+                                         max-width="calc(100% - 32px)" height="60%">
+                                    <v-sparkline :labels="Object.keys(data).reverse()"
+                                                 :value="Object.values(data).reverse()"
+                                                 :smooth="radius || false"
+                                                 :stroke-linecap="lineCap" :gradient="gradient" color="grey"
+                                                 line-width="2" padding="16" auto-draw class="zoom">
+                                    </v-sparkline>
+                                </v-sheet>
+                                <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
+                            </v-flex>
+                        </v-layout>
                     </div>
 <!--                    <v-btn icon :href="repo_add" target="_blank">-->
 <!--                        <v-icon large class="material-icons">pageview</v-icon>-->
@@ -25,44 +47,37 @@
                             <span>repository 삭제</span>
                         </v-tooltip>
                     </div>
-
-
-                </v-card-title>
-                <div class="py-3 repodiv">
-                    <v-layout row wrap>
-                        <v-flex>
-                            <v-sheet style="height: 100%" v-if="git" class="v-sheet--offset mx-auto"
-                                     color="grey lighten-5"
-                                     elevation="12"
-                                     max-width="calc(100% - 32px)" height="60%">
-                                <v-sparkline :labels="Object.keys(data).reverse()"
-                                             :value="Object.values(data).reverse()"
-                                             :smooth="radius || false"
-                                             :stroke-linecap="lineCap" :gradient="gradient" color="grey"
-                                             line-width="2" padding="16" auto-draw class="zoom">
-                                </v-sparkline>
-                            </v-sheet>
-                            <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
-                        </v-flex>
-                    </v-layout>
-                </div>
-            </v-card>
-            <v-card class="pushed">
-                <div class="blockdrag" style="margin-right: 30px; width: 80px; color: gray">
-                    <p>commit Messages</p>
-                </div>
-                <div style="overflow: hidden; width: 100%">
-                    <div v-if="git">
-                        <div style="display: flex; border-bottom: 1px gray solid; margin-bottom: 10px" v-for="i in Object.keys(message[0]).length" :key="i">
-                            <p style="min-width: 30px; overflow: hidden; text-overflow: ellipsis">{{ message[0][i - 1] }}</p>
-                            <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{ message[1][i - 1] }}</p>
+                    <div style="overflow: hidden; width: 100%">
+                        <div v-if="git">
+                            <div style="display: flex; border-bottom: 1px gray solid; margin-bottom: 10px"
+                                 v-for="i in Object.keys(message[0]).length" :key="i">
+                                <p style="min-width: 30px; overflow: hidden; text-overflow: ellipsis">{{ message[0][i -
+                                    1] }}</p>
+                                <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{
+                                    message[1][i - 1] }}</p>
+                            </div>
                         </div>
+                        <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
                     </div>
-                    <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
-                </div>
-            </v-card>
-        </v-expansion-panel-content>
-    </v-expansion-panel>
+                </v-card>
+            </v-expansion-panel-content>
+        </v-expansion-panel>
+        <div class="buttons">
+            <v-tooltip bottom>
+                <v-btn slot="activator" icon :href="repo_add" target="_blank">
+                    <v-icon large class="material-icons">pageview</v-icon>
+                </v-btn>
+                <span>Gitlab으로 이동</span>
+            </v-tooltip>
+
+            <v-tooltip bottom>
+                <v-btn slot="activator" icon @click="deleterepo(repo_no)" v-if="getId == user_id">
+                    <v-icon large class="material-icons">delete</v-icon>
+                </v-btn>
+                <span>repository 삭제</span>
+            </v-tooltip>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -77,7 +92,8 @@
             repo_created: {type: String},
             repo_recent: {type: String},
             repo_id: {type: Number},
-            user_id: {type: String}
+            repo_no: {type: Number},
+            user_id: {type: String},
         },
         data() {
             return {
@@ -105,8 +121,9 @@
         },
         methods: {
             async deleterepo(id) {
-                await RestService.deleteRepository(id);
-                // this.$router.push("../repos");
+                await RestService.deleteRepository(id, {user_id: this.user_id});
+                this.drawGraph();
+
             },
             async drawGraph() {
                 await this.getUrl();
@@ -136,7 +153,7 @@
             this.drawGraph();
         },
         watch: {
-            $route: function() {
+            $route: function () {
                 this.drawGraph();
             }
         }
@@ -146,12 +163,16 @@
 
 <style>
     .buttons {
-        position: relative;
+        background-color: white;
+        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
     }
+
     .align {
         display: flex;
         justify-content: space-between;
     }
+
     .pushed {
         display: flex;
         padding: 0 15px;
@@ -222,5 +243,10 @@
 
     .v-expansion-panel__header {
         padding: 0;
+    }
+
+    .v-expansion-panel {
+        box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
+        -webkit-box-shadow: 1px 2px 0px 0px rgba(0,0,0,.2), 1px 1px 0px 0px rgba(0,0,0,.14), 3px 1px 0px -1px rgba(0,0,0,.12);
     }
 </style>
