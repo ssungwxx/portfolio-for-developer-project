@@ -1,6 +1,5 @@
 <template>
     <v-layout mt-5 wrap>
-
         <v-flex v-for="log in Logs" >
           {{log.wlog_no}}
           <br />
