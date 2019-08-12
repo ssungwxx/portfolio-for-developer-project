@@ -1,5 +1,5 @@
 <template>
-    <v-layout style="margin-top: 60px;" column align-center >
+    <v-layout style="margin-top: 60px;" column align-center>
         <v-form ref="form" v-model="valid" style="width: 70%">
             <v-text-field v-model="user_id" :counter="15" :rules="nameRules" label="ID" required></v-text-field>
             <v-text-field v-model="user_name" :counter="12" :rules="nameRules" label="Nickname" required></v-text-field>
@@ -45,8 +45,6 @@ export default {
         }
     },
     created() {
-        console.log(this.$route.params.id);
-        console.log(this.$store)
         this.getUserInfo();
         this.setLoginInfo();
     },
@@ -68,6 +66,7 @@ export default {
         async validate () {
             if (this.$refs.form.validate()) {
                 const data = {
+                    user_id: this.user_id,
                     user_name: this.user_name,
                     user_grade: this.user_grade,
                     user_gitId: this.gitlab_id,
@@ -76,7 +75,8 @@ export default {
                     user_aboutMe: this.aboutme,
                     user_email: this.email
                 };
-                await RestService.updateUser(data)
+                await RestService.updateUser(this.user_id, data);
+                this.$router.push("/");
             }
         },
         reset () {
