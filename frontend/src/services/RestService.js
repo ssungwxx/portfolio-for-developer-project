@@ -204,8 +204,7 @@ export default {
                 {
                     headers: {
                         "Content-Type": "application/json",
-                        Authorization:
-                            "key=AAAAv_NYWa4:APA91bEv_8joSyJhsPqPh0tPA1-6-IMN01sSZ1d-N8vTHyaSOGRBpRa67GhXEDDi-yi5lOCiBpuyoUWJLcMiqQx_iWBihl66NHTtKM22kY_WpEwc8CcUyaJU4TfzwEJWZQ6pktzD8YaL"
+                        Authorization: DBcon.fcm_auth_token
                     }
                 }
             )

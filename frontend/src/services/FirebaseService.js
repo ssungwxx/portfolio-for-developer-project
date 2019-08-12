@@ -3,19 +3,12 @@ import "firebase/firestore";
 import "firebase/auth";
 import "firebase/messaging";
 import RestService from "@/services/RestService";
+import fbConfig from "../config/firebaseConfig";
 const POSTS = "posts";
 const PORTFOLIOS = "portfolios";
 
 // Setup Firebase
-const config = {
-    apiKey: "AIzaSyC48D8A57sXBcTMYbdYnigwMLj_X4HouaM",
-    authDomain: "ssafy-49605.firebaseapp.com",
-    databaseURL: "https://ssafy-49605.firebaseio.com",
-    projectId: "ssafy-49605",
-    storageBucket: "ssafy-49605.appspot.com",
-    messagingSenderId: "824421407150",
-    appId: "1:824421407150:web:c16f3997c6febade"
-};
+const config = fbConfig;
 
 firebase.initializeApp(config);
 const firestore = firebase.firestore();
