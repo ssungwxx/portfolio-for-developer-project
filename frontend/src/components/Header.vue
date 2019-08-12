@@ -124,6 +124,11 @@ export default {
     },
     $route: function() {
       this.search = "";
+    },
+    $store: function() {
+      if (this.$store.getters.getId.status === 400) {
+        this.$router.push("/")
+      }
     }
   },
   mounted() {

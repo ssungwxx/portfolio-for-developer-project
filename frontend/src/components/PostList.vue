@@ -57,7 +57,6 @@ export default {
         Post
     },
     mounted() {
-        this.getPosts();
         this.setLoginInfo();
     },
     computed: {

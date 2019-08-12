@@ -4,8 +4,12 @@
     <list default="true" id="3e01a6a9-d4ce-4b6d-a80b-482465f5816f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/Header.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/PostList.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/AddRepos.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/UserInfo.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/UserInfo.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

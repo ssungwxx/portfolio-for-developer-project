@@ -1,7 +1,6 @@
 <template>
-<!--    <h1>개인정보 확인 및 수정할 수 있는 페이지 테스트 중</h1>-->
-    <v-layout style="margin-top: 60px;" column align-center v-if="this.$store.getters.getUser_id === user_id">
-        <v-form ref="form" v-model="valid">
+    <v-layout style="margin-top: 60px;" column align-center >
+        <v-form ref="form" v-model="valid" style="width: 70%">
             <v-text-field v-model="user_id" :counter="15" :rules="nameRules" label="ID" required></v-text-field>
             <v-text-field v-model="user_name" :counter="12" :rules="nameRules" label="Nickname" required></v-text-field>
             <v-text-field v-model= "gitlab_id" label="Gitlab_ID" required></v-text-field>
@@ -9,15 +8,17 @@
             <v-text-field v-model="access_token" label="Access_token" required></v-text-field>
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
             <v-text-field v-model="aboutme" label="About_Me" required></v-text-field>
-            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" required></v-checkbox>
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">Validate</v-btn>
-            <v-btn color="error" class="mr-4" @click="reset">Reset Form</v-btn>
+            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" off-icon="check_circle_outline" on-icon="check_circle" required></v-checkbox>
+            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">정보 수정</v-btn>
+            <v-btn color="error" class="mr-4" @click="reset">정보 초기화</v-btn>
         </v-form>
     </v-layout>
 </template>
 
 <script>
 import RestService from "@/services/RestService";
+import {mapActions} from "vuex";
+
 export default {
     data() {
         return {
@@ -44,12 +45,18 @@ export default {
         }
     },
     created() {
+        console.log(this.$route.params.id);
+        console.log(this.$store)
         this.getUserInfo();
+        this.setLoginInfo();
     },
     methods: {
+        ...mapActions(['setLogin']),
+        setLoginInfo() {
+            this.setLogin();
+        },
         async getUserInfo() {
             const user = await RestService.getUser(this.user_id);
-            console.log(user)
             this.user_name = user.user_name;
             this.user_grade = user.user_grade;
             this.gitlab_id = user.user_gitId;
@@ -58,17 +65,34 @@ export default {
             this.aboutme = user.user_aboutMe;
             this.email = user.user_email;
         },
-        validate () {
+        async validate () {
             if (this.$refs.form.validate()) {
-                this.snackbar = true
+                const data = {
+                    user_name: this.user_name,
+                    user_grade: this.user_grade,
+                    user_gitId: this.gitlab_id,
+                    user_gitAdd: this.gitlab_address,
+                    user_gitToken: this.access_token,
+                    user_aboutMe: this.aboutme,
+                    user_email: this.email
+                };
+                await RestService.updateUser(data)
             }
         },
         reset () {
             this.$refs.form.reset()
         },
-        resetValidation () {
-            this.$refs.form.resetValidation()
+    },
+    computed: {
+        getIsLogin: function () {
+            return this.$store.getters.getIsLogin;
         },
+        getId: function () {
+            return this.$store.getters.getId;
+        },
+        getGrade: function () {
+            return this.$store.getters.getGrade;
+        }
     },
 }
 
