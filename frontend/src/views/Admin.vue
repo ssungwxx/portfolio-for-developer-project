@@ -33,10 +33,8 @@
         name: "Admin",
         beforeMount() {
             this.count();
-            this.insertLog();
-        },
-        created() {
             this.allcnt();
+            this.insertLog();
         },
         components: {},
         data() {
@@ -77,20 +75,43 @@
                 repo_cnt: [{
                     cnt: ""
                 }],
+                check: false,
             };
         },
         methods: {
+            admincheck() {
+                if (this.getIsLogin === true && this.getId === "admin") {
+                    this.check = true
+                } else {
+                    this.$router.push("/")
+                }
+            },
             async insertLog() {
                 this.insertLog = await RestService.insertLog("Admin");
             },
             async count() {
-                this.post_cnt = await RestService.countRepositories();
-                this.repo_cnt = await RestService.countPost();
+                const post_cnt = await RestService.countRepositories();
+                const repo_cnt = await RestService.countPost();
+                this.admincheck();
+                this.post_cnt = post_cnt;
+                this.repo_cnt = repo_cnt;
+
             },
             async allcnt() {
                 this.users = await RestService.getCount()
             },
-        }
+        },
+        computed: {
+            getIsLogin: function () {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function () {
+                return this.$store.getters.getId;
+            },
+            getGrade: function () {
+                return this.$store.getters.getGrade;
+            }
+        },
     }
 </script>
 
@@ -100,8 +121,8 @@
         height: auto;
     }
 
-    .table{
-        width:60%;
+    .table {
+        width: 60%;
     }
 
     .post {
@@ -125,6 +146,7 @@
         width: 100%;
         border: 1px solid #444444;
     }
+
     .countinfo > table > tr > th {
         border: 1px solid #444444;
         padding: 10px
