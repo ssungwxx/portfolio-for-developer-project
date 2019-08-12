@@ -65,7 +65,7 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .delete(DBcon.URL + "/repositories/" + id, data)
-            .then(response => console.log(response.data));
+            .then(response => (this.repos = response.data));
     },
     updateRepository(id, data) {
         axios.defaults.headers.jwt = sessionStorage.jwt;
