@@ -30,8 +30,8 @@
     </div>
 
     <v-spacer></v-spacer>
-    <div class="icons" v-if="getIsLogin">
-      <router-link to style="text-decoration: none;">
+    <div class="icons" v-if="getId.status === undefined">
+      <router-link to style="text-decoration: none;" v-if="getGrade != 10">
         <v-tooltip bottom>
           <v-btn slot="activator" icon v-on:click="favorite()">
             <v-icon color="white" id="bookMark">star</v-icon>
@@ -40,7 +40,7 @@
         </v-tooltip>
       </router-link>
 
-      <router-link :to="`/users/${getId}/repos`" style="text-decoration: none;">
+      <router-link :to="`/users/${getId}/repos`" v-if="getGrade != 10" style="text-decoration: none;">
         <v-tooltip bottom>
           <v-btn slot="activator" icon>
             <v-icon color="white">markunread_mailbox</v-icon>
@@ -49,7 +49,7 @@
         </v-tooltip>
       </router-link>
 
-      <router-link :to="`/users/${getId}/posts`" style="text-decoration: none;">
+      <router-link :to="`/users/${getId}/posts`" v-if="getGrade != 10" style="text-decoration: none;">
         <v-tooltip bottom>
           <v-btn slot="activator" icon>
             <v-icon color="white">description</v-icon>
@@ -58,12 +58,21 @@
         </v-tooltip>
       </router-link>
 
-      <router-link :to="`/users/${getId}/userinfo`" style="text-decoration: none;">
+      <router-link :to="`/users/${getId}/userinfo`" v-if="getGrade != 10" style="text-decoration: none;">
         <v-tooltip bottom>
           <v-btn slot="activator" icon>
             <v-icon color="white">settings</v-icon>
           </v-btn>
           <span>Settings</span>
+        </v-tooltip>
+      </router-link>
+
+      <router-link :to="`/admin`" v-if="getGrade == 10" style="text-decoration: none;">
+        <v-tooltip bottom>
+          <v-btn slot="activator" icon>
+            <v-icon color="white">lock</v-icon>
+          </v-btn>
+          <span>Admin Page</span>
         </v-tooltip>
       </router-link>
 
@@ -124,7 +133,10 @@ export default {
     },
     $route: function() {
       this.search = "";
-    }
+      if (this.getId.status === 400) {
+        this.$router.push("/")
+      }
+    },
   },
   mounted() {
     this.setLoginInfo();
