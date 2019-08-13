@@ -1,15 +1,15 @@
 <template>
-<div>
-    <v-img :src="imgSrc" aspect-ratio="3">
-        <v-layout align-center justify-center row fill-height>
-            <v-flex text-xs-center>
-                <span class="text-shadow display-3 font-weight-bold">
-                    <slot name="text" />
-                </span>
-            </v-flex>
-        </v-layout>
-    </v-img>
-</div>
+    <div>
+        <v-img class="imgdiv" :src="imgSrc" aspect-ratio="3">
+            <v-layout align-center justify-center row fill-height>
+                <v-flex text-xs-center>
+                    <span class="text-shadow display-3 font-weight-bold">
+                        <slot name="text" />
+                    </span>
+                </v-flex>
+            </v-layout>
+        </v-img>
+    </div>
 </template>
 
 
@@ -28,4 +28,11 @@ export default {
 .text-shadow {
     text-shadow: 0 0 15px rgb(255, 255, 255);
 }
+
+.imgdiv > .v-image__image {
+    opacity: 0.5;
+    background-size: 120%;
+    background-position: center 20%;
+}
+
 </style>

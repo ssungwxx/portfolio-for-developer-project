@@ -241,13 +241,12 @@ export default {
 };
 </script>
 <style>
-.post-detail-buttons {
-    width: 10%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
-}
+    .post-detail-buttons {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
 .post-detail-button {
     margin: 0;
@@ -266,18 +265,35 @@ export default {
     white-space: nowrap;
 }
 
-.post-user-id {
-    width: 10%;
-}
+    .post-user-id {
+        width: 10%;
+    }
 
-.post-reply>table>tr>th {
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
-    padding: 3px;
-}
+    .post-reply > table > tr > th {
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+        padding: 3px;
+    }
+
+    .post-reply > table > tr > td {
+        line-height: 36px;
+        /*overflow: hidden;*/
+        /*text-overflow: ellipsis;*/
+        /*white-space: nowrap;*/
+        border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+        padding: 3px;
+    }
+
+    .post-reply > table {
+        width: 100%;
+    }
+
+    .post-comment {
+        text-align: left;
+    }
 
 .post-reply>table>tr>td {
     line-height: 36px;

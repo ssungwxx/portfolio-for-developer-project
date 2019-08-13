@@ -51,6 +51,7 @@ export default {
             .get(DBcon.URL + "/repositories")
             .then(response => (this.repos = response.data));
     },
+
     getRepository(id) {
         return axios
             .get(DBcon.URL + "/repositories/" + id)
