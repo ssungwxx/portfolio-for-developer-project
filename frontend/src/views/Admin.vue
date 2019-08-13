@@ -26,9 +26,9 @@
                 </table>
             </div>
         </div>
-        <v-layout v-else-if="focus === 'logs'">
+        <v-layout v-else-if="focus === 'logs'" style="width: 80%; margin-left: auto; margin-right: auto">
             <div>
-                <div v-for="log in Logs.slice(0, limit)" style="display: inline-block; width: 18%; margin: 10px 1% 10px 1%">
+                <div class="log" v-for="log in Logs.slice(0, limit)">
                     <div>{{ log.wlog_no }} {{ log.user_id }}</div>
                     <div>{{ log.wlog_path }}</div>
                     <div>{{ log.wlog_date }}</div>
@@ -195,6 +195,26 @@
 </script>
 
 <style>
+    .log {
+        border: 2px orange solid;
+        display: inline-grid;
+        width: 18%;
+        margin: 10px 1% 10px 1%;
+        border-radius: 15px;
+        height: 120px;
+        align-items: center;
+        background-color: rgba(255, 150, 0, 0.2);
+    }
+
+    .log > div {
+        font-family: Consolas;
+        font-size: 1.2vw;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+
     .delegatetable {
         border: gray 1px solid;
         border-collapse: collapse;
@@ -257,7 +277,7 @@
 
     .countinfo > table > tr > th, .countinfo > table > tr > td {
         border: 1px solid #444444;
-        padding: 10px;
+        padding: 5px;
         font-family: Consolas !important;
         font-size: 1.5vw;
     }

@@ -5,7 +5,7 @@
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Admin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Admin.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/Delegate.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Delegate.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/WebLog.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/WebLog.vue" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -92,7 +92,7 @@
       <workItem from="1564360942070" duration="54002000" />
       <workItem from="1564616018371" duration="30171000" />
       <workItem from="1564964115129" duration="21462000" />
-      <workItem from="1565052485079" duration="110553000" />
+      <workItem from="1565052485079" duration="112142000" />
     </task>
     <servers />
   </component>
