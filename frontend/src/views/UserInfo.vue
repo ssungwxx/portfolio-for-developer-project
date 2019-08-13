@@ -1,7 +1,7 @@
 <template>
     <v-layout style="margin-top: 60px;" column align-center>
         <v-form ref="form" v-model="valid" style="width: 70%">
-            <v-text-field disabled="true" v-model="user_id" :counter="20" label="ID" required></v-text-field>
+            <v-text-field disabled v-model="user_id" :counter="20" label="ID" required></v-text-field>
             <v-text-field v-model="user_name" :counter="12" :rules="nameRules" label="Nickname" required></v-text-field>
             <v-text-field v-model= "gitlab_id" label="Gitlab_ID" required></v-text-field>
             <v-text-field v-model="gitlab_address" label="Gitlab_address" required></v-text-field>
