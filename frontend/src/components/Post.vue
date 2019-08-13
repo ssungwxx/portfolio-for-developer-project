@@ -25,7 +25,7 @@ export default {
         user_id: {type: String}
     },
     components: {
-        PostDetail,
+        PostDetail
     },
     data() {
         return {

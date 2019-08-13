@@ -125,10 +125,10 @@
         },
         methods: {
             admincheck() {
-                if (this.getIsLogin === true && this.getId === "admin") {
-                    this.check = true
+                if (this.getIsLogin && this.getGrade == 10) {
+                    this.check = true;
                 } else {
-                    this.$router.push("/")
+                    this.$router.push("/");
                 }
             },
             async insertLog() {
@@ -146,7 +146,7 @@
                 this.users = await RestService.getCount()
             },
             async getLog() {
-                this.Logs = await RestService.getLog();
+                this.Logs = await AdminRestService.getAllWebLogs();
             },
             async getUsers() {
                 this.userList = await AdminRestService.getUsers();

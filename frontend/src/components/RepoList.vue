@@ -21,10 +21,10 @@
                     </v-tooltip>
 
                     <v-tooltip bottom>
-                        <v-btn slot="activator" icon @click="deleterepo(repos[i - 1].repo_no)" v-if="getId == user_id">
+                        <v-btn slot="activator" icon @click="deleterepo(repos[i - 1].repo_no)" v-if="getIsLogin && getId == user_id">
                             <v-icon large class="material-icons">delete</v-icon>
                         </v-btn>
-                        <span>repository 삭제</span>
+                        <span>삭제</span>
                     </v-tooltip>
                 </div>
             </v-flex>
@@ -34,12 +34,12 @@
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
-                    <router-link :to="Addrepos" style="text-decoration: none; margin-right: 20px;" v-if="getId == user_id">
+                    <router-link :to="Addrepos" style="text-decoration: none; margin-right: 20px;" v-if="getIsLogin && getId == user_id">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                             <v-icon size="25" class="mr-2">fa-edit</v-icon>추가하기
                         </v-btn>
                     </router-link>
-                    <router-link :to="userpage" style="text-decoration: none;">
+                    <router-link :to="goback" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
                             <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
                         </v-btn>
@@ -66,17 +66,24 @@ import Git from "@/services/GitLabRepoService";
             user_id: {type: String}
         },
         components: {
-            Repo,
+            Repo
         },
         data() {
             return {
                 repos: [],
-                userpage:`/users/${this.user_id}`,
+                goback: "",
                 Addrepos: `/users/${this.user_id}/addrepo`,
                 loadlimits: this.limits,
             }
         },
         methods: {
+          setGoback() {
+              if (this.getIsLogin) {
+                  this.goback = '/';
+              } else {
+                  this.goback = '/users/' + this.user_id;
+              }
+          },
             async getRepos() {
                 this.repos = await RestService.getRepository(this.user_id);
             },
@@ -89,6 +96,7 @@ import Git from "@/services/GitLabRepoService";
         },
         mounted() {
             this.getRepos();
+            this.setGoback();
         },
         computed: {
             getIsLogin: function() {

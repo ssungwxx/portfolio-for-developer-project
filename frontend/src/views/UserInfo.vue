@@ -22,7 +22,7 @@ import {mapActions} from "vuex";
 export default {
     data() {
         return {
-            user_id: this.$route.params.id,
+            user_id: "",
             user_name: "",
             user_grade: "",
             gitlab_id: "",
@@ -49,6 +49,7 @@ export default {
     },
     methods: {
         async getUserInfo() {
+            this.user_id = this.getId;
             const user = await RestService.getUser(this.user_id);
             this.user_name = user.user_name;
             this.user_grade = user.user_grade;
@@ -88,7 +89,7 @@ export default {
         getGrade: function () {
             return this.$store.getters.getGrade;
         }
-    },
+    }
 }
 
 </script>

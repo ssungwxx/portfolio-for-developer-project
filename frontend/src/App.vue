@@ -20,7 +20,6 @@
     import Header from "./components/Header";
     import Sidebar from "./components/Sidebar";
     import TopButton from "./components/TopButton";
-    import TranslateButton from "./components/TranslateButton";
     import SidebarMenu from "vue-sidebar-menu";
     import {store} from "./vuex/store";
 
@@ -32,7 +31,6 @@
             Header,
             Sidebar,
             TopButton,
-            TranslateButton,
             SidebarMenu
         },
         data() {

@@ -78,19 +78,7 @@
                 len: 0,
             }
         },
-        computed: {
-          getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
-          },
-          getId: function() {
-            return this.$store.getters.getId;
-          },
-          getGrade: function() {
-            return this.$store.getters.getGrade;
-          }
-        },
         methods: {
-
             async drawGraph() {
                 await this.getUrl();
                 await this.getMessage();
@@ -110,7 +98,7 @@
                 this.message[1] = Object.values(mess);
             },
             async getUrl() {
-                const user = await RestService.getUser(this.user_id);
+                const user = await RestService.getGitInfo(this.user_id);
                 this.url = user.user_gitAdd;
                 this.token = user.user_gitToken;
             }

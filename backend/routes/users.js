@@ -169,6 +169,13 @@ router.get("/:id", (req, res) => {
         .then(data => res.json(data));
 });
 
+router.get("/gitAdd/:id", (req, res) => {
+  knex("users")
+  .select("user_gitAdd", "user_gitToken", "user_gitId")
+  .where("user_id", req.params.id)
+  .then(data => res.json(data));
+});
+
 // Update User
 router.put("/", (req, res) => {
     // 헤더에 jwt가 넘어오지 않을 때

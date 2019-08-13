@@ -1,78 +1,38 @@
 <template>
-    <v-layout row wrap mw-700 v-if="write === false">
-        <v-flex
-            v-for="i in posts.length > loadlimits ? loadlimits : posts.length"
-            :class="'md' + 12 / column"
-            xs12
-            px-3
-        >
-            <Post
-                :post_index="i"
-                :post_no="posts[i - 1].post_no"
-                :post_date="posts[i - 1].post_date"
-                :post_title="posts[i - 1].post_title"
-                :post_content="posts[i - 1].post_content"
-                :user_id="user_id"
-            ></Post>
-            <v-divider></v-divider>
-        </v-flex>
+<v-layout row wrap mw-700 v-if="write === false">
+    <v-flex v-for="i in posts.length > loadlimits ? loadlimits : posts.length" :class="'md' + 12 / column" xs12 px-3>
+        <Post :post_index="i" :post_no="posts[i - 1].post_no" :post_date="posts[i - 1].post_date" :post_title="posts[i - 1].post_title" :post_content="posts[i - 1].post_content" :user_id="user_id"></Post>
+        <v-divider></v-divider>
+    </v-flex>
 
-        <div class="plus" v-if="!loadMore">
-            <v-btn
-                class="target"
-                style="margin-right: auto;"
-                color="#ffc0cb"
-                dark
-                v-on:click="loadMorePosts"
-            >
-                <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+    <div class="plus" v-if="!loadMore">
+        <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
+            <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+        </v-btn>
+        <div style="display: flex; justify-content: center;">
+            <v-btn class="target postbutton" style="margin-top: 3rem" @click="writeon" color="#ffc0cb" dark v-if="getIsLogin && getId == user_id">
+                <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
             </v-btn>
-            <div style="display: flex; justify-content: center;">
-                <v-btn
-                    class="target postbutton"
-                    style="margin-top: 3rem"
-                    @click="writeon"
-                    color="#ffc0cb"
-                    dark
-                    v-if="getId == user_id"
-                >
-                    <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
+
+            <router-link :to="goback" style="text-decoration: none; ">
+                <v-btn class="target postbutton" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" dark>
+                    <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
                 </v-btn>
-                <router-link :to="userpage" style="text-decoration: none; ">
-                    <v-btn
-                        class="target postbutton"
-                        style="margin-right: auto; margin-top: 3rem"
-                        color="#ffc0cb"
-                        dark
-                    >
-                        <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
-                    </v-btn>
-                </router-link>
-            </div>
+            </router-link>
         </div>
-    </v-layout>
-    <v-form ref="form" v-model="valid" lazy-validation class="writetop" v-else>
-        <div class="writediv">
-            <v-text-field
-                class="write-post"
-                v-model="title"
-                :rules="titleRules"
-                label="제목"
-                required
-            ></v-text-field>
-            <v-textarea
-                class="write-post"
-                v-model="content"
-                :rules="contentRules"
-                label="내용"
-                required
-            ></v-textarea>
-        </div>
-        <div class="btns">
-            <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
-            <v-btn color="error" class="mr-4" @click="writeon">돌아가기</v-btn>
-        </div>
-    </v-form>
+    </div>
+</v-layout>
+
+<v-form ref="form" v-model="valid" lazy-validation class="writetop" v-else>
+    <div class="writediv">
+        <v-text-field class="write-post" v-model="title" :rules="titleRules" label="제목" required></v-text-field>
+        <v-textarea class="write-post" v-model="content" :rules="contentRules" label="내용" required></v-textarea>
+    </div>
+    <div class="btns">
+        <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">쓰기</v-btn>
+        <v-btn color="error" class="mr-4" @click="writeon">돌아가기</v-btn>
+    </div>
+</v-form>
 </template>
 <script>
 import Post from "@/components/Post";
@@ -91,7 +51,7 @@ export default {
         return {
             posts: [],
             loadlimits: this.limits,
-            userpage: `/users/${this.user_id}`,
+            goback: "",
             write: false,
             valid: true,
             title: "",
@@ -103,6 +63,9 @@ export default {
     },
     components: {
         Post
+    },
+    mounted() {
+        this.setGoback();
     },
     computed: {
         getIsLogin: function() {
@@ -116,6 +79,13 @@ export default {
         }
     },
     methods: {
+        setGoback() {
+            if (this.getIsLogin) {
+                this.goback = '/';
+            } else {
+                this.goback = '/users/' + this.user_id;
+            }
+        },
         writeon() {
             if (this.write === false) {
                 this.write = true;
@@ -159,21 +129,19 @@ export default {
         async reset() {
             this.$refs.form.reset();
         }
-        /*
-        async pushNotification() {
-            var list = await this.getTokenlist();
-            let test = [];
-            for (var i = 0; i < list.data.length; i++) {
-                test[i] = list.data[i].fcm_token;
-            }
-            var body = "게시물이 등록되었습니다.";
-            var title = "PostPage";
-            //const temp = RestService.pushNotification({body:body},title,test);
-        },
-        getTokenlist() {
-            return RestService.getTokenlist();
-        }
-        */
+        // async pushNotification() {
+        //     var list = await this.getTokenlist();
+        //     let test = [];
+        //     for (var i = 0; i < list.data.length; i++) {
+        //         test[i] = list.data[i].fcm_token;
+        //     }
+        //     var body = "게시물이 등록되었습니다.";
+        //     var title = "PostPage";
+        //     //const temp = RestService.pushNotification({body:body},title,test);
+        // },
+        // getTokenlist() {
+        //     return RestService.getTokenlist();
+        // }
     },
     created() {
         this.getPosts();

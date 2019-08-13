@@ -84,7 +84,7 @@ import Git from "@/services/GitLabRepoService";
                 this.$refs.form.reset()
             },
             async getUserInfo() {
-                this.user = await RestService.getUser(this.user_id);
+                this.user = await RestService.getGitInfo(this.user_id);
                 if (this.user.user_gitAdd !== null) {
                     this.gitlabApi = this.user.user_gitAdd;
                 }
