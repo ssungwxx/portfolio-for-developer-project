@@ -134,7 +134,6 @@ export default {
             .then(response => (this.portfolios = response.data));
     },
     loginUser(data) {
-        console.log("jenkins test code");
         return axios.post(DBcon.URL + "/users/login", data).then(res => {
             return res.data;
         });
