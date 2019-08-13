@@ -73,6 +73,7 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
+    console.log("test");
     let token;
     let refresh_token;
     async function getGrade() {
@@ -170,10 +171,10 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/gitAdd/:id", (req, res) => {
-  knex("users")
-  .select("user_gitAdd", "user_gitToken", "user_gitId")
-  .where("user_id", req.params.id)
-  .then(data => res.json(data));
+    knex("users")
+        .select("user_gitAdd", "user_gitToken", "user_gitId")
+        .where("user_id", req.params.id)
+        .then(data => res.json(data));
 });
 
 // Update User
