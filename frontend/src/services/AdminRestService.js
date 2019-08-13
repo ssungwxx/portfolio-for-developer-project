@@ -20,12 +20,12 @@ export default {
     },
     async updateUser(user_id, data) {
         return await axios
-            .put(DBcon.adminURL + "/users" + user_id, data)
+            .put(DBcon.adminURL + "/users/" + user_id, data)
             .then(res => res.data);
     },
     async deleteUser(user_id) {
         return await axios
-            .delete(DBcon.adminURL + "/users" + user_id)
+            .delete(DBcon.adminURL + "/users/" + user_id)
             .then(res => res.data);
     },
     // Repositories
@@ -56,7 +56,7 @@ export default {
     },
     async deleteRepository(repo_no) {
         return await axios
-            .delete(DBcon.adminURL + "/repositories" + repo_no)
+            .delete(DBcon.adminURL + "/repositories/" + repo_no)
             .then(res => res.data);
     },
     // Posts

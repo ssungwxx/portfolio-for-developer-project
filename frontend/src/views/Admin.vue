@@ -49,7 +49,7 @@
                     <td class="userdata">{{user.user_id}}</td><td class="userdata">{{user.user_name}}</td>
                     <td class="userdata">{{user.user_grade}}</td>
                     <td class="userdata">
-                        <select class="customselect" id="`TestSelect${i}`" name="SelectValue" @change="updateUser(i, user.user_id)">
+                        <select class="customselect" :id="`TestSelect${i}`" name="SelectValue" @change="updateUser(i, user.user_id)">
                             <option value="0" selected v-if="user.user_grade === 0">방문자</option>
                             <option value="0" v-else>방문자</option>
                             <option value="5" selected v-if="user.user_grade === 5">팀원</option>
@@ -154,9 +154,9 @@
             async updateUser(i, id){
                 const newGrade = document.getElementById(`TestSelect${i}`);
                 const data = {
-                    "user_grade" : newGrade.options.value
+                    "user_grade" : newGrade.options[newGrade.selectedIndex].value
                 };
-                await AdminRestService.updateUser(id, selectedValue);
+                await AdminRestService.updateUser(id, data);
             },
         },
         computed: {
