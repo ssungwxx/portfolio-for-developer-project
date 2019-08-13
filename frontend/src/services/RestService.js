@@ -107,7 +107,7 @@ export default {
         return counts;
     },
     async getUser(id) {
-        await AxiosService.checkAuthorization(id);
+        //await AxiosService.checkAuthorization(id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .get(DBcon.URL + "/users/" + id)
