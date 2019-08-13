@@ -1,6 +1,6 @@
 <template>
     <div>
-        <ImgBanner imgSrc="">
+        <ImgBanner imgSrc="https://cdn.pixabay.com/photo/2016/02/01/16/51/ascending-graph-1173935_960_720.png">
             <div class="target" style="line-height:1.2em;font-size:1.2em;" slot="text">Repositories</div>
         </ImgBanner>
         <v-container>

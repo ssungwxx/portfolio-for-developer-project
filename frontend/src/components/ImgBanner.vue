@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-img :src="imgSrc" aspect-ratio="3">
+        <v-img class="imgdiv" :src="imgSrc" aspect-ratio="3">
             <v-layout align-center justify-center row fill-height>
                 <v-flex text-xs-center>
                     <span class="text-shadow display-3 font-weight-bold">
@@ -27,6 +27,12 @@ export default {
 <style>
 .text-shadow {
     text-shadow: 0 0 15px rgb(255, 255, 255);
+}
+
+.imgdiv > .v-image__image {
+    opacity: 0.5;
+    background-size: 120%;
+    background-position: center 20%;
 }
 
 </style>

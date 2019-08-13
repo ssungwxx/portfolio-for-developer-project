@@ -47,6 +47,7 @@ export default {
 }
 
 .service {
+    margin-top: 50px;
     margin-bottom: 30px;
 }
 
