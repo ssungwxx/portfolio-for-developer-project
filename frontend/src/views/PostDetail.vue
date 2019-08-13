@@ -249,7 +249,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-
     }
 
     .post-detail-button {
@@ -284,11 +283,15 @@
 
     .post-reply > table > tr > td {
         line-height: 36px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+        /*overflow: hidden;*/
+        /*text-overflow: ellipsis;*/
+        /*white-space: nowrap;*/
         border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
         padding: 3px;
+    }
+
+    .post-reply > table {
+        width: 100%;
     }
 
     .post-comment {
