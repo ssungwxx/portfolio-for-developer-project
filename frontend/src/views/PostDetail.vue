@@ -38,13 +38,13 @@
         </v-flex>
     </div>
 
-    <div style="display: flex" v-if="getIsLogin">
+    <div style="display: flex; width: 90%; margin: auto; justify-content: flex-end;" v-if="getIsLogin" @keydown.enter="postreply">
         <v-text-field class="write-reply" v-model="reply" :rules="commentRules" label="댓글 쓰기" required></v-text-field>
-        <v-btn icon @click="postreply">
+        <v-btn class="brush" icon @click="postreply">
             <v-icon>brush</v-icon>
         </v-btn>
     </div>
-    <div class="post-reply" v-if="comments">
+    <div class="post-reply" v-if="comments.length !== 0">
         <table>
             <tr>
                 <th class="post-user-id">User ID</th>
@@ -241,6 +241,11 @@ export default {
 };
 </script>
 <style>
+    .brush {
+        margin: 0;
+        position: absolute;
+    }
+
     .post-detail-buttons {
         width: 10%;
         overflow: hidden;
@@ -248,22 +253,23 @@ export default {
         white-space: nowrap;
     }
 
-.post-detail-button {
-    margin: 0;
-}
+    .post-detail-button {
+        margin: 0;
+    }
 
-.post-reply>table {
-    border: 3px rgba(0, 0, 0, 0.5) double;
-    overflow: hidden;
-    border-collapse: collapse;
-}
+    .post-reply > table {
+        border: 3px rgba(0, 0, 0, 0.5) double;
+        border-radius: 15px;
+        overflow: hidden;
+        border-collapse: collapse;
+    }
 
-.post-date {
-    width: 10%;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
+    .post-date {
+        width: 10%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
     .post-user-id {
         width: 10%;
@@ -288,109 +294,96 @@ export default {
     }
 
     .post-reply > table {
-        width: 100%;
+        width: 90%;
+        margin: auto;
     }
 
     .post-comment {
         text-align: left;
     }
 
-.post-reply>table>tr>td {
-    line-height: 36px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
-    padding: 3px;
-}
 
-.post-comment {
-    text-align: left;
-}
-
-.time {
-    font-size: 1.2vw;
-    margin-left: 80%;
-    font-color: black;
-}
-
-.mw-700 {
-    max-width: 700px;
-    margin: auto;
-}
-
-.table-content {
-    width: auto;
-    height: auto;
-    text-align: left;
-    font-size: 2.5vw;
-}
-
-.headline {
-    overflow: hidden;
-    line-height: 1.5;
-    text-overflow: ellipsis;
-    height: 1.5em;
-}
-
-.grey--text {
-    overflow: hidden;
-    line-height: 1.2;
-    text-overflow: ellipsis;
-    height: 3.6em;
-}
-
-.table-div {
-    display: flex;
-    margin-top: 64px;
-}
-
-.table-head {
-    font-size: 3.5vw;
-}
-
-.row-content {
-    margin-top: 20px;
-}
-
-.row-title {
-    border-bottom: 1px gray solid;
-}
-
-@media screen and (max-width: 600px) {
-    .table-head {
-        font-size: 20px;
+    .time {
+        font-size: 1.2vw;
+        margin-left: 80%;
+        font-color: black;
     }
 
     .table-content {
         width: auto;
         height: auto;
         text-align: left;
-        font-size: 14px;
+        font-size: 2.5vw;
     }
-}
 
-.table-title {
-    margin: 0;
-    color: gray;
-    display: flex;
-    justify-content: flex-end;
-}
+    .headline {
+        overflow: hidden;
+        line-height: 1.5;
+        text-overflow: ellipsis;
+        height: 1.5em;
+    }
 
-th {
-    text-align: left;
-}
+    .grey--text {
+        overflow: hidden;
+        line-height: 1.2;
+        text-overflow: ellipsis;
+        height: 3.6em;
+    }
 
-.table {
-    flex-basis: 80%;
-    max-width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
+    .table-div {
+        display: flex;
+        margin-top: 64px;
+        width: 90%;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.table-date {
-    font-size: 1vw;
-    margin-left: 10px;
-    color: gray;
-}
+    .table-head {
+        font-size: 3.5vw;
+    }
+
+    .row-content {
+        margin-top: 20px;
+    }
+
+    .row-title {
+        border-bottom: 1px gray solid;
+    }
+
+    @media screen and (max-width: 600px) {
+        .table-head {
+            font-size: 20px;
+        }
+
+        .table-content {
+            width: auto;
+            height: auto;
+            text-align: left;
+            font-size: 14px;
+        }
+    }
+
+    .table-title {
+        margin: 0;
+        color: gray;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    th {
+        text-align: left;
+    }
+
+    .table {
+        flex-basis: 100%;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .table-date {
+        font-size: 1vw;
+        margin-left: 10px;
+        color: gray;
+    }
 </style>
