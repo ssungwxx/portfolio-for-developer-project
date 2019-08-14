@@ -133,8 +133,8 @@ export default {
             this.search = "";
         },
     },
-    mounted() {
-        this.setLoginInfo();
+    async mounted() {
+        await this.setLoginInfo();
     },
     computed: {
         getIsLogin: function() {
@@ -149,8 +149,8 @@ export default {
     },
     methods: {
         ...mapActions(['setLogin']),
-        setLoginInfo() {
-            this.setLogin();
+        async setLoginInfo() {
+            await this.setLogin();
         },
         favorite() {
             var bookmarkURL = window.location.href;

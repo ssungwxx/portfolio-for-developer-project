@@ -1,7 +1,7 @@
 <template>
     <v-layout style="margin-top: 60px;" column align-center>
         <v-form ref="form" v-model="valid" style="width: 70%">
-            <v-text-field disabled="true" v-model="user_id" :counter="20" label="ID" required></v-text-field>
+            <v-text-field disabled v-model="getId" :counter="20" label="ID" required></v-text-field>
             <v-text-field v-model="user_name" :counter="12" :rules="nameRules" label="Nickname" required></v-text-field>
             <v-text-field v-model= "gitlab_id" label="Gitlab_ID" required></v-text-field>
             <v-text-field v-model="gitlab_address" label="Gitlab_address" required></v-text-field>
@@ -22,7 +22,6 @@ import {mapActions} from "vuex";
 export default {
     data() {
         return {
-            user_id: "",
             user_name: "",
             user_grade: "",
             gitlab_id: "",
@@ -44,13 +43,17 @@ export default {
             checkbox: false,
         }
     },
-    created() {
-        this.getUserInfo();
+    async mounted() {
+      await this.setLoginInfo();
+      await this.getUserInfo();
     },
     methods: {
+      ...mapActions(['setLogin']),
+      async setLoginInfo() {
+        await this.setLogin();
+      },
         async getUserInfo() {
-            this.user_id = this.getId;
-            const user = await RestService.getUser(this.user_id);
+            const user = await RestService.getUser(this.getId);
             this.user_name = user.user_name;
             this.user_grade = user.user_grade;
             this.gitlab_id = user.user_gitId;
@@ -59,10 +62,9 @@ export default {
             this.aboutme = user.user_aboutMe;
             this.email = user.user_email;
         },
-        async validate () {
+        async validate() {
             if (this.$refs.form.validate()) {
                 const data = {
-                    user_id: this.user_id,
                     user_name: this.user_name,
                     user_grade: this.user_grade,
                     user_gitId: this.gitlab_id,
@@ -71,7 +73,7 @@ export default {
                     user_aboutMe: this.aboutme,
                     user_email: this.email
                 };
-                await RestService.updateUser(this.user_id, data);
+                await RestService.updateUser(this.getId, data);
                 this.$router.push("/");
             }
         },

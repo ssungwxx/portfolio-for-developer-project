@@ -100,6 +100,9 @@ export default {
             ],
         };
     },
+    async  mounted() {
+      await this.setLoginInfo();
+    },
     computed: {
         getIsLogin: function() {
             return this.$store.getters.getIsLogin;
@@ -118,6 +121,10 @@ export default {
         this.getPost();
     },
     methods: {
+      ...mapActions(['setLogin']),
+      async setLoginInfo() {
+        await this.setLogin();
+      },
         async getPost() {
             this.post = await RestService.getPostDetail(this.user_id, this.post_index - 1);
             const date = this.post.post_date;
@@ -160,7 +167,8 @@ export default {
         async edit(id, no) {
             const comment = document.querySelector(`#edit${id} > input`).value;
             const data = {
-                pcom_comment: comment
+                pcom_comment: comment,
+                user_id: this.getId
             };
             await RestService.updatePostComment(no, data);
             this.getComments();

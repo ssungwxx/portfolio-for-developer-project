@@ -10,8 +10,25 @@ import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
 import UserInfo from "./views/UserInfo";
 import AddRepos from "./views/AddRepos";
+import {store} from "./vuex/store";
 
 Vue.use(Router);
+
+const requireAuth = () => (to, from, next) => {
+  if (store.getters.getIsLogin) {
+    console.log(store.getters.getIsLogin);
+    return next();
+  }
+  console.log(store.getters.getIsLogin);
+  next('/');
+};
+
+const requireAdmin = () => (to, from, next) => {
+  if(store.getters.getIsLogin && store.getters.getGrade == 10) {
+    return next();
+  }
+  next('/');
+};
 
 export default new Router({
     mode: "history",
@@ -45,27 +62,32 @@ export default new Router({
         {
             path: "/admin",
             name: "admin",
-            component: Admin
+            component: Admin,
+            beforeEnter: requireAdmin()
         },
         {
             path: "/delegate",
             name: "delegate",
-            component: Delegate
+            component: Delegate,
+            beforeEnter: requireAdmin()
         },
         {
             path: "/WebLog",
             name: "weblog",
-            component: WebLog
+            component: WebLog,
+            beforeEnter: requireAdmin()
         },
         {
           path: "/users/:id/userinfo",
           name: "userinfo",
-          component: UserInfo
+          component: UserInfo,
+          beforeEnter: requireAuth()
         },
         {
             path: "/users/:id/addrepo",
             name: "Addrepo",
-            component: AddRepos
+            component: AddRepos,
+            beforeEnter: requireAuth()
         }
     ]
 });
