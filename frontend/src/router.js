@@ -64,12 +64,6 @@ export default new Router({
             beforeEnter: requireAdmin()
         },
         {
-            path: "/delegate",
-            name: "delegate",
-            component: Delegate,
-            beforeEnter: requireAdmin()
-        },
-        {
             path: "/WebLog",
             name: "weblog",
             component: WebLog,
