@@ -99,6 +99,8 @@ import Git from "@/services/GitLabRepoService";
             },
             async deleterepo(id) {
                 await RestService.deleteRepository(id, {user_id: this.user_id});
+
+                this.getRepos();
             },
         },
         mounted() {

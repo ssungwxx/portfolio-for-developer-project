@@ -27,7 +27,6 @@
                             :append-icon="show ? 'visibility' : 'visibility_off'"
                             :rules="pwRules" :type="show ? 'text' : 'password'"
                             label="Password"
-                            @keydown.enter="Login"
                             @click:append="show = !show"
                             required></v-text-field>
                         </v-form>
