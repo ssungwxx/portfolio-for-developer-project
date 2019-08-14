@@ -1,7 +1,7 @@
 <template>
-    <v-container>
+    <v-container mt-5>
         <v-layout wrap>
-            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xs10 style="display: flex">
+            <v-flex class="flexlist" v-for="i in repos.length > loadlimits ? loadlimits : repos.length" xs8 style="display: flex">
                 <Repo
                     class="repos"
                     :repo_title="repos[i - 1].repo_title"
@@ -29,19 +29,19 @@
                 </div>
             </v-flex>
             <div class="plus" v-if="!loadMore">
-                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos">
-                    <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos" xs12>
+                    <v-icon size="1.7vw" class="mr-2">fa-plus</v-icon><p style="font-size: 1vw">더 보기</p>
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
-                    <router-link :to="Addrepos" style="text-decoration: none; margin-right: 20px;" v-if="getIsLogin && getId == user_id">
-                        <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
-                            <v-icon size="25" class="mr-2">fa-edit</v-icon>추가하기
+                    <router-link :to="Addrepos" style="text-decoration: none; margin-right: 1.2vw;" v-if="getIsLogin && getId == user_id">
+                        <v-btn class="target" style="margin-right: auto; margin-top: 1vw" color="#ffc0cb"dark>
+                            <v-icon size="1.7vw" class="mr-2">fa-edit</v-icon><p style="font-size: 1vw">추가하기</p>
                         </v-btn>
                     </router-link>
                     <router-link :to="goback" style="text-decoration: none;">
-                        <v-btn class="target" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb"dark>
-                            <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
+                        <v-btn class="target" style="margin-right: auto; margin-top: 1vw" color="#ffc0cb"dark>
+                            <v-icon size="1.7vw" class="mr-2">fa-home</v-icon><p style="font-size: 1vw">돌아가기</p>
                         </v-btn>
                     </router-link>
                 </div>
