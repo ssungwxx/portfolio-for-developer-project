@@ -16,6 +16,7 @@ const requireAuth = () => (to, from, next) => {
   if (sessionStorage.jwt) {
     return next();
   }
+  alert('권한이 없습니다. 로그인 하십시오.')
   next('/');
 };
 
