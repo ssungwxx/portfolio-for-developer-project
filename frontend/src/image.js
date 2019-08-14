@@ -45,7 +45,6 @@ export default {
         return ret;
     },
     async imgupload() {
-
         // const hash = `https://api.imgur.com/oauth2/authorize?${qs.stringify(queryString)}`;
         // console.log(hash)
         // return
@@ -53,8 +52,8 @@ export default {
         const inputImg = document.querySelector("#imgup");
         if (inputImg.files.length === 1) {
             const file = inputImg.files[0];
-            const ret = await this.uploadImageByImgur(file)
-            return ret
-            }
+            const ret = await this.uploadImageByImgur(file);
+            return ret;
         }
     }
+};

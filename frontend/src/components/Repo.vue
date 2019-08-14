@@ -12,16 +12,27 @@
                     <div class="py-3 repodiv">
                         <v-layout row wrap>
                             <v-flex>
-                                <v-sheet style="height: 100%" v-if="git" class="v-sheet--offset mx-auto"
-                                         color="grey lighten-5"
-                                         elevation="12"
-                                         max-width="calc(100% - 32px)" height="60%">
-                                    <v-sparkline :labels="Object.keys(data).reverse()"
-                                                 :value="Object.values(data).reverse()"
-                                                 :smooth="radius || false"
-                                                 :stroke-linecap="lineCap" :gradient="gradient" color="grey"
-                                                 line-width="2" padding="16" auto-draw class="zoom">
-                                    </v-sparkline>
+                                <v-sheet
+                                    style="height: 100%"
+                                    v-if="git"
+                                    class="v-sheet--offset mx-auto"
+                                    color="grey lighten-5"
+                                    elevation="12"
+                                    max-width="calc(100% - 32px)"
+                                    height="60%"
+                                >
+                                    <v-sparkline
+                                        :labels="Object.keys(data).reverse()"
+                                        :value="Object.values(data).reverse()"
+                                        :smooth="radius || false"
+                                        :stroke-linecap="lineCap"
+                                        :gradient="gradient"
+                                        color="grey"
+                                        line-width="2"
+                                        padding="16"
+                                        auto-draw
+                                        class="zoom"
+                                    ></v-sparkline>
                                 </v-sheet>
                                 <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
                             </v-flex>
@@ -34,12 +45,23 @@
                     </div>
                     <div style="overflow: hidden; width: 100%">
                         <div v-if="git">
-                            <div style="display: flex; border-bottom: 1px gray solid; margin-bottom: 10px"
-                                 v-for="i in Object.keys(message[0]).length" :key="i">
-                                <p style="min-width: 30px; overflow: hidden; text-overflow: ellipsis">{{ message[0][i -
-                                    1] }}</p>
-                                <p style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap">{{
-                                    message[1][i - 1] }}</p>
+                            <div
+                                style="display: flex; border-bottom: 1px gray solid; margin-bottom: 10px"
+                                v-for="i in Object.keys(message[0]).length"
+                                :key="i"
+                            >
+                                <p
+                                    style="min-width: 30px; overflow: hidden; text-overflow: ellipsis"
+                                >
+                                    {{ message[0][i -
+                                    1] }}
+                                </p>
+                                <p
+                                    style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap"
+                                >
+                                    {{
+                                    message[1][i - 1] }}
+                                </p>
                             </div>
                         </div>
                         <p v-else style="height: 100%; text-align: center">Push 기록이 없습니다.</p>
@@ -51,162 +73,169 @@
 </template>
 
 <script>
-    import Git from "@/services/GitLabRepoService"
-    import RestService from "@/services/RestService"
+import Git from "@/services/GitLabRepoService";
+import RestService from "@/services/RestService";
 
-    export default {
-        name: "Repo",
-        props: {
-            repo_title: {type: String},
-            repo_add: {type: String},
-            repo_created: {type: String},
-            repo_recent: {type: String},
-            repo_id: {type: Number},
-            repo_no: {type: Number},
-            user_id: {type: String},
+export default {
+    name: "Repo",
+    props: {
+        repo_title: { type: String },
+        repo_add: { type: String },
+        repo_created: { type: String },
+        repo_recent: { type: String },
+        repo_id: { type: Number },
+        repo_no: { type: Number },
+        user_id: { type: String }
+    },
+    data() {
+        return {
+            radius: 5,
+            gradient: ["#1feaea", "#ffd200", "#f72047"],
+            lineCap: "round",
+            data: {},
+            message: [[], []],
+            url: "",
+            token: "",
+            git: false,
+            len: 0
+        };
+    },
+    methods: {
+        async drawGraph() {
+            await this.getUrl();
+            await this.getMessage();
+            await this.getGraphInfo();
         },
-        data() {
-            return {
-                radius: 5,
-                gradient: ["#1feaea", "#ffd200", "#f72047"],
-                lineCap: "round",
-                data: {},
-                message: [[], []],
-                url: "",
-                token: "",
-                git: false,
-                len: 0,
+        async getGraphInfo() {
+            this.data = await Git.getPushed(this.url, this.repo_id, this.token);
+            this.len = Object.keys(this.data).length - 1;
+            if (!(this.len === 0 && Object.values(this.data)[0] === 0)) {
+                this.git = true;
+                this.len += 1;
             }
         },
-        methods: {
-            async drawGraph() {
-                await this.getUrl();
-                await this.getMessage();
-                await this.getGraphInfo();
-            },
-            async getGraphInfo() {
-                this.data = await Git.getPushed(this.url, this.repo_id, this.token);
-                this.len = Object.keys(this.data).length - 1;
-                if (!(this.len === 0 && Object.values(this.data)[0] === 0)) {
-                    this.git = true;
-                    this.len += 1;
-                }
-            },
-            async getMessage() {
-                const mess = await Git.getMessage(this.url, this.repo_id, this.token);
-                this.message[0] = Object.keys(mess);
-                this.message[1] = Object.values(mess);
-            },
-            async getUrl() {
-                const user = await RestService.getGitInfo(this.user_id);
-                this.url = user.user_gitAdd;
-                this.token = user.user_gitToken;
-            }
+        async getMessage() {
+            const mess = await Git.getMessage(
+                this.url,
+                this.repo_id,
+                this.token
+            );
+            this.message[0] = Object.keys(mess);
+            this.message[1] = Object.values(mess);
         },
-        created() {
+        async getUrl() {
+            const user = await RestService.getGitInfo(this.user_id);
+            this.url = user.user_gitAdd;
+            this.token = user.user_gitToken;
+        }
+    },
+    created() {
+        this.drawGraph();
+    },
+    watch: {
+        $route: function() {
             this.drawGraph();
-        },
-        watch: {
-            $route: function () {
-                this.drawGraph();
-            }
         }
     }
-
+};
 </script>
 
 <style>
+.align {
+    display: flex;
+    justify-content: space-between;
+}
 
+.pushed {
+    display: flex;
+    padding: 0 15px;
+    overflow: hidden;
+}
 
-    .align {
-        display: flex;
-        justify-content: space-between;
-    }
+.headline_truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-    .pushed {
-        display: flex;
-        padding: 0 15px;
-        overflow: hidden;
-    }
+.content_truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 
-    .headline_truncate {
-        display: -webkit-box;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+p {
+    height: auto;
+    line-height: 1.2;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    align-self: center;
+    margin-bottom: 0;
+}
 
-    .content_truncate {
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-    }
+.repotitle {
+    overflow: hidden;
+    line-height: 1.5;
+    text-overflow: ellipsis;
+    height: 100%;
+    font-size: 2.5vw;
+    margin: 0;
+    text-align: left;
+}
 
-    p {
-        height: auto;
-        line-height: 1.2;
-        overflow: hidden;
-        -ms-text-overflow: ellipsis;
-        text-overflow: ellipsis;
-        align-self: center;
-        margin-bottom: 0;
-    }
+p.grey--text {
+    font-size: 1.15vw;
+    height: 100%;
+    margin: 0;
+    text-align: left;
+}
 
-    .repotitle {
-        overflow: hidden;
-        line-height: 1.5;
-        text-overflow: ellipsis;
-        height: 100%;
-        font-size: 2.5vw;
-        margin: 0;
-        text-align: left;
-    }
+.zoom {
+    width: 100%;
+    height: 100%;
+}
 
-    p.grey--text {
-        font-size: 1.15vw;
-        height: 100%;
-        margin: 0;
-        text-align: left;
-    }
+.repocard {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
 
-    .zoom {
-        width: 100%;
-        height: 100%;
-    }
+.grey.lighten-5 {
+    background-color: white !important;
+    box-shadow: 0 2px 2px -4px rgba(0, 0, 0, 0.2),
+        0 7px 6px 2px rgba(0, 0, 0, 0.14), 0 5px 6px 4px rgba(0, 0, 0, 0.12) !important;
+    -webkit-box-shadow: 0 2px 2px -4px rgba(0, 0, 0, 0.2),
+        0 7px 6px 2px rgba(0, 0, 0, 0.14), 0 5px 6px 4px rgba(0, 0, 0, 0.12) !important;
+}
 
-    .repocard {
-        width: 100%;
-        position: relative;
-        overflow: hidden;
-    }
+.v-card {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+}
 
-    .grey.lighten-5 {
-        background-color: white !important;
-        box-shadow: 0 2px 2px -4px rgba(0,0,0,.2), 0 7px 6px 2px rgba(0,0,0,.14), 0 5px 6px 4px rgba(0,0,0,.12) !important;
-        -webkit-box-shadow: 0 2px 2px -4px rgba(0,0,0,.2), 0 7px 6px 2px rgba(0,0,0,.14), 0 5px 6px 4px rgba(0,0,0,.12) !important;
-    }
+.repodiv {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-    .v-card {
-        box-shadow : none;
-        -webkit-box-shadow: none;
-    }
+.v-expansion-panel__header__icon {
+    display: none;
+}
 
-    .repodiv {
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
+.v-expansion-panel__header {
+    padding: 0;
+}
 
-    .v-expansion-panel__header__icon {
-        display: none;
-    }
-
-    .v-expansion-panel__header {
-        padding: 0;
-    }
-
-    .v-expansion-panel {
-        box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2), 0px 1px 0px 0px rgba(0,0,0,.14), 0px 1px 0px -1px rgba(0,0,0,.12);
-        -webkit-box-shadow: 0px 2px 0px 0px rgba(0,0,0,.2), 0px 1px 0px 0px rgba(0,0,0,.14), 0px 1px 0px -1px rgba(0,0,0,.12);
-    }
+.v-expansion-panel {
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 0px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 0px -1px rgba(0, 0, 0, 0.12);
+    -webkit-box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 0px 0px rgba(0, 0, 0, 0.14),
+        0px 1px 0px -1px rgba(0, 0, 0, 0.12);
+}
 </style>

@@ -7,8 +7,10 @@ export default {
 
         const project = await Api(BASE_URL, token).get(eventsURL);
         const response = {
-            repo_createdDate: this.calendar_time(project.data.created_at) + ":00",
-            repo_recentDate: this.calendar_time(project.data.last_activity_at) + ":00",
+            repo_createdDate:
+                this.calendar_time(project.data.created_at) + ":00",
+            repo_recentDate:
+                this.calendar_time(project.data.last_activity_at) + ":00"
         };
 
         return response;
@@ -21,11 +23,11 @@ export default {
         for (let i = 1; Object.keys(message).length < 10; ++i) {
             let events = await Api(BASE_URL, token).get(eventsURL + String(i));
             if (events.data.length === 0) {
-                break
+                break;
             }
             for (event of events.data) {
                 if (Object.keys(message).length == 10) {
-                    break
+                    break;
                 }
                 if (event.action_name == "pushed to") {
                     const created_at = this.calendar(event.created_at);
@@ -34,7 +36,7 @@ export default {
                 }
             }
         }
-        return message
+        return message;
     },
     async getPushed(user_add, project_id, token) {
         const BASE_URL = user_add + "/api/v4";
@@ -43,24 +45,24 @@ export default {
         const pushed = [0] * 14;
 
         for (let i = 1; Object.keys(date).length < 14; i++) {
-            let events = await Api(BASE_URL, token).get(eventsURL + String(i))
+            let events = await Api(BASE_URL, token).get(eventsURL + String(i));
             if (events.data.length === 0) {
-                break
+                break;
             }
             for (event of events.data) {
                 if (Object.keys(date).length == 14) {
-                    break
+                    break;
                 }
-                const created_at = this.calendar(event.created_at)
+                const created_at = this.calendar(event.created_at);
                 if (!(created_at in date)) {
-                    date[created_at] = 0
+                    date[created_at] = 0;
                 }
                 if (event.action_name === "pushed to") {
-                    date[created_at] += 1
+                    date[created_at] += 1;
                 }
             }
         }
-        return date
+        return date;
     },
     calendar(created_at) {
         let year = Number(created_at.slice(0, 4));
@@ -94,14 +96,14 @@ export default {
                 year += 1;
             }
         }
-        return String(month) + "-" + String(day)
+        return String(month) + "-" + String(day);
     },
     calendar_time(created_at) {
         let year = Number(created_at.slice(0, 4));
         let month = Number(created_at.slice(5, 7));
         let day = Number(created_at.slice(8, 10));
         let hour = Number(created_at.slice(11, 13)) + 9;
-        let min = Number(created_at.slice(14, 16))
+        let min = Number(created_at.slice(14, 16));
 
         if (hour >= 24) {
             hour -= 24;
@@ -129,6 +131,16 @@ export default {
                 year += 1;
             }
         }
-        return String(year) + "-" + String(month) + "-" + String(day) + " " + String(hour) + ":" + String(min)
-    },
+        return (
+            String(year) +
+            "-" +
+            String(month) +
+            "-" +
+            String(day) +
+            " " +
+            String(hour) +
+            ":" +
+            String(min)
+        );
+    }
 };

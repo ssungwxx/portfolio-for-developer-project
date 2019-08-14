@@ -18,8 +18,9 @@ async function translateText(newText, source, target) {
 }
 
 router.post("/", function(req, res) {
-    translateText(req.body.translate, req.body.source, req.body.target).then(data => res.json(data));
+    translateText(req.body.translate, req.body.source, req.body.target).then(
+        data => res.json(data)
+    );
 });
-
 
 module.exports = router;

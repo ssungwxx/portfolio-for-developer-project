@@ -1,6 +1,8 @@
 <template>
     <div>
-        <ImgBanner imgSrc="https://cdn.pixabay.com/photo/2016/02/01/16/51/ascending-graph-1173935_960_720.png">
+        <ImgBanner
+            imgSrc="https://cdn.pixabay.com/photo/2016/02/01/16/51/ascending-graph-1173935_960_720.png"
+        >
             <div class="target" style="line-height:1.2em;font-size: 5vw;" slot="text">Repositories</div>
         </ImgBanner>
         <v-container>
@@ -9,26 +11,25 @@
                     <RepoList :limits="4" :loadMore="false" :user_id="user_id"></RepoList>
                 </v-flex>
             </v-layout>
-
         </v-container>
     </div>
 </template>
 
 <script>
 import ImgBanner from "../components/ImgBanner";
-import RepoList from "../components/RepoList"
+import RepoList from "../components/RepoList";
 import RestService from "@/services/RestService";
 
 export default {
     name: "RepoPage",
     components: {
         RepoList,
-        ImgBanner,
+        ImgBanner
     },
     data() {
         return {
-            user_id: this.$route.params.id,
-        }
+            user_id: this.$route.params.id
+        };
     },
     methods: {
         async insertLog() {
@@ -37,10 +38,9 @@ export default {
     },
     beforeMount() {
         this.insertLog();
-    },
-}
+    }
+};
 </script>
 
 <style>
-
 </style>

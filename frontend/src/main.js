@@ -10,7 +10,7 @@ import "font-awesome/css/font-awesome.min.css";
 import App from "./App.vue";
 import router from "./router";
 import "./registerServiceWorker";
-import {store} from "./vuex/store";
+import { store } from "./vuex/store";
 
 // Google Analytics
 import VueAnalytics from "vue-analytics";
@@ -62,7 +62,6 @@ Vue.use(VueResizeText);
 import VueCarousel from "vue-carousel";
 Vue.use(VueCarousel);
 
-
 Vue.use(VueAnalytics, {
     id: "UA-144893029-1",
     router,
@@ -72,7 +71,7 @@ Vue.use(VueAnalytics, {
 });
 
 new Vue({
-  store,
+    store,
     router,
     render: h => h(App)
 }).$mount("#app");

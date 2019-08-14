@@ -2,13 +2,26 @@
     <v-layout style="margin-top: 60px;" column align-center>
         <v-form ref="form" v-model="valid" style="width: 70%">
             <v-text-field disabled v-model="getId" :counter="20" label="ID" required></v-text-field>
-            <v-text-field v-model="user_name" :counter="12" :rules="nameRules" label="Nickname" required></v-text-field>
-            <v-text-field v-model= "gitlab_id" label="Gitlab_ID" required></v-text-field>
+            <v-text-field
+                v-model="user_name"
+                :counter="12"
+                :rules="nameRules"
+                label="Nickname"
+                required
+            ></v-text-field>
+            <v-text-field v-model="gitlab_id" label="Gitlab_ID" required></v-text-field>
             <v-text-field v-model="gitlab_address" label="Gitlab_address" required></v-text-field>
             <v-text-field v-model="access_token" label="Access_token" required></v-text-field>
             <v-text-field v-model="email" :rules="emailRules" label="E-mail" required></v-text-field>
             <v-text-field v-model="aboutme" label="About_Me" required></v-text-field>
-            <v-checkbox v-model="checkbox" :rules="[v => !!v || 'You must agree to continue!']" label="Do you agree?" off-icon="check_circle_outline" on-icon="check_circle" required></v-checkbox>
+            <v-checkbox
+                v-model="checkbox"
+                :rules="[v => !!v || 'You must agree to continue!']"
+                label="Do you agree?"
+                off-icon="check_circle_outline"
+                on-icon="check_circle"
+                required
+            ></v-checkbox>
             <v-btn :disabled="!valid" color="success" class="mr-4" @click="validate">정보 수정</v-btn>
             <v-btn color="error" class="mr-4" @click="reset">정보 초기화</v-btn>
         </v-form>
@@ -17,7 +30,7 @@
 
 <script>
 import RestService from "@/services/RestService";
-import {mapActions} from "vuex";
+import { mapActions } from "vuex";
 
 export default {
     data() {
@@ -29,29 +42,30 @@ export default {
             access_token: "",
             aboutme: "",
 
-
             valid: true,
             nameRules: [
-                v => !!v || 'Name is required',
-                v => (v && v.length <= 10) || 'Name must be less than 10 characters',
+                v => !!v || "Name is required",
+                v =>
+                    (v && v.length <= 10) ||
+                    "Name must be less than 10 characters"
             ],
-            email: '',
+            email: "",
             emailRules: [
-                v => !!v || 'E-mail is required',
-                v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+                v => !!v || "E-mail is required",
+                v => /.+@.+\..+/.test(v) || "E-mail must be valid"
             ],
-            checkbox: false,
-        }
+            checkbox: false
+        };
     },
     async mounted() {
-      await this.setLoginInfo();
-      await this.getUserInfo();
+        await this.setLoginInfo();
+        await this.getUserInfo();
     },
     methods: {
-      ...mapActions(['setLogin']),
-      async setLoginInfo() {
-        await this.setLogin();
-      },
+        ...mapActions(["setLogin"]),
+        async setLoginInfo() {
+            await this.setLogin();
+        },
         async getUserInfo() {
             const user = await RestService.getUser(this.getId);
             this.user_name = user.user_name;
@@ -77,24 +91,22 @@ export default {
                 this.$router.push("/");
             }
         },
-        reset () {
-            this.$refs.form.reset()
-        },
+        reset() {
+            this.$refs.form.reset();
+        }
     },
     computed: {
-        getIsLogin: function () {
+        getIsLogin: function() {
             return this.$store.getters.getIsLogin;
         },
-        getId: function () {
+        getId: function() {
             return this.$store.getters.getId;
         },
-        getGrade: function () {
+        getGrade: function() {
             return this.$store.getters.getGrade;
         }
     }
-}
-
+};
 </script>
 <style>
-
 </style>

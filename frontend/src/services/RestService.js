@@ -108,7 +108,7 @@ export default {
         return counts;
     },
     async getUser(id) {
-      console.log(id);
+        console.log(id);
         await AxiosService.checkAuthorization(id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
@@ -116,9 +116,9 @@ export default {
             .then(response => (this.check = response.data[0]));
     },
     async getGitInfo(id) {
-      return axios
-      .get(DBcon.URL + "/users/gitAdd/" +id)
-      .then(response => (this.gitInfo = response.data[0]));
+        return axios
+            .get(DBcon.URL + "/users/gitAdd/" + id)
+            .then(response => (this.gitInfo = response.data[0]));
     },
     insertUser(data) {
         return axios
@@ -253,7 +253,9 @@ export default {
     */
     // JWT Token 관리
     async getRefreshToken(user_id) {
-        return await axios.get(DBcon.URL + "/jwt/" + user_id).then(res => res.data);
+        return await axios
+            .get(DBcon.URL + "/jwt/" + user_id)
+            .then(res => res.data);
     },
     async getNewAccessToken(user_id) {
         return await axios
@@ -261,7 +263,9 @@ export default {
             .then(res => res.data);
     },
     async deleteRefreshToken(user_id) {
-        return await axios.put(DBcon.URL + "/jwt/" + user_id).then(res => res.data);
+        return await axios
+            .put(DBcon.URL + "/jwt/" + user_id)
+            .then(res => res.data);
     },
     async checkAccessToken(user_id, data) {
         return await axios
@@ -269,15 +273,19 @@ export default {
             .then(res => res.data);
     },
     async getUserIdByJWT() {
-      console.log("rehi");
-      console.log(sessionStorage.jwt);
+        console.log("rehi");
+        console.log(sessionStorage.jwt);
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return await axios.get(DBcon.URL + "/jwt/user/id").then(res => res.data);
+        return await axios
+            .get(DBcon.URL + "/jwt/user/id")
+            .then(res => res.data);
     },
     async getUserGradeByJWT() {
-      console.log("rehi2222");
+        console.log("rehi2222");
 
         axios.defaults.headers.jwt = sessionStorage.jwt;
-        return await axios.get(DBcon.URL + "/jwt/user/grade").then(res => res.data);
+        return await axios
+            .get(DBcon.URL + "/jwt/user/grade")
+            .then(res => res.data);
     }
 };

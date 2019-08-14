@@ -1,84 +1,83 @@
 <template>
     <v-app>
         <v-content class="v-header">
-            <Header/>
-            <Sidebar/>
+            <Header />
+            <Sidebar />
         </v-content>
 
         <v-content>
-            <router-view/>
-            <TopButton/>
+            <router-view />
+            <TopButton />
         </v-content>
 
         <v-content class="footerwrap">
-            <Footer/>
+            <Footer />
         </v-content>
     </v-app>
 </template>
 <script>
-    import Footer from "./components/Footer";
-    import Header from "./components/Header";
-    import Sidebar from "./components/Sidebar";
-    import TopButton from "./components/TopButton";
-    import SidebarMenu from "vue-sidebar-menu";
-    import {store} from "./vuex/store";
-    import {mapActions} from "vuex";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+import Sidebar from "./components/Sidebar";
+import TopButton from "./components/TopButton";
+import SidebarMenu from "vue-sidebar-menu";
+import { store } from "./vuex/store";
+import { mapActions } from "vuex";
 
-    export default {
-        name: "App",
-        components: {
-            store,
-            Footer,
-            Header,
-            Sidebar,
-            TopButton,
-            SidebarMenu
-        },
-        data() {
-            return {};
-        },
-        mounted() {
-            const userAgent = navigator.userAgent;
-            if (
-                userAgent.indexOf("Chrome") === -1 ||
-                userAgent.indexOf("Edge") !== -1
-            ) {
-                alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
-            }
-        },
-        methods: {
+export default {
+    name: "App",
+    components: {
+        store,
+        Footer,
+        Header,
+        Sidebar,
+        TopButton,
+        SidebarMenu
+    },
+    data() {
+        return {};
+    },
+    mounted() {
+        const userAgent = navigator.userAgent;
+        if (
+            userAgent.indexOf("Chrome") === -1 ||
+            userAgent.indexOf("Edge") !== -1
+        ) {
+            alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
         }
-    };
+    },
+    methods: {}
+};
 </script>
 
 <style>
-    #app {
-        font-family: Consolas;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-        text-align: center;
-        color: black;
-        background-color: white;
-    }
+#app {
+    font-family: Consolas;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: black;
+    background-color: white;
+}
 
-    .v-content.footerwrap > .v-content__wrap {
-        margin-top: auto;
-    }
+.v-content.footerwrap > .v-content__wrap {
+    margin-top: auto;
+}
 
-    .v-header {
-        height: 64px;
-        max-height: 64px;
-    }
+.v-header {
+    height: 64px;
+    max-height: 64px;
+}
 
-    #sntch_button {
-        right: 50px !important;
-        bottom: 5% !important;
-    }
+#sntch_button {
+    right: 50px !important;
+    bottom: 5% !important;
+}
 
-    .blockdrag {
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
+.blockdrag {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
 </style>

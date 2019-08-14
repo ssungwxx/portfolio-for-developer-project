@@ -8,24 +8,24 @@ import PostPage from "./views/PostPage.vue";
 import PostDetail from "./views/PostDetail.vue";
 import UserInfo from "./views/UserInfo";
 import AddRepos from "./views/AddRepos";
-import {store} from "./vuex/store";
+import { store } from "./vuex/store";
 
 Vue.use(Router);
 
 const requireAuth = () => (to, from, next) => {
-  if (store.getters.getIsLogin) {
+    if (store.getters.getIsLogin) {
+        console.log(store.getters.getIsLogin);
+        return next();
+    }
     console.log(store.getters.getIsLogin);
-    return next();
-  }
-  console.log(store.getters.getIsLogin);
-  next('/');
+    next("/");
 };
 
 const requireAdmin = () => (to, from, next) => {
-  if(store.getters.getIsLogin && store.getters.getGrade == 10) {
-    return next();
-  }
-  next('/');
+    if (store.getters.getIsLogin && store.getters.getGrade == 10) {
+        return next();
+    }
+    next("/");
 };
 
 export default new Router({
@@ -64,10 +64,10 @@ export default new Router({
             beforeEnter: requireAdmin()
         },
         {
-          path: "/users/:id/userinfo",
-          name: "userinfo",
-          component: UserInfo,
-          beforeEnter: requireAuth()
+            path: "/users/:id/userinfo",
+            name: "userinfo",
+            component: UserInfo,
+            beforeEnter: requireAuth()
         },
         {
             path: "/users/:id/addrepo",

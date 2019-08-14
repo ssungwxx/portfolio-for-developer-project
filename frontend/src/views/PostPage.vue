@@ -22,7 +22,7 @@ export default {
     name: "PostPage",
     data() {
         return {
-            user_id: this.$route.params.id,
+            user_id: this.$route.params.id
         };
     },
     beforeMount() {
@@ -36,6 +36,6 @@ export default {
         async insertLog() {
             this.insertLog = await RestService.insertLog("PostPage");
         }
-    },
+    }
 };
 </script>
