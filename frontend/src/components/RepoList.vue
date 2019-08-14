@@ -29,19 +29,19 @@
                 </div>
             </v-flex>
             <div class="plus" v-if="!loadMore">
-                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos" xs12>
-                    <v-icon size="1.7vw" class="mr-2">fa-plus</v-icon><p style="font-size: 1vw">더 보기</p>
+                <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark @click="loadMoreRepos">
+                    <v-icon size="25">fa-plus</v-icon><v-flex style="margin-left: 10px" hidden-xs-only>더 보기</v-flex>
                 </v-btn>
 
                 <div style="display: flex; justify-content: center;">
                     <router-link :to="Addrepos" style="text-decoration: none; margin-right: 1.2vw;" v-if="getIsLogin && getId == user_id">
                         <v-btn class="target" style="margin-right: auto; margin-top: 1vw" color="#ffc0cb"dark>
-                            <v-icon size="1.7vw" class="mr-2">fa-edit</v-icon><p style="font-size: 1vw">추가하기</p>
+                            <v-icon size="25">fa-edit</v-icon><v-flex style="margin-left: 10px" hidden-xs-only>추가하기</v-flex>
                         </v-btn>
                     </router-link>
                     <router-link :to="goback" style="text-decoration: none;">
                         <v-btn class="target" style="margin-right: auto; margin-top: 1vw" color="#ffc0cb"dark>
-                            <v-icon size="1.7vw" class="mr-2">fa-home</v-icon><p style="font-size: 1vw">돌아가기</p>
+                            <v-icon size="25">fa-home</v-icon><v-flex style="margin-left: 10px" hidden-xs-only>돌아가기</v-flex>
                         </v-btn>
                     </router-link>
                 </div>
@@ -81,6 +81,13 @@ import {mapActions} from 'vuex';
           await this.setLoginInfo();
             this.getRepos();
             this.setGoback();
+        },
+        watch: {
+            $route: function() {
+                this.user_id = this.$route.params.id;
+                this.repos = [];
+                this.getRepos();
+            }
         },
         computed: {
             getIsLogin: function() {
@@ -160,5 +167,6 @@ import {mapActions} from 'vuex';
     .flexlist {
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 50px;
     }
 </style>

@@ -38,6 +38,7 @@ export default {
             this.insertlog = await RestService.insertLog("RepoPage");
         }
     }
+
 }
 </script>
 

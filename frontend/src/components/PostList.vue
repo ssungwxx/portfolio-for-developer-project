@@ -1,22 +1,21 @@
 <template>
-<v-layout row wrap mw-700 v-if="write === false">
-    <v-flex v-for="i in posts.length > loadlimits ? loadlimits : posts.length" :class="'md' + 12 / column" xs12 px-3>
+<v-layout row wrap v-if="write === false">
+    <v-flex v-for="i in posts.length > loadlimits ? loadlimits : posts.length" md5 xs12>
         <Post :post_index="i" :post_no="posts[i - 1].post_no" :post_date="posts[i - 1].post_date" :post_title="posts[i - 1].post_title" :post_content="posts[i - 1].post_content" :user_id="user_id"></Post>
-        <v-divider></v-divider>
     </v-flex>
 
     <div class="plus" v-if="!loadMore">
         <v-btn class="target" style="margin-right: auto;" color="#ffc0cb" dark v-on:click="loadMorePosts">
-            <v-icon size="25" class="mr-2">fa-plus</v-icon>더 보기
+            <v-icon size="25">fa-plus</v-icon><v-flex style="margin-left: 10px" hidden-xs-only>더 보기</v-flex>
         </v-btn>
         <div style="display: flex; justify-content: center;">
-            <v-btn class="target postbutton" style="margin-top: 3rem" @click="writeon" color="#ffc0cb" dark v-if="getIsLogin && getId == user_id">
-                <v-icon size="25" class="mr-2">fa-edit</v-icon>글쓰기
+            <v-btn class="target postbutton" style="margin-top: 1vw" @click="writeon" color="#ffc0cb" dark v-if="getIsLogin && getId == user_id">
+                <v-icon size="25">fa-edit</v-icon><v-flex style="margin-left: 10px;" hidden-xs-only>글쓰기</v-flex>
             </v-btn>
 
             <router-link :to="goback" style="text-decoration: none; ">
-                <v-btn class="target postbutton" style="margin-right: auto; margin-top: 3rem" color="#ffc0cb" dark>
-                    <v-icon size="25" class="mr-2">fa-home</v-icon>돌아가기
+                <v-btn class="target postbutton" style="margin-right: auto; margin-top: 1vw" color="#ffc0cb" dark>
+                    <v-icon size="25">fa-home</v-icon><v-flex style="margin-left: 10px" hidden-xs-only>돌아가기</v-flex>
                 </v-btn>
             </router-link>
         </div>
@@ -71,6 +70,13 @@ export default {
     },
     created() {
         this.getPosts();
+    },
+    watch: {
+        $route: function() {
+            this.user_id = this.$route.params.id;
+            this.posts = [];
+            this.getPosts();
+        }
     },
     computed: {
         getIsLogin: function() {
@@ -155,6 +161,23 @@ export default {
 };
 </script>
 <style>
+.layout.row.wrap {
+    justify-content: space-around;
+    width: 80%;
+    margin: auto;
+}
+
+.layout.row.wrap > .flex.md5.xs12 {
+    margin-bottom: 20px;
+    border: gray 3px solid;
+    border-radius: 15px;
+}
+
+.layout.row.wrap > .flex.md5.xs12:hover {
+    border: rgba(255, 150, 150, 1) 3px solid;
+    background-color: rgba(255, 190, 200, 0.2);
+}
+
 .postbutton {
     margin-left: 0px !important;
 }
@@ -166,10 +189,6 @@ export default {
     margin-top: 40px;
 }
 
-.mw-700 {
-    max-width: 700px;
-    margin: auto;
-}
 
 .color-333 {
     overflow: hidden;
@@ -183,5 +202,27 @@ export default {
     line-height: 1.2;
     text-overflow: ellipsis;
     height: 3.6em;
+}
+
+.v-text-field__slot > textarea {
+    height: 500px;
+}
+
+.writetop {
+    margin-top: 60px;
+}
+
+.writediv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.write-post {
+    width: 70%;
+}
+
+.btns {
+    margin-top: 50px;
 }
 </style>

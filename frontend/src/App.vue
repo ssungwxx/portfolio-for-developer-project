@@ -70,6 +70,11 @@
         max-height: 64px;
     }
 
+    #sntch_button {
+        right: 50px !important;
+        bottom: 5% !important;
+    }
+
     .blockdrag {
         -webkit-user-select: none;
         -moz-user-select: none;
