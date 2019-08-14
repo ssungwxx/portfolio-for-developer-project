@@ -81,7 +81,10 @@ import {mapActions} from "vuex";
           },
             async validate() {
                 if (this.$refs.form.validate()) {
-                    const res = await Git.getDate(this.gitlabApi, this.projectId, this.accessToken);
+                    const res = await Git.getDate(this.gitlabApi, this.projectId, this.accessToken)
+                    .catch(function(err) {
+                      alert(err);
+                    });
 
                     const repoData = {
                         user_id: this.user_id,
@@ -91,7 +94,9 @@ import {mapActions} from "vuex";
                         repo_createdDate: res.repo_createdDate,
                         repo_recentDate: res.repo_recentDate
                     };
+
                     await RestService.insertRepository(repoData);
+
                     this.$router.push("./repos");
 
                     const userData = {
@@ -118,7 +123,6 @@ import {mapActions} from "vuex";
                 if (this.user.user_gitToken !== null) {
                     this.accessToken = this.user.user_gitToken;
                 }
-                console.log(this.user[0])
             }
         },
     }
