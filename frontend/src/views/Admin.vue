@@ -34,7 +34,7 @@
                     <div>{{ log.wlog_date }}</div>
                 </div>
                 <div style="margin-top: 30px; margin-bottom: 30px;">
-                    <v-btn @click="loadmore">더 보기</v-btn>
+                    <v-btn class="adminbutton" @click="loadmore">더 보기</v-btn>
                 </div>
             </div>
         </v-layout>
