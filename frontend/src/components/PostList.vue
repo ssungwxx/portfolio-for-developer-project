@@ -66,6 +66,12 @@ export default {
     mounted() {
         this.setGoback();
     },
+    watch: {
+        $route: function() {
+            this.user_id = this.$route.params.id;
+            this.getPosts();
+        }
+    },
     computed: {
         getIsLogin: function() {
             return this.$store.getters.getIsLogin;
