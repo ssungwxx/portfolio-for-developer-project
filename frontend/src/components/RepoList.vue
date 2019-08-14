@@ -87,6 +87,7 @@
 import Repo from "./Repo";
 import RestService from "@/services/RestService";
 import Git from "@/services/GitLabRepoService";
+import { mapActions } from "vuex";
 
 export default {
     name: "RepoList",
@@ -122,29 +123,54 @@ export default {
                 this.goback = "/users/" + this.user_id;
             }
         },
-        async getRepos() {
-            this.repos = await RestService.getRepository(this.user_id);
+        async mounted() {
+            await this.setLoginInfo();
+            this.getRepos();
+            this.setGoback();
         },
-        loadMoreRepos() {
-            this.loadlimits += 2;
+        watch: {
+            $route: function() {
+                this.user_id = this.$route.params.id;
+                this.repos = [];
+                this.getRepos();
+            }
         },
-        async deleterepo(id) {
-            await RestService.deleteRepository(id, { user_id: this.user_id });
-        }
-    },
-    mounted() {
-        this.getRepos();
-        this.setGoback();
-    },
-    computed: {
-        getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
+        computed: {
+            getIsLogin: function() {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function() {
+                return this.$store.getters.getId;
+            },
+            getGrade: function() {
+                return this.$store.getters.getGrade;
+            }
         },
-        getId: function() {
-            return this.$store.getters.getId;
-        },
-        getGrade: function() {
-            return this.$store.getters.getGrade;
+        methods: {
+            ...mapActions(["setLogin"]),
+            async setLoginInfo() {
+                await this.setLogin();
+            },
+            setGoback() {
+                if (this.getIsLogin && this.$route.params.id == this.getId) {
+                    this.goback = "/";
+                } else {
+                    this.goback = "/users/" + this.user_id;
+                }
+            },
+            async getRepos() {
+                this.repos = await RestService.getRepository(this.user_id);
+            },
+            loadMoreRepos() {
+                this.loadlimits += 2;
+            },
+            async deleterepo(id) {
+                await RestService.deleteRepository(id, {
+                    user_id: this.user_id
+                });
+
+                this.getRepos();
+            }
         }
     }
 };

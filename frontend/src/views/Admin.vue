@@ -1,5 +1,5 @@
 <template>
-    <div style="width: 95%; margin: auto">
+    <div v-if="getIsLogin && getGrade == 10" style="width: 95%; margin: auto">
         <div
             style="display: flex; justify-content: flex-end; margin-top: 30px; margin-bottom: 30px;"
         >
@@ -39,7 +39,7 @@
                     <div>{{ log.wlog_date }}</div>
                 </div>
                 <div style="margin-top: 30px; margin-bottom: 30px;">
-                    <v-btn @click="loadmore">더 보기</v-btn>
+                    <v-btn class="adminbutton" @click="loadmore">더 보기</v-btn>
                 </div>
             </div>
         </v-layout>
@@ -86,21 +86,14 @@
     </div>
 </template>
 
-
 <script>
 import RestService from "@/services/RestService";
 import AdminRestService from "@/services/AdminRestService";
 import Git from "@/services/GitLabRepoService";
+import { mapActions } from "vuex";
 
 export default {
     name: "Admin",
-    beforeMount() {
-        this.count();
-        this.allcnt();
-        this.insertLog();
-        this.getLog();
-        this.getUsers();
-    },
     components: {},
     data() {
         return {
@@ -144,30 +137,53 @@ export default {
                     cnt: ""
                 }
             ],
-            check: false,
             focus: "users",
             Logs: [],
             limit: 50
         };
     },
+    async created() {
+        await this.setLoginInfo();
+        this.admincheck();
+    },
+    beforeMount() {
+        this.count();
+        this.allcnt();
+        this.insertlog();
+        this.getLog();
+        this.getUsers();
+    },
+    computed: {
+        getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
+        },
+        getId: function() {
+            return this.$store.getters.getId;
+        },
+        getGrade: function() {
+            return this.$store.getters.getGrade;
+        }
+    },
     methods: {
+        ...mapActions(["setLogin"]),
+        async setLoginInfo() {
+            await this.setLogin();
+        },
         loadmore() {
             this.limit += 20;
         },
         admincheck() {
-            if (this.getIsLogin && this.getGrade == 10) {
-                this.check = true;
-            } else {
+            if (!this.getIsLogin || this.getGrade != 10) {
+                alert("권한이 없습니다.");
                 this.$router.push("/");
             }
         },
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("Admin");
+        async insertlog() {
+            this.insertlog = await RestService.insertLog("Admin");
         },
         async count() {
             const post_cnt = await RestService.countRepositories();
             const repo_cnt = await RestService.countPost();
-            this.admincheck();
             this.post_cnt = post_cnt;
             this.repo_cnt = repo_cnt;
         },
@@ -180,32 +196,12 @@ export default {
                 log.wlog_date = Git.calendar_time(log.wlog_date);
             }
         },
-        async getUsers() {
-            this.userList = await AdminRestService.getUsers();
-        },
-        async updateUser(i, id) {
-            const newGrade = document.getElementById(`TestSelect${i}`);
-            const selected = newGrade.options[newGrade.selectedIndex].value;
-            const data = {
-                user_grade: selected
-            };
-            await AdminRestService.updateUser(id, data);
-            if (selected === 5) {
-                newGrade.setAttribute("style", "color: blue");
-            }
-            this.getUsers();
-        }
-    },
-    computed: {
-        getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
-        },
-        getId: function() {
-            return this.$store.getters.getId;
-        },
-        getGrade: function() {
-            return this.$store.getters.getGrade;
-        }
+        repo_cnt: [
+            {
+                cnt: ""
+            },
+            this.getUsers()
+        ]
     }
 };
 </script>

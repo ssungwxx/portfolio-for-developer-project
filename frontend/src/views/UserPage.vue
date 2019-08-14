@@ -38,23 +38,22 @@ export default {
             posts: `/users/${this.user_id}/posts`
         };
     },
-
-    methods: {
-        setUser() {
-            this.user_id = this.$route.params.id;
-            this.repos = `/users/${this.user_id}/repos`;
-            this.posts = `/users/${this.user_id}/posts`;
-        }
+    created() {
+        this.user_id = this.$route.params.id;
+        this.repos = `/users/${this.user_id}/repos`;
+        this.posts = `/users/${this.user_id}/posts`;
     },
     watch: {
         $route: function() {
             this.setUser();
         }
     },
-    created() {
-        this.user_id = this.$route.params.id;
-        this.repos = `/users/${this.user_id}/repos`;
-        this.posts = `/users/${this.user_id}/posts`;
+    methods: {
+        setUser() {
+            this.user_id = this.$route.params.id;
+            this.repos = `/users/${this.user_id}/repos`;
+            this.posts = `/users/${this.user_id}/posts`;
+        }
     }
 };
 </script>

@@ -13,18 +13,10 @@ import { store } from "./vuex/store";
 Vue.use(Router);
 
 const requireAuth = () => (to, from, next) => {
-    if (store.getters.getIsLogin) {
-        console.log(store.getters.getIsLogin);
+    if (sessionStorage.jwt) {
         return next();
     }
-    console.log(store.getters.getIsLogin);
-    next("/");
-};
-
-const requireAdmin = () => (to, from, next) => {
-    if (store.getters.getIsLogin && store.getters.getGrade == 10) {
-        return next();
-    }
+    alert("권한이 없습니다. 로그인 하십시오.");
     next("/");
 };
 
@@ -61,7 +53,7 @@ export default new Router({
             path: "/admin",
             name: "admin",
             component: Admin,
-            beforeEnter: requireAdmin()
+            beforeEnter: requireAuth()
         },
         {
             path: "/users/:id/userinfo",

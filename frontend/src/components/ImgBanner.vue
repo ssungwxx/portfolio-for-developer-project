@@ -20,9 +20,8 @@ export default {
     props: {
         imgSrc: { type: String },
         text: { type: String }
-    },
-    methods: {}
-};
+    }
+  };
 </script>
 <style>
 .text-shadow {

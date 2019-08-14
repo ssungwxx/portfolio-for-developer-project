@@ -114,27 +114,46 @@ export default {
                 this.len += 1;
             }
         },
-        async getMessage() {
-            const mess = await Git.getMessage(
-                this.url,
-                this.repo_id,
-                this.token
-            );
-            this.message[0] = Object.keys(mess);
-            this.message[1] = Object.values(mess);
-        },
-        async getUrl() {
-            const user = await RestService.getGitInfo(this.user_id);
-            this.url = user.user_gitAdd;
-            this.token = user.user_gitToken;
-        }
-    },
-    created() {
-        this.drawGraph();
-    },
-    watch: {
-        $route: function() {
+        created() {
             this.drawGraph();
+        },
+        watch: {
+            $route: function() {
+                this.drawGraph();
+            }
+        },
+        methods: {
+            async drawGraph() {
+                await this.getUrl();
+                await this.getMessage();
+                await this.getGraphInfo();
+            },
+            async getGraphInfo() {
+                this.data = await Git.getPushed(
+                    this.url,
+                    this.repo_id,
+                    this.token
+                );
+                this.len = Object.keys(this.data).length - 1;
+                if (!(this.len === 0 && Object.values(this.data)[0] === 0)) {
+                    this.git = true;
+                    this.len += 1;
+                }
+            },
+            async getMessage() {
+                const mess = await Git.getMessage(
+                    this.url,
+                    this.repo_id,
+                    this.token
+                );
+                this.message[0] = Object.keys(mess);
+                this.message[1] = Object.values(mess);
+            },
+            async getUrl() {
+                const user = await RestService.getGitInfo(this.user_id);
+                this.url = user.user_gitAdd;
+                this.token = user.user_gitToken;
+            }
         }
     }
 };

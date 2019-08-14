@@ -12,12 +12,26 @@
 
 <script>
 export default {
-    name: "TopButton",
-    props: {},
-    data: function() {
-        return {
-            isTop: true
-        };
+  name: "TopButton",
+  props: {},
+  data: function() {
+    return {
+      isTop: true
+    };
+  },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
+  methods: {
+    handleScroll(event) {
+      if (window.scrollY < 1) {
+        this.isTop = true;
+      } else {
+        this.isTop = false;
+      }
     },
     methods: {
         handleScroll(event) {

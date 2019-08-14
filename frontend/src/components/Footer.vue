@@ -1,24 +1,24 @@
 <template>
 <v-footer class="corefooter" height="82">
-  <div style="display: flex; justify-content: space-around; width: 100%; align-items: center;">
-    <div class="findus">
-      <h3 class="font">Find us</h3>
-      <hr />
-    </div>
-    <div class="fdiv font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
+    <div style="display: flex; justify-content: space-around; width: 100%; align-items: center;">
+        <div class="findus">
+            <h3 class="font">Find us</h3>
+            <hr />
+        </div>
+        <div class="fdiv font">(SSAFY)서울특별시 강남구 언주로 508 10-17층(역삼동, 서울상록빌딩)</div>
 
-    <div class="ftweather font">
-      &copy;
-      2019.08.02
-      <a href="https://lab.ssafy.com/2HyungJu/webmobile-sub2" target="_blank" class="font">GitLab
-      </a>
+        <div class="ftweather font">
+            &copy;
+            2019.08.02
+            <a href="https://lab.ssafy.com/2HyungJu/webmobile-sub2" target="_blank" class="font">GitLab
+            </a>
 
-      <br />
-      <a v-if="isLoc" class="font"> {{city}} {{ temperature }}℃ {{ weatherMain }}</a>
-      <a v-else class="font"> {{ errorMsg }} </a>
+            <br />
+            <a v-if="isLoc" class="font"> {{city}} {{ temperature }}℃ {{ weatherMain }}</a>
+            <a v-else class="font"> {{ errorMsg }} </a>
+        </div>
     </div>
-  </div>
-  <v-spacer />
+    <v-spacer />
 </v-footer>
 </template>
 
@@ -36,6 +36,9 @@ export default {
          isLoc: false,
          errorMsg: null
        };
+       },
+       created(){
+           this.getLocation();
        },
        methods:{
                getLocation: function () {
@@ -74,67 +77,64 @@ export default {
 
                    });
                }
-           },
-           created(){
-               this.getLocation();
            }
        }
        </script>
 <style>
 @media (min-width: 600px) {
-  .font {
-    font-size: 13px;
-  }
+    .font {
+        font-size: 13px;
+    }
 
-  .ftweather {
-    text-align: right;
-    margin-right: 5%;
-  }
+    .ftweather {
+        text-align: right;
+        margin-right: 5%;
+    }
 }
 
 @media (max-width:599px) {
-  .font {
-    font-size: 8px;
-  }
+    .font {
+        font-size: 8px;
+    }
 
-  .findus {
-    display: none;
-  }
+    .findus {
+        display: none;
+    }
 
-  .fdiv {
-    display: none;
-  }
+    .fdiv {
+        display: none;
+    }
 
-  .ftweather {
-    text-align: center;
-  }
+    .ftweather {
+        text-align: center;
+    }
 }
 
 .findus {
-  margin-left: 5%;
+    margin-left: 5%;
 }
 
 .corefooter {
-  text-align: center;
+    text-align: center;
 }
 
 .img {
-  margin-right: 15px;
+    margin-right: 15px;
 }
 
 .fdiv {
-  margin-left: 5%;
-  margin-right: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .ftitem {
-  padding: 25px;
-  color: black;
-  font-size: 18px;
+    padding: 25px;
+    color: black;
+    font-size: 18px;
 }
 
 .ftweather {
-  font-family: sans-serif;
-  font-size: 15px;
+    font-family: sans-serif;
+    font-size: 15px;
 }
 </style>

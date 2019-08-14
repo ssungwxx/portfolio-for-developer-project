@@ -27,7 +27,6 @@
                             :append-icon="show ? 'visibility' : 'visibility_off'"
                             :rules="pwRules" :type="show ? 'text' : 'password'"
                             label="Password"
-                            @keydown.enter="Login"
                             @click:append="show = !show"
                             required></v-text-field>
                         </v-form>
@@ -70,13 +69,7 @@ export default {
             }
         };
     },
-    beforeMount() {
-        this.insertLog();
-    },
     methods: {
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("LoginPage");
-        },
         ...mapActions(['setLogin']),
         async Login() {
             if (this.$refs.form.validate()) {
@@ -86,6 +79,7 @@ export default {
                     this.setLogin();
                     axios.defaults.headers.jwt = sessionStorage.jwt;
                     alert('로그인 되었습니다.');
+                    this.insertlog();
                     this.dialog = false;
                 } else {
                     if (data.msg == 'wrong id') {
@@ -95,6 +89,12 @@ export default {
                     }
                 }
             }
+        },
+        async insertlog() {
+          const data = {
+              user_id: this.$store.getters.getId,
+          };
+            await RestService.insertLog("Login", data)
         },
         reset() {
             this.$refs.form.reset();

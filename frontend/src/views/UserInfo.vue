@@ -1,5 +1,10 @@
 <template>
-    <v-layout style="margin-top: 60px;" column align-center>
+    <v-layout
+        v-if="getIsLogin && getId == this.$route.params.id"
+        style="margin-top: 60px;"
+        column
+        align-center
+    >
         <v-form ref="form" v-model="valid" style="width: 70%">
             <v-text-field disabled v-model="getId" :counter="20" label="ID" required></v-text-field>
             <v-text-field
@@ -57,15 +62,41 @@ export default {
             checkbox: false
         };
     },
-    async mounted() {
-        await this.setLoginInfo();
-        await this.getUserInfo();
+
+    async created() {
+      await this.setLoginInfo();
+      this.userCheck();
+      await this.getUserInfo();
+    },
+    computed: {
+        getIsLogin: function () {
+            return this.$store.getters.getIsLogin;
+        },
+        getId: function () {
+            return this.$store.getters.getId;
+        },
+        getGrade: function () {
+            return this.$store.getters.getGrade;
+        }
     },
     methods: {
+<<<<<<< HEAD
         ...mapActions(["setLogin"]),
         async setLoginInfo() {
             await this.setLogin();
         },
+=======
+      ...mapActions(['setLogin']),
+      async setLoginInfo() {
+        await this.setLogin();
+      },
+      userCheck() {
+            if (!this.getIsLogin || this.$route.params.id != this.getId) {
+              alert('권한이 없습니다.');
+                this.$router.push("/");
+            }
+      },
+>>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
         async getUserInfo() {
             const user = await RestService.getUser(this.getId);
             this.user_name = user.user_name;
@@ -91,6 +122,7 @@ export default {
                 this.$router.push("/");
             }
         },
+<<<<<<< HEAD
         reset() {
             this.$refs.form.reset();
         }
@@ -105,6 +137,11 @@ export default {
         getGrade: function() {
             return this.$store.getters.getGrade;
         }
+=======
+        reset () {
+            this.$refs.form.reset()
+        },
+>>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
     }
 };
 </script>

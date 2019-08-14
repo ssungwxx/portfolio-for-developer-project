@@ -31,15 +31,24 @@ export default {
             user_id: this.$route.params.id
         };
     },
+    async mounted() {
+        await this.insertlog();
+    },
     methods: {
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("RepoPage");
+        async insertlog() {
+            this.insertlog = await RestService.insertLog("RepoPage");
         }
+<<<<<<< HEAD
     },
     beforeMount() {
         this.insertLog();
     }
 };
+=======
+    }
+
+}
+>>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
 </script>
 
 <style>

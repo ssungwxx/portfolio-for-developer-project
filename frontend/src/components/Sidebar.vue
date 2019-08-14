@@ -97,8 +97,8 @@ export default {
         imgSrc: { type: String },
         text: { type: String }
     },
-    mounted() {
-        this.setLoginInfo();
+    async mounted() {
+        await this.setLoginInfo();
     },
     computed: {
         getIsLogin: function() {
@@ -113,8 +113,8 @@ export default {
     },
     methods: {
         ...mapActions(["setLogin"]),
-        setLoginInfo() {
-            this.setLogin();
+        async setLoginInfo() {
+            await this.setLogin();
         },
         ...mapActions(["logout"]),
         async Logout() {
