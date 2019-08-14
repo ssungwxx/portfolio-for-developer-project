@@ -64,39 +64,32 @@ export default {
     },
 
     async created() {
-      await this.setLoginInfo();
-      this.userCheck();
-      await this.getUserInfo();
+        await this.setLoginInfo();
+        this.userCheck();
+        await this.getUserInfo();
     },
     computed: {
-        getIsLogin: function () {
+        getIsLogin: function() {
             return this.$store.getters.getIsLogin;
         },
-        getId: function () {
+        getId: function() {
             return this.$store.getters.getId;
         },
-        getGrade: function () {
+        getGrade: function() {
             return this.$store.getters.getGrade;
         }
     },
     methods: {
-<<<<<<< HEAD
         ...mapActions(["setLogin"]),
         async setLoginInfo() {
             await this.setLogin();
         },
-=======
-      ...mapActions(['setLogin']),
-      async setLoginInfo() {
-        await this.setLogin();
-      },
-      userCheck() {
+        userCheck() {
             if (!this.getIsLogin || this.$route.params.id != this.getId) {
-              alert('권한이 없습니다.');
+                alert("권한이 없습니다.");
                 this.$router.push("/");
             }
-      },
->>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
+        },
         async getUserInfo() {
             const user = await RestService.getUser(this.getId);
             this.user_name = user.user_name;
@@ -122,26 +115,9 @@ export default {
                 this.$router.push("/");
             }
         },
-<<<<<<< HEAD
         reset() {
             this.$refs.form.reset();
         }
-    },
-    computed: {
-        getIsLogin: function() {
-            return this.$store.getters.getIsLogin;
-        },
-        getId: function() {
-            return this.$store.getters.getId;
-        },
-        getGrade: function() {
-            return this.$store.getters.getGrade;
-        }
-=======
-        reset () {
-            this.$refs.form.reset()
-        },
->>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
     }
 };
 </script>

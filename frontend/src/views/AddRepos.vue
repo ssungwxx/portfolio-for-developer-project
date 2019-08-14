@@ -73,104 +73,88 @@
 import RestService from "@/services/RestService";
 import FirebaseService from "@/services/FirebaseService";
 import Git from "@/services/GitLabRepoService";
-import {mapActions} from "vuex";
-    export default {
-        name: "AddRepo",
-        components: {
+import { mapActions } from "vuex";
+export default {
+    name: "AddRepo",
+    components: {},
+    data() {
+        return {
+            user_id: this.$route.params.id,
+            valid: true,
+            inputRules: [
+                v => !!v || "This field can not be empty",
+                v => (v && v.length > 1) || "Must be more than 1 characters"
+            ],
+            checkboxRules: [v => !!v || "You must agree to continue!"],
+            gitId: "",
+            gitlabApi: "",
+            accessToken: "",
+            gitlabAddress: "",
+            projectId: "",
+            projectName: "",
+            user: [],
+            checkbox: false,
+            already: false
+        };
+    },
+    async created() {
+        await this.setLoginInfo();
+        this.userCheck();
+        this.getUserInfo();
+    },
+    computed: {
+        getIsLogin: function() {
+            return this.$store.getters.getIsLogin;
         },
-        data() {
-            return {
-                user_id: this.$route.params.id,
-                valid: true,
-                inputRules: [
-                    v => !!v || 'This field can not be empty',
-                    v => (v && v.length > 1) || 'Must be more than 1 characters',
-                ],
-                checkboxRules: [
-                    v => !!v || 'You must agree to continue!'
-                ],
-                gitId: "",
-                gitlabApi: "",
-                accessToken: '',
-                gitlabAddress: '',
-                projectId: '',
-                projectName: "",
-                user: [],
-                checkbox: false,
-                already: false,
-            }
+        getId: function() {
+            return this.$store.getters.getId;
         },
-        async created() {
-            await this.setLoginInfo();
-            this.userCheck();
-            this.getUserInfo();
-        },
-        computed: {
-            getIsLogin: function () {
-                return this.$store.getters.getIsLogin;
-            },
-            getId: function () {
-                return this.$store.getters.getId;
-            },
-            getGrade: function () {
-                return this.$store.getters.getGrade;
-            }
-        },
-        methods: {
-          ...mapActions(['setLogin']),
-          async setLoginInfo() {
+        getGrade: function() {
+            return this.$store.getters.getGrade;
+        }
+    },
+    methods: {
+        ...mapActions(["setLogin"]),
+        async setLoginInfo() {
             await this.setLogin();
-          },
-          userCheck() {
-                if (!this.getIsLogin || this.$route.params.id != this.getId) {
-                  alert('권한이 없습니다.')
-                    this.$router.push("/");
-                }
-          },
-            async validate() {
-                if (this.$refs.form.validate()) {
-                    const res = await Git.getDate(this.gitlabApi, this.projectId, this.accessToken)
-                    .catch(function(err) {
-                      alert(err);
-                    });
+        },
+        userCheck() {
+            if (!this.getIsLogin || this.$route.params.id != this.getId) {
+                alert("권한이 없습니다.");
+                this.$router.push("/");
+            }
+        },
+        async validate() {
+            if (this.$refs.form.validate()) {
+                const res = await Git.getDate(
+                    this.gitlabApi,
+                    this.projectId,
+                    this.accessToken
+                ).catch(function(err) {
+                    alert(err);
+                });
 
-                    const repoData = {
-                        user_id: this.user_id,
-                        repo_title: this.projectName,
-                        repo_id: this.projectId,
-                        repo_add: this.gitlabAddress,
-                        repo_createdDate: res.repo_createdDate,
-                        repo_recentDate: res.repo_recentDate
-                    };
+                const repoData = {
+                    user_id: this.user_id,
+                    repo_title: this.projectName,
+                    repo_id: this.projectId,
+                    repo_add: this.gitlabAddress,
+                    repo_createdDate: res.repo_createdDate,
+                    repo_recentDate: res.repo_recentDate
+                };
 
-                    await RestService.insertRepository(repoData);
+                await RestService.insertRepository(repoData);
 
-                    this.$router.push("./repos");
+                this.$router.push("./repos");
 
-                    const userData = {
-                        user_id: this.user_id,
-                        user_pw : '-1',
-                        user_gitId: this.gitId,
-                        user_gitAdd: this.gitlabApi,
-                        user_gitToken: this.accessToken,
-                    };
-                    await RestService.updateUser(this.user_id, userData)
-                }
-            },
-            reset() {
-                this.$refs.form.reset()
-            },
-            async getUserInfo() {
-                this.user = await RestService.getGitInfo(this.user_id);
-                if (this.user.user_gitAdd !== null) {
-                    this.gitlabApi = this.user.user_gitAdd;
-                }
-                if (this.user.user_gitId !== null) {
-                    this.gitId = this.user.user_gitId;
-                }
-                if (this.user.user_gitToken !== null) {
-                    this.accessToken = this.user.user_gitToken;
-                }
+                const userData = {
+                    user_id: this.user_id,
+                    user_pw: "-1",
+                    user_gitId: this.gitId,
+                    user_gitAdd: this.gitlabApi,
+                    user_gitToken: this.accessToken
+                };
+                await RestService.updateUser(this.user_id, userData);
             }
         },
         reset() {
@@ -187,8 +171,23 @@ import {mapActions} from "vuex";
             if (this.user.user_gitToken !== null) {
                 this.accessToken = this.user.user_gitToken;
             }
-            console.log(this.user[0]);
         }
+    },
+    reset() {
+        this.$refs.form.reset();
+    },
+    async getUserInfo() {
+        this.user = await RestService.getGitInfo(this.user_id);
+        if (this.user.user_gitAdd !== null) {
+            this.gitlabApi = this.user.user_gitAdd;
+        }
+        if (this.user.user_gitId !== null) {
+            this.gitId = this.user.user_gitId;
+        }
+        if (this.user.user_gitToken !== null) {
+            this.accessToken = this.user.user_gitToken;
+        }
+        console.log(this.user[0]);
     }
 };
 </script>

@@ -38,17 +38,8 @@ export default {
         async insertlog() {
             this.insertlog = await RestService.insertLog("RepoPage");
         }
-<<<<<<< HEAD
-    },
-    beforeMount() {
-        this.insertLog();
     }
 };
-=======
-    }
-
-}
->>>>>>> e3d200ec924d249196e65fccf045790e4c1552e8
 </script>
 
 <style>
