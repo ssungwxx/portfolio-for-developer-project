@@ -1,8 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Admin from "./views/Admin.vue";
-import Delegate from "./views/Delegate.vue";
-import WebLog from "./views/WebLog.vue";
 import MainPage from "./views/MainPage.vue";
 import UserPage from "./views/UserPage.vue";
 import RepoPage from "./views/RepoPage.vue";
@@ -48,16 +46,6 @@ export default new Router({
             component: Admin
         },
         {
-            path: "/delegate",
-            name: "delegate",
-            component: Delegate
-        },
-        {
-            path: "/WebLog",
-            name: "weblog",
-            component: WebLog
-        },
-        {
           path: "/users/:id/userinfo",
           name: "userinfo",
           component: UserInfo
@@ -66,6 +54,6 @@ export default new Router({
             path: "/users/:id/addrepo",
             name: "Addrepo",
             component: AddRepos
-        }
+        },
     ]
 });

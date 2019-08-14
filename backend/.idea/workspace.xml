@@ -7,9 +7,13 @@
       <change beforePath="$PROJECT_DIR$/../frontend/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/ImgBanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/ImgBanner.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/components/RepoList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/services/GitlabService.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/services/RestService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/Delegate.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/MainPage.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../frontend/src/views/RepoPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../frontend/src/views/RepoPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../frontend/src/views/WebLog.vue" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
