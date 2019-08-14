@@ -73,7 +73,6 @@ router.post("/", (req, res) => {
 
 //Login
 router.post("/login", (req, res) => {
-    console.log("test");
     let token;
     let refresh_token;
     async function getGrade() {
