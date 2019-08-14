@@ -10,7 +10,7 @@ var posts = require("./routes/posts");
 var repository_comments = require("./routes/repo_comment");
 var post_comments = require("./routes/post_comment");
 var logs = require("./routes/webLog");
-var enPage = require("./routes/enPage");
+//var enPage = require("./routes/enPage");
 var test = require("./routes/crawlingPosts");
 var webLog = require("./routes/webLog");
 var fcmToken = require("./routes/fcm_tokens");
@@ -20,21 +20,11 @@ var jwt = require("./routes/jwt");
 var bodyParser = require("body-parser");
 
 var cors = require("cors");
-var serverless = require("serverless-http");
 var app = express();
 
-// cors 부분 허용
-var whitelist = ["70.12.246.138:8080"];
+// cors 허용
 
-var corsOptions = {
-    origin: function(origin, callback) {
-        var isWhitelisted = whitelist.indexOf(origin) !== -1;
-        callback(null, isWhitelisted);
-    },
-    credentials: true
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(
     bodyParser.urlencoded({
@@ -62,7 +52,7 @@ app.use("/users", users);
 app.use("/repositories", repositories);
 app.use("/posts", posts);
 app.use("/logs", logs);
-app.use("/en", enPage);
+//app.use("/en", enPage);
 app.use("/rcom", repository_comments);
 app.use("/pcom", post_comments);
 app.use("/test", test);

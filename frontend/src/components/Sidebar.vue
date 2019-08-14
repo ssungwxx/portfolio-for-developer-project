@@ -28,6 +28,15 @@
                 </v-list-tile-content>
             </v-list-tile>
 
+            <v-list-tile v-if="getGrade != 10" :to="`/users/${getId}/userinfo`">
+                <v-list-tile-action>
+                    <v-icon style="margin-right: auto; margin-left: 17px;">settings</v-icon>
+                </v-list-tile-action>
+                <v-list-tile-content>
+                    <v-list-tile-title class="vtitle">Settings</v-list-tile-title>
+                </v-list-tile-content>
+            </v-list-tile>
+
             <v-list-tile v-if="getGrade == 10" :to="`/admin`">
                 <v-list-tile-action>
                     <v-icon style="margin-right: auto; margin-left: 17px;">lock</v-icon>

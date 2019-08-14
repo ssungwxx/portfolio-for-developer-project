@@ -26,13 +26,13 @@ export default {
 </script>
 <style>
 .text-shadow {
-    text-shadow: 0 0 15px rgb(255, 255, 255);
+    text-shadow: 0 0 5px rgba(255, 255, 150, 0.4);
 }
 
-.imgdiv > .v-image__image {
+.imgdiv > .v-image__image.v-image__image--cover {
     opacity: 0.5;
     background-size: 120%;
-    background-position: center 20%;
+    background-position: center 20% !important;
 }
 
 </style>

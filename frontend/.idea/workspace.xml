@@ -4,12 +4,16 @@
     <list default="true" id="67120c12-47e2-47a6-ad1c-d81abf0c196d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/../backend/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ImgBanner.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImgBanner.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TopButton.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TopButton.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RepoList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RepoList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/GitlabService.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/RestService.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/RestService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Delegate.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/MainPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/MainPage.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/PostDetail.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PostDetail.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/RepoPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/RepoPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/WebLog.vue" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,6 +32,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -35,6 +40,9 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2019.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ss2_prj\webmobile-final\frontend\src" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ss2_prj\webmobile-final\frontend\src\components" />
       <recent name="F:\work\SSAFY\ssafy_ss2\webmobile-sub2\frontend\src\components" />
@@ -96,7 +104,7 @@
       <workItem from="1564360942070" duration="54002000" />
       <workItem from="1564616018371" duration="30171000" />
       <workItem from="1564964115129" duration="21462000" />
-      <workItem from="1565052485079" duration="116103000" />
+      <workItem from="1565052485079" duration="134805000" />
     </task>
     <servers />
   </component>
@@ -129,16 +137,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/views/HomePage.vue</url>
-          <line>18</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

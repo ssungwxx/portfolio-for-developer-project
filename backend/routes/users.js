@@ -170,10 +170,10 @@ router.get("/:id", (req, res) => {
 });
 
 router.get("/gitAdd/:id", (req, res) => {
-  knex("users")
-  .select("user_gitAdd", "user_gitToken", "user_gitId")
-  .where("user_id", req.params.id)
-  .then(data => res.json(data));
+    knex("users")
+        .select("user_gitAdd", "user_gitToken", "user_gitId")
+        .where("user_id", req.params.id)
+        .then(data => res.json(data));
 });
 
 // Update User
@@ -200,7 +200,6 @@ router.put("/", (req, res) => {
     }
 
     if ((req.body.user_pw = "-1")) {
-        console.log("!!");
         User.user_name = req.body.user_name;
         User.user_grade = req.body.user_grade;
         User.user_gitId = req.body.user_gitId;
@@ -211,8 +210,8 @@ router.put("/", (req, res) => {
         User.user_profile = req.body.user_profile;
 
         knex("users")
-            .where("user_id", token.user_id)
             .update(User)
+            .where("user_id", token.user_id)
             .then(data =>
                 res.json({
                     status: 200,
@@ -247,8 +246,8 @@ router.put("/", (req, res) => {
 
                     if (User.user_pw) {
                         knex("users")
-                            .where("user_id", token.user_id)
                             .update(User)
+                            .where("user_id", token.user_id)
                             .then(data =>
                                 res.json({
                                     status: 200,
