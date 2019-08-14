@@ -64,12 +64,6 @@ export default new Router({
             beforeEnter: requireAdmin()
         },
         {
-            path: "/WebLog",
-            name: "weblog",
-            component: WebLog,
-            beforeEnter: requireAdmin()
-        },
-        {
           path: "/users/:id/userinfo",
           name: "userinfo",
           component: UserInfo,
