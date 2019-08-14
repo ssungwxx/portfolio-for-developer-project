@@ -95,7 +95,7 @@ export default {
         await this.setLogin();
       },
         setGoback() {
-            if (this.getIsLogin) {
+            if (this.getIsLogin && this.$route.params.id == this.getId) {
                 this.goback = '/';
             } else {
                 this.goback = '/users/' + this.user_id;
