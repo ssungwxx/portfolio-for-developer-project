@@ -22,6 +22,7 @@
     import TopButton from "./components/TopButton";
     import SidebarMenu from "vue-sidebar-menu";
     import {store} from "./vuex/store";
+    import {mapActions} from "vuex";
 
     export default {
         name: "App",
@@ -45,6 +46,8 @@
                 alert("해당 사이트는 크롬에 최적화 되어 있습니다.");
             }
         },
+        methods: {
+        }
     };
 </script>
 
