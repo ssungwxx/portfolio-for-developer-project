@@ -158,5 +158,6 @@ import Git from "@/services/GitLabRepoService";
     .flexlist {
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 50px;
     }
 </style>
