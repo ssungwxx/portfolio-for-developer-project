@@ -69,6 +69,7 @@ export default {
     watch: {
         $route: function() {
             this.user_id = this.$route.params.id;
+            this.posts = [];
             this.getPosts();
         }
     },
