@@ -130,7 +130,7 @@ export default {
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
             .put(DBcon.URL + "/users", data)
-            .then(response => console.log(response.data));
+            .then(response => (this.user = response.data));
     },
     async deleteUser(id) {
         await AxiosService.checkAuthorization(id);
