@@ -19,6 +19,12 @@ export default {
       isTop: true
     };
   },
+  created() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
     handleScroll(event) {
       if (window.scrollY < 1) {
@@ -35,12 +41,6 @@ export default {
       })
 
     }
-  },
-  created() {
-    window.addEventListener("scroll", this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener("scroll", this.handleScroll);
   }
 };
 </script>

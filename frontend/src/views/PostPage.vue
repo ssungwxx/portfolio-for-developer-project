@@ -25,16 +25,16 @@ export default {
             user_id: this.$route.params.id,
         };
     },
-    beforeMount() {
-        this.insertLog();
-    },
     components: {
         ImgBanner,
         PostList
     },
+    async mounted() {
+      await this.insertlog();
+    },
     methods: {
-        async insertLog() {
-            this.insertLog = await RestService.insertLog("PostPage");
+        async insertlog() {
+            this.insertlog = await RestService.insertLog("PostPage");
         }
     },
 };

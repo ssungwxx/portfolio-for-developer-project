@@ -13,6 +13,7 @@
 <script>
 import PostDetail from "../views/PostDetail"
 import RestService from "../services/RestService";
+import {mapActions} from 'vuex';
 
 export default {
     name: "Post",
@@ -24,16 +25,17 @@ export default {
         post_date: { type: String },
         user_id: {type: String}
     },
-    components: {
-        PostDetail
-    },
     data() {
         return {
             detaillink: "/users/" + this.user_id + "/posts/" + this.post_index,
         };
     },
-    mounted() {
-
+    components: {
+        PostDetail
+    },
+    async mounted() {
+      await this.setLoginInfo()
+      await this.insertlog();
     },
     computed: {
       getIsLogin: function() {
@@ -47,6 +49,10 @@ export default {
       }
     },
     methods: {
+      ...mapActions(['setLogin']),
+      async setLoginInfo() {
+        this.setLogin();
+      },
         async insertlog() {
           const data = {
               user_id: this.$store.getters.getId,

@@ -56,6 +56,7 @@
 import Repo from "./Repo"
 import RestService from "@/services/RestService"
 import Git from "@/services/GitLabRepoService";
+import {mapActions} from 'vuex';
 
     export default {
         name: "RepoList",
@@ -76,7 +77,27 @@ import Git from "@/services/GitLabRepoService";
                 loadlimits: this.limits,
             }
         },
+        async mounted() {
+          await this.setLoginInfo();
+            this.getRepos();
+            this.setGoback();
+        },
+        computed: {
+            getIsLogin: function() {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function() {
+                return this.$store.getters.getId;
+            },
+            getGrade: function() {
+                return this.$store.getters.getGrade;
+            }
+        },
         methods: {
+          ...mapActions(['setLogin']),
+          async setLoginInfo() {
+            await this.setLogin();
+          },
           setGoback() {
               if (this.getIsLogin) {
                   this.goback = '/';
@@ -93,22 +114,9 @@ import Git from "@/services/GitLabRepoService";
             async deleterepo(id) {
                 await RestService.deleteRepository(id, {user_id: this.user_id});
             },
-        },
-        mounted() {
-            this.getRepos();
-            this.setGoback();
-        },
-        computed: {
-            getIsLogin: function() {
-                return this.$store.getters.getIsLogin;
-            },
-            getId: function() {
-                return this.$store.getters.getId;
-            },
-            getGrade: function() {
-                return this.$store.getters.getGrade;
-            }
-        },
+        }
+
+
     }
 </script>
 

@@ -100,8 +100,12 @@ export default {
             ],
         };
     },
-    async  mounted() {
+    created() {
+        this.getPost();
+    },
+    async mounted() {
       await this.setLoginInfo();
+      await this.insertlog();
     },
     computed: {
         getIsLogin: function() {
@@ -113,12 +117,6 @@ export default {
         getGrade: function() {
             return this.$store.getters.getGrade;
         }
-    },
-    beforeMount() {
-        this.insertLog();
-    },
-    created() {
-        this.getPost();
     },
     methods: {
       ...mapActions(['setLogin']),
@@ -147,11 +145,11 @@ export default {
                 this.comments[i].pcom_date = Git.calendar_time(this.comments[i].pcom_date);
             }
         },
-        async insertLog() {
+        async insertlog() {
             const data = {
-                user_id: this.$store.getters.getId,
+                user_id: this.getId,
             }
-            this.insertLog = await RestService.insertLog("DetailPost", data);
+            this.insertlog = await RestService.insertLog("DetailPost", data);
         },
         async deletepost() {
             const data = {

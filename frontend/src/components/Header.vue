@@ -123,6 +123,9 @@ export default {
         Login,
         Register
     },
+    async mounted() {
+        await this.setLoginInfo();
+    },
     watch: {
         search: function() {
             if (this.search !== "") {
@@ -132,9 +135,6 @@ export default {
         $route: function() {
             this.search = "";
         },
-    },
-    async mounted() {
-        await this.setLoginInfo();
     },
     computed: {
         getIsLogin: function() {

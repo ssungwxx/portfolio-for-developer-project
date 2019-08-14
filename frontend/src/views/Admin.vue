@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="getIsLogin && getGrade == 10">
         <div style="display: flex; justify-content: flex-end; margin-top: 30px; margin-bottom: 30px;">
             <v-btn class="adminbutton" @click="focus = 'users'">Users</v-btn>
             <v-btn class="adminbutton" @click="focus = 'logs'">Logs</v-btn>
@@ -77,16 +77,10 @@
     import RestService from "@/services/RestService";
     import AdminRestService from "@/services/AdminRestService";
     import Git from "@/services/GitLabRepoService"
+    import {mapActions} from 'vuex';
 
     export default {
         name: "Admin",
-        beforeMount() {
-            this.count();
-            this.allcnt();
-            this.insertLog();
-            this.getLog();
-            this.getUsers();
-        },
         components: {},
         data() {
             return {
@@ -127,30 +121,53 @@
                 repo_cnt: [{
                     cnt: ""
                 }],
-                check: false,
                 focus: "users",
                 Logs: [],
                 limit: 50,
             };
         },
+        async created() {
+          await this.setLoginInfo();
+          this.admincheck();
+        },
+        beforeMount() {
+            this.count();
+            this.allcnt();
+            this.insertlog();
+            this.getLog();
+            this.getUsers();
+        },
+        computed: {
+            getIsLogin: function () {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function () {
+                return this.$store.getters.getId;
+            },
+            getGrade: function () {
+                return this.$store.getters.getGrade;
+            }
+        },
         methods: {
+          ...mapActions(['setLogin']),
+          async setLoginInfo() {
+            await  this.setLogin();
+          },
             loadmore() {
                 this.limit += 20;
             },
             admincheck() {
-                if (this.getIsLogin && this.getGrade == 10) {
-                    this.check = true;
-                } else {
+                if (!this.getIsLogin || this.getGrade != 10) {
+                  alert('권한이 없습니다.')
                     this.$router.push("/");
                 }
             },
-            async insertLog() {
-                this.insertLog = await RestService.insertLog("Admin");
+            async insertlog() {
+                this.insertlog = await RestService.insertLog("Admin");
             },
             async count() {
                 const post_cnt = await RestService.countRepositories();
                 const repo_cnt = await RestService.countPost();
-                this.admincheck();
                 this.post_cnt = post_cnt;
                 this.repo_cnt = repo_cnt;
 
@@ -175,19 +192,8 @@
                     newGrade.setAttribute("style", "color: blue")
                 }
                 this.getUsers();
-            },
-        },
-        computed: {
-            getIsLogin: function () {
-                return this.$store.getters.getIsLogin;
-            },
-            getId: function () {
-                return this.$store.getters.getId;
-            },
-            getGrade: function () {
-                return this.$store.getters.getGrade;
             }
-        },
+        }
     }
 </script>
 

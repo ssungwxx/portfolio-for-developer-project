@@ -78,6 +78,14 @@
                 len: 0,
             }
         },
+        created() {
+            this.drawGraph();
+        },
+        watch: {
+            $route: function () {
+                this.drawGraph();
+            }
+        },
         methods: {
             async drawGraph() {
                 await this.getUrl();
@@ -103,14 +111,8 @@
                 this.token = user.user_gitToken;
             }
         },
-        created() {
-            this.drawGraph();
-        },
-        watch: {
-            $route: function () {
-                this.drawGraph();
-            }
-        }
+
+
     }
 
 </script>

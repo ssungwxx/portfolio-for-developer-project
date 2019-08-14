@@ -13,16 +13,7 @@ import {store} from "./vuex/store";
 Vue.use(Router);
 
 const requireAuth = () => (to, from, next) => {
-  if (store.getters.getIsLogin) {
-    console.log(store.getters.getIsLogin);
-    return next();
-  }
-  console.log(store.getters.getIsLogin);
-  next('/');
-};
-
-const requireAdmin = () => (to, from, next) => {
-  if(store.getters.getIsLogin && store.getters.getGrade == 10) {
+  if (sessionStorage.jwt) {
     return next();
   }
   next('/');
@@ -61,7 +52,7 @@ export default new Router({
             path: "/admin",
             name: "admin",
             component: Admin,
-            beforeEnter: requireAdmin()
+            beforeEnter: requireAuth()
         },
         {
           path: "/users/:id/userinfo",

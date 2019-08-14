@@ -1,5 +1,5 @@
 <template>
-    <v-container class="title-div">
+    <v-container v-if="getIsLogin && this.$route.params.id == getId" class="title-div">
         <div>
             <p class="port-title">Add New Repository</p>
         </div>
@@ -24,13 +24,11 @@
 import RestService from "@/services/RestService";
 import FirebaseService from "@/services/FirebaseService";
 import Git from "@/services/GitLabRepoService";
+import {mapActions} from "vuex";
 
     export default {
         name: "AddRepo",
         components: {
-        },
-        created() {
-            this.getUserInfo();
         },
         data() {
             return {
@@ -54,7 +52,33 @@ import Git from "@/services/GitLabRepoService";
                 already: false,
             }
         },
+        async created() {
+            await this.setLoginInfo();
+            this.userCheck();
+            this.getUserInfo();
+        },
+        computed: {
+            getIsLogin: function () {
+                return this.$store.getters.getIsLogin;
+            },
+            getId: function () {
+                return this.$store.getters.getId;
+            },
+            getGrade: function () {
+                return this.$store.getters.getGrade;
+            }
+        },
         methods: {
+          ...mapActions(['setLogin']),
+          async setLoginInfo() {
+            await this.setLogin();
+          },
+          userCheck() {
+                if (!this.getIsLogin || this.$route.params.id != this.getId) {
+                  alert('권한이 없습니다.')
+                    this.$router.push("/");
+                }
+          },
             async validate() {
                 if (this.$refs.form.validate()) {
                     const res = await Git.getDate(this.gitlabApi, this.projectId, this.accessToken);

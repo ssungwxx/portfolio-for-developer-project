@@ -76,6 +76,11 @@ export default {
             }
         };
     },
+    watch: {
+        dialog: function() {
+            this.$refs.form.reset();
+        }
+    },
     methods: {
         async submit() {
             if (this.$refs.form.validate()) {
@@ -100,11 +105,6 @@ export default {
             this.$refs.form.reset();
             this.dialog = false;
         },
-    },
-    watch: {
-        dialog: function() {
-            this.$refs.form.reset();
-        }
     }
 };
 </script>

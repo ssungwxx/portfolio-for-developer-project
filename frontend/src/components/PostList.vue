@@ -38,6 +38,7 @@
 import Post from "@/components/Post";
 import RestService from "@/services/RestService";
 import Git from "@/services/GitLabRepoService";
+import {mapActions} from 'vuex';
 
 export default {
     name: "PostList",
@@ -64,8 +65,12 @@ export default {
     components: {
         Post
     },
-    mounted() {
+    async mounted() {
+      await this.setLoginInfo();
         this.setGoback();
+    },
+    created() {
+        this.getPosts();
     },
     computed: {
         getIsLogin: function() {
@@ -79,6 +84,10 @@ export default {
         }
     },
     methods: {
+      ...mapActions(['setLogin']),
+      async setLoginInfo() {
+        await this.setLogin();
+      },
         setGoback() {
             if (this.getIsLogin) {
                 this.goback = '/';
@@ -142,9 +151,6 @@ export default {
         // getTokenlist() {
         //     return RestService.getTokenlist();
         // }
-    },
-    created() {
-        this.getPosts();
     }
 };
 </script>
