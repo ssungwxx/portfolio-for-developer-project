@@ -79,6 +79,7 @@ import Git from "@/services/GitLabRepoService";
         watch: {
             $route: function() {
                 this.user_id = this.$route.params.id;
+                this.repos = [];
                 this.getRepos();
             }
         },

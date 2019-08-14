@@ -35,9 +35,6 @@ export default {
             this.insertLog = await RestService.insertLog("RepoPage");
         }
     },
-    watch: {
-
-    },
     beforeMount() {
         this.insertLog();
     },
