@@ -118,7 +118,6 @@ import {mapActions} from "vuex";
                 if (this.user.user_gitToken !== null) {
                     this.accessToken = this.user.user_gitToken;
                 }
-                console.log(this.user[0])
             }
         },
     }
