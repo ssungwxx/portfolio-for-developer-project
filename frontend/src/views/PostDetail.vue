@@ -270,6 +270,8 @@ export default {
         border-radius: 15px;
         overflow: hidden;
         border-collapse: collapse;
+        width: 90%;
+        margin: auto;
     }
 
     .post-date {
@@ -299,11 +301,6 @@ export default {
         /*white-space: nowrap;*/
         border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
         padding: 3px;
-    }
-
-    .post-reply > table {
-        width: 90%;
-        margin: auto;
     }
 
     .post-comment {

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="width: 95%; margin: auto">
         <div style="display: flex; justify-content: flex-end; margin-top: 30px; margin-bottom: 30px;">
             <v-btn class="adminbutton" @click="focus = 'users'">Users</v-btn>
             <v-btn class="adminbutton" @click="focus = 'logs'">Logs</v-btn>
@@ -41,11 +41,11 @@
         <v-layout v-else style="width: 90%; margin-left: auto; margin-right: auto">
             <table class="delegatetable">
                 <tr>
-                    <th class="title">ID</th>
-                    <th class="title">NICKNAME</th>
-                    <th class="title">GRADE NUM</th>
-                    <th class="title">VISITOR</th>
-                    <th class="title">MEMBER</th>
+                    <th>ID</th>
+                    <th>NICKNAME</th>
+                    <th>GRADE NUM</th>
+                    <th>VISITOR</th>
+                    <th>MEMBER</th>
                 </tr>
                 <tr v-for="(user, i) in userList" v-if="user.user_grade!==10">
                     <td class="userdata">{{user.user_id}}</td>
@@ -160,6 +160,9 @@
             },
             async getLog() {
                 this.Logs = await AdminRestService.getAllWebLogs();
+                for (const log of this.Logs) {
+                    log.wlog_date = Git.calendar_time(log.wlog_date);
+                }
             },
             async getUsers() {
                 this.userList = await AdminRestService.getUsers();
@@ -192,15 +195,62 @@
 </script>
 
 <style>
+    .table {
+        border-radius: 15px;
+        overflow: hidden;
+        border-collapse: collapse;
+        width: 90%;
+        margin: auto;
+    }
+
+    .table > tr > th {
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+        padding: 3px;
+    }
+
+    .table > tr > td {
+        line-height: 36px;
+        border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+        padding: 3px;
+    }
+
+    .delegatetable {
+        border-radius: 15px;
+        overflow: hidden;
+        border-collapse: collapse;
+        width: 90%;
+        margin: auto;
+    }
+
+    .delegatetable > tr > th {
+        text-align: center;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        border-bottom: 1px rgba(0, 0, 0, 0.2) solid;
+        padding: 3px;
+    }
+
+    .delegatetable > tr > td {
+        line-height: 36px;
+        border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+        padding: 3px;
+    }
+
+
     .log {
         border: 2px orange solid;
         display: inline-grid;
-        width: 18%;
+        width: 23%;
         margin: 10px 1% 10px 1%;
         border-radius: 15px;
         height: 120px;
         align-items: center;
-        background-color: rgba(255, 150, 0, 0.2);
+        background-color: rgba(255, 150, 0, 0.1);
     }
 
     .log > div {
@@ -209,22 +259,9 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        padding: 5px;
     }
 
-
-    .delegatetable {
-        border: gray 1px solid;
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-    .delegatetable > tr > th, .delegatetable > tr > td {
-        border: 1px gray solid;
-        padding: 2px 0px 2px 0px;
-        text-align: center;
-        font-size: 1.5vw;
-        font-family: Consolas !important;
-    }
 
     .customselect {
         color: green;
@@ -237,46 +274,8 @@
     .adminbutton {
         margin-left: 0px !important;
         background-color: transparent !important;
-    }
-
-    .side {
-        float: left;
-        height: auto;
-    }
-
-    .table {
-        width: 60%;
-    }
-
-    .post {
-        width: 40%;
-        text-align: center;
-        margin-left: 10%;
-    }
-
-    .repo {
-        width: 40%;
-        text-align: center;
-        margin-left: 10%;
-    }
-
-    .countinfo {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .countinfo > table {
-        width: 100%;
-        border: 1px solid #444444;
-        border-collapse: collapse;
-        border-radius: 1;
-    }
-
-    .countinfo > table > tr > th, .countinfo > table > tr > td {
-        border: 1px solid #444444;
-        padding: 5px;
-        font-family: Consolas !important;
-        font-size: 1.5vw;
+        border-radius: 15px;
+        font-size: 18px;
     }
 
     .total {
