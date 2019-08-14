@@ -108,7 +108,6 @@ export default {
         return counts;
     },
     async getUser(id) {
-      console.log(id);
         await AxiosService.checkAuthorization(id);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return axios
@@ -269,14 +268,10 @@ export default {
             .then(res => res.data);
     },
     async getUserIdByJWT() {
-      console.log("rehi");
-      console.log(sessionStorage.jwt);
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return await axios.get(DBcon.URL + "/jwt/user/id").then(res => res.data);
     },
     async getUserGradeByJWT() {
-      console.log("rehi2222");
-
         axios.defaults.headers.jwt = sessionStorage.jwt;
         return await axios.get(DBcon.URL + "/jwt/user/grade").then(res => res.data);
     }
