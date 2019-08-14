@@ -76,6 +76,12 @@ import Git from "@/services/GitLabRepoService";
                 loadlimits: this.limits,
             }
         },
+        watch: {
+            $route: function() {
+                this.user_id = this.$route.params.id;
+                this.getRepos();
+            }
+        },
         methods: {
           setGoback() {
               if (this.getIsLogin) {
@@ -152,5 +158,6 @@ import Git from "@/services/GitLabRepoService";
     .flexlist {
         margin-left: auto;
         margin-right: auto;
+        margin-bottom: 50px;
     }
 </style>
